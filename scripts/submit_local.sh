@@ -13,10 +13,19 @@
 # show as complete.
 set -uo pipefail
 
-UNITS="${1:?usage: submit_local.sh <units.json> }"
+UNITS_IN="${1:?usage: submit_local.sh <units.json> }"
 WORKERS="${WORKERS:-1}"
-LOGDIR="${LOGDIR:-logs/$(basename "${UNITS%.units.json}")}"
+LOGDIR="${LOGDIR:-logs/$(basename "${UNITS_IN%.units.json}")}"
 mkdir -p "$LOGDIR"
+
+# SNAPSHOT THE PLAN. run_unit.py re-reads the units file for every unit, so a
+# plan.py run while this queue is live would renumber the list underneath it --
+# workers then index into a different plan than the one they were sized for and
+# start reporting "index out of range". Copy it once and work from the copy, so
+# re-planning during a run is safe and simply takes effect on the NEXT queue.
+UNITS="$LOGDIR/plan.snapshot.json"
+cp "$UNITS_IN" "$UNITS"
+echo "plan snapshot: $UNITS_IN -> $UNITS"
 
 N=$(python3 -c "import json,sys; print(len(json.load(open(sys.argv[1]))['units']))" "$UNITS")
 echo "units: $N   workers: $WORKERS   logs: $LOGDIR"
