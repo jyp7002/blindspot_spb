@@ -129,17 +129,25 @@ def check_gpu(cfg):
             biggest, need = cell["hf"], g
     if not biggest:
         return
-    # Training needs the weights plus room for activations and the LoRA graph.
+    # Training overhead is NOT proportional to model size here. The trainable
+    # part is a rank-16 LoRA on the attention projections with gradient
+    # checkpointing on, so optimizer state is tiny and activations are bounded
+    # by batch and sequence, not by parameter count. A flat allowance is a much
+    # better estimate than a percentage: at 70B a 1.5x rule demands ~196 GiB and
+    # rules out hardware that would in fact work.
+    #
     # colab_t2t4.load_model uses dispatch=False for trainable targets, so the
     # model must fit on ONE device: compare against the largest card, not the sum.
-    headroom = 1.5
+    TRAIN_OVERHEAD_GIB = 16
+    total = need + TRAIN_OVERHEAD_GIB
     largest = max(caps) if caps else 0
-    if largest >= need * headroom:
-        say(OK, f"largest cell {biggest} ~{need:.0f} GiB fits on a "
-                f"{largest:.0f} GiB card")
+    if largest >= total:
+        say(OK, f"largest cell {biggest} ~{need:.0f} GiB weights + "
+                f"{TRAIN_OVERHEAD_GIB} GiB training fits on a {largest:.0f} GiB card")
     else:
-        say(FAIL, f"largest cell {biggest} needs ~{need * headroom:.0f} GiB on ONE "
-                  f"device; largest card is {largest:.0f} GiB",
+        say(FAIL, f"largest cell {biggest} needs ~{total:.0f} GiB on ONE "
+                  f"device ({need:.0f} weights + {TRAIN_OVERHEAD_GIB} training); "
+                  f"largest card is {largest:.0f} GiB",
             "trainable targets load with dispatch=False (colab_t2t4.load_model): "
             "accelerate's device_map hooks break training, so sharding across "
             "cards is not available. Use a bigger card or drop the cell.")

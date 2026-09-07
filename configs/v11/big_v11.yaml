@@ -16,13 +16,18 @@
 # READ BEFORE RENTING A NODE. Two things are known-unresolved, and both cost
 # money to discover late:
 #
-# 1. 8-BIT + TRAINING IS UNTESTED IN THIS CODEBASE. `eightbit: true` was only
-#    ever used for T4 inference. train_task_vector runs LoRA over the attention
-#    projections; PEFT on an 8-bit base needs prepare_model_for_kbit_training
-#    and colab_t2t4 does not call it. Treat llama70b as a STRETCH cell: run
-#    qwen32b (bf16) first and confirm the pipeline end-to-end before paying for
-#    a 70B node. `scripts/preflight.py --config configs/v11/big_v11.yaml`
-#    prints the VRAM estimate and refuses a node that cannot hold the cell.
+# 1. EVERY CELL HERE IS bf16. 8-bit was considered and rejected: this whole
+#    experiment measures what survives quantizing the EDIT, so quantizing the
+#    BASE underneath it would confound edit structure with base-weight
+#    precision at exactly the cell meant to extend the size range. Every
+#    published panel is bf16 (colab_t2t4.DTYPE) and the big tier stays
+#    comparable to them. (8-bit + LoRA training is also untested here --
+#    train_task_vector never calls prepare_model_for_kbit_training -- so the
+#    rejected option was not free either.)
+#    The cost of that choice is VRAM: 32B needs ~77 GiB and 70B ~147 GiB on ONE
+#    device. Run qwen32b first and confirm the pipeline end to end before paying
+#    for a 70B node. `scripts/preflight.py --config configs/v11/big_v11.yaml`
+#    prints the estimate and refuses a node that cannot hold the cell.
 #
 # 2. dispatch=False IS REQUIRED FOR TRAINABLE TARGETS. colab_t2t4.load_model
 #    documents that device_map='auto' installs accelerate hooks that break
@@ -62,9 +67,14 @@ cells:
     hf: meta-llama/Llama-3.1-70B-Instruct
     designer: llama
     axis: occ_gender
-    eightbit: true
+    eightbit: false
     note: >
-      STRETCH. 8-bit + LoRA training is untested here (see header note 1).
-      ~70 GB in 8-bit before activations. Expect to need
-      prepare_model_for_kbit_training in colab_t2t4.train_task_vector, or a
-      >=2x80 GB bf16 node with sharded training support that does not exist yet.
+      STRETCH, and bf16 -- NOT 8-bit. Every other panel in this project runs
+      bf16 (colab_t2t4.DTYPE), and an 8-bit target would put a second
+      quantization underneath an experiment whose entire subject is what
+      survives quantizing the EDIT. Delta_selection at this cell would then
+      confound edit structure with base-weight precision, which is exactly the
+      confound the decomposition is built to avoid. ~131 GiB of weights, so it
+      needs a single >=192 GB device (B200 / MI300X); an H200 at 141 GB is too
+      tight once training overhead is added. On 2x80 GB it needs sharded
+      training, which this codebase does not have (see header note 2).

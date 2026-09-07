@@ -1216,3 +1216,34 @@ WHAT THIS DOES NOT LICENSE. If a new cell is out-of-envelope, that is a REPORTED
 result about the envelope, not a nuisance. The v10 line removed an
 outcome-selected arm ("new alphas only", n=5) for conditioning its cell set on
 the thing being measured; this rule exists so that mistake is not repeated in v11.
+
+## v11.G — The big tier is bf16, including 70B (decided 2026-09-07, before any big-tier run)
+
+`configs/v11/big_v11.yaml` originally carried `eightbit: true` for
+Llama-3.1-70B, on VRAM grounds. That is withdrawn. Every cell in the big tier
+runs bf16.
+
+REASON. The experiment measures what survives quantizing the EDIT -- one bit per
+weight, 1% of coordinates. Running the BASE model at 8 bits puts a second,
+uncontrolled quantization underneath it, so Delta_selection at that cell would
+confound edit structure with base-weight precision. That is the confound the
+seven-condition decomposition exists to avoid, and it would land on the single
+cell whose purpose is to extend the size range. Every published panel is bf16
+(colab_t2t4.DTYPE); the big tier must be comparable to them.
+
+CONSEQUENCE, RECORDED SO IT IS NOT DISCOVERED ON A RENTED NODE. Trainable
+targets load with dispatch=False, so the model must fit on ONE device:
+  Qwen2.5-32B   ~61 GiB weights + ~16 GiB training  ->  one >=80 GB card
+  Llama-3.1-70B ~131 GiB weights + ~16 GiB training ->  one >=192 GB card
+                                                        (B200 / MI300X; an H200
+                                                        at 141 GB is too tight)
+On 2x80 GB the 70B cell needs sharded training, which this codebase does not
+have. So 70B is blocked on hardware or on a code change, not on configuration,
+and qwen32b is the cell to land first.
+
+scripts/preflight.py now estimates this as weights + a FLAT 16 GiB training
+allowance rather than a 1.5x multiplier. The trainable part is a rank-16 LoRA on
+the attention projections with gradient checkpointing, so optimizer state is
+tiny and activations are bounded by batch and sequence, not by parameter count.
+The old rule demanded ~196 GiB for 70B and would have refused hardware that
+works.
