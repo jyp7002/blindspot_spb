@@ -75,6 +75,10 @@ external/*
 results/
 results_v9/
 
+# A stray v1-era panel dump that sat at the repo root, outside results/,
+# and so slipped past the rule above.
+/removal.jsonl
+
 # Rendered figures are build outputs of `make figures`; the audited
 # fig*_data.csv they are drawn from ARE tracked.
 figures/*.pdf
