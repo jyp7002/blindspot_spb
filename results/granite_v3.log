@@ -1,6 +1,0 @@
-
-=== occ_gender ===  pre: skew=+0.806 mmlu=0.710 ppl=7.87
-  a= 2: skew=+0.136 rem=+0.671 mmlu=0.630(d+0.080) ppl=9.64(x1.224) FAIL: MMLU drop +0.080, ppl ratio 1.224
-  a= 4: skew=-0.020 rem=+0.786 mmlu=0.675(d+0.035) ppl=16.52(x2.099) FAIL: MMLU drop +0.035, ppl ratio 2.099
-  a= 8: skew=-0.046 rem=+0.760 mmlu=0.295(d+0.415) ppl=2032746194.84(x258225384.724) FAIL: MMLU drop +0.415, ppl ratio 258225384.724
-  a=16: skew=-0.063 rem=+0.743 mmlu=0.275(d+0.435) ppl=251138.37(x31902.803) FAIL: MMLU drop +0.435, ppl ratio 31902.803

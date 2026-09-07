@@ -59,3 +59,23 @@ hf_token*
 # the exact commits instead.
 external/*
 !external/README.md
+
+# ---------------------------------------------------------------------------
+# DATA IS NOT IN THIS REPOSITORY. This is a CODE repo.
+#
+# The panels (~43 MB) and elicited corpora (~11 MB) were 93% of the tree by
+# size and are not source. They ship the way this project has always shipped
+# results -- as an archive, via scripts/pack_artifacts.sh -- and are restored
+# into results/ on whichever box is doing analysis. See DATA.md.
+#
+# Kept in git despite living under these trees: nothing. `make freeze` needs
+# them restored first; `bash run.sh` does not (run_unit.py re-elicits any
+# corpus it is missing).
+# ---------------------------------------------------------------------------
+results/
+results_v9/
+
+# Rendered figures are build outputs of `make figures`; the audited
+# fig*_data.csv they are drawn from ARE tracked.
+figures/*.pdf
+figures/*.png

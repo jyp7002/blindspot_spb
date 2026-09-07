@@ -1,60 +1,0 @@
-[auth] no HF_TOKEN in env — gated models (gemma/llama) will fail
-[t2x] axes=['occ_gender', 'crows_socioeconomic'] seeds=[0, 1, 2] targets=['qwen', 'llama']
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-Loading weights:   0%|                                                       | 0/339 [00:00<?, ?it/s]Loading weights: 100%|███████████████████████████████████████████| 339/339 [00:00<00:00, 6103.20it/s]
-[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-[auth] no HF_TOKEN in env — gated models (gemma/llama) will fail
-[t2x] axes=['occ_gender', 'crows_socioeconomic'] seeds=[0, 1, 2] targets=['qwen', 'llama']
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-Loading weights:   0%|                                                       | 0/339 [00:00<?, ?it/s]Loading weights: 100%|███████████████████████████████████████████| 339/339 [00:00<00:00, 5589.06it/s]
-[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-[t2x] tgt=qwen     occ_gender           s1 cross  <-olmo         removal=+0.7276
-[t2x] tgt=qwen     occ_gender           s1 cross  <-granite      removal=+0.6852
-[t2x] tgt=qwen     occ_gender           s2 self   <-qwen         removal=+0.6358
-[t2x] tgt=qwen     occ_gender           s2 sibling<-qwen_sib     removal=+0.7219
-[t2x] tgt=qwen     occ_gender           s2 cross  <-llama        removal=+0.6959
-[t2x] tgt=qwen     occ_gender           s2 cross  <-gemma        removal=+0.7459
-[t2x] tgt=qwen     occ_gender           s2 cross  <-olmo         removal=+0.7344
-[t2x] tgt=qwen     occ_gender           s2 cross  <-granite      removal=+0.6025
-Using the latest cached version of the dataset since nyu-mll/crows_pairs couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'default' at /home/jovyan/.cache/huggingface/datasets/nyu-mll___crows_pairs/default/0.0.0/565159a0443df8dc8dba9855c7454e6afc907be4 (last modified on Mon Jul 20 07:00:06 2026).
-[t2x] tgt=qwen     crows_socioeconomic  s0 self   <-qwen         removal=+0.0944
-[t2x] tgt=qwen     crows_socioeconomic  s0 sibling<-qwen_sib     removal=-0.0609
-[t2x] tgt=qwen     crows_socioeconomic  s0 cross  <-llama        removal=+0.0377
-[t2x] tgt=qwen     crows_socioeconomic  s0 cross  <-gemma        removal=+0.0939
-[t2x] tgt=qwen     crows_socioeconomic  s0 cross  <-olmo         removal=+0.0931
-[t2x] tgt=qwen     crows_socioeconomic  s0 cross  <-granite      removal=+0.0435
-[t2x] tgt=qwen     crows_socioeconomic  s1 self   <-qwen         removal=+0.0855
-[t2x] tgt=qwen     crows_socioeconomic  s1 sibling<-qwen_sib     removal=+0.0083
-[t2x] tgt=qwen     crows_socioeconomic  s1 cross  <-llama        removal=+0.0520
-[t2x] tgt=qwen     crows_socioeconomic  s1 cross  <-gemma        removal=+0.1488
-[t2x] tgt=qwen     crows_socioeconomic  s1 cross  <-olmo         removal=+0.0763
-[t2x] tgt=qwen     crows_socioeconomic  s1 cross  <-granite      removal=+0.0805
-[t2x] tgt=qwen     crows_socioeconomic  s2 self   <-qwen         removal=+0.0384
-[t2x] tgt=qwen     crows_socioeconomic  s2 sibling<-qwen_sib     removal=-0.0320
-[t2x] tgt=qwen     crows_socioeconomic  s2 cross  <-llama        removal=+0.0572
-[t2x] tgt=qwen     crows_socioeconomic  s2 cross  <-gemma        removal=+0.1014
-[t2x] tgt=qwen     crows_socioeconomic  s2 cross  <-olmo         removal=+0.1275
-[t2x] tgt=qwen     crows_socioeconomic  s2 cross  <-granite      removal=+0.0899
-Loading weights:   0%|                                                       | 0/291 [00:00<?, ?it/s]Loading weights:  31%|█████████████▉                               | 90/291 [00:00<00:00, 894.00it/s]Loading weights:  66%|█████████████████████████████▏              | 193/291 [00:00<00:00, 959.93it/s]Loading weights: 100%|████████████████████████████████████████████| 291/291 [00:00<00:00, 984.75it/s]
-[t2x] tgt=llama    occ_gender           s0 self   <-llama        removal=+0.7354
-[t2x] tgt=llama    occ_gender           s0 sibling<-llama_sib    removal=+0.2513
-[t2x] tgt=llama    occ_gender           s0 cross  <-qwen         removal=+0.6535
-[t2x] tgt=llama    occ_gender           s0 cross  <-gemma        removal=+0.7469
-[t2x] tgt=llama    occ_gender           s0 cross  <-olmo         removal=+0.6521
-[t2x] tgt=llama    occ_gender           s0 cross  <-granite      removal=+0.7503
-[t2x] tgt=llama    occ_gender           s1 self   <-llama        removal=+0.7258
-[t2x] tgt=llama    occ_gender           s1 sibling<-llama_sib    removal=+0.4981
-[t2x] tgt=llama    occ_gender           s1 cross  <-qwen         removal=+0.5583
-[t2x] tgt=llama    occ_gender           s1 cross  <-gemma        removal=+0.7526
-[t2x] tgt=llama    occ_gender           s1 cross  <-olmo         removal=+0.6594
-[t2x] tgt=llama    occ_gender           s1 cross  <-granite      removal=+0.6304
-[t2x] tgt=llama    occ_gender           s2 self   <-llama        removal=+nan
-[t2x] tgt=llama    occ_gender           s2 sibling<-llama_sib    removal=+0.5409
-[t2x] tgt=llama    occ_gender           s2 cross  <-qwen         removal=+0.6937

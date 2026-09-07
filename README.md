@@ -21,6 +21,10 @@ bash run.sh          # shows what can run, what is done, what is left
 bash run.sh all      # runs every panel that fits this machine
 ```
 
+> **Data is not in this repo** — it was 93% of the tree by size. A clean clone
+> can still run every panel (missing corpora are re-elicited automatically); the
+> number audit needs the panels restored first. See [DATA.md](DATA.md).
+
 **Everything is resumable.** If a run dies — node preempted, OOM, anything —
 re-run the same command. Finished work is skipped, because completion is read
 from the artifacts on disk, not from a progress file.
@@ -198,9 +202,10 @@ configs/v11/*.yaml              the scale-up matrix
 scripts/                        preflight, plan, run_unit, submit_*, pack
 env/Dockerfile                  the pinned stack, as a container
 
-results/, results_v9/           panels (analysis-grade artifacts are committed)
-figures/                        fig{1..6} + the CSV each one is audited against
+figures/*_data.csv              the CSV each figure is audited against
 audit/                          manifest + registered prose edits
+docs/history/                   superseded v2-v10 design and results documents
+DATA.md                         where the panels live (NOT in git -- see above)
 ```
 
 **What is not in git:** trained direction tensors, support dumps and checkpoints

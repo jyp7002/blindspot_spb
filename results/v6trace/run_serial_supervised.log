@@ -1,198 +1,0 @@
-[sup 16:34:20] attempt 1 — 51/144 cells done, starting worker
-[auth] no HF_TOKEN in env — gated models (gemma/llama) will fail
-[t2x] axes=['occ_gender', 'crows_socioeconomic'] seeds=[0, 1, 2] targets=['qwen', 'llama', 'gemma', 'olmo']
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-[t2x] qwen: nothing to do (done or corpora missing)
-Loading weights:   0%|                                                       | 0/291 [00:00<?, ?it/s]Loading weights:  31%|█████████████▉                               | 90/291 [00:00<00:00, 862.91it/s]Loading weights:  64%|████████████████████████████                | 186/291 [00:00<00:00, 904.33it/s]Loading weights: 100%|████████████████████████████████████████████| 291/291 [00:00<00:00, 966.67it/s]
-[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-[t2x] tgt=llama    occ_gender           s2 cross  <-gemma        removal=+0.7386
-[t2x] tgt=llama    occ_gender           s2 cross  <-olmo         removal=+0.7381
-[t2x] tgt=llama    occ_gender           s2 cross  <-granite      removal=+0.6959
-Using the latest cached version of the dataset since nyu-mll/crows_pairs couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'default' at /home/jovyan/.cache/huggingface/datasets/nyu-mll___crows_pairs/default/0.0.0/565159a0443df8dc8dba9855c7454e6afc907be4 (last modified on Mon Jul 20 07:00:06 2026).
-[t2x] tgt=llama    crows_socioeconomic  s0 self   <-llama        removal=+0.0147
-[t2x] tgt=llama    crows_socioeconomic  s0 sibling<-llama_sib    removal=+nan
-[t2x] tgt=llama    crows_socioeconomic  s0 cross  <-qwen         removal=-0.0331
-[t2x] tgt=llama    crows_socioeconomic  s0 cross  <-gemma        removal=+0.1059
-[t2x] tgt=llama    crows_socioeconomic  s0 cross  <-olmo         removal=+0.0726
-[t2x] tgt=llama    crows_socioeconomic  s0 cross  <-granite      removal=+0.0972
-[t2x] tgt=llama    crows_socioeconomic  s1 self   <-llama        removal=+0.0454
-[t2x] tgt=llama    crows_socioeconomic  s1 sibling<-llama_sib    removal=+0.0768
-[sup 17:12:33] worker exited rc=137 — cells 51 -> 62
-[sup 17:12:53] attempt 2 — 62/144 cells done, starting worker
-[auth] no HF_TOKEN in env — gated models (gemma/llama) will fail
-[t2x] axes=['occ_gender', 'crows_socioeconomic'] seeds=[0, 1, 2] targets=['qwen', 'llama', 'gemma', 'olmo']
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-[t2x] qwen: nothing to do (done or corpora missing)
-Loading weights:   0%|                                                       | 0/291 [00:00<?, ?it/s]Loading weights:  32%|██████████████▌                              | 94/291 [00:00<00:00, 923.77it/s]Loading weights:  66%|████████████████████████████▉               | 191/291 [00:00<00:00, 900.75it/s]Loading weights: 100%|████████████████████████████████████████████| 291/291 [00:00<00:00, 990.60it/s]
-Using the latest cached version of the dataset since nyu-mll/crows_pairs couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'default' at /home/jovyan/.cache/huggingface/datasets/nyu-mll___crows_pairs/default/0.0.0/565159a0443df8dc8dba9855c7454e6afc907be4 (last modified on Mon Jul 20 07:00:06 2026).
-[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-[t2x] tgt=llama    crows_socioeconomic  s1 cross  <-qwen         removal=-0.0161
-[t2x] tgt=llama    crows_socioeconomic  s1 cross  <-gemma        removal=+0.0890
-[t2x] tgt=llama    crows_socioeconomic  s1 cross  <-olmo         removal=+0.0389
-[t2x] tgt=llama    crows_socioeconomic  s1 cross  <-granite      removal=+0.0434
-[t2x] tgt=llama    crows_socioeconomic  s2 self   <-llama        removal=+0.0622
-[t2x] tgt=llama    crows_socioeconomic  s2 sibling<-llama_sib    removal=+0.0381
-[t2x] tgt=llama    crows_socioeconomic  s2 cross  <-qwen         removal=-0.0336
-[t2x] tgt=llama    crows_socioeconomic  s2 cross  <-gemma        removal=+0.0925
-[t2x] tgt=llama    crows_socioeconomic  s2 cross  <-olmo         removal=+0.0638
-[t2x] tgt=llama    crows_socioeconomic  s2 cross  <-granite      removal=+0.1348
-Loading weights:   0%|                                                       | 0/464 [00:00<?, ?it/s]Loading weights:  23%|█████████▊                                 | 106/464 [00:00<00:00, 1054.05it/s]Loading weights:  46%|███████████████████▋                       | 212/464 [00:00<00:00, 1017.36it/s]Loading weights:  68%|█████████████████████████████▊              | 314/464 [00:00<00:00, 980.40it/s]Loading weights:  95%|████████████████████████████████████████▉  | 442/464 [00:00<00:00, 1081.21it/s]Loading weights: 100%|███████████████████████████████████████████| 464/464 [00:00<00:00, 1078.36it/s]
-[sup 17:51:12] worker exited rc=137 — cells 62 -> 72
-[sup 17:51:32] attempt 3 — 72/144 cells done, starting worker
-[auth] no HF_TOKEN in env — gated models (gemma/llama) will fail
-[t2x] axes=['occ_gender', 'crows_socioeconomic'] seeds=[0, 1, 2] targets=['qwen', 'llama', 'gemma', 'olmo']
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-[t2x] qwen: nothing to do (done or corpora missing)
-[t2x] llama: nothing to do (done or corpora missing)
-Loading weights:   0%|                                                       | 0/464 [00:00<?, ?it/s]Loading weights:  25%|██████████▉                                | 118/464 [00:00<00:00, 1142.74it/s]Loading weights:  50%|█████████████████████▋                     | 234/464 [00:00<00:00, 1121.59it/s]Loading weights:  76%|████████████████████████████████▊          | 354/464 [00:00<00:00, 1155.14it/s]Loading weights: 100%|███████████████████████████████████████████| 464/464 [00:00<00:00, 1131.47it/s]
-[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-[sup 17:57:56] worker exited rc=137 — cells 72 -> 72
-[sup] worker failed with NO progress — stopping, needs diagnosis
-[sup 17:58:46] attempt 1 — 72/144 cells done, starting worker
-[auth] no HF_TOKEN in env — gated models (gemma/llama) will fail
-[t2x] axes=['occ_gender', 'crows_socioeconomic'] seeds=[0, 1, 2] targets=['qwen', 'llama', 'gemma', 'olmo']
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-[t2x] qwen: nothing to do (done or corpora missing)
-[t2x] llama: nothing to do (done or corpora missing)
-Loading weights:   0%|                                                       | 0/464 [00:00<?, ?it/s]Loading weights:  17%|███████▋                                     | 79/464 [00:00<00:00, 751.93it/s]Loading weights:  43%|██████████████████▌                        | 200/464 [00:00<00:00, 1003.34it/s]Loading weights:  66%|████████████████████████████▎              | 306/464 [00:00<00:00, 1022.52it/s]Loading weights:  88%|█████████████████████████████████████▉     | 410/464 [00:00<00:00, 1018.63it/s]Loading weights: 100%|███████████████████████████████████████████| 464/464 [00:00<00:00, 1013.35it/s]
-[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-[t2x] tgt=gemma    occ_gender           s0 self   <-gemma        removal=+0.6970
-[sup 18:16:27] worker exited rc=137 — cells 72 -> 73
-[sup 18:16:47] attempt 2 — 73/144 cells done, starting worker
-[auth] no HF_TOKEN in env — gated models (gemma/llama) will fail
-[t2x] axes=['occ_gender', 'crows_socioeconomic'] seeds=[0, 1, 2] targets=['qwen', 'llama', 'gemma', 'olmo']
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-[t2x] qwen: nothing to do (done or corpora missing)
-[t2x] llama: nothing to do (done or corpora missing)
-Loading weights:   0%|                                                       | 0/464 [00:00<?, ?it/s]Loading weights:  29%|████████████▍                              | 134/464 [00:00<00:00, 1311.45it/s]Loading weights:  57%|████████████████████████▋                  | 266/464 [00:00<00:00, 1230.38it/s]Loading weights:  84%|████████████████████████████████████▏      | 390/464 [00:00<00:00, 1226.32it/s]Loading weights: 100%|███████████████████████████████████████████| 464/464 [00:00<00:00, 1274.55it/s]
-[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-[t2x] tgt=gemma    occ_gender           s0 sibling<-gemma_sib    removal=+0.6209
-[sup 18:27:38] worker exited rc=137 — cells 73 -> 74
-[sup 18:27:58] attempt 3 — 74/144 cells done, starting worker
-[auth] no HF_TOKEN in env — gated models (gemma/llama) will fail
-[t2x] axes=['occ_gender', 'crows_socioeconomic'] seeds=[0, 1, 2] targets=['qwen', 'llama', 'gemma', 'olmo']
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-[t2x] qwen: nothing to do (done or corpora missing)
-[t2x] llama: nothing to do (done or corpora missing)
-Loading weights:   0%|                                                       | 0/464 [00:00<?, ?it/s]Loading weights:  28%|████████████▏                              | 131/464 [00:00<00:00, 1254.19it/s]Loading weights:  55%|███████████████████████▊                   | 257/464 [00:00<00:00, 1160.01it/s]Loading weights:  84%|████████████████████████████████████▏      | 390/464 [00:00<00:00, 1213.66it/s]Loading weights: 100%|███████████████████████████████████████████| 464/464 [00:00<00:00, 1237.27it/s]
-[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-[sup 19:15:12] worker exited rc=137 — cells 74 -> 74
-[sup] worker failed with NO progress — stopping, needs diagnosis
-[sup 04:41:25] attempt 1 — 74/110 cells done, starting worker
-[auth] no HF_TOKEN in env — gated models (gemma/llama) will fail
-[t2x] axes=['occ_gender', 'crows_socioeconomic'] seeds=[0, 1, 2] targets=['olmo']
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-Loading weights:   0%|                                                       | 0/355 [00:00<?, ?it/s]Loading weights:  30%|████████████▉                              | 107/355 [00:00<00:00, 1069.71it/s]Loading weights:  60%|█████████████████████████▉                 | 214/355 [00:00<00:00, 1032.37it/s]Loading weights:  92%|███████████████████████████████████████▌   | 327/355 [00:00<00:00, 1049.80it/s]Loading weights: 100%|███████████████████████████████████████████| 355/355 [00:00<00:00, 1083.43it/s]
-[sup 04:57:08] worker exited rc=137 — cells 74 -> 74
-[sup] worker failed with NO progress — stopping, needs diagnosis
-[sup 08:56:10] attempt 1 — 74/144 cells done, starting worker
-[auth] no HF_TOKEN in env — gated models (gemma/llama) will fail
-[t2x] axes=['occ_gender', 'crows_socioeconomic'] seeds=[0, 1, 2] targets=['qwen', 'llama', 'gemma', 'olmo']
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-[t2x] qwen: nothing to do (done or corpora missing)
-[t2x] llama: nothing to do (done or corpora missing)
-Loading weights:   0%|                                                       | 0/464 [00:00<?, ?it/s]Loading weights:  24%|██████████▍                                | 113/464 [00:00<00:00, 1046.34it/s]Loading weights:  47%|████████████████████▏                      | 218/464 [00:00<00:00, 1013.24it/s]Loading weights:  71%|██████████████████████████████▌            | 330/464 [00:00<00:00, 1059.77it/s]Loading weights:  95%|████████████████████████████████████████▊  | 440/464 [00:00<00:00, 1070.09it/s]Loading weights: 100%|███████████████████████████████████████████| 464/464 [00:00<00:00, 1073.62it/s]
-[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-[t2x] tgt=gemma    occ_gender           s0 cross  <-qwen         removal=+0.7840
-[t2x] tgt=gemma    occ_gender           s0 cross  <-llama        removal=+0.8142
-[t2x] tgt=gemma    occ_gender           s0 cross  <-olmo         removal=+0.8053
-[t2x] tgt=gemma    occ_gender           s0 cross  <-granite      removal=+0.7735
-[t2x] tgt=gemma    occ_gender           s1 self   <-gemma        removal=+0.8115
-[t2x] tgt=gemma    occ_gender           s1 sibling<-gemma_sib    removal=+0.6434
-[t2x] tgt=gemma    occ_gender           s1 cross  <-qwen         removal=+0.7375
-[t2x] tgt=gemma    occ_gender           s1 cross  <-llama        removal=+0.8157
-[t2x] tgt=gemma    occ_gender           s1 cross  <-olmo         removal=+0.8090
-[t2x] tgt=gemma    occ_gender           s1 cross  <-granite      removal=+0.7779
-[t2x] tgt=gemma    occ_gender           s2 self   <-gemma        removal=+0.7987
-[t2x] tgt=gemma    occ_gender           s2 sibling<-gemma_sib    removal=+0.5628
-[t2x] tgt=gemma    occ_gender           s2 cross  <-qwen         removal=+0.7860
-[t2x] tgt=gemma    occ_gender           s2 cross  <-llama        removal=+0.8226
-[t2x] tgt=gemma    occ_gender           s2 cross  <-olmo         removal=+0.8234
-[t2x] tgt=gemma    occ_gender           s2 cross  <-granite      removal=+0.8098
-Using the latest cached version of the dataset since nyu-mll/crows_pairs couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'default' at /home/jovyan/.cache/huggingface/datasets/nyu-mll___crows_pairs/default/0.0.0/565159a0443df8dc8dba9855c7454e6afc907be4 (last modified on Mon Jul 20 07:00:06 2026).
-[t2x] tgt=gemma    crows_socioeconomic  s0 self   <-gemma        removal=+0.1331
-[t2x] tgt=gemma    crows_socioeconomic  s0 sibling<-gemma_sib    removal=+0.1555
-[t2x] tgt=gemma    crows_socioeconomic  s0 cross  <-qwen         removal=+0.0004
-[t2x] tgt=gemma    crows_socioeconomic  s0 cross  <-llama        removal=-0.0107
-[t2x] tgt=gemma    crows_socioeconomic  s0 cross  <-olmo         removal=+0.0360
-[t2x] tgt=gemma    crows_socioeconomic  s0 cross  <-granite      removal=+0.0435
-[t2x] tgt=gemma    crows_socioeconomic  s1 self   <-gemma        removal=+0.1269
-[t2x] tgt=gemma    crows_socioeconomic  s1 sibling<-gemma_sib    removal=+0.1346
-[t2x] tgt=gemma    crows_socioeconomic  s1 cross  <-qwen         removal=-0.0096
-[t2x] tgt=gemma    crows_socioeconomic  s1 cross  <-llama        removal=+0.0146
-[t2x] tgt=gemma    crows_socioeconomic  s1 cross  <-olmo         removal=+0.0182
-[t2x] tgt=gemma    crows_socioeconomic  s1 cross  <-granite      removal=+0.1573
-[t2x] tgt=gemma    crows_socioeconomic  s2 self   <-gemma        removal=+0.1422
-[t2x] tgt=gemma    crows_socioeconomic  s2 sibling<-gemma_sib    removal=+0.1422
-[t2x] tgt=gemma    crows_socioeconomic  s2 cross  <-qwen         removal=+0.0115
-[t2x] tgt=gemma    crows_socioeconomic  s2 cross  <-llama        removal=+0.0050
-[t2x] tgt=gemma    crows_socioeconomic  s2 cross  <-olmo         removal=+0.0369
-[t2x] tgt=gemma    crows_socioeconomic  s2 cross  <-granite      removal=+0.0804
-Loading weights:   0%|                                                       | 0/355 [00:00<?, ?it/s]Loading weights:  34%|██████████████▍                            | 119/355 [00:00<00:00, 1170.33it/s]Loading weights:  68%|█████████████████████████████▍             | 243/355 [00:00<00:00, 1207.05it/s]Loading weights: 100%|███████████████████████████████████████████| 355/355 [00:00<00:00, 1239.77it/s]
-[t2x] tgt=olmo     occ_gender           s0 self   <-olmo         removal=+0.8335
-[t2x] tgt=olmo     occ_gender           s0 sibling<-olmo_sib     removal=+0.7730
-[t2x] tgt=olmo     occ_gender           s0 cross  <-qwen         removal=+0.8284
-[t2x] tgt=olmo     occ_gender           s0 cross  <-llama        removal=+0.8315
-[t2x] tgt=olmo     occ_gender           s0 cross  <-gemma        removal=+0.7088
-[t2x] tgt=olmo     occ_gender           s0 cross  <-granite      removal=+0.7556
-[t2x] tgt=olmo     occ_gender           s1 self   <-olmo         removal=+0.7525
-[t2x] tgt=olmo     occ_gender           s1 sibling<-olmo_sib     removal=+0.6795
-[t2x] tgt=olmo     occ_gender           s1 cross  <-qwen         removal=+0.7817
-[t2x] tgt=olmo     occ_gender           s1 cross  <-llama        removal=+0.8284
-[t2x] tgt=olmo     occ_gender           s1 cross  <-gemma        removal=+0.6602
-[t2x] tgt=olmo     occ_gender           s1 cross  <-granite      removal=+0.8058
-[t2x] tgt=olmo     occ_gender           s2 self   <-olmo         removal=+0.7902
-[t2x] tgt=olmo     occ_gender           s2 sibling<-olmo_sib     removal=+0.8112
-[t2x] tgt=olmo     occ_gender           s2 cross  <-qwen         removal=+0.7818
-[t2x] tgt=olmo     occ_gender           s2 cross  <-llama        removal=+0.8070
-[t2x] tgt=olmo     occ_gender           s2 cross  <-gemma        removal=+0.7010
-[t2x] tgt=olmo     occ_gender           s2 cross  <-granite      removal=+0.8065
-[t2x] tgt=olmo     crows_socioeconomic  s0 self   <-olmo         removal=+0.0899
-[t2x] tgt=olmo     crows_socioeconomic  s0 sibling<-olmo_sib     removal=+0.0755
-[t2x] tgt=olmo     crows_socioeconomic  s0 cross  <-qwen         removal=+0.0517
-[t2x] tgt=olmo     crows_socioeconomic  s0 cross  <-llama        removal=+0.0137
-[t2x] tgt=olmo     crows_socioeconomic  s0 cross  <-gemma        removal=+0.0734
-[t2x] tgt=olmo     crows_socioeconomic  s0 cross  <-granite      removal=+0.0871
-[t2x] tgt=olmo     crows_socioeconomic  s1 self   <-olmo         removal=+0.1054
-[t2x] tgt=olmo     crows_socioeconomic  s1 sibling<-olmo_sib     removal=+0.0938
-[t2x] tgt=olmo     crows_socioeconomic  s1 cross  <-qwen         removal=+0.0702
-[t2x] tgt=olmo     crows_socioeconomic  s1 cross  <-llama        removal=+0.0238
-[t2x] tgt=olmo     crows_socioeconomic  s1 cross  <-gemma        removal=+0.0941
-[t2x] tgt=olmo     crows_socioeconomic  s1 cross  <-granite      removal=+0.0393
-[t2x] tgt=olmo     crows_socioeconomic  s2 self   <-olmo         removal=+0.1138
-[t2x] tgt=olmo     crows_socioeconomic  s2 sibling<-olmo_sib     removal=+0.0842
-[t2x] tgt=olmo     crows_socioeconomic  s2 cross  <-qwen         removal=+0.0612
-[t2x] tgt=olmo     crows_socioeconomic  s2 cross  <-llama        removal=+0.0617
-[t2x] tgt=olmo     crows_socioeconomic  s2 cross  <-gemma        removal=+0.0697
-[t2x] tgt=olmo     crows_socioeconomic  s2 cross  <-granite      removal=+0.0622
-[t2x] DONE
-ALL DONE
-[sup 13:23:38] worker exited rc=0 — cells 74 -> 144
-[sup] done

@@ -1,184 +1,0 @@
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-Loading checkpoint shards:   0%|                                                                          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 1/2 [00:00<00:00,  5.07it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  6.25it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  6.03it/s]
-`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-/opt/conda/lib/python3.13/site-packages/torch/utils/checkpoint.py:232: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  check_backward_validity(args)
-[spc] qwen  occ_gender   s0 sp=0.000  nnz=339,738,624 MB= 42.468 removal=+0.0259
-[spc] qwen  occ_gender   s0 sp=0.500  nnz=169,869,309 MB= 21.234 removal=+0.2269
-[spc] qwen  occ_gender   s0 sp=0.900  nnz=33,973,860 MB=  4.247 removal=+0.6289
-[spc] qwen  occ_gender   s0 sp=0.950  nnz=16,986,928 MB=  2.124 removal=+0.6515
-[spc] qwen  occ_gender   s0 sp=0.970  nnz=10,192,156 MB=  1.274 removal=+0.6500
-[spc] qwen  occ_gender   s0 sp=0.990  nnz= 3,397,387 MB=  0.425 removal=+0.4019
-[spc] qwen  occ_gender   s0 sp=0.995  nnz= 1,698,694 MB=  0.213 removal=+0.0378
-[spc] qwen  occ_gender   s0 sp=0.999  nnz=   339,739 MB=  0.043 removal=-0.0051
-[spc] qwen  occ_gender   s1 sp=0.000  nnz=339,738,624 MB= 42.468 removal=+0.4569
-[spc] qwen  occ_gender   s1 sp=0.500  nnz=169,869,298 MB= 21.234 removal=+0.6270
-[spc] qwen  occ_gender   s1 sp=0.900  nnz=33,973,859 MB=  4.247 removal=+0.5885
-[spc] qwen  occ_gender   s1 sp=0.950  nnz=16,986,923 MB=  2.124 removal=+0.6507
-[spc] qwen  occ_gender   s1 sp=0.970  nnz=10,192,159 MB=  1.274 removal=+0.2651
-[spc] qwen  occ_gender   s1 sp=0.990  nnz= 3,397,387 MB=  0.425 removal=+0.2781
-[spc] qwen  occ_gender   s1 sp=0.995  nnz= 1,698,693 MB=  0.213 removal=+0.0463
-[spc] qwen  occ_gender   s1 sp=0.999  nnz=   339,739 MB=  0.043 removal=-0.0045
-[spc] qwen  occ_gender   s2 sp=0.000  nnz=339,738,624 MB= 42.468 removal=+0.6518
-[spc] qwen  occ_gender   s2 sp=0.500  nnz=169,869,307 MB= 21.234 removal=+0.6452
-[spc] qwen  occ_gender   s2 sp=0.900  nnz=33,973,862 MB=  4.247 removal=+0.6458
-[spc] qwen  occ_gender   s2 sp=0.950  nnz=16,986,931 MB=  2.124 removal=+0.6518
-[spc] qwen  occ_gender   s2 sp=0.970  nnz=10,192,158 MB=  1.274 removal=+0.6518
-[spc] qwen  occ_gender   s2 sp=0.990  nnz= 3,397,387 MB=  0.425 removal=+0.4931
-[spc] qwen  occ_gender   s2 sp=0.995  nnz= 1,698,694 MB=  0.213 removal=+0.1377
-[spc] qwen  occ_gender   s2 sp=0.999  nnz=   339,739 MB=  0.043 removal=-0.0198
-Loading checkpoint shards:   0%|                                                                          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 1/2 [00:00<00:00,  9.71it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00, 12.85it/s]
-[spc] phi   occ_gender   s0 sp=0.000  nnz=905,969,664 MB=113.246 removal=+0.2717
-[spc] phi   occ_gender   s0 sp=0.500  nnz=452,984,769 MB= 56.623 removal=+0.1838
-[spc] phi   occ_gender   s0 sp=0.900  nnz=90,596,964 MB= 11.325 removal=+0.1121
-[spc] phi   occ_gender   s0 sp=0.950  nnz=45,298,477 MB=  5.662 removal=+0.1850
-[spc] phi   occ_gender   s0 sp=0.970  nnz=27,179,079 MB=  3.397 removal=+0.1385
-[spc] phi   occ_gender   s0 sp=0.990  nnz= 9,059,695 MB=  1.133 removal=+0.0484
-[spc] phi   occ_gender   s0 sp=0.995  nnz= 4,529,847 MB=  0.566 removal=+0.0206
-[spc] phi   occ_gender   s0 sp=0.999  nnz=   905,970 MB=  0.113 removal=+0.0111
-[spc] phi   occ_gender   s1 sp=0.000  nnz=905,969,664 MB=113.246 removal=+0.3188
-[spc] phi   occ_gender   s1 sp=0.500  nnz=452,984,819 MB= 56.623 removal=+0.2731
-[spc] phi   occ_gender   s1 sp=0.900  nnz=90,596,967 MB= 11.325 removal=+0.0893
-[spc] phi   occ_gender   s1 sp=0.950  nnz=45,298,481 MB=  5.662 removal=+0.4090
-[spc] phi   occ_gender   s1 sp=0.970  nnz=27,179,084 MB=  3.397 removal=+0.1386
-[spc] phi   occ_gender   s1 sp=0.990  nnz= 9,059,696 MB=  1.133 removal=+0.1377
-[spc] phi   occ_gender   s1 sp=0.995  nnz= 4,529,847 MB=  0.566 removal=+0.0677
-[spc] phi   occ_gender   s1 sp=0.999  nnz=   905,970 MB=  0.113 removal=-0.0009
-[spc] phi   occ_gender   s2 sp=0.000  nnz=905,969,664 MB=113.246 removal=+0.3583
-[spc] phi   occ_gender   s2 sp=0.500  nnz=452,984,812 MB= 56.623 removal=+0.3157
-[spc] phi   occ_gender   s2 sp=0.900  nnz=90,596,947 MB= 11.325 removal=+0.2920
-[spc] phi   occ_gender   s2 sp=0.950  nnz=45,298,472 MB=  5.662 removal=+0.2310
-[spc] phi   occ_gender   s2 sp=0.970  nnz=27,179,085 MB=  3.397 removal=+0.1491
-[spc] phi   occ_gender   s2 sp=0.990  nnz= 9,059,694 MB=  1.133 removal=+0.0651
-[spc] phi   occ_gender   s2 sp=0.995  nnz= 4,529,848 MB=  0.566 removal=+0.1192
-[spc] phi   occ_gender   s2 sp=0.999  nnz=   905,970 MB=  0.113 removal=+0.0391
-Loading checkpoint shards:   0%|                                                                          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 1/2 [00:00<00:00,  4.58it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  8.59it/s]
-[spc] gemma occ_gender   s0 sp=0.000  nnz=368,050,176 MB= 46.006 removal=+0.6475
-[spc] gemma occ_gender   s0 sp=0.500  nnz=184,025,080 MB= 23.003 removal=+0.7136
-[spc] gemma occ_gender   s0 sp=0.900  nnz=36,805,015 MB=  4.601 removal=+0.7367
-[spc] gemma occ_gender   s0 sp=0.950  nnz=18,402,509 MB=  2.301 removal=+0.6805
-[spc] gemma occ_gender   s0 sp=0.970  nnz=11,041,506 MB=  1.380 removal=+0.6051
-[spc] gemma occ_gender   s0 sp=0.990  nnz= 3,680,502 MB=  0.460 removal=+0.1353
-[spc] gemma occ_gender   s0 sp=0.995  nnz= 1,840,251 MB=  0.230 removal=+0.0716
-[spc] gemma occ_gender   s0 sp=0.999  nnz=   368,051 MB=  0.046 removal=+0.1051
-[spc] gemma occ_gender   s1 sp=0.000  nnz=368,050,176 MB= 46.006 removal=+0.5925
-[spc] gemma occ_gender   s1 sp=0.500  nnz=184,025,069 MB= 23.003 removal=+0.6928
-[spc] gemma occ_gender   s1 sp=0.900  nnz=36,805,017 MB=  4.601 removal=+0.7370
-[spc] gemma occ_gender   s1 sp=0.950  nnz=18,402,509 MB=  2.301 removal=+0.3168
-[spc] gemma occ_gender   s1 sp=0.970  nnz=11,041,504 MB=  1.380 removal=+0.5609
-[spc] gemma occ_gender   s1 sp=0.990  nnz= 3,680,501 MB=  0.460 removal=+0.6164
-[spc] gemma occ_gender   s1 sp=0.995  nnz= 1,840,251 MB=  0.230 removal=+0.4249
-[spc] gemma occ_gender   s1 sp=0.999  nnz=   368,051 MB=  0.046 removal=+0.1123
-[spc] gemma occ_gender   s2 sp=0.000  nnz=368,050,176 MB= 46.006 removal=+0.7822
-[spc] gemma occ_gender   s2 sp=0.500  nnz=184,025,078 MB= 23.003 removal=+0.7070
-[spc] gemma occ_gender   s2 sp=0.900  nnz=36,805,015 MB=  4.601 removal=+0.8056
-[spc] gemma occ_gender   s2 sp=0.950  nnz=18,402,507 MB=  2.301 removal=+0.7861
-[spc] gemma occ_gender   s2 sp=0.970  nnz=11,041,502 MB=  1.380 removal=+0.5120
-[spc] gemma occ_gender   s2 sp=0.990  nnz= 3,680,502 MB=  0.460 removal=+0.7853
-[spc] gemma occ_gender   s2 sp=0.995  nnz= 1,840,251 MB=  0.230 removal=+0.6855
-[spc] gemma occ_gender   s2 sp=0.999  nnz=   368,051 MB=  0.046 removal=+0.1403
-Loading checkpoint shards:   0%|                                                                          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 1/2 [00:00<00:00,  5.74it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  8.37it/s]
-[spc] llama occ_gender   s0 sp=0.000  nnz=704,643,072 MB= 88.081 removal=+0.7404
-[spc] llama occ_gender   s0 sp=0.500  nnz=352,321,501 MB= 44.040 removal=+0.6302
-[spc] llama occ_gender   s0 sp=0.900  nnz=70,464,301 MB=  8.808 removal=+0.7466
-[spc] llama occ_gender   s0 sp=0.950  nnz=35,232,150 MB=  4.404 removal=+0.6750
-[spc] llama occ_gender   s0 sp=0.970  nnz=21,139,282 MB=  2.643 removal=+0.5940
-[spc] llama occ_gender   s0 sp=0.990  nnz= 7,046,431 MB=  0.881 removal=+0.6721
-[spc] llama occ_gender   s0 sp=0.995  nnz= 3,523,216 MB=  0.441 removal=+0.5952
-[spc] llama occ_gender   s0 sp=0.999  nnz=   704,644 MB=  0.088 removal=+0.3579
-[spc] llama occ_gender   s1 sp=0.000  nnz=704,643,072 MB= 88.081 removal=+0.7597
-[spc] llama occ_gender   s1 sp=0.500  nnz=352,321,520 MB= 44.040 removal=+0.7306
-[spc] llama occ_gender   s1 sp=0.900  nnz=70,464,301 MB=  8.808 removal=+0.7589
-[spc] llama occ_gender   s1 sp=0.950  nnz=35,232,154 MB=  4.404 removal=+0.7387
-[spc] llama occ_gender   s1 sp=0.970  nnz=21,139,289 MB=  2.643 removal=+0.7439
-[spc] llama occ_gender   s1 sp=0.990  nnz= 7,046,429 MB=  0.881 removal=+0.4695
-[spc] llama occ_gender   s1 sp=0.995  nnz= 3,523,216 MB=  0.441 removal=+0.2941
-[spc] llama occ_gender   s1 sp=0.999  nnz=   704,644 MB=  0.088 removal=+0.1770
-[spc] llama occ_gender   s2 sp=0.000  nnz=704,643,072 MB= 88.081 removal=+0.7434
-[spc] llama occ_gender   s2 sp=0.500  nnz=352,321,524 MB= 44.040 removal=+0.7540
-[spc] llama occ_gender   s2 sp=0.900  nnz=70,464,299 MB=  8.808 removal=+0.7356
-[spc] llama occ_gender   s2 sp=0.950  nnz=35,232,151 MB=  4.404 removal=+0.7076
-[spc] llama occ_gender   s2 sp=0.970  nnz=21,139,289 MB=  2.643 removal=+0.6811
-[spc] llama occ_gender   s2 sp=0.990  nnz= 7,046,428 MB=  0.881 removal=+0.7027
-[spc] llama occ_gender   s2 sp=0.995  nnz= 3,523,216 MB=  0.441 removal=+0.6759
-[spc] llama occ_gender   s2 sp=0.999  nnz=   704,643 MB=  0.088 removal=+0.4385
-[spc] ALL DONE
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-Loading checkpoint shards:   0%|                                                                          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 2/4 [00:00<00:00, 15.91it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 4/4 [00:00<00:00, 16.63it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 4/4 [00:00<00:00, 16.50it/s]
-`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-/opt/conda/lib/python3.13/site-packages/torch/utils/checkpoint.py:232: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  check_backward_validity(args)
-[spc] qwen  occ_gender   s0 sp=0.000  nnz=822,083,584 MB=102.761 removal=+0.6980
-[spc] qwen  occ_gender   s0 sp=0.500  nnz=411,041,788 MB= 51.380 removal=+0.6475
-[spc] qwen  occ_gender   s0 sp=0.900  nnz=82,208,349 MB= 10.276 removal=+0.7169
-[spc] qwen  occ_gender   s0 sp=0.950  nnz=41,104,180 MB=  5.138 removal=+0.6807
-[spc] qwen  occ_gender   s0 sp=0.970  nnz=24,662,501 MB=  3.083 removal=+0.6488
-[spc] qwen  occ_gender   s0 sp=0.990  nnz= 8,220,836 MB=  1.028 removal=+0.6652
-[spc] qwen  occ_gender   s0 sp=0.995  nnz= 4,110,418 MB=  0.514 removal=+0.6269
-[spc] qwen  occ_gender   s0 sp=0.999  nnz=   822,084 MB=  0.103 removal=+0.5681
-[spc] qwen  occ_gender   s1 sp=0.000  nnz=822,083,584 MB=102.761 removal=+0.6157
-[spc] qwen  occ_gender   s1 sp=0.500  nnz=411,041,765 MB= 51.380 removal=+0.6608
-[spc] qwen  occ_gender   s1 sp=0.900  nnz=82,208,338 MB= 10.276 removal=+0.6560
-[spc] qwen  occ_gender   s1 sp=0.950  nnz=41,104,179 MB=  5.138 removal=+0.6566
-[spc] qwen  occ_gender   s1 sp=0.970  nnz=24,662,506 MB=  3.083 removal=+0.6168
-[spc] qwen  occ_gender   s1 sp=0.990  nnz= 8,220,834 MB=  1.028 removal=+0.6672
-[spc] qwen  occ_gender   s1 sp=0.995  nnz= 4,110,418 MB=  0.514 removal=+0.7126
-[spc] qwen  occ_gender   s1 sp=0.999  nnz=   822,084 MB=  0.103 removal=+0.4267
-[spc] qwen  occ_gender   s2 sp=0.000  nnz=822,083,584 MB=102.761 removal=+0.6358
-[spc] qwen  occ_gender   s2 sp=0.500  nnz=411,041,746 MB= 51.380 removal=+0.5909
-[spc] qwen  occ_gender   s2 sp=0.900  nnz=82,208,358 MB= 10.276 removal=+0.6720
-[spc] qwen  occ_gender   s2 sp=0.950  nnz=41,104,170 MB=  5.138 removal=+0.6599
-[spc] qwen  occ_gender   s2 sp=0.970  nnz=24,662,508 MB=  3.083 removal=+0.6675
-[spc] qwen  occ_gender   s2 sp=0.990  nnz= 8,220,835 MB=  1.028 removal=+0.6577
-[spc] qwen  occ_gender   s2 sp=0.995  nnz= 4,110,418 MB=  0.514 removal=+0.6422
-[spc] qwen  occ_gender   s2 sp=0.999  nnz=   822,084 MB=  0.103 removal=+0.5917
-Loading checkpoint shards:   0%|                                                                          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 2/4 [00:00<00:00,  9.43it/s]Loading checkpoint shards:  75%|█████████████████████████████████████████████████▌                | 3/4 [00:00<00:00,  9.52it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 4/4 [00:00<00:00, 12.48it/s]
-[spc] llama occ_gender   s0 sp=0.000  nnz=1,342,177,280 MB=167.772 removal=+0.7354
-[spc] llama occ_gender   s0 sp=0.500  nnz=671,088,603 MB= 83.886 removal=+0.7523
-[spc] llama occ_gender   s0 sp=0.900  nnz=134,217,711 MB= 16.777 removal=+nan
-[spc] llama occ_gender   s0 sp=0.950  nnz=67,108,858 MB=  8.389 removal=+0.6656
-[spc] llama occ_gender   s0 sp=0.970  nnz=40,265,318 MB=  5.033 removal=+0.7398
-[spc] llama occ_gender   s0 sp=0.990  nnz=13,421,769 MB=  1.678 removal=+0.3098
-[spc] llama occ_gender   s0 sp=0.995  nnz= 6,710,885 MB=  0.839 removal=+0.7412
-[spc] llama occ_gender   s0 sp=0.999  nnz= 1,342,178 MB=  0.168 removal=+0.4619
-[spc] llama occ_gender   s1 sp=0.000  nnz=1,342,177,280 MB=167.772 removal=+0.7258
-[spc] llama occ_gender   s1 sp=0.500  nnz=671,088,635 MB= 83.886 removal=+nan
-[spc] llama occ_gender   s1 sp=0.900  nnz=134,217,719 MB= 16.777 removal=+0.7158
-[spc] llama occ_gender   s1 sp=0.950  nnz=67,108,846 MB=  8.389 removal=+0.7392
-[spc] llama occ_gender   s1 sp=0.970  nnz=40,265,314 MB=  5.033 removal=+0.7377
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-[spc] qwen: nothing to do
-Loading checkpoint shards:   0%|                                                                          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 2/4 [00:00<00:00,  9.62it/s]Loading checkpoint shards:  75%|█████████████████████████████████████████████████▌                | 3/4 [00:00<00:00,  9.59it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 4/4 [00:00<00:00, 12.58it/s]
-`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-/opt/conda/lib/python3.13/site-packages/torch/utils/checkpoint.py:232: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  check_backward_validity(args)
-[spc] llama occ_gender   s1 sp=0.990  nnz=13,421,773 MB=  1.678 removal=+0.5757
-[spc] llama occ_gender   s1 sp=0.995  nnz= 6,710,882 MB=  0.839 removal=+0.7365
-[spc] llama occ_gender   s1 sp=0.999  nnz= 1,342,178 MB=  0.168 removal=+0.4616
-[spc] llama occ_gender   s2 sp=0.000  nnz=1,342,177,280 MB=167.772 removal=+nan
-[spc] llama occ_gender   s2 sp=0.500  nnz=671,088,630 MB= 83.886 removal=+nan
-[spc] llama occ_gender   s2 sp=0.900  nnz=134,217,721 MB= 16.777 removal=+nan
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-[spc] qwen: nothing to do
-Loading checkpoint shards:   0%|                                                                          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 2/4 [00:00<00:00, 11.44it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 4/4 [00:00<00:00, 14.69it/s]
-`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-/opt/conda/lib/python3.13/site-packages/torch/utils/checkpoint.py:232: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  check_backward_validity(args)
-[spc] llama occ_gender   s2 sp=0.950  nnz=67,108,848 MB=  8.389 removal=+nan
-[spc] llama occ_gender   s2 sp=0.970  nnz=40,265,319 MB=  5.033 removal=+nan
-[spc] llama occ_gender   s2 sp=0.990  nnz=13,421,773 MB=  1.678 removal=+0.5947
-[spc] llama occ_gender   s2 sp=0.995  nnz= 6,710,883 MB=  0.839 removal=+0.7362
-[spc] llama occ_gender   s2 sp=0.999  nnz= 1,342,178 MB=  0.168 removal=+0.4567
-[spc] ALL DONE

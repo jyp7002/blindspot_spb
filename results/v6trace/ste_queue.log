@@ -1,48 +1,0 @@
-[steq 08-03 13:43:55] attempt 1 at 0/24 rows
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-Loading weights:   0%|                                                       | 0/434 [00:00<?, ?it/s]Loading weights: 100%|███████████████████████████████████████████| 434/434 [00:00<00:00, 5647.70it/s]
-[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-[ste] qwen   occ_gender           s0 sign_fp  removal=+0.0259
-[ste] qwen   occ_gender           s0 ste      removal=+0.0270
-Loading weights:   0%|                                                       | 0/434 [00:00<?, ?it/s]Loading weights: 100%|███████████████████████████████████████████| 434/434 [00:00<00:00, 6217.75it/s]
-[ste] qwen   occ_gender           s1 sign_fp  removal=+0.4569
-[ste] qwen   occ_gender           s1 ste      removal=+0.4550
-Loading weights:   0%|                                                       | 0/434 [00:00<?, ?it/s]Loading weights: 100%|███████████████████████████████████████████| 434/434 [00:00<00:00, 5475.35it/s]
-[ste] qwen   occ_gender           s2 sign_fp  removal=+0.6518
-[ste] qwen   occ_gender           s2 ste      removal=+0.6518
-Loading weights:   0%|                                                       | 0/434 [00:00<?, ?it/s]Loading weights: 100%|███████████████████████████████████████████| 434/434 [00:00<00:00, 5558.39it/s]
-Using the latest cached version of the dataset since nyu-mll/crows_pairs couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'default' at /home/jovyan/.cache/huggingface/datasets/nyu-mll___crows_pairs/default/0.0.0/565159a0443df8dc8dba9855c7454e6afc907be4 (last modified on Mon Jul 20 07:00:06 2026).
-[ste] qwen   crows_socioeconomic  s0 sign_fp  removal=-0.0546
-[ste] qwen   crows_socioeconomic  s0 ste      removal=-0.0482
-Loading weights:   0%|                                                       | 0/434 [00:00<?, ?it/s]Loading weights: 100%|███████████████████████████████████████████| 434/434 [00:00<00:00, 5983.49it/s]
-[ste] qwen   crows_socioeconomic  s1 sign_fp  removal=-0.0497
-[ste] qwen   crows_socioeconomic  s1 ste      removal=-0.0479
-Loading weights:   0%|                                                       | 0/434 [00:00<?, ?it/s]Loading weights: 100%|███████████████████████████████████████████| 434/434 [00:00<00:00, 6007.11it/s]
-[ste] qwen   crows_socioeconomic  s2 sign_fp  removal=-0.0381
-[ste] qwen   crows_socioeconomic  s2 ste      removal=-0.0405
-Loading weights:   0%|                                                       | 0/288 [00:00<?, ?it/s]Loading weights:  38%|████████████████▏                          | 108/288 [00:00<00:00, 1052.34it/s]Loading weights:  74%|███████████████████████████████▉           | 214/288 [00:00<00:00, 1012.54it/s]Loading weights: 100%|███████████████████████████████████████████| 288/288 [00:00<00:00, 1026.67it/s]
-[ste] gemma  occ_gender           s0 sign_fp  removal=+0.6475
-[ste] gemma  occ_gender           s0 ste      removal=+0.6482
-Loading weights:   0%|                                                       | 0/288 [00:00<?, ?it/s]Loading weights: 100%|███████████████████████████████████████████| 288/288 [00:00<00:00, 5501.70it/s]
-[ste] gemma  occ_gender           s1 sign_fp  removal=+0.5925
-[ste] gemma  occ_gender           s1 ste      removal=+0.5907
-Loading weights:   0%|                                                       | 0/288 [00:00<?, ?it/s]Loading weights: 100%|███████████████████████████████████████████| 288/288 [00:00<00:00, 5150.53it/s]
-[ste] gemma  occ_gender           s2 sign_fp  removal=+0.7822
-[ste] gemma  occ_gender           s2 ste      removal=+0.7809
-Loading weights:   0%|                                                       | 0/288 [00:00<?, ?it/s]Loading weights: 100%|███████████████████████████████████████████| 288/288 [00:00<00:00, 5932.33it/s]
-[ste] gemma  crows_socioeconomic  s0 sign_fp  removal=+0.1075
-[ste] gemma  crows_socioeconomic  s0 ste      removal=+0.1078
-Loading weights:   0%|                                                       | 0/288 [00:00<?, ?it/s]Loading weights: 100%|███████████████████████████████████████████| 288/288 [00:00<00:00, 5365.70it/s]
-[ste] gemma  crows_socioeconomic  s1 sign_fp  removal=+0.0927
-[ste] gemma  crows_socioeconomic  s1 ste      removal=+nan
-Loading weights:   0%|                                                       | 0/288 [00:00<?, ?it/s]Loading weights: 100%|███████████████████████████████████████████| 288/288 [00:00<00:00, 5562.74it/s]
-[ste] gemma  crows_socioeconomic  s2 sign_fp  removal=+0.1681
-[ste] gemma  crows_socioeconomic  s2 ste      removal=+0.1692
-[ste] ALL DONE
-[steq 08-03 14:26:03]   -> 0 -> 24
-[steq 08-03 14:26:03] complete at 24
-[steq 08-03 14:26:03] done

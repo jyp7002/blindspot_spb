@@ -1,422 +1,0 @@
-[elicit] load gemma_3b (google/gemma-2-2b-it) for [('bbq_Age', 0), ('bbq_Age', 1), ('bbq_Age', 2)]
-Loading checkpoint shards:   0%|                                                                          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 1/2 [00:00<00:00,  4.54it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  8.58it/s]
-Using the latest cached version of the dataset since oskarvanderwal/bbq couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'Age' at /home/jovyan/.cache/huggingface/datasets/oskarvanderwal___bbq/Age/0.0.0/ab00114b0fbf59c7c539ff9158f6ce717d13ab63 (last modified on Mon Jul 20 06:59:10 2026).
-[elicit] gemma_3b     bbq_Age      s0 gap=+0.063 n=460 -> gemma_3b|bbq_Age|s0.json
-[elicit] gemma_3b     bbq_Age      s1 gap=+0.063 n=460 -> gemma_3b|bbq_Age|s1.json
-[elicit] gemma_3b     bbq_Age      s2 gap=+0.063 n=460 -> gemma_3b|bbq_Age|s2.json
-[elicit] DONE
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-Loading checkpoint shards:   0%|                                                                          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00, 81.85it/s]
-[ins] GATE gemma2b_it     occ_gender   pre_skew=+0.8598 mmlu=0.625 ppl=22.82
-`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-/opt/conda/lib/python3.13/site-packages/torch/utils/checkpoint.py:232: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  check_backward_validity(args)
-[ins] gemma2b_it     occ_gender   s0 fp           removal=+0.6798 a=4 ifeval=None
-[ins] gemma2b_it     occ_gender   s0 sign_only    removal=+0.6475 a=8 ifeval=None
-[ins] gemma2b_it     occ_gender   s0 sparse99     removal=+0.1353 a=4 ifeval=None
-[ins] gemma2b_it     occ_gender   s0 random_sign  removal=+0.0002 a=2 ifeval=None
-[ins] gemma2b_it     occ_gender   s1 fp           removal=+0.6842 a=4 ifeval=None
-[ins] gemma2b_it     occ_gender   s1 sign_only    removal=+0.5925 a=8 ifeval=None
-[ins] gemma2b_it     occ_gender   s1 sparse99     removal=+0.6164 a=16 ifeval=None
-[ins] gemma2b_it     occ_gender   s1 random_sign  removal=+0.0058 a=16 ifeval=None
-[ins] gemma2b_it     occ_gender   s2 fp           removal=+0.8038 a=4 ifeval=None
-[ins] gemma2b_it     occ_gender   s2 sign_only    removal=+0.7822 a=8 ifeval=None
-[ins] gemma2b_it     occ_gender   s2 sparse99     removal=+0.7853 a=16 ifeval=None
-[ins] gemma2b_it     occ_gender   s2 random_sign  removal=+0.0043 a=16 ifeval=None
-Using the latest cached version of the dataset since oskarvanderwal/bbq couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'Age' at /home/jovyan/.cache/huggingface/datasets/oskarvanderwal___bbq/Age/0.0.0/ab00114b0fbf59c7c539ff9158f6ce717d13ab63 (last modified on Mon Jul 20 06:59:10 2026).
-[ins] GATE gemma2b_it     bbq_Age      pre_skew=+0.2896 mmlu=0.625 ppl=22.82
-[ins] gemma2b_it     bbq_Age      s0 fp           removal=+nan a=None ifeval=None
-[ins] gemma2b_it     bbq_Age      s0 sign_only    removal=+nan a=None ifeval=None
-[ins] gemma2b_it     bbq_Age      s0 sparse99     removal=+0.0646 a=2 ifeval=None
-[ins] gemma2b_it     bbq_Age      s0 random_sign  removal=-0.0006 a=2 ifeval=None
-[ins] gemma2b_it     bbq_Age      s1 fp           removal=+0.2879 a=2 ifeval=None
-[ins] gemma2b_it     bbq_Age      s1 sign_only    removal=+0.1827 a=2 ifeval=None
-[ins] gemma2b_it     bbq_Age      s1 sparse99     removal=+nan a=None ifeval=None
-[ins] gemma2b_it     bbq_Age      s1 random_sign  removal=+0.0011 a=8 ifeval=None
-[ins] gemma2b_it     bbq_Age      s2 fp           removal=+nan a=None ifeval=None
-[ins] gemma2b_it     bbq_Age      s2 sign_only    removal=+0.1754 a=2 ifeval=None
-[ins] gemma2b_it     bbq_Age      s2 sparse99     removal=+0.2318 a=16 ifeval=None
-[ins] gemma2b_it     bbq_Age      s2 random_sign  removal=+0.0024 a=16 ifeval=None
-Loading checkpoint shards:   0%|                                                                          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|██████████████████████                                            | 1/3 [00:40<01:21, 40.76s/it]Loading checkpoint shards:  67%|████████████████████████████████████████████                      | 2/3 [01:22<00:41, 41.10s/it]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 3/3 [01:26<00:00, 24.12s/it]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 3/3 [01:26<00:00, 28.67s/it]
-[ins] FAIL gemma2b_base occ_gender s0
-Traceback (most recent call last):
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 103, in chat_prompt
-    return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
-           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1646, in apply_chat_template
-    chat_template = self.get_chat_template(chat_template, tools)
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1824, in get_chat_template
-    raise ValueError(
-    ...<4 lines>...
-    )
-ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/jovyan/Blind_spot_spb/run_ins.py", line 125, in main
-    pre = C.fast_eval(model, tok, ax, mmlu, wt, 6)
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 650, in fast_eval
-    m = eval_mmlu(model, tok, mmlu_rows, batch_size=batch_size, n_rot=2)["mmlu_acc"]
-        ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 415, in eval_mmlu
-    preds, _ = mmlu_predict(model, tok, rows, batch_size, n_rot=n_rot)
-               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 405, in mmlu_predict
-    prompts.append(chat_prompt(tok, body, MMLU_SYS))
-                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 107, in chat_prompt
-    return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
-           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1646, in apply_chat_template
-    chat_template = self.get_chat_template(chat_template, tools)
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1824, in get_chat_template
-    raise ValueError(
-    ...<4 lines>...
-    )
-ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
-[ins] FAIL gemma2b_base occ_gender s1
-Traceback (most recent call last):
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 103, in chat_prompt
-    return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
-           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1646, in apply_chat_template
-    chat_template = self.get_chat_template(chat_template, tools)
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1824, in get_chat_template
-    raise ValueError(
-    ...<4 lines>...
-    )
-ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/jovyan/Blind_spot_spb/run_ins.py", line 125, in main
-    pre = C.fast_eval(model, tok, ax, mmlu, wt, 6)
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 650, in fast_eval
-    m = eval_mmlu(model, tok, mmlu_rows, batch_size=batch_size, n_rot=2)["mmlu_acc"]
-        ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 415, in eval_mmlu
-    preds, _ = mmlu_predict(model, tok, rows, batch_size, n_rot=n_rot)
-               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 405, in mmlu_predict
-    prompts.append(chat_prompt(tok, body, MMLU_SYS))
-                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 107, in chat_prompt
-    return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
-           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1646, in apply_chat_template
-    chat_template = self.get_chat_template(chat_template, tools)
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1824, in get_chat_template
-    raise ValueError(
-    ...<4 lines>...
-    )
-ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
-[ins] FAIL gemma2b_base occ_gender s2
-Traceback (most recent call last):
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 103, in chat_prompt
-    return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
-           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1646, in apply_chat_template
-    chat_template = self.get_chat_template(chat_template, tools)
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1824, in get_chat_template
-    raise ValueError(
-    ...<4 lines>...
-    )
-ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/jovyan/Blind_spot_spb/run_ins.py", line 125, in main
-    pre = C.fast_eval(model, tok, ax, mmlu, wt, 6)
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 650, in fast_eval
-    m = eval_mmlu(model, tok, mmlu_rows, batch_size=batch_size, n_rot=2)["mmlu_acc"]
-        ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 415, in eval_mmlu
-    preds, _ = mmlu_predict(model, tok, rows, batch_size, n_rot=n_rot)
-               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 405, in mmlu_predict
-    prompts.append(chat_prompt(tok, body, MMLU_SYS))
-                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 107, in chat_prompt
-    return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
-           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1646, in apply_chat_template
-    chat_template = self.get_chat_template(chat_template, tools)
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1824, in get_chat_template
-    raise ValueError(
-    ...<4 lines>...
-    )
-ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
-[ins] FAIL gemma2b_base bbq_Age s0
-Traceback (most recent call last):
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 103, in chat_prompt
-    return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
-           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1646, in apply_chat_template
-    chat_template = self.get_chat_template(chat_template, tools)
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1824, in get_chat_template
-    raise ValueError(
-    ...<4 lines>...
-    )
-ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/jovyan/Blind_spot_spb/run_ins.py", line 125, in main
-    pre = C.fast_eval(model, tok, ax, mmlu, wt, 6)
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 650, in fast_eval
-    m = eval_mmlu(model, tok, mmlu_rows, batch_size=batch_size, n_rot=2)["mmlu_acc"]
-        ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 415, in eval_mmlu
-    preds, _ = mmlu_predict(model, tok, rows, batch_size, n_rot=n_rot)
-               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 405, in mmlu_predict
-    prompts.append(chat_prompt(tok, body, MMLU_SYS))
-                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 107, in chat_prompt
-    return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
-           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1646, in apply_chat_template
-    chat_template = self.get_chat_template(chat_template, tools)
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1824, in get_chat_template
-    raise ValueError(
-    ...<4 lines>...
-    )
-ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
-[ins] FAIL gemma2b_base bbq_Age s1
-Traceback (most recent call last):
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 103, in chat_prompt
-    return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
-           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1646, in apply_chat_template
-    chat_template = self.get_chat_template(chat_template, tools)
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1824, in get_chat_template
-    raise ValueError(
-    ...<4 lines>...
-    )
-ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/jovyan/Blind_spot_spb/run_ins.py", line 125, in main
-    pre = C.fast_eval(model, tok, ax, mmlu, wt, 6)
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 650, in fast_eval
-    m = eval_mmlu(model, tok, mmlu_rows, batch_size=batch_size, n_rot=2)["mmlu_acc"]
-        ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 415, in eval_mmlu
-    preds, _ = mmlu_predict(model, tok, rows, batch_size, n_rot=n_rot)
-               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 405, in mmlu_predict
-    prompts.append(chat_prompt(tok, body, MMLU_SYS))
-                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 107, in chat_prompt
-    return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
-           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1646, in apply_chat_template
-    chat_template = self.get_chat_template(chat_template, tools)
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1824, in get_chat_template
-    raise ValueError(
-    ...<4 lines>...
-    )
-ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
-[ins] FAIL gemma2b_base bbq_Age s2
-Traceback (most recent call last):
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 103, in chat_prompt
-    return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
-           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1646, in apply_chat_template
-    chat_template = self.get_chat_template(chat_template, tools)
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1824, in get_chat_template
-    raise ValueError(
-    ...<4 lines>...
-    )
-ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/home/jovyan/Blind_spot_spb/run_ins.py", line 125, in main
-    pre = C.fast_eval(model, tok, ax, mmlu, wt, 6)
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 650, in fast_eval
-    m = eval_mmlu(model, tok, mmlu_rows, batch_size=batch_size, n_rot=2)["mmlu_acc"]
-        ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 415, in eval_mmlu
-    preds, _ = mmlu_predict(model, tok, rows, batch_size, n_rot=n_rot)
-               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 405, in mmlu_predict
-    prompts.append(chat_prompt(tok, body, MMLU_SYS))
-                   ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
-  File "/home/jovyan/Blind_spot_spb/colab_t2t4.py", line 107, in chat_prompt
-    return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
-           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1646, in apply_chat_template
-    chat_template = self.get_chat_template(chat_template, tools)
-  File "/opt/conda/lib/python3.13/site-packages/transformers/tokenization_utils_base.py", line 1824, in get_chat_template
-    raise ValueError(
-    ...<4 lines>...
-    )
-ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
-[ins] ALL DONE
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-Loading checkpoint shards:   0%|                                                                          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 2/4 [00:00<00:00, 15.35it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 4/4 [00:00<00:00, 15.56it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 4/4 [00:00<00:00, 15.52it/s]
-[ins] GATE qwen7b_it      occ_gender   pre_skew=+0.7473 mmlu=0.740 ppl=12.64
-`pretrained` model kwarg is not of type `str`. Many other model arguments may be ignored. Please do not launch via accelerate or use `parallelize=True` if passing an existing model this way.
-Passed an already-initialized model through `pretrained`, assuming single-process call to evaluate() or custom distributed integration
-Using the latest cached version of the dataset since google/IFEval couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'default' at /home/jovyan/.cache/huggingface/datasets/google___if_eval/default/0.0.0/966cd89545d6b6acfd7638bc708b98261ca58e84 (last modified on Fri Aug 28 15:51:04 2026).
-  0%|                                                                                                   | 0/200 [00:00<?, ?it/s]100%|█████████████████████████████████████████████████████████████████████████████████████| 200/200 [00:00<00:00, 107850.45it/s]
-Running generate_until requests:   0%|                                                                  | 0/200 [00:00<?, ?it/s]The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
-Running generate_until requests:   0%|▎                                                       | 1/200 [00:44<2:29:09, 44.97s/it]Running generate_until requests:   4%|██▌                                                       | 9/200 [01:28<27:22,  8.60s/it]Running generate_until requests:   8%|████▊                                                    | 17/200 [02:11<20:41,  6.79s/it]Running generate_until requests:  12%|███████▏                                                 | 25/200 [02:55<18:01,  6.18s/it]Running generate_until requests:  16%|█████████▍                                               | 33/200 [03:38<16:20,  5.87s/it]Running generate_until requests:  20%|███████████▋                                             | 41/200 [04:21<15:05,  5.69s/it]Running generate_until requests:  24%|█████████████▉                                           | 49/200 [05:04<14:03,  5.59s/it]Running generate_until requests:  28%|████████████████▏                                        | 57/200 [05:47<13:09,  5.52s/it]Running generate_until requests:  32%|██████████████████▌                                      | 65/200 [06:30<12:18,  5.47s/it]Running generate_until requests:  36%|████████████████████▊                                    | 73/200 [07:13<11:31,  5.44s/it]Running generate_until requests:  40%|███████████████████████                                  | 81/200 [07:56<10:45,  5.42s/it]Running generate_until requests:  44%|█████████████████████████▎                               | 89/200 [08:39<10:00,  5.41s/it]Running generate_until requests:  48%|███████████████████████████▋                             | 97/200 [09:22<09:15,  5.39s/it]Running generate_until requests:  52%|█████████████████████████████▍                          | 105/200 [10:04<08:31,  5.38s/it]Running generate_until requests:  56%|███████████████████████████████▋                        | 113/200 [10:47<07:47,  5.37s/it]Running generate_until requests:  60%|█████████████████████████████████▉                      | 121/200 [11:30<07:04,  5.37s/it]Running generate_until requests:  64%|████████████████████████████████████                    | 129/200 [12:13<06:20,  5.36s/it]Running generate_until requests:  68%|██████████████████████████████████████▎                 | 137/200 [12:46<05:13,  4.98s/it]Running generate_until requests:  72%|████████████████████████████████████████▌               | 145/200 [13:28<04:39,  5.09s/it]Running generate_until requests:  76%|██████████████████████████████████████████▊             | 153/200 [14:11<04:03,  5.17s/it]Running generate_until requests:  80%|█████████████████████████████████████████████           | 161/200 [14:54<03:23,  5.22s/it]Running generate_until requests:  84%|███████████████████████████████████████████████▎        | 169/200 [15:37<02:43,  5.26s/it]Running generate_until requests:  88%|█████████████████████████████████████████████████▌      | 177/200 [16:19<02:01,  5.28s/it]Running generate_until requests:  92%|███████████████████████████████████████████████████▊    | 185/200 [17:02<01:19,  5.29s/it]Running generate_until requests:  96%|██████████████████████████████████████████████████████  | 193/200 [17:45<00:37,  5.30s/it]Running generate_until requests: 100%|████████████████████████████████████████████████████████| 200/200 [17:45<00:00,  5.33s/it]
-fatal: not a git repository (or any parent up to mount point /)
-Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
-[ins] qwen7b_it unedited IFEval={'sample_len': 200.0, 'prompt_level_strict_acc,none': 0.475, 'inst_level_strict_acc,none': 0.6069182389937107, 'prompt_level_loose_acc,none': 0.545, 'inst_level_loose_acc,none': 0.6698113207547169}
-`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-/opt/conda/lib/python3.13/site-packages/torch/utils/checkpoint.py:232: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  check_backward_validity(args)
-Using the latest cached version of the dataset since google/IFEval couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'default' at /home/jovyan/.cache/huggingface/datasets/google___if_eval/default/0.0.0/966cd89545d6b6acfd7638bc708b98261ca58e84 (last modified on Fri Aug 28 15:51:04 2026).
-  0%|                                                                                                   | 0/200 [00:00<?, ?it/s]100%|█████████████████████████████████████████████████████████████████████████████████████| 200/200 [00:00<00:00, 117701.81it/s]
-Running generate_until requests:   0%|                                                                  | 0/200 [00:00<?, ?it/s]Running generate_until requests:   0%|▎                                                       | 1/200 [00:44<2:29:07, 44.96s/it]Running generate_until requests:   4%|██▌                                                       | 9/200 [01:28<27:21,  8.60s/it]Running generate_until requests:   8%|████▊                                                    | 17/200 [02:11<20:42,  6.79s/it]Running generate_until requests:  12%|███████▏                                                 | 25/200 [02:54<17:59,  6.17s/it]Running generate_until requests:  16%|█████████▍                                               | 33/200 [03:38<16:21,  5.88s/it]Running generate_until requests:  20%|███████████▋                                             | 41/200 [04:21<15:06,  5.70s/it]Running generate_until requests:  24%|█████████████▉                                           | 49/200 [05:04<14:04,  5.60s/it]Running generate_until requests:  28%|████████████████▏                                        | 57/200 [05:47<13:10,  5.53s/it]Running generate_until requests:  32%|██████████████████▌                                      | 65/200 [06:30<12:19,  5.48s/it]Running generate_until requests:  36%|████████████████████▊                                    | 73/200 [07:13<11:32,  5.45s/it]Running generate_until requests:  40%|███████████████████████                                  | 81/200 [07:56<10:46,  5.43s/it]Running generate_until requests:  44%|█████████████████████████▎                               | 89/200 [08:39<10:01,  5.42s/it]Running generate_until requests:  48%|███████████████████████████▋                             | 97/200 [09:22<09:17,  5.41s/it]Running generate_until requests:  52%|█████████████████████████████▍                          | 105/200 [10:05<08:32,  5.39s/it]Running generate_until requests:  56%|███████████████████████████████▋                        | 113/200 [10:48<07:48,  5.38s/it]Running generate_until requests:  60%|█████████████████████████████████▉                      | 121/200 [11:31<07:04,  5.37s/it]Running generate_until requests:  64%|████████████████████████████████████                    | 129/200 [12:14<06:21,  5.37s/it]Running generate_until requests:  68%|██████████████████████████████████████▎                 | 137/200 [12:47<05:14,  4.99s/it]Running generate_until requests:  72%|████████████████████████████████████████▌               | 145/200 [13:29<04:40,  5.10s/it]Running generate_until requests:  76%|██████████████████████████████████████████▊             | 153/200 [14:12<04:03,  5.17s/it]Running generate_until requests:  80%|█████████████████████████████████████████████           | 161/200 [14:55<03:23,  5.23s/it]Running generate_until requests:  84%|███████████████████████████████████████████████▎        | 169/200 [15:38<02:43,  5.27s/it]Running generate_until requests:  88%|█████████████████████████████████████████████████▌      | 177/200 [16:21<02:01,  5.30s/it]Running generate_until requests:  92%|███████████████████████████████████████████████████▊    | 185/200 [17:03<01:19,  5.31s/it]Running generate_until requests:  96%|██████████████████████████████████████████████████████  | 193/200 [17:46<00:37,  5.31s/it]Running generate_until requests: 100%|████████████████████████████████████████████████████████| 200/200 [17:46<00:00,  5.33s/it]
-fatal: not a git repository (or any parent up to mount point /)
-Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
-[ins] qwen7b_it      occ_gender   s0 fp           removal=+0.6965 a=2 ifeval=0.6289308176100629
-Using the latest cached version of the dataset since google/IFEval couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'default' at /home/jovyan/.cache/huggingface/datasets/google___if_eval/default/0.0.0/966cd89545d6b6acfd7638bc708b98261ca58e84 (last modified on Fri Aug 28 15:51:04 2026).
-  0%|                                                                                                   | 0/200 [00:00<?, ?it/s]100%|██████████████████████████████████████████████████████████████████████████████████████| 200/200 [00:00<00:00, 63334.15it/s]
-Running generate_until requests:   0%|                                                                  | 0/200 [00:00<?, ?it/s]Running generate_until requests:   0%|▎                                                       | 1/200 [00:45<2:29:17, 45.01s/it]Running generate_until requests:   4%|██▌                                                       | 9/200 [01:28<27:24,  8.61s/it]Running generate_until requests:   8%|████▊                                                    | 17/200 [02:11<20:42,  6.79s/it]Running generate_until requests:  12%|███████▏                                                 | 25/200 [02:55<18:01,  6.18s/it]Running generate_until requests:  16%|█████████▍                                               | 33/200 [03:38<16:21,  5.88s/it]Running generate_until requests:  20%|███████████▋                                             | 41/200 [04:21<15:07,  5.71s/it]Running generate_until requests:  24%|█████████████▉                                           | 49/200 [05:04<14:05,  5.60s/it]Running generate_until requests:  28%|████████████████▏                                        | 57/200 [05:47<13:12,  5.54s/it]Running generate_until requests:  32%|██████████████████▌                                      | 65/200 [06:30<12:20,  5.48s/it]Running generate_until requests:  36%|████████████████████▊                                    | 73/200 [07:13<11:32,  5.45s/it]Running generate_until requests:  40%|███████████████████████                                  | 81/200 [07:56<10:46,  5.43s/it]Running generate_until requests:  44%|█████████████████████████▎                               | 89/200 [08:40<10:00,  5.41s/it]Running generate_until requests:  48%|███████████████████████████▋                             | 97/200 [09:22<09:16,  5.40s/it]Running generate_until requests:  52%|█████████████████████████████▍                          | 105/200 [10:05<08:31,  5.39s/it]Running generate_until requests:  56%|███████████████████████████████▋                        | 113/200 [10:48<07:48,  5.38s/it]Running generate_until requests:  60%|█████████████████████████████████▉                      | 121/200 [11:31<07:05,  5.39s/it]Running generate_until requests:  64%|████████████████████████████████████                    | 129/200 [12:14<06:21,  5.38s/it]Running generate_until requests:  68%|██████████████████████████████████████▎                 | 137/200 [12:47<05:14,  5.00s/it]Running generate_until requests:  72%|████████████████████████████████████████▌               | 145/200 [13:30<04:40,  5.11s/it]Running generate_until requests:  76%|██████████████████████████████████████████▊             | 153/200 [14:13<04:03,  5.18s/it]Running generate_until requests:  80%|█████████████████████████████████████████████           | 161/200 [14:56<03:23,  5.23s/it]Running generate_until requests:  84%|███████████████████████████████████████████████▎        | 169/200 [15:38<02:43,  5.26s/it]Running generate_until requests:  88%|█████████████████████████████████████████████████▌      | 177/200 [16:21<02:01,  5.29s/it]Running generate_until requests:  92%|███████████████████████████████████████████████████▊    | 185/200 [17:04<01:19,  5.30s/it]Running generate_until requests:  96%|██████████████████████████████████████████████████████  | 193/200 [17:47<00:37,  5.31s/it]Running generate_until requests: 100%|████████████████████████████████████████████████████████| 200/200 [17:47<00:00,  5.34s/it]
-fatal: not a git repository (or any parent up to mount point /)
-Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
-[ins] qwen7b_it      occ_gender   s0 sign_only    removal=+0.6980 a=4 ifeval=0.6383647798742138
-Using the latest cached version of the dataset since google/IFEval couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'default' at /home/jovyan/.cache/huggingface/datasets/google___if_eval/default/0.0.0/966cd89545d6b6acfd7638bc708b98261ca58e84 (last modified on Fri Aug 28 15:51:04 2026).
-  0%|                                                                                                   | 0/200 [00:00<?, ?it/s]100%|█████████████████████████████████████████████████████████████████████████████████████| 200/200 [00:00<00:00, 112795.59it/s]
-Running generate_until requests:   0%|                                                                  | 0/200 [00:00<?, ?it/s]Running generate_until requests:   0%|▎                                                       | 1/200 [00:45<2:30:10, 45.28s/it]Running generate_until requests:   4%|██▌                                                       | 9/200 [01:28<27:28,  8.63s/it]Running generate_until requests:   8%|████▊                                                    | 17/200 [02:11<20:44,  6.80s/it]Running generate_until requests:  12%|███████▏                                                 | 25/200 [02:55<18:00,  6.17s/it]Running generate_until requests:  16%|█████████▍                                               | 33/200 [03:38<16:19,  5.87s/it]Running generate_until requests:  20%|███████████▋                                             | 41/200 [04:21<15:06,  5.70s/it]Running generate_until requests:  24%|█████████████▉                                           | 49/200 [05:04<14:04,  5.59s/it]Running generate_until requests:  28%|████████████████▏                                        | 57/200 [05:47<13:09,  5.52s/it]Running generate_until requests:  32%|██████████████████▌                                      | 65/200 [06:30<12:20,  5.48s/it]Running generate_until requests:  36%|████████████████████▊                                    | 73/200 [07:13<11:31,  5.45s/it]Running generate_until requests:  40%|███████████████████████                                  | 81/200 [07:56<10:45,  5.42s/it]Running generate_until requests:  44%|█████████████████████████▎                               | 89/200 [08:39<09:59,  5.40s/it]Running generate_until requests:  48%|███████████████████████████▋                             | 97/200 [09:22<09:15,  5.39s/it]Running generate_until requests:  52%|█████████████████████████████▍                          | 105/200 [10:05<08:31,  5.39s/it]Running generate_until requests:  56%|███████████████████████████████▋                        | 113/200 [10:48<07:48,  5.38s/it]Running generate_until requests:  60%|█████████████████████████████████▉                      | 121/200 [11:31<07:04,  5.37s/it]Running generate_until requests:  64%|████████████████████████████████████                    | 129/200 [12:08<06:05,  5.15s/it]Running generate_until requests:  68%|██████████████████████████████████████▎                 | 137/200 [12:41<05:05,  4.84s/it]Running generate_until requests:  72%|████████████████████████████████████████▌               | 145/200 [13:24<04:35,  5.01s/it]Running generate_until requests:  76%|██████████████████████████████████████████▊             | 153/200 [14:07<04:00,  5.11s/it]Running generate_until requests:  80%|█████████████████████████████████████████████           | 161/200 [14:49<03:21,  5.18s/it]Running generate_until requests:  84%|███████████████████████████████████████████████▎        | 169/200 [15:32<02:42,  5.23s/it]Running generate_until requests:  88%|█████████████████████████████████████████████████▌      | 177/200 [16:15<02:00,  5.26s/it]Running generate_until requests:  92%|███████████████████████████████████████████████████▊    | 185/200 [16:57<01:19,  5.28s/it]Running generate_until requests:  96%|██████████████████████████████████████████████████████  | 193/200 [17:40<00:37,  5.29s/it]Running generate_until requests: 100%|████████████████████████████████████████████████████████| 200/200 [17:40<00:00,  5.30s/it]
-fatal: not a git repository (or any parent up to mount point /)
-Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
-[ins] qwen7b_it      occ_gender   s0 sparse99     removal=+0.6652 a=8 ifeval=0.6257861635220126
-Using the latest cached version of the dataset since google/IFEval couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'default' at /home/jovyan/.cache/huggingface/datasets/google___if_eval/default/0.0.0/966cd89545d6b6acfd7638bc708b98261ca58e84 (last modified on Fri Aug 28 15:51:04 2026).
-  0%|                                                                                                   | 0/200 [00:00<?, ?it/s]100%|█████████████████████████████████████████████████████████████████████████████████████| 200/200 [00:00<00:00, 126220.40it/s]
-Running generate_until requests:   0%|                                                                  | 0/200 [00:00<?, ?it/s]Running generate_until requests:   0%|▎                                                       | 1/200 [00:45<2:29:16, 45.01s/it]Running generate_until requests:   4%|██▌                                                       | 9/200 [01:28<27:25,  8.61s/it]Running generate_until requests:   8%|████▊                                                    | 17/200 [02:11<20:46,  6.81s/it]Running generate_until requests:  12%|███████▏                                                 | 25/200 [02:55<18:01,  6.18s/it]Running generate_until requests:  16%|█████████▍                                               | 33/200 [03:38<16:20,  5.87s/it]Running generate_until requests:  20%|███████████▋                                             | 41/200 [04:21<15:06,  5.70s/it]Running generate_until requests:  24%|█████████████▉                                           | 49/200 [05:04<14:05,  5.60s/it]Running generate_until requests:  28%|████████████████▏                                        | 57/200 [05:47<13:10,  5.53s/it]Running generate_until requests:  32%|██████████████████▌                                      | 65/200 [06:30<12:20,  5.48s/it]Running generate_until requests:  36%|████████████████████▊                                    | 73/200 [07:13<11:32,  5.45s/it]Running generate_until requests:  40%|███████████████████████                                  | 81/200 [07:57<10:47,  5.44s/it]Running generate_until requests:  44%|█████████████████████████▎                               | 89/200 [08:39<10:00,  5.41s/it]Running generate_until requests:  48%|███████████████████████████▋                             | 97/200 [09:22<09:15,  5.39s/it]Running generate_until requests:  52%|█████████████████████████████▍                          | 105/200 [10:05<08:31,  5.38s/it]Running generate_until requests:  56%|███████████████████████████████▋                        | 113/200 [10:48<07:47,  5.37s/it]Running generate_until requests:  60%|█████████████████████████████████▉                      | 121/200 [11:31<07:03,  5.37s/it]Running generate_until requests:  64%|████████████████████████████████████                    | 129/200 [12:14<06:20,  5.36s/it]Running generate_until requests:  68%|██████████████████████████████████████▎                 | 137/200 [12:46<05:14,  4.99s/it]Running generate_until requests:  72%|████████████████████████████████████████▌               | 145/200 [13:29<04:40,  5.10s/it]Running generate_until requests:  76%|██████████████████████████████████████████▊             | 153/200 [14:12<04:03,  5.17s/it]Running generate_until requests:  80%|█████████████████████████████████████████████           | 161/200 [14:55<03:24,  5.24s/it]Running generate_until requests:  84%|███████████████████████████████████████████████▎        | 169/200 [15:38<02:43,  5.27s/it]Running generate_until requests:  88%|█████████████████████████████████████████████████▌      | 177/200 [16:21<02:01,  5.29s/it]Running generate_until requests:  92%|███████████████████████████████████████████████████▊    | 185/200 [17:03<01:19,  5.30s/it]Running generate_until requests:  96%|██████████████████████████████████████████████████████  | 193/200 [17:46<00:37,  5.31s/it]Running generate_until requests: 100%|████████████████████████████████████████████████████████| 200/200 [17:46<00:00,  5.33s/it]
-fatal: not a git repository (or any parent up to mount point /)
-Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
-[ins] qwen7b_it      occ_gender   s0 random_sign  removal=+0.0037 a=8 ifeval=0.6383647798742138
-Loading checkpoint shards:   0%|                                                                          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 2/4 [00:00<00:00,  9.47it/s]Loading checkpoint shards:  75%|█████████████████████████████████████████████████▌                | 3/4 [00:00<00:00,  9.18it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 4/4 [00:00<00:00, 12.16it/s]
-[ins] GATE llama8b_it     occ_gender   pre_skew=+0.7548 mmlu=0.720 ppl=11.29
-Using the latest cached version of the dataset since google/IFEval couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'default' at /home/jovyan/.cache/huggingface/datasets/google___if_eval/default/0.0.0/966cd89545d6b6acfd7638bc708b98261ca58e84 (last modified on Fri Aug 28 15:51:04 2026).
-  0%|                                                                                                   | 0/200 [00:00<?, ?it/s]100%|█████████████████████████████████████████████████████████████████████████████████████| 200/200 [00:00<00:00, 118667.53it/s]
-Running generate_until requests:   0%|                                                                  | 0/200 [00:00<?, ?it/s]The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
-Running generate_until requests:   0%|▎                                                       | 1/200 [00:52<2:52:58, 52.15s/it]Running generate_until requests:   4%|██▌                                                       | 9/200 [01:41<31:33,  9.91s/it]Running generate_until requests:   8%|████▊                                                    | 17/200 [02:31<23:47,  7.80s/it]Running generate_until requests:  12%|███████▏                                                 | 25/200 [03:20<20:38,  7.08s/it]Running generate_until requests:  16%|█████████▍                                               | 33/200 [04:10<18:42,  6.72s/it]Running generate_until requests:  20%|███████████▋                                             | 41/200 [04:59<17:17,  6.53s/it]Running generate_until requests:  24%|█████████████▉                                           | 49/200 [05:48<16:07,  6.40s/it]Running generate_until requests:  28%|████████████████▏                                        | 57/200 [06:38<15:05,  6.33s/it]Running generate_until requests:  32%|██████████████████▌                                      | 65/200 [07:27<14:06,  6.27s/it]Running generate_until requests:  36%|████████████████████▊                                    | 73/200 [08:16<13:11,  6.23s/it]Running generate_until requests:  40%|███████████████████████                                  | 81/200 [09:05<12:17,  6.20s/it]Running generate_until requests:  44%|█████████████████████████▎                               | 89/200 [09:54<11:25,  6.18s/it]Running generate_until requests:  48%|███████████████████████████▋                             | 97/200 [10:43<10:34,  6.16s/it]Running generate_until requests:  52%|█████████████████████████████▍                          | 105/200 [11:32<09:43,  6.15s/it]Running generate_until requests:  56%|███████████████████████████████▋                        | 113/200 [12:21<08:53,  6.14s/it]Running generate_until requests:  60%|█████████████████████████████████▉                      | 121/200 [13:10<08:04,  6.13s/it]Running generate_until requests:  64%|████████████████████████████████████                    | 129/200 [13:47<06:42,  5.66s/it]Running generate_until requests:  68%|██████████████████████████████████████▎                 | 137/200 [14:23<05:36,  5.34s/it]Running generate_until requests:  72%|████████████████████████████████████████▌               | 145/200 [15:12<05:06,  5.58s/it]Running generate_until requests:  76%|██████████████████████████████████████████▊             | 153/200 [16:01<04:29,  5.73s/it]Running generate_until requests:  80%|█████████████████████████████████████████████           | 161/200 [16:50<03:47,  5.84s/it]Running generate_until requests:  84%|███████████████████████████████████████████████▎        | 169/200 [17:38<03:03,  5.91s/it]Running generate_until requests:  88%|█████████████████████████████████████████████████▌      | 177/200 [18:27<02:17,  5.97s/it]Running generate_until requests:  92%|███████████████████████████████████████████████████▊    | 185/200 [19:16<01:30,  6.01s/it]Running generate_until requests:  96%|██████████████████████████████████████████████████████  | 193/200 [20:05<00:42,  6.03s/it]Running generate_until requests: 100%|████████████████████████████████████████████████████████| 200/200 [20:05<00:00,  6.03s/it]
-fatal: not a git repository (or any parent up to mount point /)
-Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
-[ins] llama8b_it unedited IFEval={'sample_len': 200.0, 'prompt_level_strict_acc,none': 0.45, 'inst_level_strict_acc,none': 0.6163522012578616, 'prompt_level_loose_acc,none': 0.515, 'inst_level_loose_acc,none': 0.660377358490566}
-/opt/conda/lib/python3.13/site-packages/torch/utils/checkpoint.py:232: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  check_backward_validity(args)
-Using the latest cached version of the dataset since google/IFEval couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'default' at /home/jovyan/.cache/huggingface/datasets/google___if_eval/default/0.0.0/966cd89545d6b6acfd7638bc708b98261ca58e84 (last modified on Fri Aug 28 15:51:04 2026).
-  0%|                                                                                                   | 0/200 [00:00<?, ?it/s]100%|██████████████████████████████████████████████████████████████████████████████████████| 200/200 [00:00<00:00, 61881.14it/s]
-Running generate_until requests:   0%|                                                                  | 0/200 [00:00<?, ?it/s]Running generate_until requests:   0%|▎                                                       | 1/200 [00:52<2:52:56, 52.14s/it]Running generate_until requests:   4%|██▌                                                       | 9/200 [01:41<31:32,  9.91s/it]Running generate_until requests:   8%|████▊                                                    | 17/200 [02:31<23:48,  7.81s/it]Running generate_until requests:  12%|███████▏                                                 | 25/200 [03:21<20:40,  7.09s/it]Running generate_until requests:  16%|█████████▍                                               | 33/200 [04:10<18:44,  6.74s/it]Running generate_until requests:  20%|███████████▋                                             | 41/200 [04:59<17:18,  6.53s/it]Running generate_until requests:  24%|█████████████▉                                           | 49/200 [05:49<16:07,  6.41s/it]Running generate_until requests:  28%|████████████████▏                                        | 57/200 [06:38<15:05,  6.33s/it]Running generate_until requests:  32%|██████████████████▌                                      | 65/200 [07:27<14:06,  6.27s/it]Running generate_until requests:  36%|████████████████████▊                                    | 73/200 [08:16<13:11,  6.23s/it]Running generate_until requests:  40%|███████████████████████                                  | 81/200 [09:05<12:17,  6.20s/it]Running generate_until requests:  44%|█████████████████████████▎                               | 89/200 [09:55<11:26,  6.18s/it]Running generate_until requests:  48%|███████████████████████████▋                             | 97/200 [10:44<10:35,  6.17s/it]Running generate_until requests:  52%|█████████████████████████████▍                          | 105/200 [11:33<09:45,  6.16s/it]Running generate_until requests:  56%|███████████████████████████████▋                        | 113/200 [12:22<08:54,  6.15s/it]Running generate_until requests:  60%|█████████████████████████████████▉                      | 121/200 [13:11<08:05,  6.15s/it]Running generate_until requests:  64%|████████████████████████████████████                    | 129/200 [13:48<06:42,  5.68s/it]Running generate_until requests:  68%|██████████████████████████████████████▎                 | 137/200 [14:24<05:36,  5.34s/it]Running generate_until requests:  72%|████████████████████████████████████████▌               | 145/200 [15:13<05:06,  5.57s/it]Running generate_until requests:  76%|██████████████████████████████████████████▊             | 153/200 [16:02<04:29,  5.73s/it]Running generate_until requests:  80%|█████████████████████████████████████████████           | 161/200 [16:51<03:47,  5.84s/it]Running generate_until requests:  84%|███████████████████████████████████████████████▎        | 169/200 [17:39<03:03,  5.92s/it]Running generate_until requests:  88%|█████████████████████████████████████████████████▌      | 177/200 [18:28<02:17,  5.98s/it]Running generate_until requests:  92%|███████████████████████████████████████████████████▊    | 185/200 [19:17<01:30,  6.02s/it]Running generate_until requests:  96%|██████████████████████████████████████████████████████  | 193/200 [20:06<00:42,  6.04s/it]Running generate_until requests: 100%|████████████████████████████████████████████████████████| 200/200 [20:06<00:00,  6.03s/it]
-fatal: not a git repository (or any parent up to mount point /)
-Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
-[ins] llama8b_it     occ_gender   s0 fp           removal=+0.7422 a=2 ifeval=0.5754716981132075
-Using the latest cached version of the dataset since google/IFEval couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'default' at /home/jovyan/.cache/huggingface/datasets/google___if_eval/default/0.0.0/966cd89545d6b6acfd7638bc708b98261ca58e84 (last modified on Fri Aug 28 15:51:04 2026).
-  0%|                                                                                                   | 0/200 [00:00<?, ?it/s]100%|█████████████████████████████████████████████████████████████████████████████████████| 200/200 [00:00<00:00, 125860.59it/s]
-Running generate_until requests:   0%|                                                                  | 0/200 [00:00<?, ?it/s]Running generate_until requests:   0%|▎                                                       | 1/200 [00:52<2:52:59, 52.16s/it]Running generate_until requests:   4%|██▌                                                       | 9/200 [01:42<31:38,  9.94s/it]Running generate_until requests:   8%|████▊                                                    | 17/200 [02:31<23:49,  7.81s/it]Running generate_until requests:  12%|███████▏                                                 | 25/200 [03:21<20:39,  7.08s/it]Running generate_until requests:  16%|█████████▍                                               | 33/200 [04:10<18:42,  6.72s/it]Running generate_until requests:  20%|███████████▋                                             | 41/200 [04:59<17:17,  6.52s/it]Running generate_until requests:  24%|█████████████▉                                           | 49/200 [05:48<16:06,  6.40s/it]Running generate_until requests:  28%|████████████████▏                                        | 57/200 [06:38<15:03,  6.32s/it]Running generate_until requests:  32%|██████████████████▌                                      | 65/200 [07:27<14:06,  6.27s/it]Running generate_until requests:  36%|████████████████████▊                                    | 73/200 [08:16<13:11,  6.23s/it]Running generate_until requests:  40%|███████████████████████                                  | 81/200 [09:06<12:19,  6.22s/it]Running generate_until requests:  44%|█████████████████████████▎                               | 89/200 [09:55<11:27,  6.19s/it]Running generate_until requests:  48%|███████████████████████████▋                             | 97/200 [10:44<10:35,  6.17s/it]Running generate_until requests:  52%|█████████████████████████████▍                          | 105/200 [11:33<09:44,  6.16s/it]Running generate_until requests:  56%|███████████████████████████████▋                        | 113/200 [12:22<08:54,  6.14s/it]Running generate_until requests:  60%|█████████████████████████████████▉                      | 121/200 [13:11<08:04,  6.14s/it]Running generate_until requests:  64%|████████████████████████████████████                    | 129/200 [13:47<06:42,  5.67s/it]Running generate_until requests:  68%|██████████████████████████████████████▎                 | 137/200 [14:24<05:36,  5.34s/it]Running generate_until requests:  72%|████████████████████████████████████████▌               | 145/200 [15:13<05:06,  5.57s/it]Running generate_until requests:  76%|██████████████████████████████████████████▊             | 153/200 [16:02<04:29,  5.74s/it]Running generate_until requests:  80%|█████████████████████████████████████████████           | 161/200 [16:51<03:48,  5.86s/it]Running generate_until requests:  84%|███████████████████████████████████████████████▎        | 169/200 [17:39<03:03,  5.93s/it]Running generate_until requests:  88%|█████████████████████████████████████████████████▌      | 177/200 [18:28<02:17,  5.98s/it]Running generate_until requests:  92%|███████████████████████████████████████████████████▊    | 185/200 [19:17<01:30,  6.01s/it]Running generate_until requests:  96%|██████████████████████████████████████████████████████  | 193/200 [20:05<00:42,  6.03s/it]Running generate_until requests: 100%|████████████████████████████████████████████████████████| 200/200 [20:05<00:00,  6.03s/it]
-fatal: not a git repository (or any parent up to mount point /)
-Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
-[ins] llama8b_it     occ_gender   s0 sign_only    removal=+0.7354 a=4 ifeval=0.5849056603773585
-Using the latest cached version of the dataset since google/IFEval couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'default' at /home/jovyan/.cache/huggingface/datasets/google___if_eval/default/0.0.0/966cd89545d6b6acfd7638bc708b98261ca58e84 (last modified on Fri Aug 28 15:51:04 2026).
-  0%|                                                                                                   | 0/200 [00:00<?, ?it/s]100%|█████████████████████████████████████████████████████████████████████████████████████| 200/200 [00:00<00:00, 124460.06it/s]
-Running generate_until requests:   0%|                                                                  | 0/200 [00:00<?, ?it/s]Running generate_until requests:   0%|▎                                                       | 1/200 [00:52<2:52:49, 52.11s/it]Running generate_until requests:   4%|██▌                                                       | 9/200 [01:41<31:32,  9.91s/it]Running generate_until requests:   8%|████▊                                                    | 17/200 [02:31<23:47,  7.80s/it]Running generate_until requests:  12%|███████▏                                                 | 25/200 [03:20<20:38,  7.08s/it]Running generate_until requests:  16%|█████████▍                                               | 33/200 [04:10<18:44,  6.73s/it]Running generate_until requests:  20%|███████████▋                                             | 41/200 [04:59<17:19,  6.54s/it]Running generate_until requests:  24%|█████████████▉                                           | 49/200 [05:49<16:07,  6.41s/it]Running generate_until requests:  28%|████████████████▏                                        | 57/200 [06:38<15:04,  6.32s/it]Running generate_until requests:  32%|██████████████████▌                                      | 65/200 [07:27<14:05,  6.27s/it]Running generate_until requests:  36%|████████████████████▊                                    | 73/200 [08:16<13:10,  6.23s/it]Running generate_until requests:  40%|███████████████████████                                  | 81/200 [09:05<12:17,  6.20s/it]Running generate_until requests:  44%|█████████████████████████▎                               | 89/200 [09:54<11:26,  6.18s/it]Running generate_until requests:  48%|███████████████████████████▋                             | 97/200 [10:43<10:35,  6.17s/it]Running generate_until requests:  52%|█████████████████████████████▍                          | 105/200 [11:33<09:46,  6.17s/it]Running generate_until requests:  56%|███████████████████████████████▋                        | 113/200 [12:22<08:55,  6.16s/it]Running generate_until requests:  60%|█████████████████████████████████▉                      | 121/200 [13:11<08:05,  6.15s/it]Running generate_until requests:  64%|████████████████████████████████████                    | 129/200 [13:48<06:43,  5.68s/it]Running generate_until requests:  68%|██████████████████████████████████████▎                 | 137/200 [14:24<05:36,  5.35s/it]Running generate_until requests:  72%|████████████████████████████████████████▌               | 145/200 [15:13<05:06,  5.58s/it]Running generate_until requests:  76%|██████████████████████████████████████████▊             | 153/200 [16:02<04:29,  5.74s/it]Running generate_until requests:  80%|█████████████████████████████████████████████           | 161/200 [16:51<03:48,  5.85s/it]Running generate_until requests:  84%|███████████████████████████████████████████████▎        | 169/200 [17:40<03:03,  5.93s/it]Running generate_until requests:  88%|█████████████████████████████████████████████████▌      | 177/200 [18:29<02:17,  5.98s/it]Running generate_until requests:  92%|███████████████████████████████████████████████████▊    | 185/200 [19:17<01:30,  6.02s/it]Running generate_until requests:  96%|██████████████████████████████████████████████████████  | 193/200 [20:06<00:42,  6.05s/it]Running generate_until requests: 100%|████████████████████████████████████████████████████████| 200/200 [20:06<00:00,  6.03s/it]
-fatal: not a git repository (or any parent up to mount point /)
-Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
-[ins] llama8b_it     occ_gender   s0 sparse99     removal=+0.3098 a=2 ifeval=0.5911949685534591
-Using the latest cached version of the dataset since google/IFEval couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'default' at /home/jovyan/.cache/huggingface/datasets/google___if_eval/default/0.0.0/966cd89545d6b6acfd7638bc708b98261ca58e84 (last modified on Fri Aug 28 15:51:04 2026).
-  0%|                                                                                                   | 0/200 [00:00<?, ?it/s]100%|█████████████████████████████████████████████████████████████████████████████████████| 200/200 [00:00<00:00, 124904.82it/s]
-Running generate_until requests:   0%|                                                                  | 0/200 [00:00<?, ?it/s]Running generate_until requests:   0%|▎                                                       | 1/200 [00:52<2:53:49, 52.41s/it]Running generate_until requests:   4%|██▌                                                       | 9/200 [01:42<31:39,  9.95s/it]Running generate_until requests:   8%|████▊                                                    | 17/200 [02:31<23:52,  7.83s/it]Running generate_until requests:  12%|███████▏                                                 | 25/200 [03:21<20:42,  7.10s/it]Running generate_until requests:  16%|█████████▍                                               | 33/200 [04:11<18:46,  6.74s/it]Running generate_until requests:  20%|███████████▋                                             | 41/200 [05:00<17:20,  6.54s/it]Running generate_until requests:  24%|█████████████▉                                           | 49/200 [05:49<16:08,  6.41s/it]Running generate_until requests:  28%|████████████████▏                                        | 57/200 [06:39<15:05,  6.34s/it]Running generate_until requests:  32%|██████████████████▌                                      | 65/200 [07:28<14:09,  6.29s/it]Running generate_until requests:  36%|████████████████████▊                                    | 73/200 [08:17<13:12,  6.24s/it]Running generate_until requests:  40%|███████████████████████                                  | 81/200 [09:06<12:18,  6.21s/it]Running generate_until requests:  44%|█████████████████████████▎                               | 89/200 [09:55<11:26,  6.18s/it]Running generate_until requests:  48%|███████████████████████████▋                             | 97/200 [10:44<10:35,  6.17s/it]Running generate_until requests:  52%|█████████████████████████████▍                          | 105/200 [11:33<09:44,  6.15s/it]Running generate_until requests:  56%|███████████████████████████████▋                        | 113/200 [12:22<08:54,  6.14s/it]Running generate_until requests:  60%|█████████████████████████████████▉                      | 121/200 [13:11<08:04,  6.14s/it]Running generate_until requests:  64%|████████████████████████████████████                    | 129/200 [13:48<06:42,  5.67s/it]Running generate_until requests:  68%|██████████████████████████████████████▎                 | 137/200 [14:25<05:36,  5.34s/it]Running generate_until requests:  72%|████████████████████████████████████████▌               | 145/200 [15:13<05:06,  5.57s/it]Running generate_until requests:  76%|██████████████████████████████████████████▊             | 153/200 [16:03<04:29,  5.74s/it]Running generate_until requests:  80%|█████████████████████████████████████████████           | 161/200 [16:51<03:48,  5.85s/it]Running generate_until requests:  84%|███████████████████████████████████████████████▎        | 169/200 [17:40<03:03,  5.92s/it]Running generate_until requests:  88%|█████████████████████████████████████████████████▌      | 177/200 [18:29<02:17,  5.98s/it]Running generate_until requests:  92%|███████████████████████████████████████████████████▊    | 185/200 [19:18<01:30,  6.01s/it]Running generate_until requests:  96%|██████████████████████████████████████████████████████  | 193/200 [20:07<00:42,  6.04s/it]Running generate_until requests: 100%|████████████████████████████████████████████████████████| 200/200 [20:07<00:00,  6.04s/it]
-fatal: not a git repository (or any parent up to mount point /)
-Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
-[ins] llama8b_it     occ_gender   s0 random_sign  removal=+0.0012 a=4 ifeval=0.6069182389937107
-[ins] ALL DONE
-Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
-Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
-Loading checkpoint shards:   0%|                                                                          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 1/2 [00:00<00:00,  3.84it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  7.24it/s]
-[ins] gemma2b_it: forced plain-text prompt template (format-controlled base/instruct comparison)
-[ins] GATE gemma2b_it     occ_gender   pre_skew=+0.8598 mmlu=0.450 ppl=22.82
-`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-/opt/conda/lib/python3.13/site-packages/torch/utils/checkpoint.py:232: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
-  check_backward_validity(args)
-[ins] gemma2b_it     occ_gender   s0 fp           removal=+0.6798 a=4 ifeval=None
-[ins] gemma2b_it     occ_gender   s0 sign_only    removal=+0.3407 a=4 ifeval=None
-[ins] gemma2b_it     occ_gender   s0 sparse99     removal=+0.6769 a=16 ifeval=None
-[ins] gemma2b_it     occ_gender   s0 random_sign  removal=+0.0002 a=2 ifeval=None
-[ins] gemma2b_it     occ_gender   s1 fp           removal=+0.6842 a=4 ifeval=None
-[ins] gemma2b_it     occ_gender   s1 sign_only    removal=+0.5925 a=8 ifeval=None
-[ins] gemma2b_it     occ_gender   s1 sparse99     removal=+0.6164 a=16 ifeval=None
-[ins] gemma2b_it     occ_gender   s1 random_sign  removal=+0.0058 a=16 ifeval=None
-[ins] gemma2b_it     occ_gender   s2 fp           removal=+0.8038 a=4 ifeval=None
-[ins] gemma2b_it     occ_gender   s2 sign_only    removal=+0.7822 a=8 ifeval=None
-[ins] gemma2b_it     occ_gender   s2 sparse99     removal=+0.7853 a=16 ifeval=None
-[ins] gemma2b_it     occ_gender   s2 random_sign  removal=+0.0030 a=2 ifeval=None
-Using the latest cached version of the dataset since oskarvanderwal/bbq couldn't be found on the Hugging Face Hub (offline mode is enabled).
-Found the latest cached dataset configuration 'Age' at /home/jovyan/.cache/huggingface/datasets/oskarvanderwal___bbq/Age/0.0.0/ab00114b0fbf59c7c539ff9158f6ce717d13ab63 (last modified on Mon Jul 20 06:59:10 2026).
-[ins] GATE gemma2b_it     bbq_Age      pre_skew=+0.2896 mmlu=0.450 ppl=22.82
-[ins] gemma2b_it     bbq_Age      s0 fp           removal=+nan a=None ifeval=None
-[ins] gemma2b_it     bbq_Age      s0 sign_only    removal=+nan a=None ifeval=None
-[ins] gemma2b_it     bbq_Age      s0 sparse99     removal=+nan a=None ifeval=None
-[ins] gemma2b_it     bbq_Age      s0 random_sign  removal=-0.0006 a=2 ifeval=None
-[ins] gemma2b_it     bbq_Age      s1 fp           removal=+nan a=None ifeval=None
-[ins] gemma2b_it     bbq_Age      s1 sign_only    removal=+nan a=None ifeval=None
-[ins] gemma2b_it     bbq_Age      s1 sparse99     removal=+0.0717 a=2 ifeval=None
-[ins] gemma2b_it     bbq_Age      s1 random_sign  removal=+0.0020 a=16 ifeval=None
-[ins] gemma2b_it     bbq_Age      s2 fp           removal=+nan a=None ifeval=None
-[ins] gemma2b_it     bbq_Age      s2 sign_only    removal=+0.1754 a=2 ifeval=None
-[ins] gemma2b_it     bbq_Age      s2 sparse99     removal=+0.2565 a=8 ifeval=None
-[ins] gemma2b_it     bbq_Age      s2 random_sign  removal=+0.0004 a=2 ifeval=None
-Loading checkpoint shards:   0%|                                                                          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|██████████████████████                                            | 1/3 [00:40<01:20, 40.49s/it]Loading checkpoint shards:  67%|████████████████████████████████████████████                      | 2/3 [01:21<00:40, 40.98s/it]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 3/3 [01:25<00:00, 24.06s/it]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 3/3 [01:25<00:00, 28.58s/it]
-[ins] gemma2b_base: forced plain-text prompt template (format-controlled base/instruct comparison)
-[ins] GATE gemma2b_base   occ_gender   pre_skew=+0.7079 mmlu=0.190 ppl=15.64
-[ins] gemma2b_base   occ_gender   s0 fp           removal=+0.6018 a=4 ifeval=None
-[ins] gemma2b_base   occ_gender   s0 sign_only    removal=+0.5998 a=8 ifeval=None
-[ins] gemma2b_base   occ_gender   s0 sparse99     removal=+0.5566 a=16 ifeval=None
-[ins] gemma2b_base   occ_gender   s0 random_sign  removal=-0.0023 a=2 ifeval=None
-[ins] gemma2b_base   occ_gender   s1 fp           removal=+0.6046 a=4 ifeval=None
-[ins] gemma2b_base   occ_gender   s1 sign_only    removal=+0.6151 a=8 ifeval=None
-[ins] gemma2b_base   occ_gender   s1 sparse99     removal=+0.5287 a=16 ifeval=None
-[ins] gemma2b_base   occ_gender   s1 random_sign  removal=+0.0027 a=16 ifeval=None
-[ins] gemma2b_base   occ_gender   s2 fp           removal=+0.5909 a=4 ifeval=None
-[ins] gemma2b_base   occ_gender   s2 sign_only    removal=+0.5993 a=8 ifeval=None
-[ins] gemma2b_base   occ_gender   s2 sparse99     removal=+0.5581 a=16 ifeval=None
-[ins] gemma2b_base   occ_gender   s2 random_sign  removal=+0.0008 a=2 ifeval=None
-[ins] GATE gemma2b_base   bbq_Age      pre_skew=+0.4359 mmlu=0.190 ppl=15.64
-[ins] gemma2b_base   bbq_Age      s0 fp           removal=+0.4259 a=4 ifeval=None
-[ins] gemma2b_base   bbq_Age      s0 sign_only    removal=+0.4083 a=8 ifeval=None
-[ins] gemma2b_base   bbq_Age      s0 sparse99     removal=+0.3951 a=16 ifeval=None
-[ins] gemma2b_base   bbq_Age      s0 random_sign  removal=+0.0002 a=8 ifeval=None
-[ins] gemma2b_base   bbq_Age      s1 fp           removal=+0.3899 a=4 ifeval=None
-[ins] gemma2b_base   bbq_Age      s1 sign_only    removal=+0.3713 a=8 ifeval=None
-[ins] gemma2b_base   bbq_Age      s1 sparse99     removal=+0.3666 a=16 ifeval=None
-[ins] gemma2b_base   bbq_Age      s1 random_sign  removal=+0.0008 a=16 ifeval=None
-[ins] gemma2b_base   bbq_Age      s2 fp           removal=+0.4029 a=4 ifeval=None
-[ins] gemma2b_base   bbq_Age      s2 sign_only    removal=+0.3762 a=8 ifeval=None
-[ins] gemma2b_base   bbq_Age      s2 sparse99     removal=+0.3551 a=16 ifeval=None
-[ins] gemma2b_base   bbq_Age      s2 random_sign  removal=+0.0046 a=16 ifeval=None
-[ins] ALL DONE
