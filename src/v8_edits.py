@@ -87,15 +87,37 @@ def _global_threshold(v, density, largest=True):
     return thresh
 
 
+# numpy's Generator.hypergeometric refuses ngood or nbad >= 1e9. Every model in
+# the published DEC panel edits fewer than 1e9 attention parameters (the largest,
+# qwen2.5-7B, is 8.2e8; phi is 9.1e8 because its fused qkv_proj is edited and
+# o_proj is not), so the wall was invisible until v11 added bigger targets:
+#
+#     llama-3.1-8B   1.34e9      gemma-2-9b     1.70e9
+#     qwen2.5-32B    4.03e9      llama-3.1-70B  12.08e9
+#
+# so the whole big-tier expansion was blocked here, not on VRAM.
+_HYPERGEO_LIMIT = 1_000_000_000
+
+
 def _counts_per_tensor(v, k_total, rng):
     """Exact multivariate-hypergeometric split of k_total over the tensors.
 
     Sampling k_total coordinates uniformly without replacement from the whole
     edit is equivalent to drawing per-tensor counts this way, and costs no
-    N-sized permutation (N is up to 7.8e8 here).
+    N-sized permutation.
+
+    TWO PATHS, AND THE SMALL ONE IS UNTOUCHED. Below numpy's 1e9 hypergeometric
+    limit the original sequential draw runs exactly as before -- same calls,
+    same RNG stream, same coordinates -- so every published cell still
+    reproduces bit-identically. The large path is only ever taken where the old
+    code raised ValueError, so it cannot change a number that already exists.
     """
     sizes = [t.numel() for t in v.values()]
-    remaining_n, remaining_k, out = sum(sizes), k_total, []
+    total = sum(sizes)
+    if total - min(sizes) >= _HYPERGEO_LIMIT:
+        return _counts_per_tensor_large(sizes, k_total, rng)
+
+    remaining_n, remaining_k, out = total, k_total, []
     for n_m in sizes:
         if remaining_k <= 0:
             out.append(0); remaining_n -= n_m; continue
@@ -105,6 +127,51 @@ def _counts_per_tensor(v, k_total, rng):
         remaining_k -= take
         remaining_n -= n_m
     return out
+
+
+def _counts_per_tensor_large(sizes, k_total, rng):
+    """Same estimand above numpy's hypergeometric limit, sampled directly.
+
+    Instead of drawing the per-tensor counts, draw the k_total coordinates
+    themselves -- uniformly, without replacement, from the flat concatenation --
+    and count how many land in each tensor. That IS the multivariate
+    hypergeometric, by construction, so this is exact rather than an
+    approximation of it. (A binomial chain would have been the easy substitute
+    and is wrong in a way that matters here: it drops the finite-population
+    correction, inflating the variance of every count.)
+
+    Uniform-without-replacement is obtained by oversampling with replacement,
+    deduplicating, and then taking a random k_total-subset. That is exact: by
+    symmetry over relabelling the N coordinates, the distinct set is a uniformly
+    random subset of its size, and a uniform subset of a uniform subset is
+    uniform.
+
+    Cost is k_total int64s, not N: ~107 MB at 8B (k=1.3e7), ~1 GB at 70B
+    (k=1.2e8). That is why the counts are not obtained by permuting N.
+    """
+    n = int(sum(sizes))
+    k = int(k_total)
+    if k <= 0:
+        return [0] * len(sizes)
+    if k >= n:
+        return list(sizes)
+
+    picked = np.unique(rng.integers(0, n, size=k, dtype=np.int64))
+    # Expected shortfall is k^2/(2n) -- about 67k of 13.4M at 8B -- so this
+    # loop runs a couple of times, never long.
+    while picked.size < k:
+        need = k - picked.size
+        extra = rng.integers(0, n, size=max(need * 2, 1024), dtype=np.int64)
+        picked = np.unique(np.concatenate([picked, extra]))
+    if picked.size > k:
+        # np.unique returns sorted output; truncating it would bias towards low
+        # indices, i.e. towards the first tensors. Permute, then cut.
+        picked = rng.permutation(picked)[:k]
+
+    bounds = np.cumsum(np.asarray(sizes, dtype=np.int64))
+    which = np.searchsorted(bounds, picked, side="right")
+    counts = np.bincount(which, minlength=len(sizes))
+    return [int(c) for c in counts]
 
 
 def _masks(v, condition, density, seed):

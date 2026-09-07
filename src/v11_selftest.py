@@ -192,7 +192,61 @@ def main():
           all(k in dec for k in ("pre_mmlu=pre[", "post_mmlu=post[",
                                  'n_items=pre.get("n_items"')))
 
-    n_checks = 12
+    # -- 7. the 1e9 hypergeometric wall that blocked the whole big tier --
+    #
+    # src/v8_edits._counts_per_tensor split the 1% support across tensors with
+    # numpy's hypergeometric, which refuses arguments >= 1e9. Every published
+    # model edits fewer than that (qwen2.5-7B, the largest, is 8.2e8; phi is
+    # 9.1e8 through its fused qkv_proj), so the wall was invisible until v11
+    # added llama-3.1-8B at 1.34e9. qwen2.5-32B (4.0e9) and llama-3.1-70B
+    # (12.1e9) are far past it, so the big tier was blocked here and not on VRAM.
+    import math
+    sys.path.insert(0, os.path.join(REPO, "src"))
+    import numpy as np
+    import v8_edits as V8
+
+    class _T:
+        def __init__(self, n): self._n = n
+        def numel(self): return self._n
+
+    def _orig(sizes, k, rng):
+        rn, rk, out = sum(sizes), k, []
+        for n in sizes:
+            if rk <= 0:
+                out.append(0); rn -= n; continue
+            t = int(rng.hypergeometric(n, rn - n, rk)) if rn > n else rk
+            out.append(t); rk -= t; rn -= n
+        return out
+
+    # 7a. below the wall the split must be IDENTICAL to the original draw --
+    # same RNG stream, same coordinates, so published cells still reproduce.
+    small = [12_845_056] * 28 + [1_835_008] * 28
+    ks = int(0.01 * sum(small))
+    check("counts below 1e9 are unchanged by the large-N fix",
+          _orig(small, ks, np.random.default_rng(7))
+          == V8._counts_per_tensor({i: _T(x) for i, x in enumerate(small)},
+                                   ks, np.random.default_rng(7)))
+
+    # 7b. above the wall: exact total, right distribution, deterministic.
+    # Kept small (k ~ 1e5) so this stays a fast test while still crossing 1e9.
+    big = [70_000_000] * 16          # 1.12e9 total
+    N = sum(big); kb = 100_000
+    cb = V8._counts_per_tensor({i: _T(x) for i, x in enumerate(big)},
+                               kb, np.random.default_rng(0))
+    check("counts above 1e9 sum to exactly k", sum(cb) == kb)
+    # z against the HYPERGEOMETRIC sd, not the binomial one: a binomial chain
+    # would pass a mean test and fail here by dropping the finite-population
+    # correction, which is why it was not used.
+    p_ = big[0] / N
+    sd = math.sqrt(kb * p_ * (1 - p_) * (N - kb) / (N - 1))
+    z = abs(cb[0] - kb * p_) / sd
+    check(f"above 1e9 the count distribution matches hypergeometric (z={z:.2f})",
+          z < 4)
+    check("above 1e9 the split is deterministic for a fixed seed",
+          cb == V8._counts_per_tensor({i: _T(x) for i, x in enumerate(big)},
+                                      kb, np.random.default_rng(0)))
+
+    n_checks = 17
     print(f"v11 gate selftest: {'PASS' if not fails else str(len(fails)) + ' FAILED'}"
           f"  ({n_checks - len(fails)}/{n_checks} checks)")
     return not fails
