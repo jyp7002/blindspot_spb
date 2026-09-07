@@ -54,7 +54,9 @@ def _load_unit(units_file, index, uid):
 # Designer name -> the checkpoint that elicits its corpus. The large-tier names
 # come from colab_t2t4.T2X (family -> 7-9B target); the "_3b" names are the
 # sibling column, under the naming run_dec.CELLS already uses.
-def _designer_model(designer):
+def _designer_model(designer, explicit=None):
+    if explicit:
+        return explicit
     import colab_t2t4 as C
     for fam, big, sib in C.T2X:
         if designer == fam:
@@ -87,7 +89,7 @@ def _ensure_corpus(u):
     fp = C._t2x_corpus_fp(u["designer"], u["axis"], u["seed"])
     if os.path.exists(fp):
         return
-    mid = _designer_model(u["designer"])
+    mid = _designer_model(u["designer"], u.get("designer_hf"))
     print(f"[unit] corpus missing -> eliciting {u['designer']}|{u['axis']}|"
           f"s{u['seed']} from {mid}", flush=True)
     os.makedirs(os.path.dirname(fp), exist_ok=True)

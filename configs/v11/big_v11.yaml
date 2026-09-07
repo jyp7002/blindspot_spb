@@ -54,27 +54,40 @@ seeds: [0]
 mmlu_n: 200
 
 cells:
-  # ---- primary: bf16 on one 80 GB card. Run this first. ----
-  - target: qwen32b
-    hf: Qwen/Qwen2.5-32B-Instruct
-    designer: qwen
-    axis: occ_gender
-    eightbit: false
-    note: "~64 GB bf16 weights; needs one >=80 GB device (dispatch=False)"
-
-  # ---- stretch: do NOT launch until qwen32b has completed. ----
-  - target: llama70b
-    hf: meta-llama/Llama-3.1-70B-Instruct
-    designer: llama
+  # ---- primary: the most comfortable fit on one 80 GB card. Run this first. ----
+  - target: gemma27b
+    hf: google/gemma-2-27b-it
+    designer: gemma27b
+    designer_hf: google/gemma-2-27b-it   # SELF-designer, like every published cell
     axis: occ_gender
     eightbit: false
     note: >
-      STRETCH, and bf16 -- NOT 8-bit. Every other panel in this project runs
-      bf16 (colab_t2t4.DTYPE), and an 8-bit target would put a second
-      quantization underneath an experiment whose entire subject is what
-      survives quantizing the EDIT. Delta_selection at this cell would then
-      confound edit structure with base-weight precision, which is exactly the
-      confound the decomposition is built to avoid. ~131 GiB of weights, so it
-      needs a single >=192 GB device (B200 / MI300X); an H200 at 141 GB is too
-      tight once training overhead is added. On 2x80 GB it needs sharded
-      training, which this codebase does not have (see header note 2).
+      ~50.7 GiB bf16 weights + ~16 GiB training = ~67 GiB, comfortable on one
+      80 GB card (~79 GiB usable). Replaces the Llama-3.1-70B cell, which needs
+      ~147 GiB on a single device and cannot run on the hardware available.
+      Also a THIRD family at this tier, and it gives gemma a within-family size
+      ladder: 2.6B (DEC) -> 9B (IFEval) -> 27B (here).
+
+  - target: qwen32b
+    hf: Qwen/Qwen2.5-32B-Instruct
+    designer: qwen32b
+    designer_hf: Qwen/Qwen2.5-32B-Instruct   # SELF-designer
+    axis: occ_gender
+    eightbit: false
+    note: >
+      ~61.1 GiB weights + ~16 GiB training = ~77.1 GiB against ~79.2 GiB
+      usable: it fits, but at 97% occupancy. If it OOMs, that is the reason --
+      lower the training batch rather than switching to 8-bit (see header).
+      Run gemma27b first; it has the headroom.
+
+# Recorded, not run: needs hardware that is not available.
+excluded:
+  - target: llama70b
+    hf: meta-llama/Llama-3.1-70B-Instruct
+    reason: >
+      ~131.5 GiB of bf16 weights plus ~16 GiB training needs ~147 GiB on ONE
+      device, because trainable targets load with dispatch=False and this
+      codebase has no sharded training. The available node is a single 80 GB
+      card. Dropped rather than run at 8-bit, which would confound base-weight
+      precision with the edit structure being measured (PREREGISTRATION §v11.G).
+      gemma-2-27b replaces it and keeps the tier at two cells and three families.

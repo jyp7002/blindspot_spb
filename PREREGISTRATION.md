@@ -1247,3 +1247,28 @@ the attention projections with gradient checkpointing, so optimizer state is
 tiny and activations are bounded by batch and sequence, not by parameter count.
 The old rule demanded ~196 GiB for 70B and would have refused hardware that
 works.
+
+## v11.H — 70B dropped for gemma-2-27b; big-tier cells are self-designers (2026-09-07, before any big-tier run)
+
+HARDWARE. The available node is a SINGLE 80 GB card (~79.2 GiB usable).
+Llama-3.1-70B needs ~131.5 GiB of bf16 weights plus ~16 GiB of training on ONE
+device, because trainable targets load with dispatch=False and this codebase has
+no sharded training. It is therefore dropped, not deferred. Running it at 8-bit
+to make it fit is refused under §v11.G: that would confound base-weight
+precision with the edit structure the decomposition measures.
+
+REPLACEMENT: google/gemma-2-27b-it, ~50.7 GiB + ~16 = ~67 GiB, comfortable on
+the same card. It keeps the big tier at two cells, adds a THIRD family there,
+and gives gemma a within-family size ladder (2.6B in DEC, 9B in IFEval, 27B
+here) that no other family has. Qwen2.5-32B is retained at ~77.1 GiB against
+~79.2 usable -- it fits, at 97% occupancy, and gemma27b is the cell to land
+first. llama70b stays recorded in the config's `excluded:` block with its
+reason, so the omission is auditable.
+
+SELF-DESIGNER, AND THIS WAS NEARLY WRONG. run_dec.py stamps role="self" on
+every row unconditionally, and the published panel is 285/285 genuinely
+self-designer. The designer name -> checkpoint map lives in colab_t2t4.T2X,
+which stops at 7-9B, so `designer: qwen` on a 32B target would have resolved to
+Qwen2.5-7B: a SIBLING designer recorded as "self", inside a panel whose every
+other cell is self. Cells may now name `designer_hf` explicitly, and both
+big-tier cells elicit from their own checkpoint.

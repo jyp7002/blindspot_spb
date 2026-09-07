@@ -41,8 +41,9 @@ PARAM_GIB = {
     "meta-llama/Llama-3.2-3B-Instruct": 6.4,
     "microsoft/Phi-3.5-mini-instruct": 7.2,
     "Qwen/Qwen2.5-7B-Instruct": 14.2, "meta-llama/Llama-3.1-8B-Instruct": 15.0,
-    "google/gemma-2-9b-it": 18.5, "Qwen/Qwen2.5-32B-Instruct": 61.0,
-    "meta-llama/Llama-3.1-70B-Instruct": 131.0,
+    "google/gemma-2-9b-it": 18.5, "google/gemma-2-27b-it": 50.7,
+    "Qwen/Qwen2.5-32B-Instruct": 61.1,
+    "meta-llama/Llama-3.1-70B-Instruct": 131.5,
 }
 
 OK, WARN, FAIL = "ok", "warn", "FAIL"

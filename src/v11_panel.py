@@ -132,6 +132,15 @@ def expand(cfg, only=None):
                 target=cell["target"],
                 hf=cell["hf"],
                 designer=designer,
+                # Explicit designer checkpoint. The name->checkpoint map in
+                # run_unit only knows the families in colab_t2t4.T2X, which
+                # stops at 7-9B, so a big-tier cell cannot name its own
+                # checkpoint through it. Without this the 27B/32B cells would
+                # silently take their 7-9B SIBLING as designer while run_dec
+                # still stamped role="self" -- the published panel is 285/285
+                # genuinely self-designer, and mislabelling one cell would put
+                # a sibling-designer measurement inside a self-designer panel.
+                designer_hf=cell.get("designer_hf"),
                 axis=cell["axis"],
                 seed=seed,
                 alphas=cell.get("alphas", cfg["alphas"]),
