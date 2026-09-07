@@ -4,7 +4,9 @@
 #   bash run.sh              status: what exists, what is done, what is left
 #   bash run.sh dec          the decomposition panel   (18 cells, ~54 units)
 #   bash run.sh alphaext     the alpha-saturation panel (10 cells, 30 units)
-#   bash run.sh ifeval       the instruction-following panel (6 units)
+#   bash run.sh ifeval-check the 2 PUBLISHED IFEval cells only -- run this
+#                            first: it decides whether the arm is usable at all
+#   bash run.sh ifeval       the full instruction-following panel (6 units)
 #   bash run.sh all          dec + alphaext + ifeval, in that order
 #   bash run.sh big          32B/70B -- needs a >=80 GB card, NOT this box
 #
@@ -85,6 +87,15 @@ print(c.get('out_panel', c['panel']))").units.json"
 
 case "${1:-status}" in
   status|"")   status ;;
+  ifeval-check)
+    # The lm-eval version behind the PUBLISHED IFEval numbers is recorded
+    # nowhere (see configs/v11/ifeval_v11.yaml). Replay those two cells under
+    # the pinned harness BEFORE spending anything on the four new ones: if they
+    # do not reproduce, the published numbers are version-dependent and that is
+    # the finding -- extending the arm on top of it would be building on sand.
+    python3 scripts/preflight.py --config configs/v11/ifeval_v11.yaml || exit 1
+    python3 scripts/plan.py configs/v11/ifeval_v11.yaml --only published || exit 1
+    WORKERS="$WORKERS" bash scripts/submit_local.sh work/v11ins.published.units.json ;;
   dec|alphaext|ifeval|big) run_one "$1" ;;
   all)
     rc=0
@@ -95,6 +106,6 @@ case "${1:-status}" in
     exit $rc ;;
   *)
     echo "unknown target: $1"
-    echo "usage: bash run.sh [status|dec|alphaext|ifeval|all|big]"
+    echo "usage: bash run.sh [status|dec|alphaext|ifeval-check|ifeval|all|big]"
     exit 2 ;;
 esac

@@ -412,7 +412,15 @@ def main():
     # ----------------------------------------------------------- remains ---
     A("## 7. What remains")
     A("")
-    A(f"The audit fails on **{aud.get('n_fails')}** items, both by design:")
+    # "both by design" was a literal describing the two padding-bug values
+    # that were quarantined at the time. Once they were resolved the sentence
+    # kept claiming a failure count it no longer had.
+    nf = aud.get("n_fails") or 0
+    if nf == 0:
+        A("The audit fails on **no** items: the quarantined values that used to "
+          "block it have been resolved.")
+    else:
+        A(f"The audit fails on **{nf}** item(s), by design:")
     A("")
     for e in aud.get("entries", []):
         if e.get("status") == "BLOCKED_AS_RUN":

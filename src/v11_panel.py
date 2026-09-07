@@ -105,10 +105,18 @@ def unit_id(panel, target, axis, seed, designer):
     return f"{slug}-{h}"
 
 
-def expand(cfg):
-    """Config -> ordered list of work units. Deterministic across machines."""
+def expand(cfg, only=None):
+    """Config -> ordered list of work units. Deterministic across machines.
+
+    `only` restricts to cells carrying a given key set truthy in the config,
+    e.g. only="published" selects the cells being replayed for the reproduction
+    check. Order is unchanged, so a filtered plan is a subsequence of the full
+    one and unit ids are identical either way.
+    """
     units = []
     for cell in cfg["cells"]:
+        if only and not cell.get(only):
+            continue
         for k in ("target", "hf", "axis"):
             if k not in cell:
                 raise ValueError(

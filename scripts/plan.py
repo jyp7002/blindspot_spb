@@ -31,13 +31,19 @@ def main():
                     help="emit every unit, including ones already complete")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--only", default=None, metavar="KEY",
+                    help="restrict to cells with this config key set truthy "
+                         "(e.g. --only published, to replay just the cells "
+                         "being checked for reproduction)")
     a = ap.parse_args()
 
     cfg = v11_panel.load(a.config)
-    units = v11_panel.expand(cfg)
+    units = v11_panel.expand(cfg, only=a.only)
     todo = units if a.all else v11_panel.pending(units)
 
-    out = a.out or os.path.join(REPO, "work", f"{cfg['out_panel']}.units.json")
+    suffix = f".{a.only}" if a.only else ""
+    out = a.out or os.path.join(REPO, "work",
+                                f"{cfg['out_panel']}{suffix}.units.json")
 
     print(f"config     : {a.config}")
     print(f"panel      : {cfg['out_panel']}  (kind={cfg['kind']}, "

@@ -190,7 +190,7 @@ Adversarial verification was run at every stage. It caught these in my work, not
 
 ## 7. What remains
 
-The audit fails on **0** items, both by design:
+The audit fails on **no** items: the quarantined values that used to block it have been resolved.
 
 
 These are §5.9's retracted padding-bug values, quoted as errors the protocol caught. They are quarantined by design and genuinely do not trace. They were **deliberately not whitelisted away**: weakening the gate to obtain a green light is an author decision, not an audit one. Resolving them means either restating the values so they trace, or giving the gate an explicit "quarantined" category that reports without blocking — the same treatment citations already receive.

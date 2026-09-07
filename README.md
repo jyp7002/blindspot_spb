@@ -37,6 +37,12 @@ from the artifacts on disk, not from a progress file.
 | `alphaext` | how far the concentration effect survives a bigger edit scale | 10 cells / 30 units |
 | `ifeval` | whether the edit damages instruction-following | 6 units |
 
+**Run `bash run.sh ifeval-check` before `ifeval`.** The lm-eval version behind
+the *published* IFEval numbers is recorded nowhere in this project, so the two
+published cells are replayed under the pinned harness first. If they do not
+reproduce, the published numbers are version-dependent — that is the finding,
+and extending the arm on top of it would be building on sand.
+
 `bash run.sh big` is separate: it needs a **≥80 GB** card (32B/70B) and is not
 launched by `all`. Read the header of `configs/v11/big_v11.yaml` first — 8-bit
 training is untested here and sharded training does not exist.

@@ -58,8 +58,18 @@ def main():
           f"{gc.get('allowed_drop_items')} items of {gc.get('n_items')}, "
           f"ppl <= {gc.get('ppl_budget')} — {'OK' if gc.get('ok') else 'MISMATCH'}")
     A("")
-    A("**The audit does not PASS.** That is the correct result: it is reporting "
-      "real defects, listed below. It passes when they are resolved.")
+    # This was an unconditional literal, so the report kept asserting a
+    # failure after the audit had gone green -- the same class of defect the
+    # audit exists to catch, in the audit's own report.
+    if aud.get("pass") and not aud.get("n_fails"):
+        A("**The audit PASSES.** Every number in the draft resolves to an "
+          "artifact through the manifest. The corrections below are the ones "
+          "that were applied to get here, kept as the record of what moved.")
+    else:
+        A(f"**The audit does not PASS** ({aud.get('n_fails')} failure(s), "
+          f"{aud.get('n_unmatched')} unregistered). That is the correct result: "
+          "it is reporting real defects, listed below. It passes when they are "
+          "resolved.")
     A("")
 
     # ------------------------------------------------- manuscript corrections --

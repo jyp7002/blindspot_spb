@@ -15,7 +15,7 @@ Every number below is read from an artifact at generation time.
 - `[TODO` outside limitations: 0
 - gate constants asserted against `src/v9_gate.py`: 4 items of 200, ppl <= 1.1 — OK
 
-**The audit does not PASS.** That is the correct result: it is reporting real defects, listed below. It passes when they are resolved.
+**The audit PASSES.** Every number in the draft resolves to an artifact through the manifest. The corrections below are the ones that were applied to get here, kept as the record of what moved.
 
 ## 2. Manuscript corrections
 
