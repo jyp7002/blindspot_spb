@@ -1171,3 +1171,48 @@ UNVERIFIED pin, and the two published cells are re-run alongside the four new
 ones so the whole arm shares one harness version. If the re-run does not
 reproduce, the published IFEval numbers are version-dependent and that fact is
 reported rather than overwritten. Old rows are retained; v11 writes a new panel.
+
+## v11.F — Screening rule for NEW DEC cells (declared 2026-09-07, after 1 of 54 units, before the remaining 53)
+
+DEC's standing rule (run_dec.py) admits "10 in-envelope cells (positive removal
+already measured; backfire cells would confound a decomposition of an effect
+that is not there)". For the CrowS cells added in v11 that rule is checkable
+against Table A. For five other new cells it is NOT: `gemma|bbq_Age`,
+`llama|ss_intra`, `llama8b|occ_gender`, `qwen7b|bbq_Age` and `llama8b|bbq_Age`
+have no prior removal measurement anywhere, so they cannot satisfy a rule that
+requires one. This gap was in the v11 config as written and is recorded here
+rather than repaired silently.
+
+TRIGGER. The first completed unit, `gemma|bbq_Age|s0`, returned C-ref = +0.0646
+against a published C-ref cell mean of +0.353, with Delta_selection = -0.0301
+(the published panel is unanimous 10/10 POSITIVE). One seed of one cell decides
+nothing, but it establishes that at least one new cell may sit outside the
+envelope the decomposition assumes.
+
+THE RULE, FIXED NOW. A new cell is IN-ENVELOPE iff its C-ref removal, pooled
+over its three seeds under the nan->0 rule, is positive and at least one of its
+seeds cleared the collateral budget. Screening uses C-ref ONLY -- the reference
+arm -- and never Delta_selection or any contrast between conditions, so the
+screen cannot select on the quantity being estimated.
+
+REPORTING, ALSO FIXED NOW. Three numbers, all published, none chosen after the
+fact:
+  (a) Delta_selection over the 10 PUBLISHED cells      — the registered estimand,
+      unchanged, and the only one that carries the pre-registered status;
+  (b) Delta_selection over published + in-envelope new cells — the scale-up
+      result;
+  (c) Delta_selection over ALL cells including out-of-envelope ones — the
+      conservative reading.
+Every cell's in/out status is reported with its C-ref value, so a reader can
+recompute any of the three. No cell is dropped from the record; out-of-envelope
+cells are labelled, not deleted.
+
+WHY THIS IS NOT OUTCOME-SELECTION. The criterion is stated before 53 of the 54
+units have run, is a function of C-ref alone, and is applied to every new cell
+uniformly. The one unit already complete does not change it: had it come back at
++0.4, the same rule would have been written.
+
+WHAT THIS DOES NOT LICENSE. If a new cell is out-of-envelope, that is a REPORTED
+result about the envelope, not a nuisance. The v10 line removed an
+outcome-selected arm ("new alphas only", n=5) for conditioning its cell set on
+the thing being measured; this rule exists so that mistake is not repeated in v11.

@@ -115,6 +115,16 @@ v10 caught and removed in the α-extension ("new alphas only" arm, n=5).
 multi-axis statement rested on qwen and phi. v11 adds `gemma|bbq_Age` and
 `llama|ss_intra`.
 
+**GAP IN THIS DESIGN, found after the first unit and closed by
+`PREREGISTRATION.md` §v11.F.** Five of the new cells (`gemma|bbq_Age`,
+`llama|ss_intra`, and the three big-tier cells) have NO prior removal
+measurement, so DEC's "in-envelope, positive removal already measured" rule
+cannot be checked for them. §v11.F fixes a screening rule based on C-ref alone
+— never on Delta_selection — and commits to reporting the estimand over the
+published cells, the published + in-envelope cells, and all cells. The first
+completed unit, `gemma|bbq_Age|s0`, returned C-ref = +0.0646 against a published
+cell mean of +0.353, which is what surfaced the gap.
+
 **Big tier.** One cell (`qwen7b|occ_gender`) carried every "two model tiers"
 claim. v11 adds three more.
 
