@@ -22,7 +22,7 @@ REGEN_STAMPS  = $(addprefix $(V10)/,dec_analysis_v9.json spc_v9.json frontier_v9
                                     lopo_v9.json sup1_matrix.json env_v9.json patch_sizes.json claims_audit.json artifact_sizes.json reclaimed.json missing_recomputed.json starred_sources.json alpha_extension.json lineage_h2.json padding_recompute.json)
 
 .PHONY: all regen manifest figures audit report verify freeze clean-figures clean-v10 help \
-        v11-check v11-preflight v11-plan
+        v11-check v11-preflight v11-plan v11-dec
 
 all: regen manifest figures audit
 
@@ -79,6 +79,10 @@ v11-check:
 ## v11-preflight — is THIS box safe to launch a panel on? (CFG=... to target one)
 v11-preflight:
 	$(PY) scripts/preflight.py $(if $(CFG),--config $(CFG),)
+
+## v11-dec — the three registered Delta_selection reportings (§v11.F)
+v11-dec:
+	$(PY) $(SRC)/v11_dec_analyze.py
 
 ## v11-plan — write work/<panel>.units.json for one config (CFG=... required)
 v11-plan:
