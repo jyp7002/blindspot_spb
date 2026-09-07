@@ -54,6 +54,21 @@ configured default (Option A) includes them and reports the estimate both with
 and without, so it forecloses nothing. Deciding *after* seeing the result would
 be outcome-selection — settle it first.
 
+### Checking that the replay reproduces
+
+Every v11 panel replays the published cells alongside the new ones, so a silent
+stack change cannot pass unnoticed:
+
+```bash
+python3 scripts/check_reproduction.py        # v11dec vs results_v9/v8dec
+```
+
+**Compare against the re-scored tree, not the as-run one.** `results/v8dec` was
+scored under the old float collateral gate; `results_v9/v8dec` is the same panel
+under the corrected integer gate, which is what the current code uses. Against
+`results/v8dec` a correct run shows large differences on exactly the rows with
+`v9_changed=true` — that is the gate correction, not a regression.
+
 ### Shipping results back
 
 ```bash
