@@ -120,7 +120,13 @@ def save(fig, name, figdir=None):
     os.makedirs(d, exist_ok=True)
     pdf = os.path.join(d, f"{name}.pdf")
     png = os.path.join(d, f"{name}.png")
-    fig.savefig(pdf)
-    fig.savefig(png)
+    # Deterministic output. Matplotlib stamps /CreationDate into the PDF and a
+    # timestamp into the PNG, so an unchanged figure came out byte-different on
+    # every build and dirtied six binaries in git each time `make freeze` ran.
+    # The figure DATA is already stable -- fig*_data.csv, which is what the
+    # audit contract is on, is byte-identical across builds -- so the images
+    # should be too. Suppressing the date changes no pixel and no number.
+    fig.savefig(pdf, metadata={"CreationDate": None})
+    fig.savefig(png, metadata={"Software": None})
     plt.close(fig)
     return pdf, png

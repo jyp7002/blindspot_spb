@@ -51,7 +51,65 @@ def _load_unit(units_file, index, uid):
     return units[index]
 
 
+# Designer name -> the checkpoint that elicits its corpus. The large-tier names
+# come from colab_t2t4.T2X (family -> 7-9B target); the "_3b" names are the
+# sibling column, under the naming run_dec.CELLS already uses.
+def _designer_model(designer):
+    import colab_t2t4 as C
+    for fam, big, sib in C.T2X:
+        if designer == fam:
+            return big
+        if designer in (fam + "_3b", fam + "_sib"):
+            return sib
+    extra = {"phi_3b": "microsoft/Phi-3.5-mini-instruct"}
+    if designer in extra:
+        return extra[designer]
+    raise ValueError(
+        f"no checkpoint known for designer {designer!r}; add it to T2X or to "
+        "the `extra` map in scripts/run_unit.py")
+
+
+def _ensure_corpus(u):
+    """Elicit the designer corpus for this unit if it is not already cached.
+
+    run_dec/run_ins READ a pre-elicited corpus and fail if it is absent -- the
+    published panels were elicited in a separate phase-1 pass
+    (colab_t2t4.t2x_elicit_pool). A scale-up adds (designer, axis) pairs that
+    pass never covered: the large-tier designers have occ_gender and
+    crows_socioeconomic only, so every new bbq_Age cell would have died on a
+    missing file. Eliciting here keeps a unit self-sufficient, which is what
+    lets a fresh box run one without a separate setup phase.
+
+    Inference only, and cached: the second unit that needs the same corpus
+    finds it on disk.
+    """
+    import colab_t2t4 as C
+    fp = C._t2x_corpus_fp(u["designer"], u["axis"], u["seed"])
+    if os.path.exists(fp):
+        return
+    mid = _designer_model(u["designer"])
+    print(f"[unit] corpus missing -> eliciting {u['designer']}|{u['axis']}|"
+          f"s{u['seed']} from {mid}", flush=True)
+    os.makedirs(os.path.dirname(fp), exist_ok=True)
+    m, t = C.load_model(mid, dispatch=False)
+    try:
+        el = C.elicit_selfdebias(m, t, u["axis"], u["seed"], 16)
+        # Write atomically: a torn corpus read by a later unit would be a silent
+        # data defect rather than a crash.
+        tmp = fp + ".tmp"
+        with open(tmp, "w") as f:
+            json.dump(dict(designer=u["designer"], axis=u["axis"], seed=u["seed"],
+                           biased=el["biased"], debiased=el["debiased"],
+                           diag=el["diag"]), f)
+        os.replace(tmp, fp)
+        print(f"[unit] elicited gap={el['diag']['contrast_gap']:+.3f} "
+              f"n_items={el['diag']['n_items']}", flush=True)
+    finally:
+        C._free(m)
+
+
 def _run_dec(u):
+    _ensure_corpus(u)
     os.environ["DEC_PANEL"] = u["panel"]
     os.environ["DEC_MMLU_N"] = str(u["mmlu_n"])
     import run_dec
@@ -66,6 +124,7 @@ def _run_dec(u):
 
 
 def _run_alphaext(u):
+    _ensure_corpus(u)
     os.environ["EXT_PANEL"] = u["panel"]
     os.environ["EXT_MMLU_N"] = str(u["mmlu_n"])
     import run_alpha_ext
@@ -81,6 +140,7 @@ def _run_alphaext(u):
 
 
 def _run_ifeval(u):
+    _ensure_corpus(u)
     sys.argv = ["run_ins.py", "A"]        # ARM is read from argv at import
     import run_ins
     run_ins.OUT = os.path.join(run_ins.C.RESULTS, u["panel"])

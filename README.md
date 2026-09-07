@@ -7,7 +7,59 @@ that gates it.
 > **Private repository — the submission is anonymous.** The manuscript is under
 > double-blind review (`\iclrfinalcopy` is commented out). Do not make this repo
 > public before camera-ready; the account and commit metadata would deanonymize
-> the submission. The anonymized supplementary bundle is built separately.
+> the submission.
+
+---
+
+## Quickstart — running the experiments
+
+Two commands. You do not need to read any other script.
+
+```bash
+bash setup.sh        # once per machine: installs the pinned stack, then checks it
+bash run.sh          # shows what can run, what is done, what is left
+bash run.sh all      # runs every panel that fits this machine
+```
+
+**Everything is resumable.** If a run dies — node preempted, OOM, anything —
+re-run the same command. Finished work is skipped, because completion is read
+from the artifacts on disk, not from a progress file.
+
+### What `run.sh all` runs
+
+| target | what it measures | size |
+|---|---|---|
+| `dec` | the seven-condition decomposition — the paper's headline | 18 cells / 54 units |
+| `alphaext` | how far the concentration effect survives a bigger edit scale | 10 cells / 30 units |
+| `ifeval` | whether the edit damages instruction-following | 6 units |
+
+`bash run.sh big` is separate: it needs a **≥80 GB** card (32B/70B) and is not
+launched by `all`. Read the header of `configs/v11/big_v11.yaml` first — 8-bit
+training is untested here and sharded training does not exist.
+
+### Things that will bite you
+
+- **Gated checkpoints** (gemma, llama) need `export HF_TOKEN=hf_...`.
+- **Models total ~72 GB.** If a shared cache exists, use it:
+  `export HF_HOME=/path/to/hf-cache`. Otherwise the first run downloads them.
+- **One worker per GPU.** `WORKERS=4 bash run.sh dec` uses 4 GPUs. Two workers
+  on one card will OOM: trainable targets load unsharded, by design.
+- **Do not edit a config after its panel starts.** That is an amendment, and it
+  goes in `PREREGISTRATION.md`.
+
+### One decision is open before `dec` runs
+
+`experiments_v11.md` §IV: whether two weak CrowS cells join the panel. The
+configured default (Option A) includes them and reports the estimate both with
+and without, so it forecloses nothing. Deciding *after* seeing the result would
+be outcome-selection — settle it first.
+
+### Shipping results back
+
+```bash
+bash scripts/pack_artifacts.sh v11dec     # ~40 KB, not the 300 MB of tensors
+```
+Then on the analysis box: untar into `results/` and run `make freeze`.
 
 ---
 
@@ -108,11 +160,20 @@ seconds. Verified against the published `v8dec` panel: it identifies exactly the
 ## Layout
 
 ```
+setup.sh                        install the pinned stack (once per machine)
+run.sh                          THE ENTRYPOINT — status / dec / alphaext / all
+README.md                       you are here
+
 binary_debiaser_draft_v3.md     the draft. NEVER edited by hand or by tooling.
 binary_debiaser_draft_v3.1.md   = v3 + registered prose edits + resolved numbers
 PREREGISTRATION.md              every design frozen before its run + amendments
 experiments_v{8,9,10,11}.md     per-version designs
 Makefile                        the freeze gate, and the v11 helpers
+
+colab_t2t4.py                   the core library (elicit / train / edit / eval)
+run_dec.py, run_alpha_ext.py,   the three panel runners. run_unit.py narrows
+run_ins.py                        each to a single cell; do not call directly.
+legacy/                         85 superseded v1-v9 scripts. Not needed to run.
 
 src/v9_gate.py                  THE collateral gate. One implementation.
 src/v10_audit.py                the number-source audit

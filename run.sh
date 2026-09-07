@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+# The single entrypoint. You should not need to read any other script.
+#
+#   bash run.sh              status: what exists, what is done, what is left
+#   bash run.sh dec          the decomposition panel   (18 cells, ~54 units)
+#   bash run.sh alphaext     the alpha-saturation panel (10 cells, 30 units)
+#   bash run.sh ifeval       the instruction-following panel (6 units)
+#   bash run.sh all          dec + alphaext + ifeval, in that order
+#   bash run.sh big          32B/70B -- needs a >=80 GB card, NOT this box
+#
+# Everything is resumable. If a run dies, re-run the same command: finished
+# units are skipped because completion is read from the artifacts on disk.
+#
+#   WORKERS=4 bash run.sh dec     use 4 GPUs (one worker per GPU)
+set -uo pipefail
+cd "$(dirname "$0")"
+
+PY="${PY:-python3}"
+WORKERS="${WORKERS:-1}"
+
+declare -A CFG=(
+  [dec]=configs/v11/dec_v11.yaml
+  [alphaext]=configs/v11/alphaext_v11.yaml
+  [ifeval]=configs/v11/ifeval_v11.yaml
+  [big]=configs/v11/big_v11.yaml
+)
+# Order matters: dec produces the panel the alpha extension extends.
+ORDER=(dec alphaext ifeval)
+
+status() {
+  echo "==================================================================="
+  echo " blindspot_spb — v11 scale-up status"
+  echo "==================================================================="
+  for k in "${ORDER[@]}" big; do
+    printf '\n--- %s (%s)\n' "$k" "${CFG[$k]}"
+    $PY scripts/plan.py "${CFG[$k]}" --dry-run 2>/dev/null \
+      | grep -E '^(panel|cells|units|excluded)' | sed 's/^/    /'
+  done
+  cat <<'TXT'
+
+-------------------------------------------------------------------
+  bash run.sh all      run everything that fits this machine
+  bash run.sh dec      run just the decomposition panel
+  bash setup.sh        if a preflight check below fails
+
+  'big' needs a >=80 GB card and is not launched by 'all'.
+-------------------------------------------------------------------
+TXT
+  echo
+  $PY scripts/preflight.py --no-cache 2>&1 | tail -n 4
+}
+
+run_one() {
+  local key="$1" cfg="${CFG[$1]}"
+  echo
+  echo "==================================================================="
+  echo " RUN: $key   ($cfg)"
+  echo "==================================================================="
+
+  $PY scripts/preflight.py --config "$cfg" || {
+    echo
+    echo "PREFLIGHT FAILED for '$key' — not launching."
+    echo "Run 'bash setup.sh' if the stack is missing, or pick a bigger node."
+    return 1
+  }
+
+  $PY scripts/plan.py "$cfg" || return 1
+
+  local units="work/$($PY -c "
+import sys,yaml
+c=yaml.safe_load(open('$cfg'))
+print(c.get('out_panel', c['panel']))").units.json"
+
+  local n
+  n=$($PY -c "import json;print(len(json.load(open('$units'))['units']))" 2>/dev/null || echo 0)
+  if [ "$n" -eq 0 ]; then
+    echo "nothing left to run for '$key' — panel is complete."
+    return 0
+  fi
+
+  echo
+  echo "launching $n units with WORKERS=$WORKERS ..."
+  WORKERS="$WORKERS" bash scripts/submit_local.sh "$units"
+}
+
+case "${1:-status}" in
+  status|"")   status ;;
+  dec|alphaext|ifeval|big) run_one "$1" ;;
+  all)
+    rc=0
+    for k in "${ORDER[@]}"; do run_one "$k" || rc=1; done
+    echo
+    echo "=== all panels attempted; rc=$rc ==="
+    echo "ship the artifacts back with:  bash scripts/pack_artifacts.sh <panel>"
+    exit $rc ;;
+  *)
+    echo "unknown target: $1"
+    echo "usage: bash run.sh [status|dec|alphaext|ifeval|all|big]"
+    exit 2 ;;
+esac
