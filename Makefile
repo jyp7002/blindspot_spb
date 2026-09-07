@@ -1,0 +1,99 @@
+# v10 finishing pass — the freeze gate.
+#
+#   make regen    rebuild every derived v9 artifact the manuscript and figures cite
+#   make figures  rebuild figures/fig{1..6}.{pdf,png} + fig*_data.csv
+#   make audit    run the number-source audit over text + figure CSVs
+#   make freeze   the full gate: regen -> figures -> audit, from a clean tree
+#
+# The freeze checklist (experiments_v10.md WS-C) consumes `make freeze`'s PASS
+# line and nothing else. Every number in the manuscript is written or verified
+# by `make audit`; none is hand-typed.
+
+PY      ?= python3
+SRC      = src
+DRAFT    = binary_debiaser_draft_v3.md
+OUT      = binary_debiaser_draft_v3.1.md
+FIGDIR   = figures
+V10      = results/v10
+MANIFEST = audit/manifest_v10.yaml
+
+REGEN_MODULES = dec spc frontier lopo sup1 env size claims artifact_sizes reclaim missing starred alphaext lineage padding
+REGEN_STAMPS  = $(addprefix $(V10)/,dec_analysis_v9.json spc_v9.json frontier_v9.json \
+                                    lopo_v9.json sup1_matrix.json env_v9.json patch_sizes.json claims_audit.json artifact_sizes.json reclaimed.json missing_recomputed.json starred_sources.json alpha_extension.json lineage_h2.json padding_recompute.json)
+
+.PHONY: all regen manifest figures audit report verify freeze clean-figures clean-v10 help \
+        v11-check v11-preflight v11-plan
+
+all: regen manifest figures audit
+
+## regen — rebuild derived v9 artifacts (idempotent; reads results_v9/ + results/)
+regen:
+	@for m in $(REGEN_MODULES); do \
+	  echo "--- v10_regen_$$m"; \
+	  $(PY) $(SRC)/v10_regen_$$m.py || exit 1; \
+	done
+
+## manifest — regenerate audit/manifest_v10.yaml from the artifacts
+manifest:
+	$(PY) $(SRC)/v10_make_manifest.py
+
+## figures — every figure reads only artifacts, and writes its own data CSV
+figures:
+	@mkdir -p $(FIGDIR)
+	$(PY) $(SRC)/v10_figures.py
+
+## report — regenerate V10_FINDINGS.md, V10_REMAINING_STARS.md and V10_SESSION_LOG.md
+report:
+	$(PY) $(SRC)/v10_findings.py
+	$(PY) $(SRC)/v10_remaining.py
+	$(PY) $(SRC)/v10_session_log.py
+
+## audit — verify mode over the draft + all fig*_data.csv; non-zero exit on FAIL
+audit:
+	$(PY) $(SRC)/v10_audit.py --draft $(DRAFT) --manifest $(MANIFEST) --figures $(FIGDIR)
+
+## replace — write draft_v3.1 with every *-marked value resolved from artifacts
+replace:
+	$(PY) $(SRC)/v10_audit.py --draft $(DRAFT) --manifest $(MANIFEST) \
+	      --figures $(FIGDIR) --replace --out $(OUT)
+
+## verify — self-tests of the shared substrate and the gate
+verify:
+	$(PY) $(SRC)/v9_gate.py
+	$(PY) $(SRC)/v11_panel.py
+	$(PY) $(SRC)/v11_selftest.py
+	$(PY) -c "import sys; sys.path.insert(0,'$(SRC)'); import v10_common, v10_style; print('substrate OK')"
+
+# ---------------------------------------------------------------- v11 -----
+# Scale-up (experiments_v11.md). These do not touch any published panel:
+# every v11 config writes to a new panel name.
+V11_CONFIGS = configs/v11/dec_v11.yaml configs/v11/alphaext_v11.yaml \
+              configs/v11/ifeval_v11.yaml configs/v11/big_v11.yaml
+
+## v11-check — validate every scale-up config and show what would run
+v11-check:
+	@for c in $(V11_CONFIGS); do \
+	  echo "--- $$c"; $(PY) scripts/plan.py $$c --dry-run || exit 1; echo; \
+	done
+
+## v11-preflight — is THIS box safe to launch a panel on? (CFG=... to target one)
+v11-preflight:
+	$(PY) scripts/preflight.py $(if $(CFG),--config $(CFG),)
+
+## v11-plan — write work/<panel>.units.json for one config (CFG=... required)
+v11-plan:
+	@test -n "$(CFG)" || (echo "usage: make v11-plan CFG=configs/v11/dec_v11.yaml" && exit 1)
+	$(PY) scripts/plan.py $(CFG)
+
+## freeze — the gate. Rebuilds everything from artifacts, then audits it.
+freeze: clean-figures regen manifest figures audit
+	@echo "FREEZE GATE: all stages returned 0"
+
+clean-figures:
+	rm -f $(FIGDIR)/*.pdf $(FIGDIR)/*.png $(FIGDIR)/*_data.csv
+
+clean-v10:
+	rm -f $(REGEN_STAMPS) $(V10)/audit_report.json
+
+help:
+	@grep -E '^## ' $(MAKEFILE_LIST) | sed 's/^## /  /'

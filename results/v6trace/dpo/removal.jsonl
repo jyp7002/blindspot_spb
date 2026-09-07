@@ -1,0 +1,69 @@
+{"target": "qwen", "axis": "occ_gender", "seed": 0, "alpha": 0.25, "method": "dpo", "removal": -0.19174094904146655, "collateral_ok": true, "pre_skew": 0.17603168334229102}
+{"target": "qwen", "axis": "occ_gender", "seed": 0, "alpha": 0.5, "method": "dpo", "removal": -0.38057988728041536, "collateral_ok": true, "pre_skew": 0.17603168334229102}
+{"target": "qwen", "axis": "occ_gender", "seed": 0, "alpha": 0.75, "method": "dpo", "removal": -0.5582072247314918, "collateral_ok": true, "pre_skew": 0.17603168334229102}
+{"target": "qwen", "axis": "occ_gender", "seed": 0, "alpha": 1.0, "method": "dpo", "removal": -0.4773505259148769, "collateral_ok": true, "pre_skew": 0.17603168334229102}
+{"target": "qwen", "axis": "occ_gender", "seed": 1, "alpha": 0.25, "method": "dpo", "removal": -0.08210476082757578, "collateral_ok": true, "pre_skew": 0.010435087066609894}
+{"target": "qwen", "axis": "occ_gender", "seed": 1, "alpha": 0.5, "method": "dpo", "removal": -0.36170697263469553, "collateral_ok": true, "pre_skew": 0.010435087066609894}
+{"target": "qwen", "axis": "occ_gender", "seed": 1, "alpha": 0.75, "method": "dpo", "removal": -0.6429452379543297, "collateral_ok": true, "pre_skew": 0.010435087066609894}
+{"target": "qwen", "axis": "occ_gender", "seed": 1, "alpha": 1.0, "method": "dpo", "removal": -0.6401415567223161, "collateral_ok": true, "pre_skew": 0.010435087066609894}
+{"target": "qwen", "axis": "occ_gender", "seed": 2, "alpha": 0.25, "method": "dpo", "removal": -0.1175125110592421, "collateral_ok": true, "pre_skew": 0.25687459372002075}
+{"target": "qwen", "axis": "occ_gender", "seed": 2, "alpha": 0.5, "method": "dpo", "removal": -0.3152615219370256, "collateral_ok": true, "pre_skew": 0.25687459372002075}
+{"target": "qwen", "axis": "occ_gender", "seed": 2, "alpha": 0.75, "method": "dpo", "removal": -0.471875840176053, "collateral_ok": true, "pre_skew": 0.25687459372002075}
+{"target": "qwen", "axis": "occ_gender", "seed": 2, "alpha": 1.0, "method": "dpo", "removal": -0.3958852074131074, "collateral_ok": true, "pre_skew": 0.25687459372002075}
+{"target": "qwen", "axis": "crows_socioeconomic", "seed": 0, "alpha": 0.25, "method": "dpo", "removal": 0.10041968767033072, "collateral_ok": true, "pre_skew": 0.5123841928881269}
+{"target": "qwen", "axis": "crows_socioeconomic", "seed": 0, "alpha": 0.5, "method": "dpo", "removal": 0.1984307904576147, "collateral_ok": true, "pre_skew": 0.5123841928881269}
+{"target": "qwen", "axis": "crows_socioeconomic", "seed": 0, "alpha": 0.75, "method": "dpo", "removal": 0.23858892085940342, "collateral_ok": true, "pre_skew": 0.5123841928881269}
+{"target": "qwen", "axis": "crows_socioeconomic", "seed": 0, "alpha": 1.0, "method": "dpo", "removal": 0.28110948274301933, "collateral_ok": true, "pre_skew": 0.5123841928881269}
+{"target": "qwen", "axis": "crows_socioeconomic", "seed": 1, "alpha": 0.25, "method": "dpo", "removal": 0.03985061201938367, "collateral_ok": true, "pre_skew": 0.5525546600652296}
+{"target": "qwen", "axis": "crows_socioeconomic", "seed": 1, "alpha": 0.5, "method": "dpo", "removal": 0.224473517994548, "collateral_ok": true, "pre_skew": 0.5525546600652296}
+{"target": "qwen", "axis": "crows_socioeconomic", "seed": 1, "alpha": 0.75, "method": "dpo", "removal": 0.2761581138122914, "collateral_ok": true, "pre_skew": 0.5525546600652296}
+{"target": "qwen", "axis": "crows_socioeconomic", "seed": 1, "alpha": 1.0, "method": "dpo", "removal": 0.318005545194759, "collateral_ok": true, "pre_skew": 0.5525546600652296}
+{"target": "qwen", "axis": "crows_socioeconomic", "seed": 2, "alpha": 0.25, "method": "dpo", "removal": 0.06600051147993224, "collateral_ok": true, "pre_skew": 0.46468881673591084}
+{"target": "qwen", "axis": "crows_socioeconomic", "seed": 2, "alpha": 0.5, "method": "dpo", "removal": 0.15256193072296853, "collateral_ok": true, "pre_skew": 0.46468881673591084}
+{"target": "qwen", "axis": "crows_socioeconomic", "seed": 2, "alpha": 0.75, "method": "dpo", "removal": 0.1906417940938196, "collateral_ok": true, "pre_skew": 0.46468881673591084}
+{"target": "qwen", "axis": "crows_socioeconomic", "seed": 2, "alpha": 1.0, "method": "dpo", "removal": 0.231862788976625, "collateral_ok": true, "pre_skew": 0.46468881673591084}
+{"target": "phi", "axis": "occ_gender", "seed": 0, "alpha": 0.25, "method": "dpo", "removal": -0.07189357500565108, "collateral_ok": true, "pre_skew": 0.23948008765396178}
+{"target": "phi", "axis": "occ_gender", "seed": 0, "alpha": 0.5, "method": "dpo", "removal": -0.28479324291859576, "collateral_ok": true, "pre_skew": 0.23948008765396178}
+{"target": "phi", "axis": "occ_gender", "seed": 0, "alpha": 0.75, "method": "dpo", "removal": -0.4337504821694249, "collateral_ok": true, "pre_skew": 0.23948008765396178}
+{"target": "phi", "axis": "occ_gender", "seed": 0, "alpha": 1.0, "method": "dpo", "removal": -0.4926811765353225, "collateral_ok": true, "pre_skew": 0.23948008765396178}
+{"target": "phi", "axis": "occ_gender", "seed": 1, "alpha": 0.25, "method": "dpo", "removal": -0.14112962774770366, "collateral_ok": true, "pre_skew": 0.20666246777899766}
+{"target": "phi", "axis": "occ_gender", "seed": 1, "alpha": 0.5, "method": "dpo", "removal": -0.31993720347711285, "collateral_ok": true, "pre_skew": 0.20666246777899766}
+{"target": "phi", "axis": "occ_gender", "seed": 1, "alpha": 0.75, "method": "dpo", "removal": -0.47269028053314477, "collateral_ok": true, "pre_skew": 0.20666246777899766}
+{"target": "phi", "axis": "occ_gender", "seed": 1, "alpha": 1.0, "method": "dpo", "removal": -0.5356243160001619, "collateral_ok": true, "pre_skew": 0.20666246777899766}
+{"target": "phi", "axis": "occ_gender", "seed": 2, "alpha": 0.25, "method": "dpo", "removal": -0.1599691063319244, "collateral_ok": true, "pre_skew": 0.15561761677067376}
+{"target": "phi", "axis": "occ_gender", "seed": 2, "alpha": 0.5, "method": "dpo", "removal": -0.39719067627768867, "collateral_ok": true, "pre_skew": 0.15561761677067376}
+{"target": "phi", "axis": "occ_gender", "seed": 2, "alpha": 0.75, "method": "dpo", "removal": -0.5201667136493049, "collateral_ok": true, "pre_skew": 0.15561761677067376}
+{"target": "phi", "axis": "occ_gender", "seed": 2, "alpha": 1.0, "method": "dpo", "removal": -0.5876050891470233, "collateral_ok": true, "pre_skew": 0.15561761677067376}
+{"target": "phi", "axis": "crows_socioeconomic", "seed": 0, "alpha": 0.25, "method": "dpo", "removal": -0.02308134699976721, "collateral_ok": true, "pre_skew": 0.04556938104851301}
+{"target": "phi", "axis": "crows_socioeconomic", "seed": 0, "alpha": 0.5, "method": "dpo", "removal": -0.07842560701592025, "collateral_ok": true, "pre_skew": 0.04556938104851301}
+{"target": "phi", "axis": "crows_socioeconomic", "seed": 0, "alpha": 0.75, "method": "dpo", "removal": -0.10492768953012865, "collateral_ok": true, "pre_skew": 0.04556938104851301}
+{"target": "phi", "axis": "crows_socioeconomic", "seed": 0, "alpha": 1.0, "method": "dpo", "removal": -0.0982354019963464, "collateral_ok": true, "pre_skew": 0.04556938104851301}
+{"target": "phi", "axis": "crows_socioeconomic", "seed": 1, "alpha": 0.25, "method": "dpo", "removal": 0.03362594371618227, "collateral_ok": true, "pre_skew": 0.17667862703633863}
+{"target": "phi", "axis": "crows_socioeconomic", "seed": 1, "alpha": 0.5, "method": "dpo", "removal": 0.016241090242252787, "collateral_ok": true, "pre_skew": 0.17667862703633863}
+{"target": "phi", "axis": "crows_socioeconomic", "seed": 1, "alpha": 0.75, "method": "dpo", "removal": 0.02169366215550622, "collateral_ok": true, "pre_skew": 0.17667862703633863}
+{"target": "phi", "axis": "crows_socioeconomic", "seed": 1, "alpha": 1.0, "method": "dpo", "removal": 0.02695537167926168, "collateral_ok": true, "pre_skew": 0.17667862703633863}
+{"target": "phi", "axis": "crows_socioeconomic", "seed": 2, "alpha": 0.25, "method": "dpo", "removal": 0.07057756878608881, "collateral_ok": true, "pre_skew": 0.20604154121044072}
+{"target": "phi", "axis": "crows_socioeconomic", "seed": 2, "alpha": 0.5, "method": "dpo", "removal": 0.063910209855368, "collateral_ok": true, "pre_skew": 0.20604154121044072}
+{"target": "phi", "axis": "crows_socioeconomic", "seed": 2, "alpha": 0.75, "method": "dpo", "removal": 0.048604679662127837, "collateral_ok": true, "pre_skew": 0.20604154121044072}
+{"target": "phi", "axis": "crows_socioeconomic", "seed": 2, "alpha": 1.0, "method": "dpo", "removal": 0.0618324778800787, "collateral_ok": true, "pre_skew": 0.20604154121044072}
+{"target": "gemma", "axis": "occ_gender", "seed": 0, "alpha": null, "method": "dpo", "removal": null, "collateral_ok": false, "skipped": "too_few_pairs", "n_informative": 11, "n_total": 144}
+{"target": "gemma", "axis": "occ_gender", "seed": 1, "alpha": null, "method": "dpo", "removal": null, "collateral_ok": false, "skipped": "too_few_pairs", "n_informative": 12, "n_total": 144}
+{"target": "gemma", "axis": "occ_gender", "seed": 2, "alpha": null, "method": "dpo", "removal": null, "collateral_ok": false, "skipped": "too_few_pairs", "n_informative": 11, "n_total": 144}
+{"target": "gemma", "axis": "crows_socioeconomic", "seed": 0, "alpha": null, "method": "dpo", "removal": null, "collateral_ok": false, "skipped": "too_few_pairs", "n_informative": 10, "n_total": 86}
+{"target": "gemma", "axis": "crows_socioeconomic", "seed": 1, "alpha": null, "method": "dpo", "removal": null, "collateral_ok": false, "skipped": "too_few_pairs", "n_informative": 10, "n_total": 86}
+{"target": "gemma", "axis": "crows_socioeconomic", "seed": 2, "alpha": null, "method": "dpo", "removal": null, "collateral_ok": false, "skipped": "too_few_pairs", "n_informative": 10, "n_total": 86}
+{"target": "llama", "axis": "occ_gender", "seed": 0, "alpha": 0.25, "method": "dpo", "removal": -1.440403352148678e-12, "collateral_ok": true, "pre_skew": 2.220446049250313e-16}
+{"target": "llama", "axis": "occ_gender", "seed": 0, "alpha": 0.5, "method": "dpo", "removal": -4.4340273475107495e-07, "collateral_ok": true, "pre_skew": 2.220446049250313e-16}
+{"target": "llama", "axis": "occ_gender", "seed": 0, "alpha": 0.75, "method": "dpo", "removal": -0.009785114863950728, "collateral_ok": true, "pre_skew": 2.220446049250313e-16}
+{"target": "llama", "axis": "occ_gender", "seed": 0, "alpha": 1.0, "method": "dpo", "removal": -0.7611831810465408, "collateral_ok": true, "pre_skew": 2.220446049250313e-16}
+{"target": "llama", "axis": "occ_gender", "seed": 1, "alpha": 0.25, "method": "dpo", "removal": -1.9051427102567686e-13, "collateral_ok": true, "pre_skew": 0.0}
+{"target": "llama", "axis": "occ_gender", "seed": 1, "alpha": 0.5, "method": "dpo", "removal": -1.018269888408696e-07, "collateral_ok": true, "pre_skew": 0.0}
+{"target": "llama", "axis": "occ_gender", "seed": 1, "alpha": 0.75, "method": "dpo", "removal": -0.007906469933338878, "collateral_ok": true, "pre_skew": 0.0}
+{"target": "llama", "axis": "occ_gender", "seed": 1, "alpha": 1.0, "method": "dpo", "removal": -0.7624685883178215, "collateral_ok": true, "pre_skew": 0.0}
+{"target": "llama", "axis": "occ_gender", "seed": 2, "alpha": 0.25, "method": "dpo", "removal": -8.326672684688674e-15, "collateral_ok": true, "pre_skew": 1.5543122344752192e-15}
+{"target": "llama", "axis": "occ_gender", "seed": 2, "alpha": 0.5, "method": "dpo", "removal": -2.4662532105423907e-07, "collateral_ok": true, "pre_skew": 1.5543122344752192e-15}
+{"target": "llama", "axis": "occ_gender", "seed": 2, "alpha": 0.75, "method": "dpo", "removal": -0.009722854375486145, "collateral_ok": true, "pre_skew": 1.5543122344752192e-15}
+{"target": "llama", "axis": "occ_gender", "seed": 2, "alpha": 1.0, "method": "dpo", "removal": -0.7596069271219994, "collateral_ok": true, "pre_skew": 1.5543122344752192e-15}
+{"target": "llama", "axis": "crows_socioeconomic", "seed": 0, "alpha": null, "method": "dpo", "removal": null, "collateral_ok": false, "skipped": "too_few_pairs", "n_informative": 11, "n_total": 86}
+{"target": "llama", "axis": "crows_socioeconomic", "seed": 1, "alpha": null, "method": "dpo", "removal": null, "collateral_ok": false, "skipped": "too_few_pairs", "n_informative": 11, "n_total": 86}
+{"target": "llama", "axis": "crows_socioeconomic", "seed": 2, "alpha": null, "method": "dpo", "removal": null, "collateral_ok": false, "skipped": "too_few_pairs", "n_informative": 11, "n_total": 86}

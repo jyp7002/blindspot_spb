@@ -1,0 +1,101 @@
+==============================================================================
+EXPERIMENT B -- axis-divergence x blind-spot magnitude (experiments_v2 §B)
+==============================================================================
+  d_axis = pre-edit within-family item-profile correlation (basis-independent; see geometry.py)
+    occ_gender   d_axis=0.598478 cross=0.472557 differentiation=0.125921
+    gen_fm       d_axis=0.512146 cross=0.202949 differentiation=0.309197
+    age_oy       d_axis=0.801007 cross=0.634949 differentiation=0.166058
+    wt_os        d_axis=0.350520 cross=0.356419 differentiation=-0.00589
+    ses_lw       d_axis=0.940034 cross=0.810462 differentiation=0.129572
+    rel_bu_lu    d_axis=0.502082 cross=0.259073 differentiation=0.243008
+    nat_ro_dk    d_axis=0.266322 cross=0.083691 differentiation=0.182630
+    nat_mx_ca    d_axis=0.477541 cross=0.296167 differentiation=0.181374
+    nat_ng_no    d_axis=0.692959 cross=0.152819 differentiation=0.540139
+    nat_pk_nl    d_axis=0.671146 cross=0.074026 differentiation=0.597120
+    nat_bg_be    d_axis=0.546797 cross=0.133376 differentiation=0.413420
+    hand_lr      d_axis=0.498989 cross=0.255852 differentiation=0.243137
+    hair_rb      d_axis=0.839158 cross=0.694002 differentiation=0.145155
+    crows_race-color d_axis=0.651646 cross=0.406029 differentiation=0.245617
+    crows_socioeconomic d_axis=0.813722 cross=0.637270 differentiation=0.176451
+    crows_gender d_axis=0.702832 cross=0.545286 differentiation=0.157545
+    crows_disability d_axis=0.832286 cross=0.563136 differentiation=0.269149
+    crows_nationality d_axis=0.737104 cross=0.536162 differentiation=0.200941
+    crows_sexual-orientation d_axis=0.672602 cross=0.531990 differentiation=0.140611
+    crows_physical-appearance d_axis=0.753912 cross=0.598161 differentiation=0.155750
+    crows_religion d_axis=0.699529 cross=0.408578 differentiation=0.290951
+    crows_age    d_axis=0.866530 cross=0.707931 differentiation=0.158598
+
+  b_axis (cross - same), per arm x axis:
+  arm                      axis  injected      same     cross    b_axis  pre_bias    b_norm null   d_axis  bias_magnitude
+gemma                    gen_fm      True  0.576913  0.567471 -0.009442  0.628644 -0.015019 None 0.512147        0.045156
+gemma                occ_gender     False  0.207114  0.614510  0.407395  0.859520  0.473980 None 0.598478        0.373024
+llama                    gen_fm      True  0.501820  0.496766 -0.005055  0.525595 -0.009617 None 0.512147        0.045156
+llama                    age_oy     False  0.035607  0.031561 -0.004046  0.069804 -0.057965 None 0.801008        0.040567
+llama                 crows_age     False  0.020836  0.002128 -0.018708  0.172382 -0.108529 None 0.866530        0.140410
+llama          crows_disability     False  0.007613  0.011618  0.004006  0.324380  0.012349 None 0.832286        0.400078
+llama crows_physical-appearance     False  0.025855  0.022191 -0.003665  0.226415 -0.016185 None 0.753912        0.235508
+llama          crows_race-color     False  0.000040 -0.000266 -0.000306  0.006238 -0.049126 None 0.651647        0.060024
+llama            crows_religion     False  0.014313  0.004608 -0.009704  0.141424 -0.068619 None 0.699530        0.184602
+llama  crows_sexual-orientation     False  0.006442  0.006860  0.000418  0.091446  0.004569 None 0.672602        0.181788
+llama       crows_socioeconomic     False  0.043461  0.007046 -0.036415  0.161487 -0.225500 None 0.813723        0.172244
+llama                 nat_pk_nl     False  0.003123  0.003117 -0.000006  0.004124 -0.001467 None 0.671147        0.021118
+llama                 nat_ro_dk     False  0.006965  0.010936  0.003971  0.014711  0.269959 None 0.266322        0.017599
+llama                occ_gender     False  0.650599  0.643008 -0.007590  0.767173 -0.009894 None 0.598478        0.373024
+llama                 rel_bu_lu     False -0.000025  0.001207  0.001231  0.048940  0.025161 None 0.502082        0.017379
+llama                    ses_lw     False  0.064572  0.098221  0.033648  0.108327  0.310619 None 0.940035        0.077532
+llama                     wt_os     False  0.009088  0.008019 -0.001069  0.023974 -0.044570 None 0.350521        0.025938
+  phi                    gen_fm      True  0.751984  0.753469  0.001485  0.776598  0.001912 None 0.512147        0.045156
+  phi                occ_gender     False  0.337893  0.610730  0.272837  0.735144  0.371134 None 0.598478        0.373024
+ qwen                    gen_fm      True  0.441891  0.446472  0.004581  0.546254  0.008387 None 0.512147        0.045156
+ qwen                    age_oy     False  0.006195  0.005612 -0.000583  0.091245 -0.006388 None 0.801008        0.040567
+ qwen                 crows_age     False -0.001040 -0.001668 -0.000628  0.105280 -0.005968 None 0.866530        0.140410
+ qwen          crows_disability     False  0.008185  0.009661  0.001477  0.437819  0.003373 None 0.832286        0.400078
+ qwen crows_physical-appearance     False  0.014013  0.047600  0.033587  0.296608  0.113238 None 0.753912        0.235508
+ qwen          crows_race-color     False  0.011441  0.004579 -0.006862  0.041977 -0.163459 None 0.651647        0.060024
+ qwen            crows_religion     False  0.017033  0.058150  0.041118  0.132710  0.309830 None 0.699530        0.184602
+ qwen  crows_sexual-orientation     False  0.006577 -0.004115 -0.010692  0.199789 -0.053517 None 0.672602        0.181788
+ qwen       crows_socioeconomic     False  0.013475  0.092810  0.079335  0.220941  0.359078 None 0.813723        0.172244
+ qwen                 nat_pk_nl     False  0.001862  0.001422 -0.000440  0.012836 -0.034284 None 0.671147        0.021118
+ qwen                 nat_ro_dk     False  0.002092  0.001744 -0.000348  0.034005 -0.010225 None 0.266322        0.017599
+ qwen                occ_gender     False  0.372665  0.626310  0.253645  0.686714  0.369360 None 0.598478        0.373024
+ qwen                 rel_bu_lu     False  0.004620  0.002666 -0.001954  0.021256 -0.091908 None 0.502082        0.017379
+ qwen                    ses_lw     False  0.089659  0.075616 -0.014043  0.135152 -0.103901 None 0.940035        0.077532
+ qwen                     wt_os     False  0.018750  0.003792 -0.014958  0.048421 -0.308914 None 0.350521        0.025938
+ smol                    gen_fm      True  0.390832  0.458336  0.067505  0.506171  0.133363 None 0.512147        0.045156
+ smol                occ_gender     False  0.389727  0.607832  0.218105  0.799821  0.272692 None 0.598478        0.373024
+
+  fits:
+    {
+      "outcome": "b_norm",
+      "B1": {
+        "model": "mixedlm(|arm)",
+        "slope": 0.03817297229140321,
+        "ci": [
+          -0.3186721873087833,
+          0.3950181318915897
+        ],
+        "p": 0.8339297775475308,
+        "n": 36
+      },
+      "B2": {
+        "d_slope_with_magnitude": -0.16173013535737413,
+        "d_ci": [
+          -0.500849504220144,
+          0.17738923350539565
+        ],
+        "d_p": 0.33896284440216895,
+        "magnitude_alone_slope": 0.6025962266022376,
+        "magnitude_alone_p": 0.006115869367362426
+      },
+      "B3": {
+        "mean": 0.023805151649382593,
+        "ci": [
+          -0.009472083418200581,
+          0.07977186842266619
+        ],
+        "n": 5
+      }
+    }
+
+  B1 geometry slope: FAIL (slope=+0.0382, CI=[-0.3186721873087833, 0.3950181318915897])
+  NOTE: with only the 2 MVP axes this is underpowered; experiments_v2 §B asks for K>=5 axes.

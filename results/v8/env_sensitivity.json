@@ -1,0 +1,116 @@
+{
+ "artifact": "v8_env_sensitivity",
+ "unit": "(target,axis,designer)",
+ "thresholds": {
+  "pre_skew_gate": {
+   "n_cells": 87,
+   "n_edited": 82,
+   "edit_rate": 0.9425287356321839,
+   "mean_removal_edited": 0.29740433517423925,
+   "backfire_rate_edited": 0.08536585365853659,
+   "utility": 0.28031213200330596,
+   "tau": 0.115757,
+   "gamma": null
+  },
+  "contrast_gap_gate": {
+   "n_cells": 87,
+   "n_edited": 79,
+   "edit_rate": 0.9080459770114943,
+   "mean_removal_edited": 0.2972384060883357,
+   "backfire_rate_edited": 0.06329113924050633,
+   "utility": 0.2699061388618221,
+   "tau": null,
+   "gamma": 0.003876
+  },
+  "joint_gate": {
+   "n_cells": 87,
+   "n_edited": 82,
+   "edit_rate": 0.9425287356321839,
+   "mean_removal_edited": 0.29740433517423925,
+   "backfire_rate_edited": 0.08536585365853659,
+   "utility": 0.28031213200330596,
+   "tau": 0.115757,
+   "gamma": -0.050891
+  }
+ },
+ "n_cal": 87,
+ "n_held_out": 87,
+ "held_out_table": [
+  {
+   "n_cells": 87,
+   "n_edited": 87,
+   "edit_rate": 1.0,
+   "mean_removal_edited": 0.2631869111200978,
+   "backfire_rate_edited": 0.11494252873563218,
+   "utility": 0.2631869111200978,
+   "policy": "edit-all",
+   "tau": null,
+   "gamma": null,
+   "utility_ci": [
+    0.2041439566935837,
+    0.32268220966992206
+   ],
+   "mean_removal_edited_ci": [
+    0.2041439566935837,
+    0.32268220966992206
+   ]
+  },
+  {
+   "n_cells": 87,
+   "n_edited": 84,
+   "edit_rate": 0.9655172413793104,
+   "mean_removal_edited": 0.2735201257897136,
+   "backfire_rate_edited": 0.09523809523809523,
+   "utility": 0.2640883973142062,
+   "policy": "pre-skew gate",
+   "tau": 0.115757,
+   "gamma": null,
+   "utility_ci": [
+    0.20515034075077368,
+    0.3235210067122748
+   ],
+   "mean_removal_edited_ci": [
+    0.2136277224612271,
+    0.33425736141730317
+   ]
+  },
+  {
+   "n_cells": 87,
+   "n_edited": 73,
+   "edit_rate": 0.8390804597701149,
+   "mean_removal_edited": 0.2768259881507895,
+   "backfire_rate_edited": 0.0821917808219178,
+   "utility": 0.23227927741388085,
+   "policy": "contrast-gap gate",
+   "tau": null,
+   "gamma": 0.003876,
+   "utility_ci": [
+    0.17470944099004782,
+    0.292038047095451
+   ],
+   "mean_removal_edited_ci": [
+    0.21199425693092147,
+    0.34317234256090734
+   ]
+  },
+  {
+   "n_cells": 87,
+   "n_edited": 84,
+   "edit_rate": 0.9655172413793104,
+   "mean_removal_edited": 0.2735201257897136,
+   "backfire_rate_edited": 0.09523809523809523,
+   "utility": 0.2640883973142062,
+   "policy": "joint gate",
+   "tau": 0.115757,
+   "gamma": -0.050891,
+   "utility_ci": [
+    0.20515034075077368,
+    0.3235210067122748
+   ],
+   "mean_removal_edited_ci": [
+    0.2136277224612271,
+    0.33425736141730317
+   ]
+  }
+ ]
+}

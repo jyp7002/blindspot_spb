@@ -1,0 +1,3 @@
+[N] llama8b crows_socioeconomic    fp        removal=+0.0456
+[N] llama8b crows_socioeconomic    real      removal=+0.0530
+[N] llama8b crows_socioeconomic    signshuf  removal=+0.0007

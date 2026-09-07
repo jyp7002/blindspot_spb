@@ -1,0 +1,40 @@
+{
+ "artifact": "v10_regen_padding",
+ "clean_panel": "v6trace/steer",
+ "dmmlu_inflation": {
+  "_pairing": "matched on target, axis, seed, layer, strength, kind, grid",
+  "_what": "paired \u0394MMLU inflation, buggy panel minus clean panel",
+  "all_arms": {
+   "max": 0.44999999999999996,
+   "mean": 0.12439670138888889,
+   "median": 0.0050000000000000044,
+   "min": -0.11000000000000004,
+   "n_pairs": 1152
+  },
+  "n_matched_configs": 1152,
+  "real_arm": {
+   "max": 0.43,
+   "mean": 0.11850260416666668,
+   "median": 0.0,
+   "min": -0.11000000000000004,
+   "n_pairs": 384
+  }
+ },
+ "false_claim": {
+  "_note": "the edit arm here is the CURRENT v9 arm, so this is the closest reconstruction rather than the original figure, which used as-run edit values",
+  "_what": "edit \u2212 steering against the quarantined padding-bug panel, the comparison that produced the retracted advantage",
+  "edit_minus_steering": {
+   "hi": 0.4959575266902687,
+   "lo": 0.07738540028504068,
+   "n": 8,
+   "point": 0.2821011509876547,
+   "status": "excludes 0",
+   "text": "+0.2821 [+0.0774, +0.4960] (n=8, excludes 0)"
+  },
+  "n_cells": 8,
+  "steering_cells_with_any_in_budget_config": 4
+ },
+ "module": "src/v10_regen_padding.py",
+ "panel": "v6trace/steer_paddingbug_1785685027",
+ "purpose": "give \u00a75.9's recomputed padding-bug magnitudes a resolvable key, so the paragraph that retracts hardcoded values does not itself print hardcoded values"
+}

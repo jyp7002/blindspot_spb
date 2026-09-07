@@ -1,0 +1,803 @@
+{
+ "zip_install": [
+  {
+   "designer": "falcon",
+   "axis": "crows_socioeconomic",
+   "seed": 1,
+   "installed_as": "falcon|crows_socioeconomic|s1.json",
+   "source_zip": "blindspot_results-20260729T073015Z-1-001.zip",
+   "source_name": "falcon_crows_socioeconomic_s1.json",
+   "md5": "d4c3da44959f7e0ec9f95eeb10a4af54",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "falcon",
+   "axis": "crows_socioeconomic",
+   "seed": 2,
+   "installed_as": "falcon|crows_socioeconomic|s2.json",
+   "source_zip": "blindspot_results-20260729T073015Z-1-001.zip",
+   "source_name": "falcon_crows_socioeconomic_s2.json",
+   "md5": "77151dce04f9ccd0e3a04b97aabe7c82",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "falcon",
+   "axis": "occ_gender",
+   "seed": 1,
+   "installed_as": "falcon|occ_gender|s1.json",
+   "source_zip": "blindspot_results-20260729T073015Z-1-001.zip",
+   "source_name": "falcon_occ_gender_s1.json",
+   "md5": "1f3fd8c0c3eaddc5011910dd81f391c0",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "falcon",
+   "axis": "occ_gender",
+   "seed": 2,
+   "installed_as": "falcon|occ_gender|s2.json",
+   "source_zip": "blindspot_results-20260729T073015Z-1-001.zip",
+   "source_name": "falcon_occ_gender_s2.json",
+   "md5": "7102afaa934f0c187df29dbc8733fcd1",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "falcon_large",
+   "axis": "crows_socioeconomic",
+   "seed": 1,
+   "installed_as": "falcon_large|crows_socioeconomic|s1.json",
+   "source_zip": "blindspot_results-20260729T073015Z-1-001.zip",
+   "source_name": "falcon_large_crows_socioeconomic_s1.json",
+   "md5": "827c648287aa43078bffb8eadaff4b26",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "falcon_large",
+   "axis": "crows_socioeconomic",
+   "seed": 2,
+   "installed_as": "falcon_large|crows_socioeconomic|s2.json",
+   "source_zip": "blindspot_results-20260729T073015Z-1-001.zip",
+   "source_name": "falcon_large_crows_socioeconomic_s2.json",
+   "md5": "cec332b0f896b5665a8af1ec23e75dcd",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "falcon_large",
+   "axis": "occ_gender",
+   "seed": 1,
+   "installed_as": "falcon_large|occ_gender|s1.json",
+   "source_zip": "blindspot_results-20260729T073015Z-1-001.zip",
+   "source_name": "falcon_large_occ_gender_s1.json",
+   "md5": "e362044a3f6516e9c767bb53767356a5",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "falcon_large",
+   "axis": "occ_gender",
+   "seed": 2,
+   "installed_as": "falcon_large|occ_gender|s2.json",
+   "source_zip": "blindspot_results-20260729T073015Z-1-001.zip",
+   "source_name": "falcon_large_occ_gender_s2.json",
+   "md5": "72b5ab508844cb9f41cf91cbd3e234d2",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "olmo_large",
+   "axis": "crows_socioeconomic",
+   "seed": 1,
+   "installed_as": "olmo_large|crows_socioeconomic|s1.json",
+   "source_zip": "blindspot_results-20260729T073015Z-1-001.zip",
+   "source_name": "olmo_large_crows_socioeconomic_s1.json",
+   "md5": "81e95518995a0feef49917f185bca2c3",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "olmo_large",
+   "axis": "crows_socioeconomic",
+   "seed": 2,
+   "installed_as": "olmo_large|crows_socioeconomic|s2.json",
+   "source_zip": "blindspot_results-20260729T073015Z-1-001.zip",
+   "source_name": "olmo_large_crows_socioeconomic_s2.json",
+   "md5": "e9f38e9575066a230638087b8b237963",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "olmo_large",
+   "axis": "occ_gender",
+   "seed": 1,
+   "installed_as": "olmo_large|occ_gender|s1.json",
+   "source_zip": "blindspot_results-20260729T073015Z-1-001.zip",
+   "source_name": "olmo_large_occ_gender_s1.json",
+   "md5": "9447414a81fb8947383339b4816fdfeb",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "olmo_large",
+   "axis": "occ_gender",
+   "seed": 2,
+   "installed_as": "olmo_large|occ_gender|s2.json",
+   "source_zip": "blindspot_results-20260729T073015Z-1-001.zip",
+   "source_name": "olmo_large_occ_gender_s2.json",
+   "md5": "0701ef2d775b5fead607a2c5e1ae16bc",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "qwen_large",
+   "axis": "crows_socioeconomic",
+   "seed": 1,
+   "installed_as": "qwen_large|crows_socioeconomic|s1.json",
+   "source_zip": "blindspot_results-20260729T073015Z-1-001.zip",
+   "source_name": "qwen_large_crows_socioeconomic_s1.json",
+   "md5": "d50977838e3a81848bb89a18523a3769",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "qwen_large",
+   "axis": "crows_socioeconomic",
+   "seed": 2,
+   "installed_as": "qwen_large|crows_socioeconomic|s2.json",
+   "source_zip": "blindspot_results-20260729T073015Z-1-001.zip",
+   "source_name": "qwen_large_crows_socioeconomic_s2.json",
+   "md5": "654c3c1fce4e8fae5724ba300695afc6",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "qwen_large",
+   "axis": "occ_gender",
+   "seed": 1,
+   "installed_as": "qwen_large|occ_gender|s1.json",
+   "source_zip": "blindspot_results-20260729T073015Z-1-001.zip",
+   "source_name": "qwen_large_occ_gender_s1.json",
+   "md5": "5efc2c67588db118f91fcb8d9ad8fb6a",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "qwen_large",
+   "axis": "occ_gender",
+   "seed": 2,
+   "installed_as": "qwen_large|occ_gender|s2.json",
+   "source_zip": "blindspot_results-20260729T073015Z-1-001.zip",
+   "source_name": "qwen_large_occ_gender_s2.json",
+   "md5": "9fec387a02906dc7eacb462b56df8eec",
+   "n_biased": 144,
+   "n_debiased": 144
+  }
+ ],
+ "pipe_exposure": [
+  {
+   "designer": "falcon",
+   "axis": "crows_socioeconomic",
+   "seed": 0,
+   "installed_as": "falcon|crows_socioeconomic|s0.json",
+   "from_local": "falcon_crows_socioeconomic_s0.json",
+   "md5": "58fc507b24f482aec2902383d3b20aa1",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "falcon",
+   "axis": "occ_gender",
+   "seed": 0,
+   "installed_as": "falcon|occ_gender|s0.json",
+   "from_local": "falcon_occ_gender_s0.json",
+   "md5": "595daaaca9d32696776be9618cf8084a",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "falcon_large",
+   "axis": "crows_socioeconomic",
+   "seed": 0,
+   "installed_as": "falcon_large|crows_socioeconomic|s0.json",
+   "from_local": "falcon_large_crows_socioeconomic_s0.json",
+   "md5": "233c79aff732719250dd6a94542cde8a",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "falcon_large",
+   "axis": "occ_gender",
+   "seed": 0,
+   "installed_as": "falcon_large|occ_gender|s0.json",
+   "from_local": "falcon_large_occ_gender_s0.json",
+   "md5": "86aaea102d7369ce3f6e74ceab8a44f1",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "gemma",
+   "axis": "crows_socioeconomic",
+   "seed": 0,
+   "installed_as": "gemma|crows_socioeconomic|s0.json",
+   "from_local": "gemma_crows_socioeconomic_s0.json",
+   "md5": "c9c2e92d7fc4b3da12bd04c7ecf662cd",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "gemma",
+   "axis": "crows_socioeconomic",
+   "seed": 1,
+   "installed_as": "gemma|crows_socioeconomic|s1.json",
+   "from_local": "gemma_crows_socioeconomic_s1.json",
+   "md5": "f2f532b244164c20cdcee5342b734b59",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "gemma",
+   "axis": "crows_socioeconomic",
+   "seed": 2,
+   "installed_as": "gemma|crows_socioeconomic|s2.json",
+   "from_local": "gemma_crows_socioeconomic_s2.json",
+   "md5": "c19687161802b6644edb9066f921c9d2",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "gemma",
+   "axis": "occ_gender",
+   "seed": 0,
+   "installed_as": "gemma|occ_gender|s0.json",
+   "from_local": "gemma_occ_gender_s0.json",
+   "md5": "03c0574fd42321142f387c934ca41a6c",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "gemma",
+   "axis": "occ_gender",
+   "seed": 1,
+   "installed_as": "gemma|occ_gender|s1.json",
+   "from_local": "gemma_occ_gender_s1.json",
+   "md5": "e94ff90824ee2157acd58a183c9d2af6",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "gemma",
+   "axis": "occ_gender",
+   "seed": 2,
+   "installed_as": "gemma|occ_gender|s2.json",
+   "from_local": "gemma_occ_gender_s2.json",
+   "md5": "67d7f47c63bc97202b4082711f109774",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "gemma_sib",
+   "axis": "crows_socioeconomic",
+   "seed": 0,
+   "installed_as": "gemma_sib|crows_socioeconomic|s0.json",
+   "from_local": "gemma_sib_crows_socioeconomic_s0.json",
+   "md5": "6ffa8912195fc5c61fd0b4f2ca26df6b",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "gemma_sib",
+   "axis": "crows_socioeconomic",
+   "seed": 1,
+   "installed_as": "gemma_sib|crows_socioeconomic|s1.json",
+   "from_local": "gemma_sib_crows_socioeconomic_s1.json",
+   "md5": "e3e64cd980a93f8dcdc6098fa96415f7",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "gemma_sib",
+   "axis": "crows_socioeconomic",
+   "seed": 2,
+   "installed_as": "gemma_sib|crows_socioeconomic|s2.json",
+   "from_local": "gemma_sib_crows_socioeconomic_s2.json",
+   "md5": "c8bffe45a338a08eab42193b44d66873",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "gemma_sib",
+   "axis": "occ_gender",
+   "seed": 0,
+   "installed_as": "gemma_sib|occ_gender|s0.json",
+   "from_local": "gemma_sib_occ_gender_s0.json",
+   "md5": "8a9093ac6dc8f5a9089476fcf6940a89",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "gemma_sib",
+   "axis": "occ_gender",
+   "seed": 1,
+   "installed_as": "gemma_sib|occ_gender|s1.json",
+   "from_local": "gemma_sib_occ_gender_s1.json",
+   "md5": "38886b1d827fe70ae9dcfa220bdd0d1a",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "gemma_sib",
+   "axis": "occ_gender",
+   "seed": 2,
+   "installed_as": "gemma_sib|occ_gender|s2.json",
+   "from_local": "gemma_sib_occ_gender_s2.json",
+   "md5": "12ad38bee9dc6f34ecca008f177b292d",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "granite",
+   "axis": "crows_socioeconomic",
+   "seed": 0,
+   "installed_as": "granite|crows_socioeconomic|s0.json",
+   "from_local": "granite_crows_socioeconomic_s0.json",
+   "md5": "ba98359c67d038e0ad7f02a99f73149a",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "granite",
+   "axis": "crows_socioeconomic",
+   "seed": 1,
+   "installed_as": "granite|crows_socioeconomic|s1.json",
+   "from_local": "granite_crows_socioeconomic_s1.json",
+   "md5": "d0b85d111ef9f16ac9dfdefd76c3befa",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "granite",
+   "axis": "crows_socioeconomic",
+   "seed": 2,
+   "installed_as": "granite|crows_socioeconomic|s2.json",
+   "from_local": "granite_crows_socioeconomic_s2.json",
+   "md5": "c67b45d23b4a2615332fa8ea59495d4f",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "granite",
+   "axis": "occ_gender",
+   "seed": 0,
+   "installed_as": "granite|occ_gender|s0.json",
+   "from_local": "granite_occ_gender_s0.json",
+   "md5": "c641a3a978083abf265ead6cce54236e",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "granite",
+   "axis": "occ_gender",
+   "seed": 1,
+   "installed_as": "granite|occ_gender|s1.json",
+   "from_local": "granite_occ_gender_s1.json",
+   "md5": "9fc7dd383b6b20cbc8ccf23185472120",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "granite",
+   "axis": "occ_gender",
+   "seed": 2,
+   "installed_as": "granite|occ_gender|s2.json",
+   "from_local": "granite_occ_gender_s2.json",
+   "md5": "4c423d82d58479751a0bdb025eb8d5ac",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "llama",
+   "axis": "crows_socioeconomic",
+   "seed": 0,
+   "installed_as": "llama|crows_socioeconomic|s0.json",
+   "from_local": "llama_crows_socioeconomic_s0.json",
+   "md5": "fb72eeeb85164cf20ad083fdbf0a6bef",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "llama",
+   "axis": "crows_socioeconomic",
+   "seed": 1,
+   "installed_as": "llama|crows_socioeconomic|s1.json",
+   "from_local": "llama_crows_socioeconomic_s1.json",
+   "md5": "d686d983b0ecf58b889f16348a5e6ccd",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "llama",
+   "axis": "crows_socioeconomic",
+   "seed": 2,
+   "installed_as": "llama|crows_socioeconomic|s2.json",
+   "from_local": "llama_crows_socioeconomic_s2.json",
+   "md5": "8173afb742a4e1bff9ea635aaa977f9f",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "llama",
+   "axis": "occ_gender",
+   "seed": 0,
+   "installed_as": "llama|occ_gender|s0.json",
+   "from_local": "llama_occ_gender_s0.json",
+   "md5": "82a8c2e2973bfcf5ba7b6510e53b77c8",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "llama",
+   "axis": "occ_gender",
+   "seed": 1,
+   "installed_as": "llama|occ_gender|s1.json",
+   "from_local": "llama_occ_gender_s1.json",
+   "md5": "d47e3d0be3240d9376a2a244db897789",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "llama",
+   "axis": "occ_gender",
+   "seed": 2,
+   "installed_as": "llama|occ_gender|s2.json",
+   "from_local": "llama_occ_gender_s2.json",
+   "md5": "c27f548c46826c2654d75ba72ec59d33",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "llama_sib",
+   "axis": "crows_socioeconomic",
+   "seed": 0,
+   "installed_as": "llama_sib|crows_socioeconomic|s0.json",
+   "from_local": "llama_sib_crows_socioeconomic_s0.json",
+   "md5": "072162d74a8d614fbcf418fb7928525b",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "llama_sib",
+   "axis": "crows_socioeconomic",
+   "seed": 1,
+   "installed_as": "llama_sib|crows_socioeconomic|s1.json",
+   "from_local": "llama_sib_crows_socioeconomic_s1.json",
+   "md5": "7ffb7917847c2b921f42fe4503add7e8",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "llama_sib",
+   "axis": "crows_socioeconomic",
+   "seed": 2,
+   "installed_as": "llama_sib|crows_socioeconomic|s2.json",
+   "from_local": "llama_sib_crows_socioeconomic_s2.json",
+   "md5": "dc109ff5aa9d598d11b84525d586ee18",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "llama_sib",
+   "axis": "occ_gender",
+   "seed": 0,
+   "installed_as": "llama_sib|occ_gender|s0.json",
+   "from_local": "llama_sib_occ_gender_s0.json",
+   "md5": "cc6e93d2ce30e31044c84380f1656b20",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "llama_sib",
+   "axis": "occ_gender",
+   "seed": 1,
+   "installed_as": "llama_sib|occ_gender|s1.json",
+   "from_local": "llama_sib_occ_gender_s1.json",
+   "md5": "f7dcd421a630988f56c87cc06e92cc18",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "llama_sib",
+   "axis": "occ_gender",
+   "seed": 2,
+   "installed_as": "llama_sib|occ_gender|s2.json",
+   "from_local": "llama_sib_occ_gender_s2.json",
+   "md5": "9e7af9a9361a144faed7d21bdc1fc485",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "olmo",
+   "axis": "crows_socioeconomic",
+   "seed": 0,
+   "installed_as": "olmo|crows_socioeconomic|s0.json",
+   "from_local": "olmo_crows_socioeconomic_s0.json",
+   "md5": "5f7f90c2176c0d49b55e2b940c6cb13e",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "olmo",
+   "axis": "crows_socioeconomic",
+   "seed": 1,
+   "installed_as": "olmo|crows_socioeconomic|s1.json",
+   "from_local": "olmo_crows_socioeconomic_s1.json",
+   "md5": "4eea7e4644949cc4dad5002d2c32e714",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "olmo",
+   "axis": "crows_socioeconomic",
+   "seed": 2,
+   "installed_as": "olmo|crows_socioeconomic|s2.json",
+   "from_local": "olmo_crows_socioeconomic_s2.json",
+   "md5": "c47811b25edf4a4e4ea906e844a492cc",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "olmo",
+   "axis": "occ_gender",
+   "seed": 0,
+   "installed_as": "olmo|occ_gender|s0.json",
+   "from_local": "olmo_occ_gender_s0.json",
+   "md5": "7164096637e0ee6ded480bcacbeaa5fc",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "olmo",
+   "axis": "occ_gender",
+   "seed": 1,
+   "installed_as": "olmo|occ_gender|s1.json",
+   "from_local": "olmo_occ_gender_s1.json",
+   "md5": "c4fe6bf5203c790875d26e3607f025bf",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "olmo",
+   "axis": "occ_gender",
+   "seed": 2,
+   "installed_as": "olmo|occ_gender|s2.json",
+   "from_local": "olmo_occ_gender_s2.json",
+   "md5": "ab6a06f98cb958b1303431b40c572917",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "olmo_large",
+   "axis": "crows_socioeconomic",
+   "seed": 0,
+   "installed_as": "olmo_large|crows_socioeconomic|s0.json",
+   "from_local": "olmo_large_crows_socioeconomic_s0.json",
+   "md5": "93802c6af2df86d3ace6e21cff7cc606",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "olmo_large",
+   "axis": "occ_gender",
+   "seed": 0,
+   "installed_as": "olmo_large|occ_gender|s0.json",
+   "from_local": "olmo_large_occ_gender_s0.json",
+   "md5": "f1a9e66e9f67d79b7683625e056b7c8f",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "olmo_sib",
+   "axis": "crows_socioeconomic",
+   "seed": 0,
+   "installed_as": "olmo_sib|crows_socioeconomic|s0.json",
+   "from_local": "olmo_sib_crows_socioeconomic_s0.json",
+   "md5": "ab0e66013fbdc3bd3aea85696473106b",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "olmo_sib",
+   "axis": "crows_socioeconomic",
+   "seed": 1,
+   "installed_as": "olmo_sib|crows_socioeconomic|s1.json",
+   "from_local": "olmo_sib_crows_socioeconomic_s1.json",
+   "md5": "3401e03a83aab10e8878f1ed2658424c",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "olmo_sib",
+   "axis": "crows_socioeconomic",
+   "seed": 2,
+   "installed_as": "olmo_sib|crows_socioeconomic|s2.json",
+   "from_local": "olmo_sib_crows_socioeconomic_s2.json",
+   "md5": "304d07992119f69e8d469b0eb4fdbc80",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "olmo_sib",
+   "axis": "occ_gender",
+   "seed": 0,
+   "installed_as": "olmo_sib|occ_gender|s0.json",
+   "from_local": "olmo_sib_occ_gender_s0.json",
+   "md5": "50bf4b1e2e46b5b04df5dd6023885174",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "olmo_sib",
+   "axis": "occ_gender",
+   "seed": 1,
+   "installed_as": "olmo_sib|occ_gender|s1.json",
+   "from_local": "olmo_sib_occ_gender_s1.json",
+   "md5": "b9a10600bcaf84a58eea86bda597e621",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "olmo_sib",
+   "axis": "occ_gender",
+   "seed": 2,
+   "installed_as": "olmo_sib|occ_gender|s2.json",
+   "from_local": "olmo_sib_occ_gender_s2.json",
+   "md5": "adeae20c0c4e8f6ecdccf40486aadde2",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "qwen",
+   "axis": "crows_socioeconomic",
+   "seed": 0,
+   "installed_as": "qwen|crows_socioeconomic|s0.json",
+   "from_local": "qwen_crows_socioeconomic_s0.json",
+   "md5": "b9391b62270da9e1f1aae33cace542ef",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "qwen",
+   "axis": "crows_socioeconomic",
+   "seed": 1,
+   "installed_as": "qwen|crows_socioeconomic|s1.json",
+   "from_local": "qwen_crows_socioeconomic_s1.json",
+   "md5": "609f0395f064c1033d74aee1b554821c",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "qwen",
+   "axis": "crows_socioeconomic",
+   "seed": 2,
+   "installed_as": "qwen|crows_socioeconomic|s2.json",
+   "from_local": "qwen_crows_socioeconomic_s2.json",
+   "md5": "94d7b11836b28fe34bbf6e7a1f5bd317",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "qwen",
+   "axis": "occ_gender",
+   "seed": 0,
+   "installed_as": "qwen|occ_gender|s0.json",
+   "from_local": "qwen_occ_gender_s0.json",
+   "md5": "c9a78373f145e0a1d90da807953bdb37",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "qwen",
+   "axis": "occ_gender",
+   "seed": 1,
+   "installed_as": "qwen|occ_gender|s1.json",
+   "from_local": "qwen_occ_gender_s1.json",
+   "md5": "295a59d044bb063d991d8941778fc999",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "qwen",
+   "axis": "occ_gender",
+   "seed": 2,
+   "installed_as": "qwen|occ_gender|s2.json",
+   "from_local": "qwen_occ_gender_s2.json",
+   "md5": "98cefb0758aef2734513ce3fd7780552",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "qwen_large",
+   "axis": "crows_socioeconomic",
+   "seed": 0,
+   "installed_as": "qwen_large|crows_socioeconomic|s0.json",
+   "from_local": "qwen_large_crows_socioeconomic_s0.json",
+   "md5": "da366d30cbcd18aded2b1f67015e1c80",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "qwen_large",
+   "axis": "occ_gender",
+   "seed": 0,
+   "installed_as": "qwen_large|occ_gender|s0.json",
+   "from_local": "qwen_large_occ_gender_s0.json",
+   "md5": "3e9f872e6304d6333e29a99f5b0dc471",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "qwen_sib",
+   "axis": "crows_socioeconomic",
+   "seed": 0,
+   "installed_as": "qwen_sib|crows_socioeconomic|s0.json",
+   "from_local": "qwen_sib_crows_socioeconomic_s0.json",
+   "md5": "a3f85141df6164a14703536785b0c2fb",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "qwen_sib",
+   "axis": "crows_socioeconomic",
+   "seed": 1,
+   "installed_as": "qwen_sib|crows_socioeconomic|s1.json",
+   "from_local": "qwen_sib_crows_socioeconomic_s1.json",
+   "md5": "b77607f318cc09da44c74bb578b7a8f9",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "qwen_sib",
+   "axis": "crows_socioeconomic",
+   "seed": 2,
+   "installed_as": "qwen_sib|crows_socioeconomic|s2.json",
+   "from_local": "qwen_sib_crows_socioeconomic_s2.json",
+   "md5": "cd5bba30bdce476bd60778548f0287b6",
+   "n_biased": 86,
+   "n_debiased": 86
+  },
+  {
+   "designer": "qwen_sib",
+   "axis": "occ_gender",
+   "seed": 0,
+   "installed_as": "qwen_sib|occ_gender|s0.json",
+   "from_local": "qwen_sib_occ_gender_s0.json",
+   "md5": "1ccf46fb129a96f156bc953cfcd9f814",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "qwen_sib",
+   "axis": "occ_gender",
+   "seed": 1,
+   "installed_as": "qwen_sib|occ_gender|s1.json",
+   "from_local": "qwen_sib_occ_gender_s1.json",
+   "md5": "d3e2aac423510600d9f2397e444152d0",
+   "n_biased": 144,
+   "n_debiased": 144
+  },
+  {
+   "designer": "qwen_sib",
+   "axis": "occ_gender",
+   "seed": 2,
+   "installed_as": "qwen_sib|occ_gender|s2.json",
+   "from_local": "qwen_sib_occ_gender_s2.json",
+   "md5": "ab0b1615cc71766293d13743c18ec206",
+   "n_biased": 144,
+   "n_debiased": 144
+  }
+ ],
+ "note": "pipe_exposure copies the bigbox (underscore-named) corpora to the pipe names colab_t2t4.py:732 reads. Additive only: keys that already had a pipe-named file were NOT touched (18 keys, 13 of which diverge from the bigbox original - pending reconciliation)."
+}

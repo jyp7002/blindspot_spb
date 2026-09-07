@@ -1,0 +1,21 @@
+[y] profiled gemma2b base
+[y] profiled gemma9b base
+
+=== base<->it profile correlation (per model, per axis) ===
+  gemma2b  occ_gender             base<->it r=+0.724
+  gemma2b  crows_socioeconomic    base<->it r=+0.916
+  gemma2b  crows_race-color       base<->it r=+0.812
+  gemma2b  crows_gender           base<->it r=+0.909
+  gemma2b  crows_religion         base<->it r=+0.754
+  gemma2b  crows_age              base<->it r=+0.870
+  gemma2b mean base<->it r = +0.830
+  gemma9b  occ_gender             base<->it r=+0.862
+  gemma9b  crows_socioeconomic    base<->it r=+0.758
+  gemma9b  crows_race-color       base<->it r=+0.713
+  gemma9b  crows_gender           base<->it r=+0.751
+  gemma9b  crows_religion         base<->it r=+0.469
+  gemma9b  crows_age              base<->it r=+0.822
+  gemma9b mean base<->it r = +0.729
+
+=== same-family gemma d (2b<->9b): base=+0.913  it=+0.749 ===
+wrote results/y_base_check.json

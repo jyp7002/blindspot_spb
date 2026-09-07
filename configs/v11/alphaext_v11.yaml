@@ -1,0 +1,62 @@
+# v11 ALPHAEXT — push the edit-scale grid to saturation.
+#
+# WHAT THIS CLOSES. Section 5.3's single largest weakness, stated in the paper
+# itself: "at alpha=128, C-a is still in budget in 10 of 30 runs, C-ref in
+# none", so the measured Delta_selection = +0.104 [+0.036, +0.183] is an UPPER
+# BOUND on the unbounded-extension gap, not the gap. The depth series
+#
+#     +0.284 (a<=16, frozen)  ->  +0.233 (<=32)  ->  +0.146 (<=64)  ->  +0.104 (<=128)
+#
+# is monotone and still falling at the top of the probed grid. A reviewer can
+# ask whether it reaches zero, and right now the honest answer is "we do not
+# know". Extending to {256, 512} answers it: the arm terminates when C-a stops
+# clearing the collateral budget, because past that point no larger alpha is
+# admissible and the series cannot fall further.
+#
+# THE SATURATION CRITERION, FIXED BEFORE THE RUN. The extension is SATURATED
+# when C-a's in-budget count reaches 0/30 at some alpha, matching C-ref, which
+# was already 0/30 at 128. Report the alpha at which that happens and the
+# Delta_selection at the deepest alpha where BOTH arms still have an in-budget
+# run. If C-a is still in budget at 512, say so and report the value as an
+# upper bound again -- do not extrapolate.
+#
+# WHY THIS IS POST-HOC AND MUST STAY LABELLED. PREREGISTRATION.md v10.B
+# registers the alpha-extension panel as POST-HOC. This deepens the same
+# post-hoc arm; it does not become confirmatory by going further. The
+# frozen-grid estimand {2,4,8,16} remains the registered one.
+#
+# IT MUST REPRODUCE THE FROZEN ARM EXACTLY. v10 found that the frozen arm
+# reproduces +0.2835 [+0.1692, +0.4072] only when the cell list keeps the
+# PANEL INSERTION ORDER -- sorting shifts the CI by ~0.0008. The cell order
+# below is the v10ext order for that reason. Do not sort it.
+
+panel: v11ext
+kind: alphaext
+out_panel: v11ext
+base_on: v10ext
+
+density: 0.01
+scale_mode: ref_tensor
+seeds: [0, 1, 2]
+mmlu_n: 200
+
+# STRICTLY ABOVE the v10ext grid {32,64,128}, which is strictly above the
+# frozen {2,4,8,16}. Each panel probes only its own new alphas; the analysis
+# joins the three panels into one depth series.
+alphas: [256, 512]
+
+# The same 10 cells as the published DEC panel, in panel insertion order.
+# The extension is only interpretable against the frozen arm it extends, so
+# this list must NOT pick up v11dec's new cells -- those get their own frozen
+# grid first. See experiments_v11.md III.
+cells:
+  - {target: gemma,  hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: occ_gender}
+  - {target: llama,  hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: occ_gender}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: occ_gender}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: occ_gender}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: bbq_Age}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: bbq_Age}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: bbq_Race_ethnicity}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: ss_intra}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: ss_intra}
+  - {target: qwen7b, hf: Qwen/Qwen2.5-7B-Instruct,         designer: qwen,     axis: occ_gender}

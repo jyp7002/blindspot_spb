@@ -1,0 +1,21 @@
+# Panels are line-oriented data: keep diffs readable, never CRLF-mangled.
+*.jsonl text eol=lf
+*.json  text eol=lf
+*.csv   text eol=lf
+*.md    text eol=lf
+*.py    text eol=lf
+*.sh    text eol=lf
+Makefile text eol=lf
+
+# EXCEPTION, and it must stay LAST -- in .gitattributes the last matching
+# pattern wins, so this has to come after the general *.csv rule above.
+#
+# Figure data CSVs are written by python's csv.writer, which emits CRLF by
+# default (RFC 4180). The v10 audit contract is on these files byte-for-byte,
+# so git must NOT normalise them: a clone that checked out LF would differ from
+# what `make figures` regenerates, and every freeze would show a phantom diff.
+figures/*_data.csv -text
+
+# Figures are binary; do not try to diff or merge them.
+*.pdf binary
+*.png binary

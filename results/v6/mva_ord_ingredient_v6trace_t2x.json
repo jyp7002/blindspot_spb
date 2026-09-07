@@ -1,0 +1,87 @@
+{
+  "note": "ORD ingredient \u2014 frozen before any bridge correlation (experiments_v6 \u00a77 no-peeking).",
+  "ref_removal": 0.6,
+  "degen_pplr": 1.5,
+  "cells": [
+    {
+      "target": "gemma",
+      "axis": "crows_socioeconomic",
+      "self_frontier_excess": null,
+      "self_ceiling_deficit": 0.0,
+      "sibling_frontier_excess": null,
+      "sibling_ceiling_deficit": 0.0,
+      "cross_frontier_excess": null,
+      "cross_ceiling_deficit": 0.03597955879314926
+    },
+    {
+      "target": "gemma",
+      "axis": "occ_gender",
+      "self_frontier_excess": 0.01254556228822179,
+      "self_ceiling_deficit": 0.03757267117078541,
+      "sibling_frontier_excess": 0.12751409539599323,
+      "sibling_ceiling_deficit": 0.16373244608339932,
+      "cross_frontier_excess": 0.013866512155787492,
+      "cross_ceiling_deficit": 0.012274922117887
+    },
+    {
+      "target": "llama",
+      "axis": "crows_socioeconomic",
+      "self_frontier_excess": null,
+      "self_ceiling_deficit": 0.03711431525474371,
+      "sibling_frontier_excess": null,
+      "sibling_ceiling_deficit": 0.06341985861460368,
+      "cross_frontier_excess": null,
+      "cross_ceiling_deficit": 0.014870339123777642
+    },
+    {
+      "target": "llama",
+      "axis": "occ_gender",
+      "self_frontier_excess": 0.014825251100070602,
+      "self_ceiling_deficit": 0.2551800860475849,
+      "sibling_frontier_excess": 0.12155602870682314,
+      "sibling_ceiling_deficit": 0.2114783952505471,
+      "cross_frontier_excess": 0.04234917339915456,
+      "cross_ceiling_deficit": 0.05710793805259836
+    },
+    {
+      "target": "olmo",
+      "axis": "crows_socioeconomic",
+      "self_frontier_excess": null,
+      "self_ceiling_deficit": 0.09352199051731318,
+      "sibling_frontier_excess": null,
+      "sibling_ceiling_deficit": 0.04849212021790734,
+      "cross_frontier_excess": null,
+      "cross_ceiling_deficit": 0.057070419076801264
+    },
+    {
+      "target": "olmo",
+      "axis": "occ_gender",
+      "self_frontier_excess": 0.02685560608683235,
+      "self_ceiling_deficit": 0.03867845305242464,
+      "sibling_frontier_excess": 0.06555987483970593,
+      "sibling_ceiling_deficit": 0.0616070349615481,
+      "cross_frontier_excess": 0.02745085214928511,
+      "cross_ceiling_deficit": 0.042706243728710014
+    },
+    {
+      "target": "qwen",
+      "axis": "crows_socioeconomic",
+      "self_frontier_excess": null,
+      "self_ceiling_deficit": 0.03994831743166428,
+      "sibling_frontier_excess": null,
+      "sibling_ceiling_deficit": 0.013027299282162693,
+      "cross_frontier_excess": null,
+      "cross_ceiling_deficit": 0.02265962704207546
+    },
+    {
+      "target": "qwen",
+      "axis": "occ_gender",
+      "self_frontier_excess": 0.060485082196427786,
+      "self_ceiling_deficit": 0.022020654554504304,
+      "sibling_frontier_excess": 0.027527121935731147,
+      "sibling_ceiling_deficit": 0.012596369729095391,
+      "cross_frontier_excess": 0.033475789234711506,
+      "cross_ceiling_deficit": 0.03248610295123722
+    }
+  ]
+}

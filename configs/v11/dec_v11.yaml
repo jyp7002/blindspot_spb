@@ -1,0 +1,75 @@
+# v11 DEC — cell-count scale-up of the headline decomposition.
+#
+# WHAT THIS FIXES. The published DEC panel is n=10 cells, and the paper's own
+# Limitations names that as a weakness. Two specific defects follow from it:
+#
+#   1. THE ABSTRACT SAYS "three benchmark families" BECAUSE CROWS IS MISSING.
+#      The v10 audit found the draft had claimed four; the DEC panel carries
+#      BBQ / StereoSet / templated only. crows_socioeconomic cells are added
+#      here so the fourth family is measured rather than corrected away.
+#   2. THE BIG TIER IS ONE CELL (qwen7b|occ_gender). Every "two model tiers"
+#      claim rests on it. Three more are added.
+#
+# THE PRE-REGISTERED EXCLUSION IS RESPECTED. run_dec.py's cell list is
+# documented as "10 in-envelope cells (positive removal already measured;
+# backfire cells would confound a decomposition of an effect that is not
+# there)". qwen|crows_socioeconomic has removal -0.071 in Table A -- it
+# BACKFIRES -- so it is NOT added, and is listed under `excluded` below with
+# its reason so the omission is visible rather than silent.
+#
+# AUTHOR DECISION STILL OPEN. llama|crows (+0.040) and phi|crows (+0.046) are
+# in-envelope but weak. Adding them widens the population the decomposition
+# estimand is defined over, which can move Delta_selection without any
+# mechanism changing. If you want the fourth family on the strongest footing
+# only, keep gemma|crows and drop the other two -- see experiments_v11.md IV.
+
+panel: v11dec
+kind: dec
+out_panel: v11dec
+base_on: v8dec          # provenance: this extends, and must reproduce, v8dec
+
+# Frozen from the v8 DEC pre-registration. Do not change without an amendment.
+density: 0.01
+scale_mode: ref_tensor
+alphas: [2, 4, 8, 16]
+seeds: [0, 1, 2]
+mmlu_n: 200             # unchanged: see experiments_v11.md II on why not 1000
+
+cells:
+  # ---- the 10 published cells, replayed verbatim so the panel reproduces ----
+  - {target: gemma,  hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: occ_gender,         published: true}
+  - {target: llama,  hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: occ_gender,         published: true}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: occ_gender,         published: true}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: occ_gender,         published: true}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: bbq_Age,            published: true}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: bbq_Age,            published: true}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: bbq_Race_ethnicity, published: true}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: ss_intra,           published: true}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: ss_intra,           published: true}
+  - {target: qwen7b, hf: Qwen/Qwen2.5-7B-Instruct,         designer: qwen,     axis: occ_gender,         published: true}
+
+  # ---- NEW: the fourth benchmark family (CrowS-Pairs) ----
+  - {target: gemma,  hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: crows_socioeconomic, note: "strongest in-envelope crows cell (+0.123)"}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: crows_socioeconomic, note: "in-envelope but weak (+0.046)"}
+  - {target: llama,  hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: crows_socioeconomic, note: "in-envelope but weak (+0.040)"}
+
+  # ---- NEW: the 7-9B tier, which was one cell ----
+  - {target: llama8b, hf: meta-llama/Llama-3.1-8B-Instruct, designer: llama,   axis: occ_gender}
+  - {target: qwen7b,  hf: Qwen/Qwen2.5-7B-Instruct,         designer: qwen,    axis: bbq_Age}
+  - {target: llama8b, hf: meta-llama/Llama-3.1-8B-Instruct, designer: llama,   axis: bbq_Age}
+
+  # ---- NEW: axis balance in the small tier ----
+  # gemma and llama each carried exactly one axis; every multi-axis statement
+  # was carried by qwen and phi.
+  - {target: gemma,  hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: bbq_Age}
+  - {target: llama,  hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: ss_intra}
+
+# Recorded, not run. Kept in the config so the exclusion is auditable.
+excluded:
+  - target: qwen
+    axis: crows_socioeconomic
+    reason: >
+      BACKFIRE CELL (removal -0.071, Table A). run_dec.py's pre-registered rule
+      excludes backfire cells from the decomposition because decomposing an
+      effect whose sign is negative is uninterpretable. Including it would also
+      hand Delta_selection a cell where C-ref itself is negative.

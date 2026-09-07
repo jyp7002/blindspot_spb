@@ -1,0 +1,204 @@
+tier,tier_label,n_cells,series,target,target_label,sparsity,retained_fraction,value,ci_lo,ci_hi,ci_status,n,unit,gate,note
+small,≤3.8B,4,per_target_delta_vs_dense,gemma,gemma-2.6B,0.0,1.0,0.000000,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,gemma,gemma-2.6B,0.0,1.0,0.674084,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,llama,llama-3.2B,0.0,1.0,0.000000,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,llama,llama-3.2B,0.0,1.0,0.747831,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,phi,phi-3.8B,0.0,1.0,0.000000,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,phi,phi-3.8B,0.0,1.0,0.316270,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,qwen,qwen-3B,0.0,1.0,0.000000,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,qwen,qwen-3B,0.0,1.0,0.378201,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,gemma,gemma-2.6B,0.5,0.5,0.030383,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,gemma,gemma-2.6B,0.5,0.5,0.704467,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,llama,llama-3.2B,0.5,0.5,-0.042913,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,llama,llama-3.2B,0.5,0.5,0.704918,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,phi,phi-3.8B,0.5,0.5,-0.005935,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,phi,phi-3.8B,0.5,0.5,0.310336,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,qwen,qwen-3B,0.5,0.5,0.121498,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,qwen,qwen-3B,0.5,0.5,0.499699,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,gemma,gemma-2.6B,0.9,0.09999999999999998,0.085703,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,gemma,gemma-2.6B,0.9,0.09999999999999998,0.759788,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,llama,llama-3.2B,0.9,0.09999999999999998,-0.000805,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,llama,llama-3.2B,0.9,0.09999999999999998,0.747026,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,phi,phi-3.8B,0.9,0.09999999999999998,-0.061621,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,phi,phi-3.8B,0.9,0.09999999999999998,0.254649,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,qwen,qwen-3B,0.9,0.09999999999999998,0.242874,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,qwen,qwen-3B,0.9,0.09999999999999998,0.621075,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,gemma,gemma-2.6B,0.95,0.050000000000000044,0.031240,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,gemma,gemma-2.6B,0.95,0.050000000000000044,0.705324,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,llama,llama-3.2B,0.95,0.050000000000000044,-0.040713,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,llama,llama-3.2B,0.95,0.050000000000000044,0.707119,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,phi,phi-3.8B,0.95,0.050000000000000044,-0.041232,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,phi,phi-3.8B,0.95,0.050000000000000044,0.275039,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,qwen,qwen-3B,0.95,0.050000000000000044,0.273151,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,qwen,qwen-3B,0.95,0.050000000000000044,0.651353,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,gemma,gemma-2.6B,0.97,0.030000000000000027,-0.114750,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,gemma,gemma-2.6B,0.97,0.030000000000000027,0.559335,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,llama,llama-3.2B,0.97,0.030000000000000027,-0.074856,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,llama,llama-3.2B,0.97,0.030000000000000027,0.672975,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,phi,phi-3.8B,0.97,0.030000000000000027,-0.114447,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,phi,phi-3.8B,0.97,0.030000000000000027,0.201823,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,qwen,qwen-3B,0.97,0.030000000000000027,0.267631,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,qwen,qwen-3B,0.97,0.030000000000000027,0.645832,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,gemma,gemma-2.6B,0.99,0.010000000000000009,0.018778,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,gemma,gemma-2.6B,0.99,0.010000000000000009,0.692862,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,llama,llama-3.2B,0.99,0.010000000000000009,-0.133063,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,llama,llama-3.2B,0.99,0.010000000000000009,0.614768,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,phi,phi-3.8B,0.99,0.010000000000000009,-0.199968,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,phi,phi-3.8B,0.99,0.010000000000000009,0.116302,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,qwen,qwen-3B,0.99,0.010000000000000009,0.012833,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,qwen,qwen-3B,0.99,0.010000000000000009,0.391034,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,gemma,gemma-2.6B,0.995,0.0050000000000000044,-0.124931,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,gemma,gemma-2.6B,0.995,0.0050000000000000044,0.549154,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,llama,llama-3.2B,0.995,0.0050000000000000044,-0.226091,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,llama,llama-3.2B,0.995,0.0050000000000000044,0.521741,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,phi,phi-3.8B,0.995,0.0050000000000000044,-0.247110,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,phi,phi-3.8B,0.995,0.0050000000000000044,0.069161,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,qwen,qwen-3B,0.995,0.0050000000000000044,-0.304255,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,qwen,qwen-3B,0.995,0.0050000000000000044,0.073947,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,gemma,gemma-2.6B,0.999,0.0010000000000000009,-0.554851,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,gemma,gemma-2.6B,0.999,0.0010000000000000009,0.119234,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,llama,llama-3.2B,0.999,0.0010000000000000009,-0.423382,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,llama,llama-3.2B,0.999,0.0010000000000000009,0.324449,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,phi,phi-3.8B,0.999,0.0010000000000000009,-0.299836,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,phi,phi-3.8B,0.999,0.0010000000000000009,0.016435,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,per_target_delta_vs_dense,qwen,qwen-3B,0.999,0.0010000000000000009,-0.388029,,,,1,removal delta,v9,one of the 4 cells the band resamples
+small,≤3.8B,4,per_target_cell_mean,qwen,qwen-3B,0.999,0.0010000000000000009,-0.009828,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+small,≤3.8B,4,delta_vs_dense_v9,,,0.0,1.0,0.000000,0.000000,0.000000,n/a,4,removal delta,v9,"REGISTERED v9 value; budget-fail scored 0.0 — dense reference, 0 by construction"
+small,≤3.8B,4,delta_vs_dense_v9,,,0.5,0.5,0.025758,-0.024589,0.089640,covers 0,4,removal delta,v9,REGISTERED v9 value; budget-fail scored 0.0
+small,≤3.8B,4,delta_vs_dense_v9,,,0.9,0.09999999999999998,0.066538,-0.031213,0.181954,covers 0,4,removal delta,v9,REGISTERED v9 value; budget-fail scored 0.0
+small,≤3.8B,4,delta_vs_dense_v9,,,0.95,0.050000000000000044,0.055612,-0.040972,0.194685,covers 0,4,removal delta,v9,REGISTERED v9 value; budget-fail scored 0.0
+small,≤3.8B,4,delta_vs_dense_v9,,,0.97,0.030000000000000027,-0.009106,-0.114599,0.172111,covers 0,4,removal delta,v9,REGISTERED v9 value; budget-fail scored 0.0
+small,≤3.8B,4,delta_vs_dense_v9,,,0.99,0.010000000000000009,-0.075355,-0.166515,0.015805,covers 0,4,removal delta,v9,REGISTERED v9 value; budget-fail scored 0.0
+small,≤3.8B,4,delta_vs_dense_v9,,,0.995,0.0050000000000000044,-0.225596,-0.284714,-0.155475,excludes 0,4,removal delta,v9,REGISTERED v9 value; budget-fail scored 0.0
+small,≤3.8B,4,delta_vs_dense_v9,,,0.999,0.0010000000000000009,-0.416525,-0.513146,-0.330722,excludes 0,4,removal delta,v9,REGISTERED v9 value; budget-fail scored 0.0
+small,≤3.8B,4,delta_vs_dense_sensitivity_fails_dropped,,,0.5,0.5,0.025758,-0.024589,0.089640,covers 0,4,removal delta,v9,NOT registered — v10 sensitivity to the nan->0 rule
+small,≤3.8B,4,delta_vs_dense_sensitivity_fails_dropped,,,0.9,0.09999999999999998,0.066538,-0.031213,0.181954,covers 0,4,removal delta,v9,NOT registered — v10 sensitivity to the nan->0 rule
+small,≤3.8B,4,delta_vs_dense_sensitivity_fails_dropped,,,0.95,0.050000000000000044,0.055612,-0.040972,0.194685,covers 0,4,removal delta,v9,NOT registered — v10 sensitivity to the nan->0 rule
+small,≤3.8B,4,delta_vs_dense_sensitivity_fails_dropped,,,0.97,0.030000000000000027,-0.009106,-0.114599,0.172111,covers 0,4,removal delta,v9,NOT registered — v10 sensitivity to the nan->0 rule
+small,≤3.8B,4,delta_vs_dense_sensitivity_fails_dropped,,,0.99,0.010000000000000009,-0.075355,-0.166515,0.015805,covers 0,4,removal delta,v9,NOT registered — v10 sensitivity to the nan->0 rule
+small,≤3.8B,4,delta_vs_dense_sensitivity_fails_dropped,,,0.995,0.0050000000000000044,-0.225596,-0.284714,-0.155475,excludes 0,4,removal delta,v9,NOT registered — v10 sensitivity to the nan->0 rule
+small,≤3.8B,4,delta_vs_dense_sensitivity_fails_dropped,,,0.999,0.0010000000000000009,-0.416525,-0.513146,-0.330722,excludes 0,4,removal delta,v9,NOT registered — v10 sensitivity to the nan->0 rule
+small,≤3.8B,,annotation.n_budget_fail,,,,,0,,,,96,rows,v9,0 of 96 v9 rows are budget-fails (as-run: 0)
+small,≤3.8B,4,annotation.cliff_level,,,0.995,0.0050000000000000044,-0.225596,-0.284714,-0.155475,excludes 0,4,removal delta,v9,negative and excludes 0 -> shaded as cliff
+small,≤3.8B,4,annotation.cliff_level,,,0.999,0.0010000000000000009,-0.416525,-0.513146,-0.330722,excludes 0,4,removal delta,v9,negative and excludes 0 -> shaded as cliff
+small,≤3.8B,,patch_payload_mib_axis_range,,,0.0,1.0,40.5003–108.0001,40.5003,108.0001,,4,MiB (bytes/2**20),v9,printed on the secondary axis; payload only
+small,≤3.8B,,patch_payload_mib_axis_range,,,0.9,0.09999999999999998,4.0503–10.8001,4.0503,10.8001,,4,MiB (bytes/2**20),v9,printed on the secondary axis; payload only
+small,≤3.8B,,patch_payload_mib_axis_range,,,0.99,0.010000000000000009,0.4053–1.0801,0.4053,1.0801,,4,MiB (bytes/2**20),v9,printed on the secondary axis; payload only
+small,≤3.8B,,patch_payload_mib_axis_range,,,0.999,0.0010000000000000009,0.0408–0.1081,0.0408,0.1081,,4,MiB (bytes/2**20),v9,printed on the secondary axis; payload only
+small,≤3.8B,,patch_payload_mib,qwen,qwen-3B,0.0,1.0,40.500275,40.500275,40.500275,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,qwen,qwen-3B,0.5,0.5,20.250274,20.250273,20.250274,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,qwen,qwen-3B,0.9,0.09999999999999998,4.050274,4.050274,4.050275,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,qwen,qwen-3B,0.95,0.050000000000000044,2.025274,2.025274,2.025275,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,qwen,qwen-3B,0.97,0.030000000000000027,1.215275,1.215274,1.215275,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,qwen,qwen-3B,0.99,0.010000000000000009,0.405275,0.405275,0.405275,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,qwen,qwen-3B,0.995,0.0050000000000000044,0.202775,0.202775,0.202775,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,qwen,qwen-3B,0.999,0.0010000000000000009,0.040775,0.040775,0.040775,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,phi,phi-3.8B,0.0,1.0,108.000061,108.000061,108.000061,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,phi,phi-3.8B,0.5,0.5,54.000057,54.000054,54.000059,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,phi,phi-3.8B,0.9,0.09999999999999998,10.800060,10.800059,10.800061,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,phi,phi-3.8B,0.95,0.050000000000000044,5.400060,5.400060,5.400061,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,phi,phi-3.8B,0.97,0.030000000000000027,3.240060,3.240060,3.240060,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,phi,phi-3.8B,0.99,0.010000000000000009,1.080061,1.080061,1.080061,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,phi,phi-3.8B,0.995,0.0050000000000000044,0.540061,0.540061,0.540061,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,phi,phi-3.8B,0.999,0.0010000000000000009,0.108061,0.108061,0.108061,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,gemma,gemma-2.6B,0.0,1.0,43.875198,43.875198,43.875198,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,gemma,gemma-2.6B,0.5,0.5,21.937697,21.937696,21.937697,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,gemma,gemma-2.6B,0.9,0.09999999999999998,4.387698,4.387698,4.387698,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,gemma,gemma-2.6B,0.95,0.050000000000000044,2.193948,2.193948,2.193948,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,gemma,gemma-2.6B,0.97,0.030000000000000027,1.316448,1.316448,1.316448,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,gemma,gemma-2.6B,0.99,0.010000000000000009,0.438948,0.438948,0.438948,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,gemma,gemma-2.6B,0.995,0.0050000000000000044,0.219573,0.219573,0.219573,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,gemma,gemma-2.6B,0.999,0.0010000000000000009,0.044073,0.044073,0.044073,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,llama,llama-3.2B,0.0,1.0,84.000214,84.000214,84.000214,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,llama,llama-3.2B,0.5,0.5,42.000211,42.000209,42.000212,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,llama,llama-3.2B,0.9,0.09999999999999998,8.400213,8.400213,8.400213,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,llama,llama-3.2B,0.95,0.050000000000000044,4.200213,4.200213,4.200214,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,llama,llama-3.2B,0.97,0.030000000000000027,2.520213,2.520212,2.520213,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,llama,llama-3.2B,0.99,0.010000000000000009,0.840213,0.840213,0.840214,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,llama,llama-3.2B,0.995,0.0050000000000000044,0.420214,0.420214,0.420214,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+small,≤3.8B,,patch_payload_mib,llama,llama-3.2B,0.999,0.0010000000000000009,0.084214,0.084214,0.084214,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,2,per_target_delta_vs_dense,llama,llama-8B,0.0,1.0,0.000000,,,,1,removal delta,v9,one of the 2 cells the band resamples
+big,7–9B,2,per_target_cell_mean,llama,llama-8B,0.0,1.0,0.487061,,,,3,removal,v9,mean over 3 seed rows; 1 budget-fail scored 0.0
+big,7–9B,2,per_target_delta_vs_dense,qwen,qwen-7B,0.0,1.0,0.000000,,,,1,removal delta,v9,one of the 2 cells the band resamples
+big,7–9B,2,per_target_cell_mean,qwen,qwen-7B,0.0,1.0,0.649859,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+big,7–9B,2,per_target_delta_vs_dense,llama,llama-8B,0.5,0.5,0.013637,,,,1,removal delta,v9,one of the 2 cells the band resamples
+big,7–9B,2,per_target_cell_mean,llama,llama-8B,0.5,0.5,0.500697,,,,3,removal,v9,mean over 3 seed rows; 1 budget-fail scored 0.0
+big,7–9B,2,per_target_delta_vs_dense,qwen,qwen-7B,0.5,0.5,-0.016810,,,,1,removal delta,v9,one of the 2 cells the band resamples
+big,7–9B,2,per_target_cell_mean,qwen,qwen-7B,0.5,0.5,0.633049,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+big,7–9B,2,per_target_delta_vs_dense,llama,llama-8B,0.9,0.09999999999999998,-0.000503,,,,1,removal delta,v9,one of the 2 cells the band resamples
+big,7–9B,2,per_target_cell_mean,llama,llama-8B,0.9,0.09999999999999998,0.486557,,,,3,removal,v9,mean over 3 seed rows; 1 budget-fail scored 0.0
+big,7–9B,2,per_target_delta_vs_dense,qwen,qwen-7B,0.9,0.09999999999999998,0.031804,,,,1,removal delta,v9,one of the 2 cells the band resamples
+big,7–9B,2,per_target_cell_mean,qwen,qwen-7B,0.9,0.09999999999999998,0.681663,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+big,7–9B,2,per_target_delta_vs_dense,llama,llama-8B,0.95,0.050000000000000044,0.205452,,,,1,removal delta,v9,one of the 2 cells the band resamples
+big,7–9B,2,per_target_cell_mean,llama,llama-8B,0.95,0.050000000000000044,0.692513,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+big,7–9B,2,per_target_delta_vs_dense,qwen,qwen-7B,0.95,0.050000000000000044,0.015885,,,,1,removal delta,v9,one of the 2 cells the band resamples
+big,7–9B,2,per_target_cell_mean,qwen,qwen-7B,0.95,0.050000000000000044,0.665744,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+big,7–9B,2,per_target_delta_vs_dense,llama,llama-8B,0.97,0.030000000000000027,0.199713,,,,1,removal delta,v9,one of the 2 cells the band resamples
+big,7–9B,2,per_target_cell_mean,llama,llama-8B,0.97,0.030000000000000027,0.686774,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+big,7–9B,2,per_target_delta_vs_dense,qwen,qwen-7B,0.97,0.030000000000000027,-0.005485,,,,1,removal delta,v9,one of the 2 cells the band resamples
+big,7–9B,2,per_target_cell_mean,qwen,qwen-7B,0.97,0.030000000000000027,0.644373,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+big,7–9B,2,per_target_delta_vs_dense,llama,llama-8B,0.99,0.010000000000000009,0.210468,,,,1,removal delta,v9,one of the 2 cells the band resamples
+big,7–9B,2,per_target_cell_mean,llama,llama-8B,0.99,0.010000000000000009,0.697528,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+big,7–9B,2,per_target_delta_vs_dense,qwen,qwen-7B,0.99,0.010000000000000009,0.013492,,,,1,removal delta,v9,one of the 2 cells the band resamples
+big,7–9B,2,per_target_cell_mean,qwen,qwen-7B,0.99,0.010000000000000009,0.663351,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+big,7–9B,2,per_target_delta_vs_dense,llama,llama-8B,0.995,0.0050000000000000044,0.250911,,,,1,removal delta,v9,one of the 2 cells the band resamples
+big,7–9B,2,per_target_cell_mean,llama,llama-8B,0.995,0.0050000000000000044,0.737972,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+big,7–9B,2,per_target_delta_vs_dense,qwen,qwen-7B,0.995,0.0050000000000000044,0.010719,,,,1,removal delta,v9,one of the 2 cells the band resamples
+big,7–9B,2,per_target_cell_mean,qwen,qwen-7B,0.995,0.0050000000000000044,0.660578,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+big,7–9B,2,per_target_delta_vs_dense,llama,llama-8B,0.999,0.0010000000000000009,-0.026978,,,,1,removal delta,v9,one of the 2 cells the band resamples
+big,7–9B,2,per_target_cell_mean,llama,llama-8B,0.999,0.0010000000000000009,0.460083,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+big,7–9B,2,per_target_delta_vs_dense,qwen,qwen-7B,0.999,0.0010000000000000009,-0.121020,,,,1,removal delta,v9,one of the 2 cells the band resamples
+big,7–9B,2,per_target_cell_mean,qwen,qwen-7B,0.999,0.0010000000000000009,0.528839,,,,3,removal,v9,mean over 3 seed rows; 0 budget-fail scored 0.0
+big,7–9B,2,delta_vs_dense_v9,,,0.0,1.0,0.000000,0.000000,0.000000,n/a,2,removal delta,v9,"REGISTERED v9 value; budget-fail scored 0.0 — dense reference, 0 by construction"
+big,7–9B,2,delta_vs_dense_v9,,,0.5,0.5,-0.001587,-0.016810,0.013637,covers 0,2,removal delta,v9,REGISTERED v9 value; budget-fail scored 0.0
+big,7–9B,2,delta_vs_dense_v9,,,0.9,0.09999999999999998,0.015650,-0.000503,0.031804,covers 0,2,removal delta,v9,REGISTERED v9 value; budget-fail scored 0.0
+big,7–9B,2,delta_vs_dense_v9,,,0.95,0.050000000000000044,0.110669,0.015885,0.205452,excludes 0,2,removal delta,v9,REGISTERED v9 value; budget-fail scored 0.0
+big,7–9B,2,delta_vs_dense_v9,,,0.97,0.030000000000000027,0.097114,-0.005485,0.199713,covers 0,2,removal delta,v9,REGISTERED v9 value; budget-fail scored 0.0
+big,7–9B,2,delta_vs_dense_v9,,,0.99,0.010000000000000009,0.111980,0.013492,0.210468,excludes 0,2,removal delta,v9,REGISTERED v9 value; budget-fail scored 0.0
+big,7–9B,2,delta_vs_dense_v9,,,0.995,0.0050000000000000044,0.130815,0.010719,0.250911,excludes 0,2,removal delta,v9,REGISTERED v9 value; budget-fail scored 0.0
+big,7–9B,2,delta_vs_dense_v9,,,0.999,0.0010000000000000009,-0.073999,-0.121020,-0.026978,excludes 0,2,removal delta,v9,REGISTERED v9 value; budget-fail scored 0.0
+big,7–9B,2,delta_vs_dense_sensitivity_fails_dropped,,,0.5,0.5,0.001823,-0.016810,0.020455,covers 0,2,removal delta,v9,NOT registered — v10 sensitivity to the nan->0 rule
+big,7–9B,2,delta_vs_dense_sensitivity_fails_dropped,,,0.9,0.09999999999999998,0.015525,-0.000755,0.031804,covers 0,2,removal delta,v9,NOT registered — v10 sensitivity to the nan->0 rule
+big,7–9B,2,delta_vs_dense_sensitivity_fails_dropped,,,0.95,0.050000000000000044,-0.011096,-0.038078,0.015885,covers 0,2,removal delta,v9,NOT registered — v10 sensitivity to the nan->0 rule
+big,7–9B,2,delta_vs_dense_sensitivity_fails_dropped,,,0.97,0.030000000000000027,-0.024651,-0.043817,-0.005485,excludes 0,2,removal delta,v9,NOT registered — v10 sensitivity to the nan->0 rule
+big,7–9B,2,delta_vs_dense_sensitivity_fails_dropped,,,0.99,0.010000000000000009,-0.009785,-0.033063,0.013492,covers 0,2,removal delta,v9,NOT registered — v10 sensitivity to the nan->0 rule
+big,7–9B,2,delta_vs_dense_sensitivity_fails_dropped,,,0.995,0.0050000000000000044,0.009050,0.007381,0.010719,excludes 0,2,removal delta,v9,NOT registered — v10 sensitivity to the nan->0 rule
+big,7–9B,2,delta_vs_dense_sensitivity_fails_dropped,,,0.999,0.0010000000000000009,-0.195764,-0.270508,-0.121020,excludes 0,2,removal delta,v9,NOT registered — v10 sensitivity to the nan->0 rule
+big,7–9B,,budget_fail_row_v9,llama,llama-8B,0.0,1.0,0.0,,,,1,removal (scored),v9,seed 2 — NOT a measurement; nan scored 0.0
+big,7–9B,,budget_fail_row_v9,llama,llama-8B,0.5,0.5,0.0,,,,1,removal (scored),v9,seed 2 — NOT a measurement; nan scored 0.0
+big,7–9B,,budget_fail_row_v9,llama,llama-8B,0.9,0.09999999999999998,0.0,,,,1,removal (scored),v9,seed 2 — NOT a measurement; nan scored 0.0
+big,7–9B,,budget_fail_row_as_run_recovered_by_v9,llama,llama-8B,0.9,0.09999999999999998,0.0,,,,1,removal (scored),as-run,"seed 0 — failed the as-run float gate, PASSES under v9"
+big,7–9B,,budget_fail_row_as_run_recovered_by_v9,llama,llama-8B,0.5,0.5,0.0,,,,1,removal (scored),as-run,"seed 1 — failed the as-run float gate, PASSES under v9"
+big,7–9B,,budget_fail_row_as_run_recovered_by_v9,llama,llama-8B,0.95,0.050000000000000044,0.0,,,,1,removal (scored),as-run,"seed 2 — failed the as-run float gate, PASSES under v9"
+big,7–9B,,budget_fail_row_as_run_recovered_by_v9,llama,llama-8B,0.97,0.030000000000000027,0.0,,,,1,removal (scored),as-run,"seed 2 — failed the as-run float gate, PASSES under v9"
+big,7–9B,,annotation.n_budget_fail,,,,,3,,,,48,rows,v9,3 of 48 v9 rows are budget-fails (as-run: 7)
+big,7–9B,2,annotation.cliff_level,,,0.999,0.0010000000000000009,-0.073999,-0.121020,-0.026978,excludes 0,2,removal delta,v9,negative and excludes 0 -> shaded as cliff
+big,7–9B,,patch_payload_mib_axis_range,,,0.0,1.0,98.0002–160.0002,98.0002,160.0002,,2,MiB (bytes/2**20),v9,printed on the secondary axis; payload only
+big,7–9B,,patch_payload_mib_axis_range,,,0.9,0.09999999999999998,9.8002–16.0002,9.8002,16.0002,,2,MiB (bytes/2**20),v9,printed on the secondary axis; payload only
+big,7–9B,,patch_payload_mib_axis_range,,,0.99,0.010000000000000009,0.9802–1.6002,0.9802,1.6002,,2,MiB (bytes/2**20),v9,printed on the secondary axis; payload only
+big,7–9B,,patch_payload_mib_axis_range,,,0.999,0.0010000000000000009,0.0982–0.1602,0.0982,0.1602,,2,MiB (bytes/2**20),v9,printed on the secondary axis; payload only
+big,7–9B,,patch_payload_mib,qwen,qwen-7B,0.0,1.0,98.000214,98.000214,98.000214,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,,patch_payload_mib,qwen,qwen-7B,0.5,0.5,49.000211,49.000208,49.000213,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,,patch_payload_mib,qwen,qwen-7B,0.9,0.09999999999999998,9.800212,9.800211,9.800214,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,,patch_payload_mib,qwen,qwen-7B,0.95,0.050000000000000044,4.900213,4.900213,4.900214,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,,patch_payload_mib,qwen,qwen-7B,0.97,0.030000000000000027,2.940213,2.940213,2.940214,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,,patch_payload_mib,qwen,qwen-7B,0.99,0.010000000000000009,0.980214,0.980213,0.980214,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,,patch_payload_mib,qwen,qwen-7B,0.995,0.0050000000000000044,0.490214,0.490214,0.490214,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,,patch_payload_mib,qwen,qwen-7B,0.999,0.0010000000000000009,0.098214,0.098214,0.098214,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,,patch_payload_mib,llama,llama-8B,0.0,1.0,160.000244,160.000244,160.000244,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,,patch_payload_mib,llama,llama-8B,0.5,0.5,80.000242,80.000240,80.000244,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,,patch_payload_mib,llama,llama-8B,0.9,0.09999999999999998,16.000243,16.000242,16.000243,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,,patch_payload_mib,llama,llama-8B,0.95,0.050000000000000044,8.000243,8.000242,8.000243,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,,patch_payload_mib,llama,llama-8B,0.97,0.030000000000000027,4.800244,4.800244,4.800244,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,,patch_payload_mib,llama,llama-8B,0.99,0.010000000000000009,1.600244,1.600244,1.600244,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,,patch_payload_mib,llama,llama-8B,0.995,0.0050000000000000044,0.800244,0.800244,0.800244,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,,patch_payload_mib,llama,llama-8B,0.999,0.0010000000000000009,0.160244,0.160244,0.160244,,3,MiB (bytes/2**20),v9 (size is gate-invariant),"payload only: bits + per-tensor scales, no support index"
+big,7–9B,2,annotation.beats_dense_under_zeroing,,,0.95,0.050000000000000044,0.110669,0.015885,0.205452,excludes 0,2,removal delta,v9,"sensitivity (fails dropped): -0.0111 [-0.0381, +0.0159] (covers 0)"
+big,7–9B,2,annotation.beats_dense_under_zeroing,,,0.99,0.010000000000000009,0.111980,0.013492,0.210468,excludes 0,2,removal delta,v9,"sensitivity (fails dropped): -0.0098 [-0.0331, +0.0135] (covers 0)"
+big,7–9B,2,annotation.beats_dense_under_zeroing,,,0.995,0.0050000000000000044,0.130815,0.010719,0.250911,excludes 0,2,removal delta,v9,"sensitivity (fails dropped): +0.0090 [+0.0074, +0.0107] (excludes 0)"
+big,7–9B,,annotation.dense_deployable_runs_v9,,,0.0,1.0,5,,,,6,runs passing the collateral budget,v9,refutes the draft's 'too disruptive to deploy at all'
+big,7–9B,,annotation.fail_envelope_max_sparsity_v9,,,0.9,,0.9,,,,3,sparsity,v9,deepest sparsity at which a v9 budget-fail occurs
+big,7–9B,,annotation.fail_envelope_max_sparsity_as_run,,,0.97,,0.97,,,,7,sparsity,as-run,the draft's 'dense through 97%' envelope — SUPERSEDED
+big,7–9B,,annotation.fail_envelope_clean_from_v9,,,0.95,,0.95,,,,,sparsity,v9,every level at or beyond this sparsity is budget-clean under v9
+,,,annotation.patch_1pct_payload_mib,,qwen-3B..llama-8B,0.99,0.01,0.4053–1.6002,0.4053,1.6002,,6,MiB (bytes/2**20),v9,the manuscript's '0.4-1.6 MB' callout; payload only
+,,,annotation.patch_1pct_with_support_index_mib,,qwen-3B..llama-8B,0.99,0.01,3.6774–14.5271,3.6774,14.5271,,6,MiB (bytes/2**20),v9,payload + information-theoretic floor for naming the support

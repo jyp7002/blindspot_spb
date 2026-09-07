@@ -1,0 +1,38 @@
+{
+  "mt_crows_socioeconomic": {
+    "kind": "templatize",
+    "pre_bias": 0.16344195918032997,
+    "frame_overlap": 0.4568304304984632,
+    "n_probe": 57,
+    "bias_ok": true,
+    "frame_ok": true,
+    "accepted": true
+  },
+  "mt_crows_religion": {
+    "kind": "templatize",
+    "pre_bias": 0.19449364222013032,
+    "frame_overlap": 0.656628988295655,
+    "n_probe": 39,
+    "bias_ok": true,
+    "frame_ok": true,
+    "accepted": false
+  },
+  "mt_crows_age": {
+    "kind": "templatize",
+    "pre_bias": 0.1597022649013635,
+    "frame_overlap": 0.55398556998557,
+    "n_probe": 33,
+    "bias_ok": true,
+    "frame_ok": true,
+    "accepted": false
+  },
+  "md_occ_gender": {
+    "kind": "detemplatize",
+    "pre_bias": 0.15404080781410998,
+    "frame_overlap": 0.3655160853915181,
+    "n_probe": 127,
+    "bias_ok": false,
+    "frame_ok": false,
+    "accepted": false
+  }
+}

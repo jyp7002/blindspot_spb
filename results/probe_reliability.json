@@ -1,0 +1,58 @@
+{
+  "wt_os": {
+    "reliability": 0.9167776068119183,
+    "d_obs": -0.12237941311245039,
+    "d_disattenuated": -0.13348865875773638,
+    "bias_magnitude": 0.15913416019507817,
+    "n_same_pairs": 2
+  },
+  "nat_ro_dk": {
+    "reliability": 0.928840613999119,
+    "d_obs": 0.11566924885618393,
+    "d_disattenuated": 0.12453078290598267,
+    "bias_magnitude": 0.07612256492887226,
+    "n_same_pairs": 2
+  },
+  "nat_pk_nl": {
+    "reliability": 0.9160687938564853,
+    "d_obs": 0.674176649606987,
+    "d_disattenuated": 0.7359454378626131,
+    "bias_magnitude": 0.15370720199176244,
+    "n_same_pairs": 2
+  },
+  "rel_bu_lu": {
+    "reliability": 0.9095770289642268,
+    "d_obs": 0.2637294474293023,
+    "d_disattenuated": 0.28994734808729944,
+    "bias_magnitude": 0.14505950467927115,
+    "n_same_pairs": 2
+  },
+  "age_oy": {
+    "reliability": 0.9181307194124655,
+    "d_obs": 0.5972518835018895,
+    "d_disattenuated": 0.6505085505515878,
+    "bias_magnitude": 0.3160367913189388,
+    "n_same_pairs": 2
+  },
+  "occ_gender": {
+    "reliability": 0.5414110958168411,
+    "d_obs": 0.6521964300985881,
+    "d_disattenuated": 1.2046233169909497,
+    "bias_magnitude": 0.37621566880366236,
+    "n_same_pairs": 2
+  },
+  "ses_lw": {
+    "reliability": 0.9357580993342719,
+    "d_obs": 0.9376534933574835,
+    "d_disattenuated": 1.0020255170909662,
+    "bias_magnitude": 0.33667932379813426,
+    "n_same_pairs": 2
+  },
+  "gen_fm": {
+    "reliability": 0.884757451591378,
+    "d_obs": 0.6382953026870879,
+    "d_disattenuated": 0.7214353510547005,
+    "bias_magnitude": 0.04129736125469208,
+    "n_same_pairs": 2
+  }
+}

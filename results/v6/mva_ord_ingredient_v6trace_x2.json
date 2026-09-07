@@ -1,0 +1,67 @@
+{
+  "note": "ORD ingredient \u2014 frozen before any bridge correlation (experiments_v6 \u00a77 no-peeking).",
+  "ref_removal": 0.6,
+  "degen_pplr": 1.5,
+  "cells": [
+    {
+      "target": "gemma",
+      "axis": "crows_socioeconomic",
+      "self_frontier_excess": null,
+      "self_ceiling_deficit": 0.03842485135839891,
+      "sibling_frontier_excess": null,
+      "sibling_ceiling_deficit": null,
+      "cross_frontier_excess": null,
+      "cross_ceiling_deficit": 0.026831258174984954
+    },
+    {
+      "target": "gemma",
+      "axis": "occ_gender",
+      "self_frontier_excess": 0.062374154127255776,
+      "self_ceiling_deficit": 0.09880462845590299,
+      "sibling_frontier_excess": null,
+      "sibling_ceiling_deficit": null,
+      "cross_frontier_excess": 0.10481954659937265,
+      "cross_ceiling_deficit": 0.25165795746825503
+    },
+    {
+      "target": "granite",
+      "axis": "crows_socioeconomic",
+      "self_frontier_excess": null,
+      "self_ceiling_deficit": 0.018558789593304773,
+      "sibling_frontier_excess": null,
+      "sibling_ceiling_deficit": null,
+      "cross_frontier_excess": null,
+      "cross_ceiling_deficit": 0.04724728950234347
+    },
+    {
+      "target": "granite",
+      "axis": "occ_gender",
+      "self_frontier_excess": 0.3157256854878898,
+      "self_ceiling_deficit": 0.8531779114862289,
+      "sibling_frontier_excess": null,
+      "sibling_ceiling_deficit": null,
+      "cross_frontier_excess": 0.201765682880495,
+      "cross_ceiling_deficit": 0.42936952531899697
+    },
+    {
+      "target": "phi",
+      "axis": "crows_socioeconomic",
+      "self_frontier_excess": null,
+      "self_ceiling_deficit": 0.04083051792410917,
+      "sibling_frontier_excess": null,
+      "sibling_ceiling_deficit": null,
+      "cross_frontier_excess": null,
+      "cross_ceiling_deficit": 0.007044927279154458
+    },
+    {
+      "target": "phi",
+      "axis": "occ_gender",
+      "self_frontier_excess": null,
+      "self_ceiling_deficit": 0.052901841681591545,
+      "sibling_frontier_excess": null,
+      "sibling_ceiling_deficit": null,
+      "cross_frontier_excess": 0.0738971888548634,
+      "cross_ceiling_deficit": 0.0803942055204945
+    }
+  ]
+}

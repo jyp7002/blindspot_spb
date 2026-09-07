@@ -1,0 +1,43 @@
+{
+  "qwen": {
+    "within_family_sharing": 0.6076465787609644,
+    "n_pairs": 3,
+    "siblings": [
+      "qwen0.5b",
+      "qwen1.5b",
+      "qwen3b"
+    ]
+  },
+  "llama": {
+    "within_family_sharing": 0.5653089739035434,
+    "n_pairs": 1,
+    "siblings": [
+      "llama1b",
+      "llama3b"
+    ]
+  },
+  "gemma": {
+    "within_family_sharing": 0.6611138758159633,
+    "n_pairs": 1,
+    "siblings": [
+      "gemma2b",
+      "gemma9b"
+    ]
+  },
+  "phi": {
+    "within_family_sharing": 0.7942956807005744,
+    "n_pairs": 1,
+    "siblings": [
+      "phi3.5",
+      "phi3mini"
+    ]
+  },
+  "smollm": {
+    "within_family_sharing": 0.34569055418413996,
+    "n_pairs": 1,
+    "siblings": [
+      "smol1.7b",
+      "smol360m"
+    ]
+  }
+}

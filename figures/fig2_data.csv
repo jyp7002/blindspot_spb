@@ -1,0 +1,90 @@
+kind,condition,perturb_class,marker,marker_fill,cell,target,axis,axis_family,value,ci_lo,ci_hi,n,ci_status,ci_registered_in_v9,note
+condition_mean,C-ref,reference,D,filled,,,,,0.353176,0.224083,0.492600,10,excludes 0,False,
+cell_value,C-ref,reference,D,filled,gemma|occ_gender,gemma,occ_gender,templated,0.692862,,,,,,
+cell_value,C-ref,reference,D,filled,llama|occ_gender,llama,occ_gender,templated,0.614768,,,,,,
+cell_value,C-ref,reference,D,filled,phi|bbq_Age,phi,bbq_Age,BBQ,0.330883,,,,,,
+cell_value,C-ref,reference,D,filled,phi|occ_gender,phi,occ_gender,templated,0.116302,,,,,,
+cell_value,C-ref,reference,D,filled,phi|ss_intra,phi,ss_intra,StereoSet,0.100044,,,,,,
+cell_value,C-ref,reference,D,filled,qwen|bbq_Age,qwen,bbq_Age,BBQ,0.253136,,,,,,
+cell_value,C-ref,reference,D,filled,qwen|bbq_Race_ethnicity,qwen,bbq_Race_ethnicity,BBQ,0.252799,,,,,,
+cell_value,C-ref,reference,D,filled,qwen|occ_gender,qwen,occ_gender,templated,0.391034,,,,,,
+cell_value,C-ref,reference,D,filled,qwen|ss_intra,qwen,ss_intra,StereoSet,0.116584,,,,,,
+cell_value,C-ref,reference,D,filled,qwen7b|occ_gender,qwen7b,occ_gender,templated,0.663351,,,,,,
+condition_mean,C-a,support,o,filled,,,,,0.069627,0.031566,0.113276,10,excludes 0,False,
+cell_value,C-a,support,o,filled,gemma|occ_gender,gemma,occ_gender,templated,0.094883,,,,,,
+cell_value,C-a,support,o,filled,llama|occ_gender,llama,occ_gender,templated,0.043003,,,,,,
+cell_value,C-a,support,o,filled,phi|bbq_Age,phi,bbq_Age,BBQ,0.077934,,,,,,
+cell_value,C-a,support,o,filled,phi|occ_gender,phi,occ_gender,templated,0.013982,,,,,,
+cell_value,C-a,support,o,filled,phi|ss_intra,phi,ss_intra,StereoSet,0.010514,,,,,,
+cell_value,C-a,support,o,filled,qwen|bbq_Age,qwen,bbq_Age,BBQ,0.132730,,,,,,
+cell_value,C-a,support,o,filled,qwen|bbq_Race_ethnicity,qwen,bbq_Race_ethnicity,BBQ,0.106525,,,,,,
+cell_value,C-a,support,o,filled,qwen|occ_gender,qwen,occ_gender,templated,-0.010591,,,,,,
+cell_value,C-a,support,o,filled,qwen|ss_intra,qwen,ss_intra,StereoSet,0.013603,,,,,,
+cell_value,C-a,support,o,filled,qwen7b|occ_gender,qwen7b,occ_gender,templated,0.213681,,,,,,
+condition_mean,C-tensorshuf,location,^,open,,,,,0.045485,-0.001606,0.136720,7,covers 0,False,"n=7 of 10 cells: phi|occ_gender, phi|bbq_Age, phi|ss_intra carry no C-tensorshuf row (fused qkv_proj) - ABSENT, not zero-filled"
+cell_value,C-tensorshuf,location,^,open,gemma|occ_gender,gemma,occ_gender,templated,0.316950,,,,,,
+cell_value,C-tensorshuf,location,^,open,llama|occ_gender,llama,occ_gender,templated,-0.005759,,,,,,
+cell_value,C-tensorshuf,location,^,open,phi|bbq_Age,phi,bbq_Age,BBQ,,,,,,,structurally absent (fused qkv_proj)
+cell_value,C-tensorshuf,location,^,open,phi|occ_gender,phi,occ_gender,templated,,,,,,,structurally absent (fused qkv_proj)
+cell_value,C-tensorshuf,location,^,open,phi|ss_intra,phi,ss_intra,StereoSet,,,,,,,structurally absent (fused qkv_proj)
+cell_value,C-tensorshuf,location,^,open,qwen|bbq_Age,qwen,bbq_Age,BBQ,0.003507,,,,,,
+cell_value,C-tensorshuf,location,^,open,qwen|bbq_Race_ethnicity,qwen,bbq_Race_ethnicity,BBQ,0.002492,,,,,,
+cell_value,C-tensorshuf,location,^,open,qwen|occ_gender,qwen,occ_gender,templated,-0.001711,,,,,,
+cell_value,C-tensorshuf,location,^,open,qwen|ss_intra,qwen,ss_intra,StereoSet,0.001016,,,,,,
+cell_value,C-tensorshuf,location,^,open,qwen7b|occ_gender,qwen7b,occ_gender,templated,0.001902,,,,,,
+condition_mean,C-layershuf,location,^,open,,,,,0.004451,0.001999,0.007791,10,excludes 0,False,
+cell_value,C-layershuf,location,^,open,gemma|occ_gender,gemma,occ_gender,templated,0.003054,,,,,,
+cell_value,C-layershuf,location,^,open,llama|occ_gender,llama,occ_gender,templated,0.008923,,,,,,
+cell_value,C-layershuf,location,^,open,phi|bbq_Age,phi,bbq_Age,BBQ,0.004716,,,,,,
+cell_value,C-layershuf,location,^,open,phi|occ_gender,phi,occ_gender,templated,0.003744,,,,,,
+cell_value,C-layershuf,location,^,open,phi|ss_intra,phi,ss_intra,StereoSet,0.000321,,,,,,
+cell_value,C-layershuf,location,^,open,qwen|bbq_Age,qwen,bbq_Age,BBQ,0.000967,,,,,,
+cell_value,C-layershuf,location,^,open,qwen|bbq_Race_ethnicity,qwen,bbq_Race_ethnicity,BBQ,0.000944,,,,,,
+cell_value,C-layershuf,location,^,open,qwen|occ_gender,qwen,occ_gender,templated,0.003003,,,,,,
+cell_value,C-layershuf,location,^,open,qwen|ss_intra,qwen,ss_intra,StereoSet,0.002114,,,,,,
+cell_value,C-layershuf,location,^,open,qwen7b|occ_gender,qwen7b,occ_gender,templated,0.016727,,,,,,
+condition_mean,C-b,sign,s,open,,,,,0.003577,0.001780,0.005553,10,excludes 0,False,
+cell_value,C-b,sign,s,open,gemma|occ_gender,gemma,occ_gender,templated,0.009604,,,,,,
+cell_value,C-b,sign,s,open,llama|occ_gender,llama,occ_gender,templated,0.007702,,,,,,
+cell_value,C-b,sign,s,open,phi|bbq_Age,phi,bbq_Age,BBQ,0.003113,,,,,,
+cell_value,C-b,sign,s,open,phi|occ_gender,phi,occ_gender,templated,0.005169,,,,,,
+cell_value,C-b,sign,s,open,phi|ss_intra,phi,ss_intra,StereoSet,0.000894,,,,,,
+cell_value,C-b,sign,s,open,qwen|bbq_Age,qwen,bbq_Age,BBQ,0.001277,,,,,,
+cell_value,C-b,sign,s,open,qwen|bbq_Race_ethnicity,qwen,bbq_Race_ethnicity,BBQ,0.004686,,,,,,
+cell_value,C-b,sign,s,open,qwen|occ_gender,qwen,occ_gender,templated,0.002629,,,,,,
+cell_value,C-b,sign,s,open,qwen|ss_intra,qwen,ss_intra,StereoSet,0.000175,,,,,,
+cell_value,C-b,sign,s,open,qwen7b|occ_gender,qwen7b,occ_gender,templated,0.000518,,,,,,
+condition_mean,C-rand,both,X,open,,,,,0.001397,0.000674,0.002246,10,excludes 0,False,
+cell_value,C-rand,both,X,open,gemma|occ_gender,gemma,occ_gender,templated,0.004059,,,,,,
+cell_value,C-rand,both,X,open,llama|occ_gender,llama,occ_gender,templated,0.001885,,,,,,
+cell_value,C-rand,both,X,open,phi|bbq_Age,phi,bbq_Age,BBQ,-0.000140,,,,,,
+cell_value,C-rand,both,X,open,phi|occ_gender,phi,occ_gender,templated,0.000151,,,,,,
+cell_value,C-rand,both,X,open,phi|ss_intra,phi,ss_intra,StereoSet,0.001043,,,,,,
+cell_value,C-rand,both,X,open,qwen|bbq_Age,qwen,bbq_Age,BBQ,0.001082,,,,,,
+cell_value,C-rand,both,X,open,qwen|bbq_Race_ethnicity,qwen,bbq_Race_ethnicity,BBQ,0.000937,,,,,,
+cell_value,C-rand,both,X,open,qwen|occ_gender,qwen,occ_gender,templated,0.003219,,,,,,
+cell_value,C-rand,both,X,open,qwen|ss_intra,qwen,ss_intra,StereoSet,0.000484,,,,,,
+cell_value,C-rand,both,X,open,qwen7b|occ_gender,qwen7b,occ_gender,templated,0.001248,,,,,,
+condition_mean,C-bottom,support,o,filled,,,,,0.001193,0.000614,0.001829,10,excludes 0,False,
+cell_value,C-bottom,support,o,filled,gemma|occ_gender,gemma,occ_gender,templated,0.003149,,,,,,
+cell_value,C-bottom,support,o,filled,llama|occ_gender,llama,occ_gender,templated,-0.000084,,,,,,
+cell_value,C-bottom,support,o,filled,phi|bbq_Age,phi,bbq_Age,BBQ,0.000718,,,,,,
+cell_value,C-bottom,support,o,filled,phi|occ_gender,phi,occ_gender,templated,0.001291,,,,,,
+cell_value,C-bottom,support,o,filled,phi|ss_intra,phi,ss_intra,StereoSet,0.000628,,,,,,
+cell_value,C-bottom,support,o,filled,qwen|bbq_Age,qwen,bbq_Age,BBQ,0.000303,,,,,,
+cell_value,C-bottom,support,o,filled,qwen|bbq_Race_ethnicity,qwen,bbq_Race_ethnicity,BBQ,0.002135,,,,,,
+cell_value,C-bottom,support,o,filled,qwen|occ_gender,qwen,occ_gender,templated,0.002066,,,,,,
+cell_value,C-bottom,support,o,filled,qwen|ss_intra,qwen,ss_intra,StereoSet,0.000226,,,,,,
+cell_value,C-bottom,support,o,filled,qwen7b|occ_gender,qwen7b,occ_gender,templated,0.001493,,,,,,
+annotation,Delta_selection,,,,,,,,0.283550,0.169176,0.407212,10,excludes 0,True,paired cell bootstrap; registered v9 estimand
+annotation,C-a minus C-rand,,,,,,,,0.068230,0.030005,0.111995,10,excludes 0,True,paired cell bootstrap; registered v9 estimand
+annotation,Delta_tensor,,,,,,,,0.380877,0.248808,0.520096,7,excludes 0,True,paired cell bootstrap; registered v9 estimand
+annotation,unanimity,,,,,,,,10,,,10,,True,cells with C-ref > C-a
+annotation,C-a argmax at grid max,,,,,,,,27,,,30,,True,argmax counts per run at alpha=16; NOT budget-availability counts
+annotation,coverage: targets,,,,,,,,5,,,10,,True,panel composition stated in the figure footnote; the denominator column is the cell count
+annotation,coverage: axes,,,,,,,,4,,,10,,True,panel composition stated in the figure footnote; the denominator column is the cell count
+annotation,coverage: benchmark families,,,,,,,,3,,,10,,True,panel composition stated in the figure footnote; the denominator column is the cell count
+annotation,alpha grid maximum,,,,,,,,16.0,,,,,True,largest alpha in the frozen deployment grid
+annotation,budget_fail_rows_zeroed,,,,,,,,0,,,285,,True,nan/None removal -> 0.0 convention; zero such rows here
+annotation,C-ref mean on the C-tensorshuf cells,reference,,,,,,,0.426362,,,7,,False,cell-matched denominator for the n=7 condition; the artifact's share_of_C_ref for C-tensorshuf uses the 10-cell C-ref mean instead
+annotation,C-tensorshuf mean excluding max cell,location,,,gemma|occ_gender,,,,0.000241,,,6,,False,mean over the cells other than the max cell; the cell column names the EXCLUDED max cell

@@ -1,0 +1,41 @@
+{
+  "axis": "occ_gender",
+  "n": 252,
+  "results": {
+    "(1) ALL designers incl. self": {
+      "profile cos(designer, target)": {
+        "beta": -0.517827178349702,
+        "ci": [
+          -1.1703392110480677,
+          0.2132113908015424
+        ]
+      },
+      "log2(designer size)": {
+        "beta": 0.06817565110321297,
+        "ci": [
+          0.012694249779713897,
+          0.12547419488739162
+        ]
+      }
+    },
+    "(2) EXCLUDING self \u2014 the real test": {
+      "profile cos(designer, target)": {
+        "beta": 0.2199423752532922,
+        "ci": [
+          -0.7361120837283409,
+          0.7228984162696549
+        ]
+      },
+      "log2(designer size)": {
+        "beta": 0.06496157313554542,
+        "ci": [
+          0.009856448281465865,
+          0.13256544905408366
+        ]
+      }
+    }
+  },
+  "spec": "removal ~ profile_cos + log2(size), cell FE, cluster boot",
+  "boot": 5000,
+  "boot_seed": 0
+}

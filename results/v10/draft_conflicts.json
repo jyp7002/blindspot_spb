@@ -1,0 +1,212 @@
+[
+ {
+  "artifact_says": "The 10 DEC cells span 3 benchmark families under the project's own rule (src/v8_env.axis_family): BBQ (bbq_Age, bbq_Race_ethnicity), StereoSet (ss_intra), templated (occ_gender). 4 AXES, 3 FAMILIES. 'Four families' is the 36-cell ENV inventory's count (CrowS 17 / templated 9 / BBQ 8 / StereoSet 2) \u2014 the DEC panel contains no CrowS axis at all. coverage.n_benchmark_families = 3.",
+  "draft_line": 10,
+  "draft_says": "The selection effect, \u0394 = +0.284 [+0.169, +0.407], is unanimous across 10/10 cells spanning four benchmark families and two model tiers.",
+  "severity": "factual-error",
+  "module": "dec"
+ },
+ {
+  "artifact_says": "3 benchmark families (BBQ, StereoSet, templated) over 4 axes; identical diagnosis to L10. The 'both tiers' half is fine (gemma/llama/phi/qwen \u22643.8B, qwen7b 7B) but the big tier is a single cell.",
+  "draft_line": 109,
+  "draft_says": "on 10 pre-registered in-envelope cells across four benchmark families and both tiers:",
+  "severity": "factual-error",
+  "module": "dec"
+ },
+ {
+  "artifact_says": "C-tensorshuf v9 mean = +0.045485 \u2192 +0.045 at 3 dp. The draft double-rounded the published 4-dp value (+0.0455 \u2192 +0.046). Published v9 4-dp value reproduces exactly.",
+  "draft_line": 115,
+  "draft_says": "| C-tensorshuf | top-\\|\u0394\\| | patterns moved across projections | +0.046 |",
+  "severity": "factual-error",
+  "module": "dec"
+ },
+ {
+  "artifact_says": "C-layershuf v9 mean = +0.004451 \u2192 +0.004 at 3 dp. Same double-rounding (+0.0045 \u2192 +0.005).",
+  "draft_line": 116,
+  "draft_says": "| C-layershuf | top-\\|\u0394\\| | patterns moved across layers | +0.005 |",
+  "severity": "factual-error",
+  "module": "dec"
+ },
+ {
+  "artifact_says": "Under the v9 integer gate, C-a's in-budget argmax is at the grid max (\u03b1=16) in 27 of 30 runs, not 26. 26/30 is the AS-RUN v8 count (RESULTS_V8 \u00a7, V8_FINDINGS L61) and the as-run panel carries no selected-alpha field at all; the count only exists in the re-scored tree (v9_selected_alpha). The section is headed '(headline; all numbers v9)' and this value is not `*`-marked.",
+  "draft_line": 126,
+  "draft_says": "C-a is *grid*-limited (argmax at the largest \u03b1 in 26/30 runs, spending almost no collateral)",
+  "severity": "stale-value",
+  "module": "dec"
+ },
+ {
+  "artifact_says": "Tensor shuffling does NOT collapse to \u22480. C-tensorshuf = +0.0455 = 12.9% of C-ref, and its new per-condition CI [-0.0016, +0.1367] COVERS 0 only because the mean is one cell: gemma|occ_gender = +0.3170 (46% of that cell's C-ref +0.6929); the other six cells mean +0.00024. Sign permutation (+0.0036), layer shuffling (+0.0045) and bottom support (+0.0012) do collapse; tensor shuffling is a different animal, and the v9 re-score made it bigger (as-run +0.0342 \u2192 v9 +0.0455; gemma cell +0.2385 \u2192 +0.3170). Recommend splitting the sentence.",
+  "draft_line": 10,
+  "draft_says": "sign permutation, layer shuffling, tensor shuffling, and bottom-magnitude support all collapse to \u2248 0",
+  "severity": "unsupported",
+  "module": "dec"
+ },
+ {
+  "artifact_says": "The C-tensorshuf row is n=7, not n=10 \u2014 the three phi cells have no C-tensorshuf (fused qkv_proj). V8_FINDINGS carried footnote '\u1d43 n = 7 cells' on this row; draft_v3's table dropped it, so the table reads as seven means over one cell set. RESULTS_V8's own reporting caveat says per-condition means over different cell sets 'are not directly comparable'.",
+  "draft_line": 115,
+  "draft_says": "| C-tensorshuf | top-\\|\u0394\\| | patterns moved across projections | +0.046 | (no n=7 marker in the table)",
+  "severity": "wording",
+  "module": "dec"
+ },
+ {
+  "artifact_says": "+0.0957 [-0.0095, +0.2021] is an AS-RUN v8 audit counterfactual (RESULTS_V8: 'continuing all 26 grid-capped C-a runs'), and its stated input (26 grid-capped runs) is now 27 under v9. It IS re-computable under the v9 gate \u2014 results/v8dec/alpha_trace.jsonl holds per-alpha bias_reduction/dmmlu/ppl_ratio for all four alphas, which src/v9_gate.py re-gates \u2014 but no v9 artifact contains it today. My module does not compute it (needs the per-alpha curve, not the selected alpha); it is flagged in alpha_grid.not_computed_here.",
+  "draft_line": 126,
+  "draft_says": "Under aggressive \u03b1 extension the gap shrinks to +0.096* and covers 0.",
+  "severity": "stale-value",
+  "module": "dec"
+ },
+ {
+  "draft_line": 149,
+  "draft_says": "Every collateral-budget failure at 8B occurs at *low* sparsity (dense through 97%)",
+  "artifact_says": "\"dense through 97%\" is the AS-RUN fail envelope, not the v9 one. Under the v9 gate the fail set at 8B is {llama|seed2|s=0.0, llama|seed2|s=0.5, llama|seed2|s=0.9} - dense through 90%, and all three are the SAME seed of the same target. The v9 gate recovers 4 of the 7 as-run failures (llama|seed0|s=0.9, llama|seed1|s=0.5, llama|seed2|s=0.95, llama|seed2|s=0.97), which is exactly what removes 95% and 97% from the range. Corrected: every 8B budget failure occurs at dense-through-90% sparsity, in one of three seeds.",
+  "severity": "stale-value",
+  "module": "spc"
+ },
+ {
+  "draft_line": 149,
+  "draft_says": "99%-and-sparser never fails the budget",
+  "artifact_says": "Also the as-run threshold. Under v9 the panel is clean from s=0.95 onward: 95%-and-sparser never fails the budget in either tier. The draft understates its own result by two sparsity levels.",
+  "severity": "stale-value",
+  "module": "spc"
+ },
+ {
+  "draft_line": 149,
+  "draft_says": "The dense 8B edit is too disruptive to deploy at all; sparsification is what brings it under the budget.",
+  "artifact_says": "FALSE under v9 (and under as-run). Dense llama-8B clears the collateral budget in 2 of 3 seeds: seed 0 removal +0.7354 at alpha 4, seed 1 removal +0.7258 at alpha 4; only seed 2 fails at every probed alpha (2/4/8/16). Dense qwen-7B clears it in 3 of 3. So 5 of the 6 dense (target, seed) pairs in the 7-9B tier are deployable. The defensible claim is the seed-level one: for the single seed where the dense 8B edit fails the budget (llama seed 2), sparsification restores deployability - and it does so at 95%, not 99%. Note the sentence's rhetorical force partly comes from the nan->0 rule: llama's dense CELL mean is 0.4871 only because that one failing seed is scored 0.0.",
+  "severity": "factual-error",
+  "module": "spc"
+ },
+ {
+  "draft_line": 147,
+  "draft_says": "**Sparsity, 7-9B (n = 2):** 99% *outperforms dense* (+0.112 [+0.014, +0.211])",
+  "artifact_says": "The point +0.112 is right; the CI digits are a double-rounding of the 4-dp published string [+0.0135, +0.2105]. The underlying bootstrap values are lo=+0.013492 and hi=+0.210468, which round to [+0.013, +0.210]. A WS-A verify at 3 dp against the artifact FAILS both endpoints.",
+  "severity": "factual-error",
+  "module": "spc"
+ },
+ {
+  "draft_line": 145,
+  "draft_says": "99.5% -0.226 [-0.285, -0.156]",
+  "artifact_says": "Same double-rounding: the published 4-dp string is [-0.2847, -0.1555] but the underlying hi is -0.155475, which rounds to -0.155, not -0.156. Lo and point are correct.",
+  "severity": "factual-error",
+  "module": "spc"
+ },
+ {
+  "draft_line": 173,
+  "draft_says": "| llama \\| occ | +0.747* | +0.640* | +0.701* | \u22120.000* |  \u2014 the steering entry is +0.640",
+  "artifact_says": "steering llama|occ_gender under v9 = +0.644472 (rounds to +0.644). +0.639826 is the AS-RUN value, which is what the draft printed. The table is headed '(diffs v9)' at line 166, so this cell is stale.",
+  "severity": "stale-value",
+  "module": "frontier"
+ },
+ {
+  "draft_line": 177,
+  "draft_says": "| phi \\| crows | +0.046* | +0.029* | +0.000* | +0.027* |  \u2014 the SentenceDebias entry is '+0.000*', marked with the generic pending-audit asterisk",
+  "artifact_says": "SentenceDebias phi|crows_socioeconomic is a ZEROED cell, not a measurement: the panel has 12 candidate rows for that cell and 0 of them clear the collateral gate, so the value is 0.0 supplied by the nan->0 rule. The footnote '\u1d43' at line 181 covers only the DPO too-few-preference-pairs cells and does not cover this one, so the table presents a budget-fail as a measured +0.000.",
+  "severity": "unsupported",
+  "module": "frontier"
+ },
+ {
+  "draft_line": 181,
+  "draft_says": "(Steering's qwen|occ rose under v9 re-selection; per-cell values marked * pending the audit's final table.)",
+  "artifact_says": "TWO steering cells rose under v9, not one: qwen|occ +0.549578 -> +0.634940 and llama|occ +0.639826 -> +0.644472. Those are the only 2 of 32 dots that move between the as-run and v9 trees. The footnote names only the first, which is why line 173 was left stale.",
+  "severity": "factual-error",
+  "module": "frontier"
+ },
+ {
+  "draft_line": 217,
+  "draft_says": "Where they touch this paper (two frontier edit cells; the STE ablation) the gate status is disclosed inline",
+  "artifact_says": "FOUR frontier edit cells are as-run, not two: llama|occ_gender, llama|crows_socioeconomic, qwen|occ_gender, qwen|crows_socioeconomic. Line 185's own disclosure is consistent with 4 ('llama and qwen edit cells'), so line 217 contradicts line 185.",
+  "severity": "factual-error",
+  "module": "frontier"
+ },
+ {
+  "draft_line": 185,
+  "draft_says": "Gate-mixing disclosure. The frontier's edit arm is not fully re-scorable: gemma and phi cells are true v9 ...; llama and qwen edit cells remain as-run (their panel predates the alpha-trace fix).",
+  "artifact_says": "The disclosure is incomplete: it names only the EDIT arm. The entire DPO column (all 8 cells) also carries v9_gate_mode='UNGATED' \u2014 run_dpo_baseline.py persisted no dmmlu/ppl_ratio on the removal rows, so v9_rescore could not re-gate it and its collateral_ok is still the as-run float gate. 12 of the table's 32 dots are therefore not true-v9 (4 edit + 8 DPO), against the 4 the draft discloses. Advisory: re-gating DPO from its alpha_trace flips 0 of 60 rows, so no number moves \u2014 but the disclosure as written is wrong about which cells are v9.",
+  "severity": "unsupported",
+  "module": "frontier"
+ },
+ {
+  "draft_line": 166,
+  "draft_says": "### 5.7 The frontier \u2014 removal ties; the artifact differs *(diffs v9)*",
+  "artifact_says": "Table A as printed is a MIXED table, not a v9 table: 30 of 32 dots are gate-identical between the trees, 1 dot (qwen|occ steering) was updated to v9, and 1 dot (llama|occ steering) was left at its as-run value. Regenerating from results/v10/frontier_v9.json is the only way the heading becomes true.",
+  "severity": "stale-value",
+  "module": "frontier"
+ },
+ {
+  "draft_line": 134,
+  "draft_says": "| q_proj | \u22120.011* [\u22120.068, +0.043] | droppable |",
+  "artifact_says": "v9: +0.0153 [-0.0123, +0.0518] (n=7, covers 0). The printed value is the AS-RUN/v8 number (reproduced exactly by this module from results/v8dec). Under v9 the point estimate CHANGES SIGN: dropping q_proj no longer looks mildly beneficial, it costs +0.015 \u2014 still covering 0, so the 'droppable' reading survives.",
+  "severity": "stale-value",
+  "module": "lopo"
+ },
+ {
+  "draft_line": 135,
+  "draft_says": "| k_proj | \u22120.009* [\u22120.030, +0.008] | droppable |",
+  "artifact_says": "v9: +0.0172 [-0.0058, +0.0531] (n=7, covers 0). Printed value is as-run/v8. Sign flips negative\u2192positive under v9; CI still covers 0, 'droppable' survives. Note the v9 interval is ~2.3x wider than the printed one.",
+  "severity": "stale-value",
+  "module": "lopo"
+ },
+ {
+  "draft_line": 136,
+  "draft_says": "| **v_proj** | **+0.119*** [+0.010, +0.250] | load-bearing |",
+  "artifact_says": "v9: +0.1431 [+0.0208, +0.2846] (n=7, excludes 0). Printed value is as-run/v8; v9 raises the point by +0.024 and the interval still excludes 0. 'load-bearing' survives.",
+  "severity": "stale-value",
+  "module": "lopo"
+ },
+ {
+  "draft_line": 137,
+  "draft_says": "| **o_proj** | **+0.121*** [+0.079, +0.183] | load-bearing |",
+  "artifact_says": "v9: +0.1189 [+0.0800, +0.1681] (n=7, excludes 0). Printed value is as-run/v8; v9 moves it slightly down and tightens the upper bound. 'load-bearing' survives.",
+  "severity": "stale-value",
+  "module": "lopo"
+ },
+ {
+  "draft_line": 139,
+  "draft_says": "v_proj holds *fewer* surviving coordinates (0.64\u00d7) than q_proj (0.83\u00d7)",
+  "artifact_says": "NOT a numeric error \u2014 0.6410x and 0.8330x reproduce exactly. But the two halves of the sentence rest on different sample sets and the draft does not say so: the density figures average 27 support dumps, while the LOPO bars they are paired with rest on 21 dumps / 7 cells. On the LOPO-matched 21 dumps the values are v_proj 0.600x and q_proj 0.866x \u2014 same ordering, different numbers. Fig 4's caption ('density is not importance') should state which denominator its heatmap uses.",
+  "severity": "unsupported",
+  "module": "lopo"
+ },
+ {
+  "draft_line": 139,
+  "draft_says": "**phi is the counterexample** (its fused-qkv edit never touches o_proj and produces headline numbers, so o is load-bearing *within the q,k,v,o parameterization*, not universally necessary)",
+  "artifact_says": "VERIFIED TRUE and now machine-backed: all 9 phi support dumps expose the single key qkv_proj and no o_proj, and run_dec.applicable_conditions() therefore emits no LOPO rows for phi's 3 cells. But the draft never states the consequence for the table above it \u2014 that n=7 is 10 DEC cells minus phi's 3, i.e. the LOPO table and the \u00a75.3 decomposition table are computed on DIFFERENT cell sets. Fig 4's caption must carry this, and \u00a75.4's 'n = 7' (line 130) should name the exclusion.",
+  "severity": "wording",
+  "module": "lopo"
+ },
+ {
+  "draft_line": 130,
+  "draft_says": "Leave-one-projection-out on the four-projection cells (n = 7):",
+  "artifact_says": "n=7 is correct, but the whole \u00a75.4 table is marked '*' (stale) while it is in fact re-scorable: the LOPO conditions live in the v8dec panel, which HAS an alpha_trace and WAS re-scored (results_v9/v8dec/removal.jsonl carries v9_selected_alpha / v9_changed on all 105 LOPO rows). There is no reason for \u00a75.4 to ship as-run \u2014 every value has a true-v9 replacement in results/v10/lopo_v9.json.",
+  "severity": "stale-value",
+  "module": "lopo"
+ },
+ {
+  "draft_line": 164,
+  "draft_says": "bbq_Age \u00d7 bbq_Race share their sign field at designer-level strength (signed agreement 0.769) while every other axis pair sits at chance (~0.49)",
+  "artifact_says": "0.769 is the MEAN of the 3 bbq_Age x bbq_Race pairs (0.768894). Every other overlap number in that same sentence is a MEDIAN (seed 11.15x/0.953, designer 14.64x, chance ~0.49 = median 0.48987) \u2014 the median of the 3 bbq pairs is 0.76522, i.e. 0.765. Under the sentence's own statistic the value should read 0.765; under the mean it is 0.769 but then the sentence mixes two statistics silently. n = 3 pairs (qwen-3B only, one per seed), which the sentence also does not state. Individual pairs: 0.7618, 0.7652, 0.7796.",
+  "severity": "unsupported",
+  "module": "sup1"
+ },
+ {
+  "draft_line": 164,
+  "draft_says": "Support concentrates in late layers (0.41\u00d7 early \u2192 1.52\u00d7 late).",
+  "artifact_says": "The value reproduces exactly (0.40692 -> 1.51996) but ONLY when pooled over all 36 supports INCLUDING phi, whose fused qkv_proj is excluded from the Fig 4 left heatmap (experiments_v10 B4: 'phi excluded (fused module), stated'). Over the 27 supports the heatmap actually shows, the same integer-floor-thirds gradient is 0.4492 early -> 1.6094 late. As written, the sentence and the panel beside it are computed over different populations. Either the sentence gains 'across all six-target supports including phi', or it cites the panel's own 0.45x -> 1.61x. Also note the binning is v8_sup1's integer-floor thirds (L < n//3 | < 2n//3 | rest), which gives unequal thirds for n_layers = 26, 28, 32 \u2014 under equal fractional-depth thirds the same numbers are 0.4420 -> 1.5484 (all 36) and 0.4654 -> 1.6474 (non-phi 27).",
+  "severity": "unit-mismatch",
+  "module": "sup1"
+ },
+ {
+  "draft_line": 139,
+  "draft_says": "so the support heatmap (\u00a75.6) must not be read as an importance map",
+  "artifact_says": "\u00a75.6 contains no figure callout, and there is no `[FIG 4]` marker anywhere in binary_debiaser_draft_v3.md (only [FIG 2] at line 107, [FIG 3] at line 160, [FIG 6] at line 203). The heatmap this sentence points at is Fig 4 left (experiments_v10 B4; App. G line 255), which the draft never places. The cross-reference resolves to a section with no figure.",
+  "severity": "wording",
+  "module": "sup1"
+ },
+ {
+  "draft_line": 139,
+  "draft_says": "**density is not importance** \u2014 v_proj holds *fewer* surviving coordinates (0.64\u00d7) than q_proj (0.83\u00d7) yet is causally load-bearing",
+  "artifact_says": "Both values reproduce exactly (v_proj 0.64104, q_proj 0.83303, means over the 27 non-fused dumps) \u2014 no numeric conflict. But the heatmap the sentence sends the reader to also shows o_proj at 1.3200x, the DENSEST projection, and o_proj is the other load-bearing projection in LOPO (+0.121). So on the full column the density/importance relation is not merely absent, it is positive for o and negative for v. The claim is safe only as stated about the v/q pair; a reader looking at the panel will see the o column and the sentence does not pre-empt it.",
+  "severity": "wording",
+  "module": "sup1"
+ }
+]

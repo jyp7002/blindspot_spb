@@ -1,0 +1,212 @@
+[
+  {
+    "family": "qwen",
+    "role": "self",
+    "seed": 0,
+    "pre_skew": 0.7487940914471609,
+    "self_removal": 0.7110867892792365
+  },
+  {
+    "family": "qwen",
+    "role": "sibling",
+    "seed": 0,
+    "pre_skew": 0.7487940914471609,
+    "self_removal": 0.6828807187470642
+  },
+  {
+    "family": "qwen",
+    "role": "self",
+    "seed": 1,
+    "pre_skew": 0.7487940914471609,
+    "self_removal": 0.6571742896734345
+  },
+  {
+    "family": "qwen",
+    "role": "sibling",
+    "seed": 1,
+    "pre_skew": 0.7487940914471609,
+    "self_removal": 0.7094151903716188
+  },
+  {
+    "family": "qwen",
+    "role": "self",
+    "seed": 2,
+    "pre_skew": 0.7487940914471609,
+    "self_removal": 0.6916138874347435
+  },
+  {
+    "family": "qwen",
+    "role": "sibling",
+    "seed": 2,
+    "pre_skew": 0.7487940914471609,
+    "self_removal": 0.5103738475999662
+  },
+  {
+    "family": "llama",
+    "role": "self",
+    "seed": 0,
+    "pre_skew": 0.7576600990639459,
+    "self_removal": NaN
+  },
+  {
+    "family": "llama",
+    "role": "sibling",
+    "seed": 0,
+    "pre_skew": 0.7576600990639459,
+    "self_removal": 0.27804424315764176
+  },
+  {
+    "family": "llama",
+    "role": "self",
+    "seed": 1,
+    "pre_skew": 0.7576600990639459,
+    "self_removal": NaN
+  },
+  {
+    "family": "llama",
+    "role": "sibling",
+    "seed": 1,
+    "pre_skew": 0.7576600990639459,
+    "self_removal": 0.7491064812667638
+  },
+  {
+    "family": "llama",
+    "role": "self",
+    "seed": 2,
+    "pre_skew": 0.7576600990639459,
+    "self_removal": NaN
+  },
+  {
+    "family": "llama",
+    "role": "sibling",
+    "seed": 2,
+    "pre_skew": 0.7576600990639459,
+    "self_removal": 0.4602667962859577
+  },
+  {
+    "family": "gemma",
+    "role": "self",
+    "seed": 0,
+    "pre_skew": 0.822057768001488,
+    "self_removal": 0.8117383500235029
+  },
+  {
+    "family": "gemma",
+    "role": "sibling",
+    "seed": 0,
+    "pre_skew": 0.822057768001488,
+    "self_removal": 0.7450351289273003
+  },
+  {
+    "family": "gemma",
+    "role": "self",
+    "seed": 1,
+    "pre_skew": 0.822057768001488,
+    "self_removal": 0.7881383930083592
+  },
+  {
+    "family": "gemma",
+    "role": "sibling",
+    "seed": 1,
+    "pre_skew": 0.822057768001488,
+    "self_removal": 0.62965336443609
+  },
+  {
+    "family": "gemma",
+    "role": "self",
+    "seed": 2,
+    "pre_skew": 0.822057768001488,
+    "self_removal": 0.7843070659432907
+  },
+  {
+    "family": "gemma",
+    "role": "sibling",
+    "seed": 2,
+    "pre_skew": 0.822057768001488,
+    "self_removal": 0.4466948447967034
+  },
+  {
+    "family": "olmo",
+    "role": "self",
+    "seed": 0,
+    "pre_skew": 0.8368227921824556,
+    "self_removal": 0.8338073637513544
+  },
+  {
+    "family": "olmo",
+    "role": "sibling",
+    "seed": 0,
+    "pre_skew": 0.8368227921824556,
+    "self_removal": 0.802978080773006
+  },
+  {
+    "family": "olmo",
+    "role": "self",
+    "seed": 1,
+    "pre_skew": 0.8368227921824556,
+    "self_removal": 0.8364786893886356
+  },
+  {
+    "family": "olmo",
+    "role": "sibling",
+    "seed": 1,
+    "pre_skew": 0.8368227921824556,
+    "self_removal": 0.7411107030195478
+  },
+  {
+    "family": "olmo",
+    "role": "self",
+    "seed": 2,
+    "pre_skew": 0.8368227921824556,
+    "self_removal": 0.8227675258492686
+  },
+  {
+    "family": "olmo",
+    "role": "sibling",
+    "seed": 2,
+    "pre_skew": 0.8368227921824556,
+    "self_removal": 0.8089796606922166
+  },
+  {
+    "family": "granite",
+    "role": "self",
+    "seed": 0,
+    "pre_skew": 0.8040482096385853,
+    "self_removal": NaN
+  },
+  {
+    "family": "granite",
+    "role": "sibling",
+    "seed": 0,
+    "pre_skew": 0.8040482096385853,
+    "self_removal": NaN
+  },
+  {
+    "family": "granite",
+    "role": "self",
+    "seed": 1,
+    "pre_skew": 0.8040482096385853,
+    "self_removal": NaN
+  },
+  {
+    "family": "granite",
+    "role": "sibling",
+    "seed": 1,
+    "pre_skew": 0.8040482096385853,
+    "self_removal": NaN
+  },
+  {
+    "family": "granite",
+    "role": "self",
+    "seed": 2,
+    "pre_skew": 0.8040482096385853,
+    "self_removal": NaN
+  },
+  {
+    "family": "granite",
+    "role": "sibling",
+    "seed": 2,
+    "pre_skew": 0.8040482096385853,
+    "self_removal": NaN
+  }
+]

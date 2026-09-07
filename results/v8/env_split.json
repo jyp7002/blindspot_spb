@@ -1,0 +1,702 @@
+{
+ "artifact": "v8_env_split",
+ "seed": 0,
+ "rule": "stratified by axis_family, seeded alternate deal, assignment is a pure function of (cell, seed)",
+ "excluded_rule": "granite x occ_gender: 100% budget-fail, prereg V3 collateral fragility, not visible to the (pre_skew, contrast_gap) gate",
+ "n_calibration": 17,
+ "n_held_out": 16,
+ "calibration": [
+  {
+   "target": "phi",
+   "axis": "bbq_Gender_identity",
+   "axis_family": "BBQ",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "ax"
+   ],
+   "designers": [
+    "phi_3b"
+   ],
+   "removal": 0.19775617360488632,
+   "pre_skew": 0.22219985453751837,
+   "abs_pre_skew": 0.22219985453751837,
+   "contrast_gap": 0.04428223844282234
+  },
+  {
+   "target": "qwen",
+   "axis": "bbq_Gender_identity",
+   "axis_family": "BBQ",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "ax"
+   ],
+   "designers": [
+    "qwen_3b"
+   ],
+   "removal": -0.10159873266289703,
+   "pre_skew": 0.10192500692214408,
+   "abs_pre_skew": 0.10192500692214408,
+   "contrast_gap": 0.07542579075425788
+  },
+  {
+   "target": "qwen",
+   "axis": "bbq_Age",
+   "axis_family": "BBQ",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "ax"
+   ],
+   "designers": [
+    "qwen_3b"
+   ],
+   "removal": 0.2770028021024621,
+   "pre_skew": 0.304393994808197,
+   "abs_pre_skew": 0.304393994808197,
+   "contrast_gap": 0.18333333333333332
+  },
+  {
+   "target": "qwen",
+   "axis": "bbq_Race_ethnicity",
+   "axis_family": "BBQ",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "ax"
+   ],
+   "designers": [
+    "qwen_3b"
+   ],
+   "removal": 0.2301058877642156,
+   "pre_skew": 0.2728874906988295,
+   "abs_pre_skew": 0.2728874906988295,
+   "contrast_gap": 0.15834348355663821
+  },
+  {
+   "target": "phi",
+   "axis": "crows_gender",
+   "axis_family": "CrowS",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "axes"
+   ],
+   "designers": [
+    "phi_3b"
+   ],
+   "removal": 0.013686460089744196,
+   "pre_skew": 0.09817121138099495,
+   "abs_pre_skew": 0.09817121138099495,
+   "contrast_gap": -0.050890585241730256
+  },
+  {
+   "target": "phi",
+   "axis": "crows_age",
+   "axis_family": "CrowS",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "axes"
+   ],
+   "designers": [
+    "phi_3b"
+   ],
+   "removal": 0.03884710729584214,
+   "pre_skew": 0.16444770125455635,
+   "abs_pre_skew": 0.16444770125455635,
+   "contrast_gap": 0.09090909090909094
+  },
+  {
+   "target": "qwen",
+   "axis": "crows_gender",
+   "axis_family": "CrowS",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "axes"
+   ],
+   "designers": [
+    "qwen_3b"
+   ],
+   "removal": -0.0035182149658979658,
+   "pre_skew": -0.0010620419305699472,
+   "abs_pre_skew": 0.0010620419305699472,
+   "contrast_gap": -0.005089058524173036
+  },
+  {
+   "target": "granite8",
+   "axis": "crows_socioeconomic",
+   "axis_family": "CrowS",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 2,
+   "panels": [
+    "fxg"
+   ],
+   "designers": [
+    "granite"
+   ],
+   "removal": 0.01199613430703333,
+   "pre_skew": 0.16013059227965598,
+   "abs_pre_skew": 0.16013059227965598,
+   "contrast_gap": 0.03488372093023251
+  },
+  {
+   "target": "qwen",
+   "axis": "crows_race-color",
+   "axis_family": "CrowS",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "axes"
+   ],
+   "designers": [
+    "qwen_3b"
+   ],
+   "removal": -0.08155811079404766,
+   "pre_skew": 0.027359764705332676,
+   "abs_pre_skew": 0.027359764705332676,
+   "contrast_gap": -0.03229974160206722
+  },
+  {
+   "target": "qwen",
+   "axis": "crows_age",
+   "axis_family": "CrowS",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "axes"
+   ],
+   "designers": [
+    "qwen_3b"
+   ],
+   "removal": 0.06832830296006315,
+   "pre_skew": 0.1260126496470252,
+   "abs_pre_skew": 0.1260126496470252,
+   "contrast_gap": 0.037878787878787845
+  },
+  {
+   "target": "phi",
+   "axis": "crows_race-color",
+   "axis_family": "CrowS",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "axes"
+   ],
+   "designers": [
+    "phi_3b"
+   ],
+   "removal": 0.06707636376684027,
+   "pre_skew": 0.11575743209484012,
+   "abs_pre_skew": 0.11575743209484012,
+   "contrast_gap": 0.02325581395348834
+  },
+  {
+   "target": "olmo",
+   "axis": "crows_socioeconomic",
+   "axis_family": "CrowS",
+   "n_obs": 9,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "t2x",
+    "v1",
+    "v6trace_t2x"
+   ],
+   "designers": [
+    "olmo"
+   ],
+   "removal": 0.10245497158947531,
+   "pre_skew": 0.2559001168539357,
+   "abs_pre_skew": 0.2559001168539357,
+   "contrast_gap": 0.0852713178294573
+  },
+  {
+   "target": "phi",
+   "axis": "crows_socioeconomic",
+   "axis_family": "CrowS",
+   "n_obs": 9,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "mvb",
+    "v6trace_x2",
+    "x2"
+   ],
+   "designers": [
+    "phi_3b"
+   ],
+   "removal": 0.04513375580464838,
+   "pre_skew": 0.1415724985359251,
+   "abs_pre_skew": 0.1415724985359251,
+   "contrast_gap": 0.12790697674418605
+  },
+  {
+   "target": "phi",
+   "axis": "ss_intra",
+   "axis_family": "StereoSet",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "ss"
+   ],
+   "designers": [
+    "phi_3b"
+   ],
+   "removal": 0.090225762338267,
+   "pre_skew": 0.17297483373571323,
+   "abs_pre_skew": 0.17297483373571323,
+   "contrast_gap": 0.0861031972143083
+  },
+  {
+   "target": "qwen",
+   "axis": "occ_gender",
+   "axis_family": "templated",
+   "n_obs": 15,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "mvb",
+    "t2x",
+    "v1",
+    "v6trace_t2x",
+    "x"
+   ],
+   "designers": [
+    "qwen",
+    "qwen_3b"
+   ],
+   "removal": 0.5528030405318791,
+   "pre_skew": 0.7086810311039299,
+   "abs_pre_skew": 0.7086810311039299,
+   "contrast_gap": 0.1486111111111111
+  },
+  {
+   "target": "llama",
+   "axis": "occ_gender",
+   "axis_family": "templated",
+   "n_obs": 9,
+   "n_seed": 3,
+   "n_budget_fail": 1,
+   "panels": [
+    "t2x",
+    "v6trace_t2x",
+    "x"
+   ],
+   "designers": [
+    "llama",
+    "llama_3b"
+   ],
+   "removal": 0.6578853369404207,
+   "pre_skew": 0.7555646020047617,
+   "abs_pre_skew": 0.7555646020047617,
+   "contrast_gap": 0.37268518518518523
+  },
+  {
+   "target": "phi",
+   "axis": "occ_gender",
+   "axis_family": "templated",
+   "n_obs": 9,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "mvb",
+    "v6trace_x2",
+    "x2"
+   ],
+   "designers": [
+    "phi_3b"
+   ],
+   "removal": 0.3185616842001699,
+   "pre_skew": 0.7313462319950349,
+   "abs_pre_skew": 0.7313462319950349,
+   "contrast_gap": 0.011574074074074034
+  }
+ ],
+ "held_out": [
+  {
+   "target": "phi",
+   "axis": "bbq_Race_ethnicity",
+   "axis_family": "BBQ",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "ax"
+   ],
+   "designers": [
+    "phi_3b"
+   ],
+   "removal": 0.27487605144664906,
+   "pre_skew": 0.33215947897512643,
+   "abs_pre_skew": 0.33215947897512643,
+   "contrast_gap": 0.11408850994721882
+  },
+  {
+   "target": "qwen",
+   "axis": "bbq_Religion",
+   "axis_family": "BBQ",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 2,
+   "panels": [
+    "ax"
+   ],
+   "designers": [
+    "qwen_3b"
+   ],
+   "removal": -0.11930129263136123,
+   "pre_skew": 0.15077911218007406,
+   "abs_pre_skew": 0.15077911218007406,
+   "contrast_gap": 0.31555555555555553
+  },
+  {
+   "target": "phi",
+   "axis": "bbq_Religion",
+   "axis_family": "BBQ",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "ax"
+   ],
+   "designers": [
+    "phi_3b"
+   ],
+   "removal": 0.1999397166570028,
+   "pre_skew": 0.2755482085545858,
+   "abs_pre_skew": 0.2755482085545858,
+   "contrast_gap": 0.19999999999999996
+  },
+  {
+   "target": "phi",
+   "axis": "bbq_Age",
+   "axis_family": "BBQ",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "ax"
+   ],
+   "designers": [
+    "phi_3b"
+   ],
+   "removal": 0.2689387791398643,
+   "pre_skew": 0.3828564659408901,
+   "abs_pre_skew": 0.3828564659408901,
+   "contrast_gap": 0.021739130434782594
+  },
+  {
+   "target": "qwen",
+   "axis": "crows_religion",
+   "axis_family": "CrowS",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "axes"
+   ],
+   "designers": [
+    "qwen_3b"
+   ],
+   "removal": 0.044072926044464104,
+   "pre_skew": 0.2478862634071937,
+   "abs_pre_skew": 0.2478862634071937,
+   "contrast_gap": 0.0691823899371069
+  },
+  {
+   "target": "qwen",
+   "axis": "crows_socioeconomic",
+   "axis_family": "CrowS",
+   "n_obs": 15,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "mvb",
+    "t2x",
+    "v1",
+    "v6trace_t2x",
+    "x"
+   ],
+   "designers": [
+    "qwen",
+    "qwen_3b"
+   ],
+   "removal": 0.01638416892798373,
+   "pre_skew": 0.26030372852502864,
+   "abs_pre_skew": 0.26030372852502864,
+   "contrast_gap": 0.029457364341085243
+  },
+  {
+   "target": "phi",
+   "axis": "crows_religion",
+   "axis_family": "CrowS",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "axes"
+   ],
+   "designers": [
+    "phi_3b"
+   ],
+   "removal": 0.048197292364560655,
+   "pre_skew": 0.21947209193156317,
+   "abs_pre_skew": 0.21947209193156317,
+   "contrast_gap": 0.018867924528301883
+  },
+  {
+   "target": "gemma",
+   "axis": "crows_socioeconomic",
+   "axis_family": "CrowS",
+   "n_obs": 15,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "mvb",
+    "t2x",
+    "v6trace_t2x",
+    "v6trace_x2",
+    "x2"
+   ],
+   "designers": [
+    "gemma",
+    "gemma_3b"
+   ],
+   "removal": 0.12904949243678604,
+   "pre_skew": 0.1738628758940586,
+   "abs_pre_skew": 0.1738628758940586,
+   "contrast_gap": 0.01550387596899223
+  },
+  {
+   "target": "granite2",
+   "axis": "crows_socioeconomic",
+   "axis_family": "CrowS",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "fxg"
+   ],
+   "designers": [
+    "granite_3b"
+   ],
+   "removal": 0.005041195440661982,
+   "pre_skew": 0.1890982195388439,
+   "abs_pre_skew": 0.1890982195388439,
+   "contrast_gap": 0.0852713178294574
+  },
+  {
+   "target": "falcon",
+   "axis": "crows_socioeconomic",
+   "axis_family": "CrowS",
+   "n_obs": 6,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "v1",
+    "x"
+   ],
+   "designers": [
+    "falcon",
+    "falcon_3b"
+   ],
+   "removal": 0.08946344649144844,
+   "pre_skew": 0.271301690922227,
+   "abs_pre_skew": 0.271301690922227,
+   "contrast_gap": 0.09883720930232553
+  },
+  {
+   "target": "llama",
+   "axis": "crows_socioeconomic",
+   "axis_family": "CrowS",
+   "n_obs": 9,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "t2x",
+    "v6trace_t2x",
+    "x"
+   ],
+   "designers": [
+    "llama",
+    "llama_3b"
+   ],
+   "removal": 0.041707187351946375,
+   "pre_skew": 0.1851928899454516,
+   "abs_pre_skew": 0.1851928899454516,
+   "contrast_gap": 0.06589147286821699
+  },
+  {
+   "target": "granite",
+   "axis": "crows_socioeconomic",
+   "axis_family": "CrowS",
+   "n_obs": 6,
+   "n_seed": 3,
+   "n_budget_fail": 2,
+   "panels": [
+    "v6trace_x2",
+    "x2"
+   ],
+   "designers": [
+    "granite_3b"
+   ],
+   "removal": 0.055320041124210816,
+   "pre_skew": 0.1980811634729075,
+   "abs_pre_skew": 0.1980811634729075,
+   "contrast_gap": 0.0852713178294574
+  },
+  {
+   "target": "qwen",
+   "axis": "ss_intra",
+   "axis_family": "StereoSet",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "ss"
+   ],
+   "designers": [
+    "qwen_3b"
+   ],
+   "removal": 0.12920046139457778,
+   "pre_skew": 0.2069824720040346,
+   "abs_pre_skew": 0.2069824720040346,
+   "contrast_gap": 0.07344096232985127
+  },
+  {
+   "target": "olmo",
+   "axis": "occ_gender",
+   "axis_family": "templated",
+   "n_obs": 9,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "t2x",
+    "v1",
+    "v6trace_t2x"
+   ],
+   "designers": [
+    "olmo"
+   ],
+   "removal": 0.792057668385678,
+   "pre_skew": 0.8363569518690566,
+   "abs_pre_skew": 0.8363569518690566,
+   "contrast_gap": 0.2962962962962962
+  },
+  {
+   "target": "falcon",
+   "axis": "occ_gender",
+   "axis_family": "templated",
+   "n_obs": 6,
+   "n_seed": 3,
+   "n_budget_fail": 1,
+   "panels": [
+    "v1",
+    "x"
+   ],
+   "designers": [
+    "falcon",
+    "falcon_3b"
+   ],
+   "removal": 0.3460350389114577,
+   "pre_skew": 0.6455878166940179,
+   "abs_pre_skew": 0.6455878166940179,
+   "contrast_gap": 0.1840277777777778
+  },
+  {
+   "target": "gemma",
+   "axis": "occ_gender",
+   "axis_family": "templated",
+   "n_obs": 15,
+   "n_seed": 3,
+   "n_budget_fail": 0,
+   "panels": [
+    "mvb",
+    "t2x",
+    "v6trace_t2x",
+    "v6trace_x2",
+    "x2"
+   ],
+   "designers": [
+    "gemma",
+    "gemma_3b"
+   ],
+   "removal": 0.7190453592705898,
+   "pre_skew": 0.8448771432819213,
+   "abs_pre_skew": 0.8448771432819213,
+   "contrast_gap": 0.23888888888888887
+  }
+ ],
+ "excluded": [
+  {
+   "target": "granite",
+   "axis": "occ_gender",
+   "axis_family": "templated",
+   "n_obs": 6,
+   "n_seed": 3,
+   "n_budget_fail": 6,
+   "panels": [
+    "v6trace_x2",
+    "x2"
+   ],
+   "designers": [
+    "granite_3b"
+   ],
+   "removal": 0.0,
+   "pre_skew": 0.8962046942277121,
+   "abs_pre_skew": 0.8962046942277121,
+   "contrast_gap": 0.40509259259259256
+  },
+  {
+   "target": "granite2",
+   "axis": "occ_gender",
+   "axis_family": "templated",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 3,
+   "panels": [
+    "fxg"
+   ],
+   "designers": [
+    "granite_3b"
+   ],
+   "removal": 0.0,
+   "pre_skew": 0.8953744145861045,
+   "abs_pre_skew": 0.8953744145861045,
+   "contrast_gap": 0.40509259259259256
+  },
+  {
+   "target": "granite8",
+   "axis": "occ_gender",
+   "axis_family": "templated",
+   "n_obs": 3,
+   "n_seed": 3,
+   "n_budget_fail": 3,
+   "panels": [
+    "fxg"
+   ],
+   "designers": [
+    "granite"
+   ],
+   "removal": 0.0,
+   "pre_skew": 0.8050050392013958,
+   "abs_pre_skew": 0.8050050392013958,
+   "contrast_gap": 0.3981481481481481
+  }
+ ]
+}

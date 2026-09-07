@@ -1,0 +1,267 @@
+{
+ "argmax_above_frozen_grid": {
+  "C-a": {
+   "n": 30,
+   "of": 30
+  },
+  "C-ref": {
+   "n": 5,
+   "of": 30
+  }
+ },
+ "artifact": "v10_regen_alphaext",
+ "condition_gain_from_extension": {
+  "C-a": {
+   "extended": 0.28437732952111017,
+   "frozen": 0.06962651191676142,
+   "gain": 0.21475081760434875
+  },
+  "C-ref": {
+   "extended": 0.3884527834786544,
+   "frozen": 0.35317637390454115,
+   "gain": 0.035276409574113265
+  }
+ },
+ "depth_series": [
+  {
+   "condition_means": {
+    "C-a": 0.1557344387144514,
+    "C-ref": 0.3884527834786544
+   },
+   "delta_selection": {
+    "hi": 0.3616355829735816,
+    "lo": 0.12052894941249889,
+    "n": 10,
+    "point": 0.23271834476420308,
+    "status": "excludes 0",
+    "text": "+0.2327 [+0.1205, +0.3616] (n=10, excludes 0)"
+   },
+   "max_alpha": 32.0,
+   "unanimity": 10
+  },
+  {
+   "condition_means": {
+    "C-a": 0.24262196035990655,
+    "C-ref": 0.3884527834786544
+   },
+   "delta_selection": {
+    "hi": 0.26768068063505457,
+    "lo": 0.054285270326504785,
+    "n": 10,
+    "point": 0.1458308231187479,
+    "status": "excludes 0",
+    "text": "+0.1458 [+0.0543, +0.2677] (n=10, excludes 0)"
+   },
+   "max_alpha": 64.0,
+   "unanimity": 10
+  },
+  {
+   "condition_means": {
+    "C-a": 0.28437732952111017,
+    "C-ref": 0.3884527834786544
+   },
+   "delta_selection": {
+    "hi": 0.18272167070287293,
+    "lo": 0.03607253742116516,
+    "n": 10,
+    "point": 0.10407545395754432,
+    "status": "excludes 0",
+    "text": "+0.1041 [+0.0361, +0.1827] (n=10, excludes 0)"
+   },
+   "max_alpha": 128.0,
+   "unanimity": 9
+  }
+ ],
+ "extended": {
+  "alphas": [
+   2.0,
+   4.0,
+   8.0,
+   16.0,
+   32.0,
+   64.0,
+   128.0
+  ],
+  "condition_means": {
+   "C-a": 0.28437732952111017,
+   "C-ref": 0.3884527834786544
+  },
+  "delta_selection": {
+   "hi": 0.18272167070287293,
+   "lo": 0.03607253742116516,
+   "n": 10,
+   "point": 0.10407545395754432,
+   "status": "excludes 0",
+   "text": "+0.1041 [+0.0361, +0.1827] (n=10, excludes 0)"
+  },
+  "gate_modes": {
+   "integer-delta": 420
+  },
+  "label": "extended grid + [32.0, 64.0, 128.0]",
+  "n_cells": 10,
+  "n_rows": 420,
+  "n_rows_in_budget": 310,
+  "per_cell": {
+   "gemma|occ_gender": {
+    "C-a": 0.3866021398356076,
+    "C-ref": 0.6928624581874882,
+    "delta": 0.30626031835188056
+   },
+   "llama|occ_gender": {
+    "C-a": 0.4182273830759851,
+    "C-ref": 0.6147684659351736,
+    "delta": 0.19654108285918853
+   },
+   "phi|bbq_Age": {
+    "C-a": 0.3406539066978123,
+    "C-ref": 0.3308832499428072,
+    "delta": -0.009770656755005103
+   },
+   "phi|occ_gender": {
+    "C-a": 0.11799287192247158,
+    "C-ref": 0.1899411577012958,
+    "delta": 0.07194828577882421
+   },
+   "phi|ss_intra": {
+    "C-a": 0.05978461585870534,
+    "C-ref": 0.10004366330988766,
+    "delta": 0.04025904745118232
+   },
+   "qwen7b|occ_gender": {
+    "C-a": 0.6121304819266545,
+    "C-ref": 0.6633505975907624,
+    "delta": 0.05122011566410789
+   },
+   "qwen|bbq_Age": {
+    "C-a": 0.24622286886408706,
+    "C-ref": 0.2531364525573841,
+    "delta": 0.006913583693297032
+   },
+   "qwen|bbq_Race_ethnicity": {
+    "C-a": 0.23371846734920845,
+    "C-ref": 0.2527985808039118,
+    "delta": 0.019080113454703368
+   },
+   "qwen|occ_gender": {
+    "C-a": 0.3161338631323367,
+    "C-ref": 0.6478568391510499,
+    "delta": 0.33172297601871314
+   },
+   "qwen|ss_intra": {
+    "C-a": 0.11230669654823248,
+    "C-ref": 0.13888636960678366,
+    "delta": 0.026579673058551176
+   }
+  },
+  "unanimity": 9
+ },
+ "frozen": {
+  "alphas": [
+   2.0,
+   4.0,
+   8.0,
+   16.0
+  ],
+  "condition_means": {
+   "C-a": 0.06962651191676142,
+   "C-ref": 0.35317637390454115
+  },
+  "delta_selection": {
+   "hi": 0.40721210086913906,
+   "lo": 0.16917605354415527,
+   "n": 10,
+   "point": 0.28354986198777976,
+   "status": "excludes 0",
+   "text": "+0.2835 [+0.1692, +0.4072] (n=10, excludes 0)"
+  },
+  "gate_modes": {
+   "integer-delta": 240
+  },
+  "label": "frozen grid {2,4,8,16}",
+  "n_cells": 10,
+  "n_rows": 240,
+  "n_rows_in_budget": 234,
+  "per_cell": {
+   "gemma|occ_gender": {
+    "C-a": 0.09488269102316349,
+    "C-ref": 0.6928624581874882,
+    "delta": 0.5979797671643247
+   },
+   "llama|occ_gender": {
+    "C-a": 0.04300338637738584,
+    "C-ref": 0.6147684659351736,
+    "delta": 0.5717650795577878
+   },
+   "phi|bbq_Age": {
+    "C-a": 0.07793369923812758,
+    "C-ref": 0.3308832499428072,
+    "delta": 0.2529495507046796
+   },
+   "phi|occ_gender": {
+    "C-a": 0.01398238961200334,
+    "C-ref": 0.11630237252548674,
+    "delta": 0.1023199829134834
+   },
+   "phi|ss_intra": {
+    "C-a": 0.010514238017312558,
+    "C-ref": 0.10004366330988766,
+    "delta": 0.0895294252925751
+   },
+   "qwen7b|occ_gender": {
+    "C-a": 0.2136812861963504,
+    "C-ref": 0.6633505975907624,
+    "delta": 0.449669311394412
+   },
+   "qwen|bbq_Age": {
+    "C-a": 0.13272991249526755,
+    "C-ref": 0.2531364525573841,
+    "delta": 0.12040654006211654
+   },
+   "qwen|bbq_Race_ethnicity": {
+    "C-a": 0.10652546973621464,
+    "C-ref": 0.2527985808039118,
+    "delta": 0.1462731110676972
+   },
+   "qwen|occ_gender": {
+    "C-a": -0.010590732801316541,
+    "C-ref": 0.39103392818360644,
+    "delta": 0.401624660984923
+   },
+   "qwen|ss_intra": {
+    "C-a": 0.013602779273105298,
+    "C-ref": 0.11658397000890323,
+    "delta": 0.10298119073579794
+   }
+  },
+  "unanimity": 10
+ },
+ "gate": "both grids re-gated with src/v9_gate.collateral_ok_row; the frozen panel's stored collateral_ok is the AS-RUN float verdict and is deliberately not reused",
+ "manuscript_claim": {
+  "covers_zero": false,
+  "gap_shrinks": true,
+  "matches_printed_point": false,
+  "measured_point": 0.10407545395754432,
+  "measured_status": "excludes 0",
+  "measured_text": "+0.1041 [+0.0361, +0.1827] (n=10, excludes 0)",
+  "printed_point": 0.096,
+  "text": "under aggressive alpha extension the gap shrinks to +0.096 and covers 0",
+  "verdict": "HALF-RIGHT: the shrink is real and close to the printed magnitude, but the CI does not cover 0 at this extension depth. Because C-a has not saturated, deeper extension would shrink the gap further and could yet reach 0 -- so 'covers 0' is unsupported AT THIS DEPTH rather than refuted outright."
+ },
+ "module": "src/v10_regen_alphaext.py",
+ "saturation": {
+  "in_budget_at_max_alpha": {
+   "C-a": {
+    "n": 10,
+    "of": 30
+   },
+   "C-ref": {
+    "n": 0,
+    "of": 30
+   }
+  },
+  "max_alpha_probed": 128.0,
+  "note": "C-a still in budget at the largest probed alpha means the extension is NOT exhaustive: its ceiling lies beyond the grid, so the measured gap is an UPPER bound on how far it would shrink under unbounded extension. 'Aggressive' is therefore relative to this grid, not absolute.",
+  "saturated": false
+ },
+ "status": "MEASURED (post-hoc; the deployment grid was frozen pre-DEC)"
+}

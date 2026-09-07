@@ -1,0 +1,39 @@
+[v8q 08-28 16:20:06] queue start
+[v8q 08-28 16:20:06] DEC small tier start
+[v8q 08-28 16:43:51] DEC gemma rc=0
+[v8q 08-28 17:10:44] DEC llama rc=0
+[v8q 08-28 19:43:24] DEC qwen  rc=0
+[v8q 08-28 21:03:35] DEC phi   rc=0
+[v8q 08-28 21:03:35] DEC 7-9B tier start
+[v8q 08-28 21:42:36] DEC qwen7b rc=0
+[v8q 08-28 21:42:37] DEC analysis rc=0
+[v8q 08-28 21:51:14] SUP1 designers rc=137
+[v8q 08-28 21:51:46] SUP1 rc=0
+[v8q2 08-28 21:52:12] follow-up queue armed; waiting for main queue and natural arm to exit
+[v8q 08-28 23:24:18] SPC small rc=0
+[v8q 08-29 00:18:00] SPC big   rc=137
+[v8q 08-29 00:19:34] INS elicit rc=0
+[v8q3 08-29 00:19:38] armed; waiting for queues 1 and 2
+[v8q 08-29 00:48:30] INS-B (base vs instruct) rc=0
+[v8q4 08-29 00:50:00] armed; waiting for all other v8 jobs
+[v8q 08-29 04:16:03] INS-A (IFEval collateral) rc=0
+[v8q 08-29 04:16:03] queue done
+[v8q2 08-29 04:16:14] predecessors done; starting serial follow-up
+[v8q2 08-29 04:27:42] SUP1 designers (retry) rc=0
+[v8q2 08-29 04:28:21] SUP1 analysis (rerun) rc=0
+[v8q2 08-29 04:28:33] DEC deep (conditional) rc=1
+[v8q2 08-29 04:28:34] figures rc=0
+[v8q2 08-29 04:28:34] follow-up queue done
+[v8q3 08-29 04:28:39] starting SPC big retry
+[v8q3 08-29 04:41:56] SPC big (retry) rc=137
+[v8q3 08-29 04:41:58] figures rc=0
+[v8q3 08-29 04:41:58] queue3 done
+[v8q4 08-29 04:42:02] starting INS-BP
+[v8q5 08-29 04:43:48] armed; waiting for all other v8 jobs
+[v8q4 08-29 05:36:52] INS-BP rc=0
+[v8q4 08-29 05:36:53] figures rc=0
+[v8q4 08-29 05:36:53] queue4 done
+[v8q5 08-29 05:37:19] starting SPC big retry #2
+[v8q5 08-29 05:46:37] SPC big (retry2) rc=0
+[v8q5 08-29 05:46:39] figures rc=0
+[v8q5 08-29 05:46:39] queue5 done

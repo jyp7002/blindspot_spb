@@ -1,0 +1,66 @@
+# v11 IFEVAL — generation-side collateral, widened.
+#
+# WHAT THIS FIXES. IFEval is the ONLY generation-side collateral measurement in
+# the paper: every other budget number (MMLU, perplexity) is likelihood-only,
+# so IFEval carries the whole claim that the edit does not damage
+# instruction-following. It currently rests on
+#
+#     2 targets x 1 axis x 1 seed, 200 of 541 prompts
+#
+# which the Limitations section lists verbatim as a sample-size caveat. One
+# target (llama) shows -0.022, about 1.1 SE -- a single additional target could
+# change how that reads.
+#
+# WHAT IS ADDED (deliberately small: two things, not a rebuild):
+#   1. gemma-2-9b-it as a THIRD target. Same 7-9B tier as the two published
+#      ones, and a third model family, so the arm stops being "qwen and llama".
+#   2. bbq_Age as a SECOND axis, on all three targets. The published arm is
+#      occupation->gender only, so nothing currently says whether the
+#      generation-side result is axis-specific.
+# Seeds stay at [0] and the prompt bound stays at 200: this is a breadth
+# extension, not a depth one, and both of those changes would break
+# comparability with the published cells for no new claim.
+#
+# THE PUBLISHED CELLS ARE RE-RUN, NOT REUSED -- READ THIS BEFORE LAUNCHING.
+# The lm-eval version used for the PUBLISHED IFEval numbers is recorded
+# NOWHERE: not in PREREGISTRATION.md, not in the run logs, not in the
+# artifacts. run_ws2_determinism.py already attributes a cross-panel MMLU
+# divergence to a `transformers` rebuild, so a harness-version difference
+# inside one arm is a live risk, not a theoretical one. The two published cells
+# are therefore listed below with `published: true` and are re-run under the
+# pinned lm-eval, so that every cell in the arm shares one harness version.
+#   * If the re-run REPRODUCES the published values, cite the widened arm.
+#   * If it does NOT, the published IFEval numbers are version-dependent and
+#     that fact belongs in the paper -- it does not get quietly overwritten.
+# Either way the old rows stay on disk; this writes to a new panel.
+#
+# WHY NOT MMLU 200 -> 1000 INSTEAD. Raising the MMLU item count changes the
+# collateral gate's integer grid (budget = round(0.02 * n_items) items), so
+# every panel would have to be re-run before any number could be compared to
+# any other. IFEval breadth is purely additive: every published number stays
+# valid. See experiments_v11.md II.
+
+panel: v11ins
+kind: ifeval
+out_panel: v11ins
+base_on: v8ins/A
+
+alphas: [2, 4, 8, 16]     # frozen grid; IFEval is scored at the SELECTED alpha
+seeds: [0]
+density: 0.01
+scale_mode: ref_tensor
+mmlu_n: 200
+ifeval_limit: 200         # stated bound, unchanged from the published arm
+
+cells:
+  # ---- published, re-run under the pinned harness (see the note above) ----
+  - {target: qwen7b_it,  hf: Qwen/Qwen2.5-7B-Instruct,        designer: qwen,  axis: occ_gender, published: true}
+  - {target: llama8b_it, hf: meta-llama/Llama-3.1-8B-Instruct, designer: llama, axis: occ_gender, published: true}
+
+  # ---- NEW target: a third family in the same tier ----
+  - {target: gemma9b_it, hf: google/gemma-2-9b-it,             designer: gemma, axis: occ_gender}
+
+  # ---- NEW axis: is the generation-side result axis-specific? ----
+  - {target: qwen7b_it,  hf: Qwen/Qwen2.5-7B-Instruct,         designer: qwen,  axis: bbq_Age}
+  - {target: llama8b_it, hf: meta-llama/Llama-3.1-8B-Instruct, designer: llama, axis: bbq_Age}
+  - {target: gemma9b_it, hf: google/gemma-2-9b-it,             designer: gemma, axis: bbq_Age}

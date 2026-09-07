@@ -1,0 +1,1283 @@
+{
+ "alpha_grid": {
+  "alphas_observed": [
+   2.0,
+   4.0,
+   8.0,
+   16.0
+  ],
+  "by_condition": {
+   "C-a": {
+    "at_grid_max": 27,
+    "by_alpha": {
+     "16.0": 27,
+     "2.0": 3,
+     "4.0": 0,
+     "8.0": 0
+    },
+    "n_runs": 30
+   },
+   "C-b": {
+    "at_grid_max": 14,
+    "by_alpha": {
+     "16.0": 14,
+     "2.0": 8,
+     "4.0": 6,
+     "8.0": 2
+    },
+    "n_runs": 30
+   },
+   "C-bottom": {
+    "at_grid_max": 13,
+    "by_alpha": {
+     "16.0": 13,
+     "2.0": 8,
+     "4.0": 5,
+     "8.0": 4
+    },
+    "n_runs": 30
+   },
+   "C-layershuf": {
+    "at_grid_max": 13,
+    "by_alpha": {
+     "16.0": 13,
+     "2.0": 10,
+     "4.0": 3,
+     "8.0": 4
+    },
+    "n_runs": 30
+   },
+   "C-rand": {
+    "at_grid_max": 8,
+    "by_alpha": {
+     "16.0": 8,
+     "2.0": 7,
+     "4.0": 5,
+     "8.0": 10
+    },
+    "n_runs": 30
+   },
+   "C-ref": {
+    "at_grid_max": 19,
+    "by_alpha": {
+     "16.0": 19,
+     "2.0": 0,
+     "4.0": 0,
+     "8.0": 11
+    },
+    "n_runs": 30
+   },
+   "C-tensorshuf": {
+    "at_grid_max": 10,
+    "by_alpha": {
+     "16.0": 10,
+     "2.0": 10,
+     "4.0": 1,
+     "8.0": 0
+    },
+    "n_runs": 21
+   }
+  },
+  "field": "v9_selected_alpha (present only in the re-scored tree; the as-run results/v8dec rows carry no selected alpha, so any alpha-selection count quoted from v8 is an as-run number)",
+  "grid_max": 16.0,
+  "not_computed_here": "The alpha-EXTENSION counterfactual (extrapolating grid-capped C-a runs past the grid) is NOT computed by this module. It is re-computable under the v9 gate \u2014 results/v8dec/alpha_trace.jsonl carries per-alpha bias_reduction, dmmlu and ppl_ratio for all four alphas, which is exactly what src/v9_gate.py re-gates \u2014 but it needs the per-alpha curve, not this panel's selected value. Any extension number still in the manuscript is an AS-RUN v8 quantity until that is done.",
+  "reading": "C-a is GRID-limited: its in-budget argmax piles up at the largest alpha in the grid. C-ref's argmax sits below the grid max in the rest of its runs. Counts are per RUN (cell x seed) and are ARGMAX counts, not budget-availability counts \u2014 the two are different quantities and must not be quoted interchangeably."
+ },
+ "artifact": "v10_dec_analysis_v9",
+ "blocked": [],
+ "conditions_ordered_by_v9_mean_desc": [
+  "C-ref",
+  "C-a",
+  "C-tensorshuf",
+  "C-layershuf",
+  "C-b",
+  "C-rand",
+  "C-bottom"
+ ],
+ "conventions": {
+  "absent_condition": "null (NOT 0.0) \u2014 structurally not run in that cell",
+  "bootstrap": "percentile, 10k resamples, seed 0, CELL is the unit",
+  "budget_fail": "nan/None removal -> 0.0",
+  "cell": "(target, axis); value = mean over its rows (seeds/designers)",
+  "paired_pair_order": "cells in panel insertion order (v9_regen.dec)",
+  "per_condition_ci_cell_order": "cells sorted by (target, axis)"
+ },
+ "coverage": {
+  "axes": [
+   "bbq_Age",
+   "bbq_Race_ethnicity",
+   "occ_gender",
+   "ss_intra"
+  ],
+  "benchmark_families": {
+   "BBQ": 2,
+   "StereoSet": 1,
+   "templated": 1
+  },
+  "cells": [
+   "gemma|occ_gender",
+   "llama|occ_gender",
+   "phi|bbq_Age",
+   "phi|occ_gender",
+   "phi|ss_intra",
+   "qwen|bbq_Age",
+   "qwen|bbq_Race_ethnicity",
+   "qwen|occ_gender",
+   "qwen|ss_intra",
+   "qwen7b|occ_gender"
+  ],
+  "cells_per_benchmark_family": {
+   "BBQ": 3,
+   "StereoSet": 2,
+   "templated": 5
+  },
+  "density": [
+   0.01
+  ],
+  "designers": [
+   "gemma_3b",
+   "llama_3b",
+   "phi_3b",
+   "qwen",
+   "qwen_3b"
+  ],
+  "family_rule": "src/v8_env.axis_family (bbq_->BBQ, crows_->CrowS, ss_->StereoSet, else templated)",
+  "n_axes": 4,
+  "n_benchmark_families": 3,
+  "n_cells": 10,
+  "n_targets": 5,
+  "roles": [
+   "self"
+  ],
+  "scale_mode": [
+   "ref_tensor"
+  ],
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "targets": [
+   "gemma",
+   "llama",
+   "phi",
+   "qwen",
+   "qwen7b"
+  ]
+ },
+ "delta_tensor_n_explained": {
+  "cells_without_C_tensorshuf": [
+   "phi|bbq_Age",
+   "phi|occ_gender",
+   "phi|ss_intra"
+  ],
+  "cells_without_any_LOPO": [
+   "phi|bbq_Age",
+   "phi|occ_gender",
+   "phi|ss_intra"
+  ],
+  "evidence": "results_v9/v8dec/removal.jsonl contains no condition='C-tensorshuf' row for target='phi'",
+  "lopo_conditions_in_panel": [
+   "C-ref-no_k_proj",
+   "C-ref-no_o_proj",
+   "C-ref-no_q_proj",
+   "C-ref-no_v_proj"
+  ],
+  "n": 7,
+  "n_cells_in_panel": 10,
+  "reason": "The three phi cells carry no C-tensorshuf rows and no LOPO rows. Phi-3.5-mini fuses q/k/v into a single qkv_proj, so ATTN resolves to ['qkv_proj'] alone: there is no shape-compatible sibling projection to permute the sign pattern with, and no separate q/k/v/o module to leave out (run_dec.py, the structural exclusion). Those cells are ABSENT, not zero \u2014 zero-filling them would put fabricated evidence into a paired contrast.",
+  "targets_without_C_tensorshuf": [
+   "phi"
+  ]
+ },
+ "derived": {
+  "C_a_share_of_C_ref": 0.19714374194118808,
+  "concentration_ratio_C_ref_over_C_a": 5.072441002455558,
+  "delta_selection_pct_of_C_ref_range": [
+   47.56586372514693,
+   102.7083923000011
+  ]
+ },
+ "draft_conflicts_binary_debiaser_draft_v3": [
+  {
+   "computed": 0.045485,
+   "computed_at_draft_precision": "+0.045",
+   "condition": "C-tensorshuf",
+   "draft_line": 115,
+   "draft_says": "C-tensorshuf = +0.046",
+   "kind": "per_condition_mean"
+  },
+  {
+   "computed": 0.004451,
+   "computed_at_draft_precision": "+0.004",
+   "condition": "C-layershuf",
+   "draft_line": 116,
+   "draft_says": "C-layershuf = +0.005",
+   "kind": "per_condition_mean"
+  },
+  {
+   "computed": 3,
+   "draft_line": 10,
+   "draft_says": "spanning four benchmark famil",
+   "kind": "benchmark_family_count"
+  },
+  {
+   "computed": 3,
+   "draft_line": 109,
+   "draft_says": "across four benchmark famil",
+   "kind": "benchmark_family_count"
+  },
+  {
+   "computed": "27/30 runs at alpha=16.0",
+   "draft_line": 126,
+   "draft_says": "argmax at the largest \u03b1 in 26/30 runs",
+   "kind": "C-a_argmax_at_grid_max"
+  }
+ ],
+ "estimands": {
+  "C-a minus C-rand": {
+   "cells_absent": [],
+   "cells_used": [
+    "gemma|occ_gender",
+    "llama|occ_gender",
+    "qwen|occ_gender",
+    "qwen|bbq_Age",
+    "qwen|bbq_Race_ethnicity",
+    "qwen|ss_intra",
+    "phi|occ_gender",
+    "phi|bbq_Age",
+    "phi|ss_intra",
+    "qwen7b|occ_gender"
+   ],
+   "formatted": "+0.0682 [+0.0300, +0.1120] (n=10, excludes 0)",
+   "hi": 0.11199465787964966,
+   "lo": 0.030005361980142566,
+   "minuend": "C-a",
+   "n": 10,
+   "point": 0.06822969264107137,
+   "registered": true,
+   "status": "excludes 0",
+   "subtrahend": "C-rand"
+  },
+  "Delta_location": {
+   "cells_absent": [],
+   "cells_used": [
+    "gemma|occ_gender",
+    "llama|occ_gender",
+    "qwen|occ_gender",
+    "qwen|bbq_Age",
+    "qwen|bbq_Race_ethnicity",
+    "qwen|ss_intra",
+    "phi|occ_gender",
+    "phi|bbq_Age",
+    "phi|ss_intra",
+    "qwen7b|occ_gender"
+   ],
+   "formatted": "+0.3487 [+0.2205, +0.4877] (n=10, excludes 0)",
+   "hi": 0.4876649493196915,
+   "lo": 0.22052383291165337,
+   "minuend": "C-ref",
+   "n": 10,
+   "point": 0.34872520009456653,
+   "registered": true,
+   "status": "excludes 0",
+   "subtrahend": "C-layershuf"
+  },
+  "Delta_null": {
+   "cells_absent": [],
+   "cells_used": [
+    "gemma|occ_gender",
+    "llama|occ_gender",
+    "qwen|occ_gender",
+    "qwen|bbq_Age",
+    "qwen|bbq_Race_ethnicity",
+    "qwen|ss_intra",
+    "phi|occ_gender",
+    "phi|bbq_Age",
+    "phi|ss_intra",
+    "qwen7b|occ_gender"
+   ],
+   "formatted": "+0.3518 [+0.2216, +0.4922] (n=10, excludes 0)",
+   "hi": 0.49215513300039876,
+   "lo": 0.22164276079214504,
+   "minuend": "C-ref",
+   "n": 10,
+   "point": 0.3517795546288511,
+   "registered": true,
+   "status": "excludes 0",
+   "subtrahend": "C-rand"
+  },
+  "Delta_selection": {
+   "cells_absent": [],
+   "cells_used": [
+    "gemma|occ_gender",
+    "llama|occ_gender",
+    "qwen|occ_gender",
+    "qwen|bbq_Age",
+    "qwen|bbq_Race_ethnicity",
+    "qwen|ss_intra",
+    "phi|occ_gender",
+    "phi|bbq_Age",
+    "phi|ss_intra",
+    "qwen7b|occ_gender"
+   ],
+   "formatted": "+0.2835 [+0.1692, +0.4072] (n=10, excludes 0)",
+   "hi": 0.40721210086913906,
+   "lo": 0.16917605354415527,
+   "minuend": "C-ref",
+   "n": 10,
+   "point": 0.28354986198777976,
+   "registered": true,
+   "status": "excludes 0",
+   "subtrahend": "C-a"
+  },
+  "Delta_sign": {
+   "cells_absent": [],
+   "cells_used": [
+    "gemma|occ_gender",
+    "llama|occ_gender",
+    "qwen|occ_gender",
+    "qwen|bbq_Age",
+    "qwen|bbq_Race_ethnicity",
+    "qwen|ss_intra",
+    "phi|occ_gender",
+    "phi|bbq_Age",
+    "phi|ss_intra",
+    "qwen7b|occ_gender"
+   ],
+   "formatted": "+0.3496 [+0.2203, +0.4898] (n=10, excludes 0)",
+   "hi": 0.4897587482392177,
+   "lo": 0.22026387072338566,
+   "minuend": "C-ref",
+   "n": 10,
+   "point": 0.3495996361110737,
+   "registered": true,
+   "status": "excludes 0",
+   "subtrahend": "C-b"
+  },
+  "Delta_tensor": {
+   "cells_absent": [
+    "phi|bbq_Age",
+    "phi|occ_gender",
+    "phi|ss_intra"
+   ],
+   "cells_used": [
+    "gemma|occ_gender",
+    "llama|occ_gender",
+    "qwen|occ_gender",
+    "qwen|bbq_Age",
+    "qwen|bbq_Race_ethnicity",
+    "qwen|ss_intra",
+    "qwen7b|occ_gender"
+   ],
+   "formatted": "+0.3809 [+0.2488, +0.5201] (n=7, excludes 0)",
+   "hi": 0.5200955337007802,
+   "lo": 0.24880833781773193,
+   "minuend": "C-ref",
+   "n": 7,
+   "point": 0.38087666092308964,
+   "registered": true,
+   "status": "excludes 0",
+   "subtrahend": "C-tensorshuf"
+  }
+ },
+ "figure": "fig2 (headline) \u2014 seven-condition decomposition",
+ "gate": "v9 integer-item collateral gate (<=4 of 200 MMLU items)",
+ "module": "src/v10_regen_dec.py",
+ "n_cells": 10,
+ "per_cell": {
+  "gemma|occ_gender": {
+   "axis": "occ_gender",
+   "axis_family": "templated",
+   "conditions_absent": [],
+   "delta_selection": 0.5979797671643247,
+   "delta_selection_pct_of_C_ref": 86.30569604371777,
+   "n_rows": {
+    "C-a": 3,
+    "C-b": 3,
+    "C-bottom": 3,
+    "C-layershuf": 3,
+    "C-rand": 3,
+    "C-ref": 3,
+    "C-tensorshuf": 3
+   },
+   "target": "gemma",
+   "values": {
+    "C-a": 0.09488269102316349,
+    "C-b": 0.009604341150006338,
+    "C-bottom": 0.0031492017999145507,
+    "C-layershuf": 0.003053792961772809,
+    "C-rand": 0.004059487691593884,
+    "C-ref": 0.6928624581874882,
+    "C-tensorshuf": 0.31695048698426587
+   }
+  },
+  "llama|occ_gender": {
+   "axis": "occ_gender",
+   "axis_family": "templated",
+   "conditions_absent": [],
+   "delta_selection": 0.5717650795577878,
+   "delta_selection_pct_of_C_ref": 93.00494596580032,
+   "n_rows": {
+    "C-a": 3,
+    "C-b": 3,
+    "C-bottom": 3,
+    "C-layershuf": 3,
+    "C-rand": 3,
+    "C-ref": 3,
+    "C-tensorshuf": 3
+   },
+   "target": "llama",
+   "values": {
+    "C-a": 0.04300338637738584,
+    "C-b": 0.0077017827370665275,
+    "C-bottom": -8.38590386671445e-05,
+    "C-layershuf": 0.008922582320346484,
+    "C-rand": 0.0018852474133767376,
+    "C-ref": 0.6147684659351736,
+    "C-tensorshuf": -0.0057586114211283235
+   }
+  },
+  "phi|bbq_Age": {
+   "axis": "bbq_Age",
+   "axis_family": "BBQ",
+   "conditions_absent": [
+    "C-tensorshuf"
+   ],
+   "delta_selection": 0.2529495507046796,
+   "delta_selection_pct_of_C_ref": 76.44676808161236,
+   "n_rows": {
+    "C-a": 3,
+    "C-b": 3,
+    "C-bottom": 3,
+    "C-layershuf": 3,
+    "C-rand": 3,
+    "C-ref": 3
+   },
+   "target": "phi",
+   "values": {
+    "C-a": 0.07793369923812758,
+    "C-b": 0.003113030523493691,
+    "C-bottom": 0.0007176051969113676,
+    "C-layershuf": 0.004715673819832196,
+    "C-rand": -0.0001401355301124211,
+    "C-ref": 0.3308832499428072,
+    "C-tensorshuf": null
+   }
+  },
+  "phi|occ_gender": {
+   "axis": "occ_gender",
+   "axis_family": "templated",
+   "conditions_absent": [
+    "C-tensorshuf"
+   ],
+   "delta_selection": 0.1023199829134834,
+   "delta_selection_pct_of_C_ref": 87.97755427651383,
+   "n_rows": {
+    "C-a": 3,
+    "C-b": 3,
+    "C-bottom": 3,
+    "C-layershuf": 3,
+    "C-rand": 3,
+    "C-ref": 3
+   },
+   "target": "phi",
+   "values": {
+    "C-a": 0.01398238961200334,
+    "C-b": 0.005168959585150512,
+    "C-bottom": 0.0012911718217567536,
+    "C-layershuf": 0.003744430276983494,
+    "C-rand": 0.0001510338375145063,
+    "C-ref": 0.11630237252548674,
+    "C-tensorshuf": null
+   }
+  },
+  "phi|ss_intra": {
+   "axis": "ss_intra",
+   "axis_family": "StereoSet",
+   "conditions_absent": [
+    "C-tensorshuf"
+   ],
+   "delta_selection": 0.0895294252925751,
+   "delta_selection_pct_of_C_ref": 89.4903508433668,
+   "n_rows": {
+    "C-a": 3,
+    "C-b": 3,
+    "C-bottom": 3,
+    "C-layershuf": 3,
+    "C-rand": 3,
+    "C-ref": 3
+   },
+   "target": "phi",
+   "values": {
+    "C-a": 0.010514238017312558,
+    "C-b": 0.0008938458947752026,
+    "C-bottom": 0.0006280708026191739,
+    "C-layershuf": 0.00032064430922714343,
+    "C-rand": 0.0010426037671559345,
+    "C-ref": 0.10004366330988766,
+    "C-tensorshuf": null
+   }
+  },
+  "qwen7b|occ_gender": {
+   "axis": "occ_gender",
+   "axis_family": "templated",
+   "conditions_absent": [],
+   "delta_selection": 0.449669311394412,
+   "delta_selection_pct_of_C_ref": 67.78757915159431,
+   "n_rows": {
+    "C-a": 3,
+    "C-b": 3,
+    "C-bottom": 3,
+    "C-layershuf": 3,
+    "C-rand": 3,
+    "C-ref": 3,
+    "C-tensorshuf": 3
+   },
+   "target": "qwen7b",
+   "values": {
+    "C-a": 0.2136812861963504,
+    "C-b": 0.0005183941653183292,
+    "C-bottom": 0.0014932002096191461,
+    "C-layershuf": 0.01672735550000315,
+    "C-rand": 0.0012481219424212615,
+    "C-ref": 0.6633505975907624,
+    "C-tensorshuf": 0.0019020826504401918
+   }
+  },
+  "qwen|bbq_Age": {
+   "axis": "bbq_Age",
+   "axis_family": "BBQ",
+   "conditions_absent": [],
+   "delta_selection": 0.12040654006211654,
+   "delta_selection_pct_of_C_ref": 47.56586372514693,
+   "n_rows": {
+    "C-a": 3,
+    "C-b": 3,
+    "C-bottom": 3,
+    "C-layershuf": 3,
+    "C-rand": 3,
+    "C-ref": 3,
+    "C-tensorshuf": 3
+   },
+   "target": "qwen",
+   "values": {
+    "C-a": 0.13272991249526755,
+    "C-b": 0.0012769915055537522,
+    "C-bottom": 0.0003029128779535502,
+    "C-layershuf": 0.0009667116662730272,
+    "C-rand": 0.0010817221973253115,
+    "C-ref": 0.2531364525573841,
+    "C-tensorshuf": 0.0035065775332243456
+   }
+  },
+  "qwen|bbq_Race_ethnicity": {
+   "axis": "bbq_Race_ethnicity",
+   "axis_family": "BBQ",
+   "conditions_absent": [],
+   "delta_selection": 0.1462731110676972,
+   "delta_selection_pct_of_C_ref": 57.86152382760282,
+   "n_rows": {
+    "C-a": 3,
+    "C-b": 3,
+    "C-bottom": 3,
+    "C-layershuf": 3,
+    "C-rand": 3,
+    "C-ref": 3,
+    "C-tensorshuf": 3
+   },
+   "target": "qwen",
+   "values": {
+    "C-a": 0.10652546973621464,
+    "C-b": 0.004685548084613707,
+    "C-bottom": 0.002135059962270721,
+    "C-layershuf": 0.0009440889796057025,
+    "C-rand": 0.0009365343147305638,
+    "C-ref": 0.2527985808039118,
+    "C-tensorshuf": 0.0024923758442886856
+   }
+  },
+  "qwen|occ_gender": {
+   "axis": "occ_gender",
+   "axis_family": "templated",
+   "conditions_absent": [],
+   "delta_selection": 0.401624660984923,
+   "delta_selection_pct_of_C_ref": 102.7083923000011,
+   "n_rows": {
+    "C-a": 3,
+    "C-b": 3,
+    "C-bottom": 3,
+    "C-layershuf": 3,
+    "C-rand": 3,
+    "C-ref": 3,
+    "C-tensorshuf": 3
+   },
+   "target": "qwen",
+   "values": {
+    "C-a": -0.010590732801316541,
+    "C-b": 0.002629192632267907,
+    "C-bottom": 0.002066203312718636,
+    "C-layershuf": 0.003002517632177959,
+    "C-rand": 0.0032193509132959117,
+    "C-ref": 0.39103392818360644,
+    "C-tensorshuf": -0.0017110262006786818
+   }
+  },
+  "qwen|ss_intra": {
+   "axis": "ss_intra",
+   "axis_family": "StereoSet",
+   "conditions_absent": [],
+   "delta_selection": 0.10298119073579794,
+   "delta_selection_pct_of_C_ref": 88.33220444280077,
+   "n_rows": {
+    "C-a": 3,
+    "C-b": 3,
+    "C-bottom": 3,
+    "C-layershuf": 3,
+    "C-rand": 3,
+    "C-ref": 3,
+    "C-tensorshuf": 3
+   },
+   "target": "qwen",
+   "values": {
+    "C-a": 0.013602779273105298,
+    "C-b": 0.00017529165642893307,
+    "C-bottom": 0.00022566880784332297,
+    "C-layershuf": 0.002113940633524436,
+    "C-rand": 0.0004842262095988333,
+    "C-ref": 0.11658397000890323,
+    "C-tensorshuf": 0.0010159414151908093
+   }
+  }
+ },
+ "per_cell_table": {
+  "header": [
+   "cell",
+   "target",
+   "axis",
+   "axis_family",
+   "C-ref",
+   "C-a",
+   "C-tensorshuf",
+   "C-layershuf",
+   "C-b",
+   "C-rand",
+   "C-bottom"
+  ],
+  "note": "null = condition structurally absent in that cell (see delta_tensor_n_explained).",
+  "rows": [
+   [
+    "gemma|occ_gender",
+    "gemma",
+    "occ_gender",
+    "templated",
+    0.6928624581874882,
+    0.09488269102316349,
+    0.31695048698426587,
+    0.003053792961772809,
+    0.009604341150006338,
+    0.004059487691593884,
+    0.0031492017999145507
+   ],
+   [
+    "llama|occ_gender",
+    "llama",
+    "occ_gender",
+    "templated",
+    0.6147684659351736,
+    0.04300338637738584,
+    -0.0057586114211283235,
+    0.008922582320346484,
+    0.0077017827370665275,
+    0.0018852474133767376,
+    -8.38590386671445e-05
+   ],
+   [
+    "phi|bbq_Age",
+    "phi",
+    "bbq_Age",
+    "BBQ",
+    0.3308832499428072,
+    0.07793369923812758,
+    null,
+    0.004715673819832196,
+    0.003113030523493691,
+    -0.0001401355301124211,
+    0.0007176051969113676
+   ],
+   [
+    "phi|occ_gender",
+    "phi",
+    "occ_gender",
+    "templated",
+    0.11630237252548674,
+    0.01398238961200334,
+    null,
+    0.003744430276983494,
+    0.005168959585150512,
+    0.0001510338375145063,
+    0.0012911718217567536
+   ],
+   [
+    "phi|ss_intra",
+    "phi",
+    "ss_intra",
+    "StereoSet",
+    0.10004366330988766,
+    0.010514238017312558,
+    null,
+    0.00032064430922714343,
+    0.0008938458947752026,
+    0.0010426037671559345,
+    0.0006280708026191739
+   ],
+   [
+    "qwen|bbq_Age",
+    "qwen",
+    "bbq_Age",
+    "BBQ",
+    0.2531364525573841,
+    0.13272991249526755,
+    0.0035065775332243456,
+    0.0009667116662730272,
+    0.0012769915055537522,
+    0.0010817221973253115,
+    0.0003029128779535502
+   ],
+   [
+    "qwen|bbq_Race_ethnicity",
+    "qwen",
+    "bbq_Race_ethnicity",
+    "BBQ",
+    0.2527985808039118,
+    0.10652546973621464,
+    0.0024923758442886856,
+    0.0009440889796057025,
+    0.004685548084613707,
+    0.0009365343147305638,
+    0.002135059962270721
+   ],
+   [
+    "qwen|occ_gender",
+    "qwen",
+    "occ_gender",
+    "templated",
+    0.39103392818360644,
+    -0.010590732801316541,
+    -0.0017110262006786818,
+    0.003002517632177959,
+    0.002629192632267907,
+    0.0032193509132959117,
+    0.002066203312718636
+   ],
+   [
+    "qwen|ss_intra",
+    "qwen",
+    "ss_intra",
+    "StereoSet",
+    0.11658397000890323,
+    0.013602779273105298,
+    0.0010159414151908093,
+    0.002113940633524436,
+    0.00017529165642893307,
+    0.0004842262095988333,
+    0.00022566880784332297
+   ],
+   [
+    "qwen7b|occ_gender",
+    "qwen7b",
+    "occ_gender",
+    "templated",
+    0.6633505975907624,
+    0.2136812861963504,
+    0.0019020826504401918,
+    0.01672735550000315,
+    0.0005183941653183292,
+    0.0012481219424212615,
+    0.0014932002096191461
+   ]
+  ]
+ },
+ "per_condition": {
+  "C-a": {
+   "cell_max": 0.2136812861963504,
+   "cell_min": -0.010590732801316541,
+   "ci": {
+    "hi": 0.11327585944949829,
+    "lo": 0.0315655949437444,
+    "method": "percentile bootstrap of the mean, cell = resampling unit, 10k, seed 0",
+    "n": 10,
+    "note": "NEW IN v10 \u2014 no per-condition CI exists in any v9 artifact; v9 bootstrapped paired differences only.",
+    "point": 0.06962651191676142,
+    "registered": false,
+    "status": "excludes 0"
+   },
+   "formatted": "+0.0696 [+0.0316, +0.1133] (n=10, excludes 0)",
+   "max_cell": "qwen7b|occ_gender",
+   "mean": 0.06962651191676142,
+   "mean_excluding_max_cell": 0.05362042588569597,
+   "n_cells": 10,
+   "perturbs": "support",
+   "share_of_C_ref": 0.19714374194118808
+  },
+  "C-b": {
+   "cell_max": 0.009604341150006338,
+   "cell_min": 0.00017529165642893307,
+   "ci": {
+    "hi": 0.005552735145575804,
+    "lo": 0.0017802738742635142,
+    "method": "percentile bootstrap of the mean, cell = resampling unit, 10k, seed 0",
+    "n": 10,
+    "note": "NEW IN v10 \u2014 no per-condition CI exists in any v9 artifact; v9 bootstrapped paired differences only.",
+    "point": 0.0035767377934674896,
+    "registered": false,
+    "status": "excludes 0"
+   },
+   "formatted": "+0.0036 [+0.0018, +0.0056] (n=10, excludes 0)",
+   "max_cell": "gemma|occ_gender",
+   "mean": 0.0035767377934674896,
+   "mean_excluding_max_cell": 0.002907004087185396,
+   "n_cells": 10,
+   "perturbs": "sign",
+   "share_of_C_ref": 0.010127341627994158
+  },
+  "C-bottom": {
+   "cell_max": 0.0031492017999145507,
+   "cell_min": -8.38590386671445e-05,
+   "ci": {
+    "hi": 0.0018289302036557798,
+    "lo": 0.0006135324402529636,
+    "method": "percentile bootstrap of the mean, cell = resampling unit, 10k, seed 0",
+    "n": 10,
+    "note": "NEW IN v10 \u2014 no per-condition CI exists in any v9 artifact; v9 bootstrapped paired differences only.",
+    "point": 0.0011925235752940078,
+    "registered": false,
+    "status": "excludes 0"
+   },
+   "formatted": "+0.0012 [+0.0006, +0.0018] (n=10, excludes 0)",
+   "max_cell": "gemma|occ_gender",
+   "mean": 0.0011925235752940078,
+   "mean_excluding_max_cell": 0.000975114883669503,
+   "n_cells": 10,
+   "perturbs": "support",
+   "share_of_C_ref": 0.003376566677181897
+  },
+  "C-layershuf": {
+   "cell_max": 0.01672735550000315,
+   "cell_min": 0.00032064430922714343,
+   "ci": {
+    "hi": 0.007791034333061352,
+    "lo": 0.001998544290713531,
+    "method": "percentile bootstrap of the mean, cell = resampling unit, 10k, seed 0",
+    "n": 10,
+    "note": "NEW IN v10 \u2014 no per-condition CI exists in any v9 artifact; v9 bootstrapped paired differences only.",
+    "point": 0.00445117380997464,
+    "registered": false,
+    "status": "excludes 0"
+   },
+   "formatted": "+0.0045 [+0.0020, +0.0078] (n=10, excludes 0)",
+   "max_cell": "qwen7b|occ_gender",
+   "mean": 0.00445117380997464,
+   "mean_excluding_max_cell": 0.003087153622193694,
+   "n_cells": 10,
+   "perturbs": "location",
+   "share_of_C_ref": 0.012603260407157736
+  },
+  "C-rand": {
+   "cell_max": 0.004059487691593884,
+   "cell_min": -0.0001401355301124211,
+   "ci": {
+    "hi": 0.0022460979978216203,
+    "lo": 0.0006739370889582189,
+    "method": "percentile bootstrap of the mean, cell = resampling unit, 10k, seed 0",
+    "n": 10,
+    "note": "NEW IN v10 \u2014 no per-condition CI exists in any v9 artifact; v9 bootstrapped paired differences only.",
+    "point": 0.0013968192756900525,
+    "registered": false,
+    "status": "excludes 0"
+   },
+   "formatted": "+0.0014 [+0.0007, +0.0022] (n=10, excludes 0)",
+   "max_cell": "gemma|occ_gender",
+   "mean": 0.0013968192756900525,
+   "mean_excluding_max_cell": 0.0011009672294785156,
+   "n_cells": 10,
+   "perturbs": "both",
+   "share_of_C_ref": 0.00395501901853603
+  },
+  "C-ref": {
+   "cell_max": 0.6928624581874882,
+   "cell_min": 0.10004366330988766,
+   "ci": {
+    "hi": 0.4926004114383928,
+    "lo": 0.22408264064044273,
+    "method": "percentile bootstrap of the mean, cell = resampling unit, 10k, seed 0",
+    "n": 10,
+    "note": "NEW IN v10 \u2014 no per-condition CI exists in any v9 artifact; v9 bootstrapped paired differences only.",
+    "point": 0.35317637390454115,
+    "registered": false,
+    "status": "excludes 0"
+   },
+   "formatted": "+0.3532 [+0.2241, +0.4926] (n=10, excludes 0)",
+   "max_cell": "gemma|occ_gender",
+   "mean": 0.35317637390454115,
+   "mean_excluding_max_cell": 0.31543347565088037,
+   "n_cells": 10,
+   "perturbs": "reference",
+   "share_of_C_ref": 1.0
+  },
+  "C-tensorshuf": {
+   "cell_max": 0.31695048698426587,
+   "cell_min": -0.0057586114211283235,
+   "ci": {
+    "hi": 0.13672021011143887,
+    "lo": -0.0016059487515183081,
+    "method": "percentile bootstrap of the mean, cell = resampling unit, 10k, seed 0",
+    "n": 7,
+    "note": "NEW IN v10 \u2014 no per-condition CI exists in any v9 artifact; v9 bootstrapped paired differences only.",
+    "point": 0.045485403829371836,
+    "registered": false,
+    "status": "covers 0"
+   },
+   "formatted": "+0.0455 [-0.0016, +0.1367] (n=7, covers 0)",
+   "max_cell": "gemma|occ_gender",
+   "mean": 0.045485403829371836,
+   "mean_excluding_max_cell": 0.00024122330355617116,
+   "n_cells": 7,
+   "perturbs": "location",
+   "share_of_C_ref": 0.1287894864724613
+  }
+ },
+ "per_condition_ci_provenance": "PER-CONDITION CIs ARE NEW IN v10. They are not in the registered v9 set: v9 (src/v9_regen.py) bootstrapped paired differences only, so no per-condition interval exists in RESULTS_METHOD_v9.md or results/v9/v9_diff_report.json. Same estimator family and same resampling unit as the registered deltas (v10_common.boot_mean), but they are a v10 addition and the Fig 2 caption must say so.",
+ "perturb_classification": {
+  "C-a": "support",
+  "C-b": "sign",
+  "C-bottom": "support",
+  "C-layershuf": "location",
+  "C-rand": "both",
+  "C-ref": "reference",
+  "C-tensorshuf": "location"
+ },
+ "perturb_classification_provenance": "v10_common.DEC_PERTURBS \u2014 a v10 presentation choice (marker encoding), not a registered v9 quantity.",
+ "registered_qualifiers": {
+  "concentrated_not_exclusive_estimand": "C-a minus C-rand",
+  "concentrated_not_exclusive_value": "+0.0682 [+0.0300, +0.1120] (n=10, excludes 0)",
+  "grid_conditional_verbatim_from_RESULTS_METHOD_v9": "Magnitude remains **grid-conditional** (C-a is grid-limited, C-ref is collateral-limited) and the cell set was pre-selected as in-envelope. Both caveats survive the re-score unchanged."
+ },
+ "source": {
+  "as_run_file_deliberately_not_used": "results/v8/dec_analysis.json",
+  "budget_fail_rows_zeroed": 0,
+  "conditions_in_panel": [
+   "C-a",
+   "C-b",
+   "C-bottom",
+   "C-layershuf",
+   "C-rand",
+   "C-ref",
+   "C-ref-no_k_proj",
+   "C-ref-no_o_proj",
+   "C-ref-no_q_proj",
+   "C-ref-no_v_proj",
+   "C-tensorshuf"
+  ],
+  "conditions_present_but_out_of_scope": [
+   "C-ref-no_k_proj",
+   "C-ref-no_o_proj",
+   "C-ref-no_q_proj",
+   "C-ref-no_v_proj"
+  ],
+  "conditions_used_by_fig2": [
+   "C-ref",
+   "C-a",
+   "C-tensorshuf",
+   "C-layershuf",
+   "C-b",
+   "C-rand",
+   "C-bottom"
+  ],
+  "dedupe_key": "(target, axis, seed, designer, condition) \u2014 last wins",
+  "n_rows_after_dedupe": 285,
+  "n_rows_in_file": 285,
+  "panel": "v8dec",
+  "path": "results_v9/v8dec/removal.jsonl",
+  "rows_changed_by_v9_rescore": 17,
+  "tree": "results_v9 (RE-SCORED, citable)",
+  "v9_gate_mode": [
+   "integer"
+  ]
+ },
+ "unanimity": {
+  "annotation": "10/10 cells",
+  "cells_not_supporting": [],
+  "cells_supporting": [
+   "gemma|occ_gender",
+   "llama|occ_gender",
+   "phi|bbq_Age",
+   "phi|occ_gender",
+   "phi|ss_intra",
+   "qwen|bbq_Age",
+   "qwen|bbq_Race_ethnicity",
+   "qwen|occ_gender",
+   "qwen|ss_intra",
+   "qwen7b|occ_gender"
+  ],
+  "comparison": "C-ref > C-a",
+  "count": 10,
+  "denominator": 10
+ },
+ "verification_vs_published_v9": {
+  "checks": [
+   {
+    "computed": 0.353176,
+    "estimand": "C-ref",
+    "kind": "per_condition_mean",
+    "matches": true,
+    "places": 4,
+    "published": 0.3532,
+    "source": "RESULTS_METHOD_v9.md \u00a72"
+   },
+   {
+    "computed": 0.353176,
+    "estimand": "C-ref",
+    "kind": "per_condition_mean",
+    "matches": true,
+    "places": 4,
+    "published": 0.3532,
+    "source": "results/v9/v9_diff_report.json DEC_means_v9"
+   },
+   {
+    "computed": 0.069627,
+    "estimand": "C-a",
+    "kind": "per_condition_mean",
+    "matches": true,
+    "places": 4,
+    "published": 0.0696,
+    "source": "RESULTS_METHOD_v9.md \u00a72"
+   },
+   {
+    "computed": 0.069627,
+    "estimand": "C-a",
+    "kind": "per_condition_mean",
+    "matches": true,
+    "places": 4,
+    "published": 0.0696,
+    "source": "results/v9/v9_diff_report.json DEC_means_v9"
+   },
+   {
+    "computed": 0.045485,
+    "estimand": "C-tensorshuf",
+    "kind": "per_condition_mean",
+    "matches": true,
+    "places": 4,
+    "published": 0.0455,
+    "source": "RESULTS_METHOD_v9.md \u00a72"
+   },
+   {
+    "computed": 0.045485,
+    "estimand": "C-tensorshuf",
+    "kind": "per_condition_mean",
+    "matches": true,
+    "places": 4,
+    "published": 0.0455,
+    "source": "results/v9/v9_diff_report.json DEC_means_v9"
+   },
+   {
+    "computed": 0.004451,
+    "estimand": "C-layershuf",
+    "kind": "per_condition_mean",
+    "matches": true,
+    "places": 4,
+    "published": 0.0045,
+    "source": "RESULTS_METHOD_v9.md \u00a72"
+   },
+   {
+    "computed": 0.004451,
+    "estimand": "C-layershuf",
+    "kind": "per_condition_mean",
+    "matches": true,
+    "places": 4,
+    "published": 0.0045,
+    "source": "results/v9/v9_diff_report.json DEC_means_v9"
+   },
+   {
+    "computed": 0.003577,
+    "estimand": "C-b",
+    "kind": "per_condition_mean",
+    "matches": true,
+    "places": 4,
+    "published": 0.0036,
+    "source": "RESULTS_METHOD_v9.md \u00a72"
+   },
+   {
+    "computed": 0.003577,
+    "estimand": "C-b",
+    "kind": "per_condition_mean",
+    "matches": true,
+    "places": 4,
+    "published": 0.0036,
+    "source": "results/v9/v9_diff_report.json DEC_means_v9"
+   },
+   {
+    "computed": 0.001397,
+    "estimand": "C-rand",
+    "kind": "per_condition_mean",
+    "matches": true,
+    "places": 4,
+    "published": 0.0014,
+    "source": "RESULTS_METHOD_v9.md \u00a72"
+   },
+   {
+    "computed": 0.001397,
+    "estimand": "C-rand",
+    "kind": "per_condition_mean",
+    "matches": true,
+    "places": 4,
+    "published": 0.0014,
+    "source": "results/v9/v9_diff_report.json DEC_means_v9"
+   },
+   {
+    "computed": 0.001193,
+    "estimand": "C-bottom",
+    "kind": "per_condition_mean",
+    "matches": true,
+    "places": 4,
+    "published": 0.0012,
+    "source": "RESULTS_METHOD_v9.md \u00a72"
+   },
+   {
+    "computed": 0.001193,
+    "estimand": "C-bottom",
+    "kind": "per_condition_mean",
+    "matches": true,
+    "places": 4,
+    "published": 0.0012,
+    "source": "results/v9/v9_diff_report.json DEC_means_v9"
+   },
+   {
+    "computed": "+0.2835 [+0.1692, +0.4072] (n=10, excludes 0)",
+    "estimand": "Delta_selection",
+    "kind": "paired_delta",
+    "matches": true,
+    "places": 4,
+    "published": "+0.2835 [+0.1692, +0.4072] (n=10, excludes 0)",
+    "source": "RESULTS_METHOD_v9.md \u00a71"
+   },
+   {
+    "computed": "+0.2835 [+0.1692, +0.4072] (n=10, excludes 0)",
+    "estimand": "Delta_selection",
+    "kind": "paired_delta",
+    "matches": true,
+    "places": 4,
+    "published": "+0.2835 [+0.1692, +0.4072] (n=10, excludes 0)",
+    "source": "results/v9/v9_diff_report.json diff[DEC :: *].v9"
+   },
+   {
+    "computed": "+0.3496 [+0.2203, +0.4898] (n=10, excludes 0)",
+    "estimand": "Delta_sign",
+    "kind": "paired_delta",
+    "matches": true,
+    "places": 4,
+    "published": "+0.3496 [+0.2203, +0.4898] (n=10, excludes 0)",
+    "source": "RESULTS_METHOD_v9.md \u00a71"
+   },
+   {
+    "computed": "+0.3496 [+0.2203, +0.4898] (n=10, excludes 0)",
+    "estimand": "Delta_sign",
+    "kind": "paired_delta",
+    "matches": true,
+    "places": 4,
+    "published": "+0.3496 [+0.2203, +0.4898] (n=10, excludes 0)",
+    "source": "results/v9/v9_diff_report.json diff[DEC :: *].v9"
+   },
+   {
+    "computed": "+0.3518 [+0.2216, +0.4922] (n=10, excludes 0)",
+    "estimand": "Delta_null",
+    "kind": "paired_delta",
+    "matches": true,
+    "places": 4,
+    "published": "+0.3518 [+0.2216, +0.4922] (n=10, excludes 0)",
+    "source": "RESULTS_METHOD_v9.md \u00a71"
+   },
+   {
+    "computed": "+0.3518 [+0.2216, +0.4922] (n=10, excludes 0)",
+    "estimand": "Delta_null",
+    "kind": "paired_delta",
+    "matches": true,
+    "places": 4,
+    "published": "+0.3518 [+0.2216, +0.4922] (n=10, excludes 0)",
+    "source": "results/v9/v9_diff_report.json diff[DEC :: *].v9"
+   },
+   {
+    "computed": "+0.3487 [+0.2205, +0.4877] (n=10, excludes 0)",
+    "estimand": "Delta_location",
+    "kind": "paired_delta",
+    "matches": true,
+    "places": 4,
+    "published": "+0.3487 [+0.2205, +0.4877] (n=10, excludes 0)",
+    "source": "RESULTS_METHOD_v9.md \u00a71"
+   },
+   {
+    "computed": "+0.3487 [+0.2205, +0.4877] (n=10, excludes 0)",
+    "estimand": "Delta_location",
+    "kind": "paired_delta",
+    "matches": true,
+    "places": 4,
+    "published": "+0.3487 [+0.2205, +0.4877] (n=10, excludes 0)",
+    "source": "results/v9/v9_diff_report.json diff[DEC :: *].v9"
+   },
+   {
+    "computed": "+0.3809 [+0.2488, +0.5201] (n=7, excludes 0)",
+    "estimand": "Delta_tensor",
+    "kind": "paired_delta",
+    "matches": true,
+    "places": 4,
+    "published": "+0.3809 [+0.2488, +0.5201] (n=7, excludes 0)",
+    "source": "RESULTS_METHOD_v9.md \u00a71"
+   },
+   {
+    "computed": "+0.3809 [+0.2488, +0.5201] (n=7, excludes 0)",
+    "estimand": "Delta_tensor",
+    "kind": "paired_delta",
+    "matches": true,
+    "places": 4,
+    "published": "+0.3809 [+0.2488, +0.5201] (n=7, excludes 0)",
+    "source": "results/v9/v9_diff_report.json diff[DEC :: *].v9"
+   },
+   {
+    "computed": "+0.0682 [+0.0300, +0.1120] (n=10, excludes 0)",
+    "estimand": "C-a minus C-rand",
+    "kind": "paired_delta",
+    "matches": true,
+    "places": 4,
+    "published": "+0.0682 [+0.0300, +0.1120] (n=10, excludes 0)",
+    "source": "RESULTS_METHOD_v9.md \u00a71"
+   },
+   {
+    "computed": "+0.0682 [+0.0300, +0.1120] (n=10, excludes 0)",
+    "estimand": "C-a minus C-rand",
+    "kind": "paired_delta",
+    "matches": true,
+    "places": 4,
+    "published": "+0.0682 [+0.0300, +0.1120] (n=10, excludes 0)",
+    "source": "results/v9/v9_diff_report.json diff[DEC :: *].v9"
+   },
+   {
+    "computed": "10/10",
+    "estimand": "C-ref > C-a",
+    "kind": "unanimity",
+    "matches": true,
+    "published": "10/10",
+    "source": "RESULTS_METHOD_v9.md \u00a72"
+   },
+   {
+    "computed": 10,
+    "estimand": "C-ref > C-a",
+    "kind": "unanimity",
+    "matches": true,
+    "published": 10,
+    "source": "results/v9/v9_diff_report.json DEC_unanimity.v9"
+   }
+  ],
+  "n_checks": 28,
+  "n_failed": 0
+ }
+}

@@ -1,0 +1,231 @@
+{
+  "ingredient": "contrast_gap (frozen, sha256-verified)",
+  "frozen_utc": "2026-07-29T07:38:02Z",
+  "ord_cells": [
+    [
+      "gemma",
+      "occ_gender"
+    ],
+    [
+      "gemma",
+      "crows_socioeconomic"
+    ],
+    [
+      "qwen",
+      "occ_gender"
+    ],
+    [
+      "qwen",
+      "crows_socioeconomic"
+    ],
+    [
+      "llama",
+      "occ_gender"
+    ],
+    [
+      "llama",
+      "crows_socioeconomic"
+    ],
+    [
+      "phi",
+      "occ_gender"
+    ],
+    [
+      "phi",
+      "crows_socioeconomic"
+    ],
+    [
+      "falcon",
+      "crows_socioeconomic"
+    ]
+  ],
+  "flagged": [
+    [
+      "falcon",
+      "occ_gender"
+    ]
+  ],
+  "excluded": [
+    "granite"
+  ],
+  "outcome": "cross - self at strict budget, nan->0",
+  "cells": [
+    {
+      "tier": "bridge",
+      "cell": "gemma|occ_gender",
+      "self_designer": "gemma_3b",
+      "gap": 0.07833333333333332,
+      "penalty": -0.17443571150449888,
+      "flagged": false
+    },
+    {
+      "tier": "bridge",
+      "cell": "gemma|crows_socioeconomic",
+      "self_designer": "gemma_3b",
+      "gap": -0.023000000000000003,
+      "penalty": -0.08176420788432276,
+      "flagged": false
+    },
+    {
+      "tier": "bridge",
+      "cell": "qwen|occ_gender",
+      "self_designer": "qwen_3b",
+      "gap": -0.028,
+      "penalty": 0.051034855238453525,
+      "flagged": false
+    },
+    {
+      "tier": "bridge",
+      "cell": "qwen|crows_socioeconomic",
+      "self_designer": "qwen_3b",
+      "gap": 0.004,
+      "penalty": 0.22686901342037114,
+      "flagged": false
+    },
+    {
+      "tier": "bridge",
+      "cell": "llama|occ_gender",
+      "self_designer": "llama_3b",
+      "gap": 0.132,
+      "penalty": -0.05000585124334955,
+      "flagged": false
+    },
+    {
+      "tier": "bridge",
+      "cell": "llama|crows_socioeconomic",
+      "self_designer": "llama_3b",
+      "gap": 0.012000000000000002,
+      "penalty": -0.006383897260177969,
+      "flagged": false
+    },
+    {
+      "tier": "bridge",
+      "cell": "phi|occ_gender",
+      "self_designer": "phi_3b",
+      "gap": 0.011666666666666667,
+      "penalty": 0.2877318171749736,
+      "flagged": false
+    },
+    {
+      "tier": "bridge",
+      "cell": "phi|crows_socioeconomic",
+      "self_designer": "phi_3b",
+      "gap": 0.128,
+      "penalty": 0.0020436406135559138,
+      "flagged": false
+    },
+    {
+      "tier": "bridge",
+      "cell": "falcon|crows_socioeconomic",
+      "self_designer": "falcon_3b",
+      "gap": 0.10466666666666667,
+      "penalty": -0.06473389522049779,
+      "flagged": false
+    },
+    {
+      "tier": "bridge",
+      "cell": "falcon|occ_gender",
+      "self_designer": "falcon_3b",
+      "gap": 0.20099999999999998,
+      "penalty": 0.264231790360697,
+      "flagged": true
+    },
+    {
+      "tier": "7-9B",
+      "cell": "gemma|occ_gender",
+      "self_designer": "gemma",
+      "gap": 0.4789999999999999,
+      "penalty": -0.012360443143160427,
+      "flagged": false
+    },
+    {
+      "tier": "7-9B",
+      "cell": "gemma|crows_socioeconomic",
+      "self_designer": "gemma",
+      "gap": 0.07366666666666667,
+      "penalty": -0.10442185078480448,
+      "flagged": false
+    },
+    {
+      "tier": "7-9B",
+      "cell": "qwen|occ_gender",
+      "self_designer": "qwen",
+      "gap": 0.26633333333333337,
+      "penalty": 0.051494697148074864,
+      "flagged": false
+    },
+    {
+      "tier": "7-9B",
+      "cell": "qwen|crows_socioeconomic",
+      "self_designer": "qwen",
+      "gap": 0.04700000000000001,
+      "penalty": 0.017097403605779035,
+      "flagged": false
+    },
+    {
+      "tier": "7-9B",
+      "cell": "llama|occ_gender",
+      "self_designer": "llama",
+      "gap": 0.49300000000000005,
+      "penalty": -0.057137291793849077,
+      "flagged": false
+    },
+    {
+      "tier": "7-9B",
+      "cell": "llama|crows_socioeconomic",
+      "self_designer": "llama",
+      "gap": 0.09300000000000001,
+      "penalty": 0.005049821711325828,
+      "flagged": false
+    }
+  ],
+  "results": {
+    "all": {
+      "n": 16,
+      "spearman": -0.12058823529411765,
+      "ci": [
+        -0.6176470588235293,
+        0.4264705882352941
+      ],
+      "pearson": -0.13202286038122388
+    },
+    "bridge": {
+      "n": 10,
+      "spearman": -0.01818181818181818,
+      "ci": [
+        -0.6484848484848483,
+        0.6969696969696969
+      ],
+      "pearson": 0.024652349568126355
+    },
+    "t2x": {
+      "n": 6,
+      "spearman": -0.2,
+      "ci": [
+        -0.8857142857142858,
+        0.942857142857143
+      ],
+      "pearson": -0.04429898726078953
+    },
+    "no_phi": {
+      "n": 14,
+      "spearman": -0.015384615384615385,
+      "ci": [
+        -0.5692307692307692,
+        0.5384615384615385
+      ],
+      "pearson": -0.03197855712553617
+    },
+    "unflagged": {
+      "n": 15,
+      "spearman": -0.24642857142857136,
+      "ci": [
+        -0.7071428571428571,
+        0.3428571428571428
+      ],
+      "pearson": -0.22005234422523703
+    }
+  },
+  "boot": 10000,
+  "boot_seed": 0
+}

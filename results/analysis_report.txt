@@ -1,0 +1,1026 @@
+==============================================================================
+BLIND SPOT / SPB -- analysis report
+design.md §5.4 (frontier), §6 (inference), §5.6★/H3 (mechanism), §5.1 (bidirectional arms),
+§7 (kill switches), §12 (blind-spot correlation), plus the random-partition null and the direction sketches
+==============================================================================
+source          : /home/jovyan/Blind_spot_spb/results/runs.jsonl
+records loaded  : 1476   (malformed/truncated lines skipped: 0)
+arms            : ['gemma', 'llama', 'phi', 'qwen', 'smol']
+seeds           : [0, 1, 2]
+origins         : ['acquired', 'inherited']
+signals         : ['endogenous', 'exogenous']
+designer roles  : ['cross', 'cross2', 'gt', 'random', 'self', 'sibling']
+family factors  : ['cross', 'exogenous', 'null', 'same']
+variants        : ['binary-per_channel-s0.0', 'binary-per_tensor-s0.0', 'binary-per_tensor-s0.0-rand', 'binary-per_tensor-s0.5', 'binary-per_tensor-s0.9', 'binary-per_tensor-s0.99', 'binary-scalar-s0.0', 'fp--s0']
+alphas          : [16.0, 2.0, 4.0, 8.0]
+axes            : ['gen_fm', 'occ_gender']
+
+==============================================================================
+0. DESIGN COVERAGE (cells x seeds actually present)
+==============================================================================
+    arm    origin     signal  cross  cross2  gt  random  self  sibling
+  gemma  acquired endogenous     24       0   0      24    24       24
+  gemma  acquired  exogenous      0       0  24       0     0        0
+  gemma inherited endogenous     24       0   0      24    24       24
+  gemma inherited  exogenous      0       0  24       0     0        0
+  llama  acquired endogenous     24      24   0      24    24       24
+  llama  acquired  exogenous      0       0  24       0     0        0
+  llama inherited endogenous     24      24   0      24    24       24
+  llama inherited  exogenous      0       0  24       0     0        0
+    phi  acquired endogenous     24       0   0      24    24       24
+    phi  acquired  exogenous      0       0  24       0     0        0
+    phi inherited endogenous     24       0   0      24    24       24
+    phi inherited  exogenous      0       0  24       0     0        0
+   qwen  acquired endogenous     42      42   0      24    42       42
+   qwen  acquired  exogenous      0       0  42       0     0        0
+   qwen inherited endogenous     42      42   0      24    42       42
+   qwen inherited  exogenous      0       0  42       0     0        0
+   smol  acquired endogenous     24       0   0      24    24       24
+   smol  acquired  exogenous      0       0  24       0     0        0
+   smol inherited endogenous     24       0   0      24    24       24
+   smol inherited  exogenous      0       0  24       0     0        0
+
+  cells populated : 54/60 (grid sized on the arms seen so far: ['gemma', 'llama', 'phi', 'qwen', 'smol'])
+  MISSING         : gemma/inherited/endogenous/cross2, gemma/acquired/endogenous/cross2, phi/inherited/endogenous/cross2, phi/acquired/endogenous/cross2, smol/inherited/endogenous/cross2, smol/acquired/endogenous/cross2
+
+==============================================================================
+1. BIAS REDUCTION by origin x designer_role x signal (all alphas, all variants)
+==============================================================================
+     origin designer_role     signal   n  dBias_mean  dBias_sd     min    max
+   acquired         cross endogenous 138      0.3578    0.2336 -0.0206 0.7611
+   acquired        cross2 endogenous  66      0.4348    0.1170 -0.0165 0.5405
+   acquired        random endogenous 120      0.2752    0.2450 -0.1327 0.7284
+   acquired          self endogenous 138      0.3716    0.2409 -0.0131 0.7718
+   acquired       sibling endogenous 138      0.3639    0.2416 -0.0120 0.7746
+   acquired            gt  exogenous 138      0.1509    0.2816 -0.8514 0.5253
+  inherited         cross endogenous 138      0.3289    0.3022 -0.0283 0.8445
+  inherited        cross2 endogenous  66      0.4262    0.2398 -0.0043 0.7652
+  inherited        random endogenous 120      0.2569    0.2895 -0.0802 0.8413
+  inherited          self endogenous 138      0.1901    0.2520 -0.0470 0.7802
+  inherited       sibling endogenous 138      0.2841    0.3248 -0.1062 0.8501
+  inherited            gt  exogenous 138      0.4377    0.2935 -0.0083 0.8573
+
+  -- same table, main binary variant only (binary-per_tensor-s0.0) --
+     origin designer_role     signal  n  dBias_mean  dBias_sd     min    max
+   acquired         cross endogenous 60      0.5057    0.1235  0.2398 0.7611
+   acquired        cross2 endogenous 24      0.4579    0.0598  0.3566 0.5394
+   acquired        random endogenous 60      0.3757    0.2274 -0.1327 0.7284
+   acquired          self endogenous 60      0.5300    0.1207  0.3196 0.7718
+   acquired       sibling endogenous 60      0.5236    0.1287  0.3144 0.7746
+   acquired            gt  exogenous 60      0.1609    0.3638 -0.8514 0.5213
+  inherited         cross endogenous 60      0.4065    0.2750 -0.0283 0.8445
+  inherited        cross2 endogenous 24      0.4221    0.2216  0.0860 0.7652
+  inherited        random endogenous 60      0.3077    0.2832 -0.0802 0.8413
+  inherited          self endogenous 60      0.2421    0.2251 -0.0116 0.7802
+  inherited       sibling endogenous 60      0.3845    0.3185 -0.1062 0.8501
+  inherited            gt  exogenous 60      0.6383    0.1214  0.3356 0.8573
+
+==============================================================================
+1b. ABOVE-NULL SUMMARY -- every designer number as a GAP over the data-partition null (experiments_v2.md §N)
+==============================================================================
+  Raw numbers overstate every condition: negating any gendered minimal-pair
+  contrast already lands in the gender subspace, so the null is ~0.30, not ~0.
+
+  data-partition null, frontier dBias by arm x origin (budget=strict):
+    arm    origin  n  null_dBias     sd
+  gemma  acquired  2      0.3695 0.3560
+  gemma inherited  3      0.2648 0.3932
+  llama  acquired  3      0.0972 0.1546
+  llama inherited  3      0.1581 0.1306
+    phi  acquired  3      0.5765 0.1361
+    phi inherited  3      0.0993 0.0273
+   qwen  acquired  3      0.3564 0.2662
+   qwen inherited  3      0.4386 0.0777
+   smol  acquired  3      0.2681 0.2570
+   smol inherited  3      0.0704 0.1432
+
+  frontier dBias RAW vs ABOVE NULL (variant=binary-per_tensor-s0.0, budget=strict):
+     origin designer_role     signal  n  dBias  dBias_sd   null  dBias_above_null  above_null_sd
+   acquired         cross endogenous 14 0.5510    0.1200 0.3209            0.2301         0.2135
+   acquired        cross2 endogenous  5 0.4667    0.0764 0.1702            0.2964         0.2599
+   acquired            gt  exogenous 14 0.2227    0.3153 0.3419           -0.1193         0.4162
+   acquired          self endogenous 14 0.5323    0.1508 0.3209            0.2113         0.2166
+   acquired       sibling endogenous 15 0.5301    0.1372 0.3335            0.1966         0.2311
+  inherited         cross endogenous 15 0.5717    0.0953 0.2063            0.3655         0.2198
+  inherited        cross2 endogenous  6 0.5962    0.1079 0.2984            0.2979         0.2624
+  inherited            gt  exogenous 12 0.6619    0.0751 0.1916            0.4703         0.2271
+  inherited          self endogenous 15 0.3751    0.1403 0.2063            0.1688         0.2690
+  inherited       sibling endogenous 12 0.3979    0.1185 0.1916            0.2062         0.2624
+
+  null baseline granularity actually matched: {'arm/seed/origin': np.int64(147), 'arm/origin': np.int64(4)}
+
+  ... by arm x origin x family factor (per-arm reporting is mandatory, §N):
+    arm    origin designer_family_factor  n   dBias  dBias_sd   null  dBias_above_null  above_null_sd
+  gemma  acquired                  cross  3  0.5675    0.0274 0.3695            0.1980         0.2737
+  gemma  acquired              exogenous  3 -0.2934    0.2937 0.3695           -0.6629         0.1698
+  gemma  acquired                   same  6  0.5769    0.0467 0.3695            0.2075         0.2346
+  gemma inherited                  cross  3  0.6145    0.0429 0.2648            0.3497         0.3652
+  gemma inherited                   same  3  0.4116    0.0612 0.2648            0.1468         0.4365
+  llama  acquired                  cross  6  0.4944    0.0315 0.0972            0.3972         0.1359
+  llama  acquired              exogenous  2  0.4031    0.0087 0.0379            0.3652         0.1546
+  llama  acquired                   same  6  0.4985    0.0117 0.0972            0.4013         0.1400
+  llama inherited                  cross  6  0.5417    0.1579 0.1581            0.3835         0.1849
+  llama inherited              exogenous  3  0.7290    0.0274 0.1581            0.5709         0.1431
+  llama inherited                   same  6  0.5024    0.0483 0.1581            0.3443         0.0753
+    phi  acquired                  cross  3  0.7535    0.0076 0.5765            0.1770         0.1420
+    phi  acquired              exogenous  3  0.2088    0.0276 0.5765           -0.3677         0.1196
+    phi  acquired                   same  6  0.7520    0.0251 0.5765            0.1755         0.1298
+    phi inherited                  cross  3  0.6107    0.0253 0.0993            0.5114         0.0494
+    phi inherited              exogenous  3  0.6899    0.0268 0.0993            0.5906         0.0341
+    phi inherited                   same  6  0.3379    0.0741 0.0993            0.2386         0.0728
+   qwen  acquired                  cross  4  0.4357    0.0760 0.2795            0.1562         0.3021
+   qwen  acquired              exogenous  3  0.4150    0.0210 0.3564            0.0586         0.2467
+   qwen  acquired                   same  5  0.4189    0.0770 0.3257            0.0931         0.2584
+   qwen inherited                  cross  6  0.5673    0.0855 0.4386            0.1287         0.0990
+   qwen inherited              exogenous  3  0.5563    0.0155 0.4386            0.1176         0.0720
+   qwen inherited                   same  6  0.2975    0.2166 0.4386           -0.1411         0.2517
+   smol  acquired                  cross  3  0.4583    0.0104 0.2681            0.1903         0.2476
+   smol  acquired              exogenous  3  0.4401    0.0091 0.2681            0.1720         0.2543
+   smol  acquired                   same  6  0.3908    0.0749 0.2681            0.1228         0.2430
+   smol inherited                  cross  3  0.6078    0.0410 0.0704            0.5374         0.1798
+   smol inherited              exogenous  3  0.6724    0.0669 0.0704            0.6020         0.0856
+   smol inherited                   same  6  0.3897    0.0403 0.0704            0.3193         0.1466
+
+==============================================================================
+1c. SIGN-SHUFFLE NULL (variant '*-rand') -- must be ~0
+==============================================================================
+    arm   n  dBias_mean     sd     min    max  abs_mean  flat
+  gemma 120      0.0133 0.0220 -0.0149 0.0921    0.0133  True
+    phi 120      0.0027 0.0091 -0.0277 0.0329    0.0027  True
+   qwen  30     -0.0066 0.0057 -0.0184 0.0019    0.0066  True
+   smol 120      0.0090 0.0086 -0.0004 0.0442    0.0090  True
+
+  (frontier view -- what the shuffled-sign edit would score if treated like a designer:)
+    arm  n  frontier_dBias_mean
+  gemma 30               0.0209
+    phi 30               0.0095
+   qwen 10              -0.0043
+   smol 30               0.0144
+
+  arms with NO sign-shuffle null yet: ['llama']
+
+  OK: every covered arm is flat (|mean| < 0.05); the sign PATTERN is carrying the effect, not the scale.
+
+==============================================================================
+2. FRONTIER: bias reduction vs collateral (design.md §5.4)
+==============================================================================
+  budgets: strict = d_mmlu >= -0.02, ppl_ratio <= 1.1;  loose = d_mmlu >= -0.05, ppl_ratio <= 1.25
+
+  -- best achievable bias reduction per condition --
+    arm    origin designer_family_factor designer_role                     variant  n_rows  n_alpha  best_any  alpha_any  best_strict  alpha_strict  n_strict  best_loose  alpha_loose  n_loose
+  gemma  acquired                  cross         cross      binary-per_tensor-s0.0      12        4    0.6233    16.0000       0.5988        8.0000         8      0.5988       8.0000        9
+  gemma  acquired                  cross         cross binary-per_tensor-s0.0-rand      12        4    0.0848    16.0000       0.0848       16.0000        10      0.0848      16.0000       12
+  gemma  acquired              exogenous            gt      binary-per_tensor-s0.0      12        4   -0.0978     2.0000      -0.0978        2.0000         4     -0.0978       2.0000        9
+  gemma  acquired              exogenous            gt binary-per_tensor-s0.0-rand      12        4    0.0869    16.0000       0.0869       16.0000         8      0.0869      16.0000       12
+  gemma  acquired                   null        random      binary-per_tensor-s0.0      12        4    0.6212     2.0000       0.6212        2.0000         3      0.6212       2.0000        8
+  gemma  acquired                   null        random binary-per_tensor-s0.0-rand      12        4    0.0897    16.0000       0.0897       16.0000        10      0.0897      16.0000       12
+  gemma  acquired                   same          self      binary-per_tensor-s0.0      12        4    0.6276     4.0000       0.6276        4.0000         6      0.6276       4.0000        9
+  gemma  acquired                   same          self binary-per_tensor-s0.0-rand      12        4    0.0921    16.0000       0.0921       16.0000         9      0.0921      16.0000       12
+  gemma  acquired                   same       sibling      binary-per_tensor-s0.0      12        4    0.6087     8.0000       0.5542        4.0000         6      0.6087       8.0000        9
+  gemma  acquired                   same       sibling binary-per_tensor-s0.0-rand      12        4    0.0718    16.0000       0.0718       16.0000         9      0.0718      16.0000       12
+  gemma inherited                  cross         cross      binary-per_tensor-s0.0      12        4    0.8445    16.0000       0.6501        8.0000         8      0.8445      16.0000       12
+  gemma inherited                  cross         cross binary-per_tensor-s0.0-rand      12        4    0.0037    16.0000       0.0037       16.0000         9      0.0037      16.0000       12
+  gemma inherited              exogenous            gt      binary-per_tensor-s0.0      12        4    0.8573     2.0000          NaN           NaN         0      0.8573       2.0000        6
+  gemma inherited              exogenous            gt binary-per_tensor-s0.0-rand      12        4    0.0063    16.0000       0.0063       16.0000         9      0.0063      16.0000       12
+  gemma inherited                   null        random      binary-per_tensor-s0.0      12        4    0.8413    16.0000       0.7182        8.0000         5      0.8389      16.0000       10
+  gemma inherited                   null        random binary-per_tensor-s0.0-rand      12        4    0.0071    16.0000       0.0071       16.0000         9      0.0071      16.0000       12
+  gemma inherited                   same          self      binary-per_tensor-s0.0      12        4    0.7802    16.0000       0.4800        8.0000         9      0.7802      16.0000       12
+  gemma inherited                   same          self binary-per_tensor-s0.0-rand      12        4    0.0031    16.0000       0.0031       16.0000        11      0.0031      16.0000       12
+  gemma inherited                   same       sibling      binary-per_tensor-s0.0      12        4    0.8501     8.0000          NaN           NaN         0      0.8501       8.0000        9
+  gemma inherited                   same       sibling binary-per_tensor-s0.0-rand      12        4    0.0060    16.0000       0.0060       16.0000         9      0.0060      16.0000       12
+  llama  acquired                  cross         cross      binary-per_tensor-s0.0      12        4    0.5252    16.0000       0.4774        4.0000         6      0.4774       4.0000        6
+  llama  acquired                  cross         cross                      fp--s0      12        4    0.5252    16.0000       0.4806        2.0000         3      0.5198       4.0000        4
+  llama  acquired                  cross        cross2      binary-per_tensor-s0.0      12        4    0.5254     8.0000       0.5254        4.0000         6      0.5254       4.0000        6
+  llama  acquired                  cross        cross2                      fp--s0      12        4    0.5238     2.0000       0.5238        2.0000         3      0.5238       2.0000        3
+  llama  acquired              exogenous            gt      binary-per_tensor-s0.0      12        4    0.5213    16.0000       0.4092        2.0000         2      0.4210       2.0000        3
+  llama  acquired              exogenous            gt                      fp--s0      12        4    0.5240     8.0000          NaN           NaN         0      0.4415       2.0000        1
+  llama  acquired                   null        random      binary-per_tensor-s0.0      12        4    0.5133    16.0000       0.2159        2.0000         3      0.4250       4.0000        5
+  llama  acquired                   null        random                      fp--s0      12        4    0.5224    16.0000          NaN           NaN         0      0.4179       2.0000        3
+  llama  acquired                   same          self      binary-per_tensor-s0.0      12        4    0.5251     8.0000       0.5101        4.0000         6      0.5101       4.0000        6
+  llama  acquired                   same          self                      fp--s0      12        4    0.5253    16.0000       0.5162        2.0000         3      0.5178       4.0000        4
+  llama  acquired                   same       sibling      binary-per_tensor-s0.0      12        4    0.5164    16.0000       0.4925        4.0000         6      0.4925       4.0000        6
+  llama  acquired                   same       sibling                      fp--s0      12        4    0.5255    16.0000       0.4928        2.0000         2      0.4963       2.0000        3
+  llama inherited                  cross         cross      binary-per_tensor-s0.0      12        4    0.7476     8.0000       0.5228        4.0000         6      0.7476       8.0000        9
+  llama inherited                  cross         cross                      fp--s0      12        4    0.7671    16.0000       0.5875        2.0000         3      0.7508       4.0000        6
+  llama inherited                  cross        cross2      binary-per_tensor-s0.0      12        4    0.7652    16.0000       0.6879        8.0000         9      0.6879       8.0000        9
+  llama inherited                  cross        cross2                      fp--s0      12        4    0.7464     8.0000       0.7333        4.0000         6      0.7333       4.0000        6
+  llama inherited              exogenous            gt      binary-per_tensor-s0.0      12        4    0.7672    16.0000       0.7524        2.0000         3      0.7524       2.0000        5
+  llama inherited              exogenous            gt                      fp--s0      12        4    0.7672    16.0000          NaN           NaN         0      0.6177       2.0000        1
+  llama inherited                   null        random      binary-per_tensor-s0.0      12        4    0.7519    16.0000       0.2535        4.0000         5      0.5879       8.0000        9
+  llama inherited                   null        random                      fp--s0      12        4    0.7669    16.0000       0.3049        2.0000         2      0.6296       4.0000        6
+  llama inherited                   same          self      binary-per_tensor-s0.0      12        4    0.7272    16.0000       0.5437        8.0000         8      0.5437       8.0000        9
+  llama inherited                   same          self                      fp--s0      12        4    0.7663    16.0000       0.6648        4.0000         5      0.6648       4.0000        6
+  llama inherited                   same       sibling      binary-per_tensor-s0.0      12        4    0.7540    16.0000       0.5327        4.0000         6      0.7531       8.0000        9
+  llama inherited                   same       sibling                      fp--s0      12        4    0.7666     4.0000       0.7311        2.0000         3      0.7666       4.0000        6
+    phi  acquired                  cross         cross      binary-per_tensor-s0.0      12        4    0.7611     4.0000       0.7611        4.0000         6      0.7611       4.0000        9
+    phi  acquired                  cross         cross binary-per_tensor-s0.0-rand      12        4    0.0237    16.0000       0.0237       16.0000        12      0.0237      16.0000       12
+    phi  acquired              exogenous            gt      binary-per_tensor-s0.0      12        4    0.3492    16.0000       0.2385        2.0000         6      0.2385       2.0000        6
+    phi  acquired              exogenous            gt binary-per_tensor-s0.0-rand      12        4    0.0329    16.0000       0.0329       16.0000        11      0.0329      16.0000       12
+    phi  acquired                   null        random      binary-per_tensor-s0.0      12        4    0.7284    16.0000       0.6764        2.0000         6      0.6887       8.0000        9
+    phi  acquired                   null        random binary-per_tensor-s0.0-rand      12        4    0.0293    16.0000       0.0293       16.0000        12      0.0293      16.0000       12
+    phi  acquired                   same          self      binary-per_tensor-s0.0      12        4    0.7718    16.0000       0.7470        4.0000         6      0.7588       8.0000        9
+    phi  acquired                   same          self binary-per_tensor-s0.0-rand      12        4    0.0193    16.0000       0.0193       16.0000        12      0.0193      16.0000       12
+    phi  acquired                   same       sibling      binary-per_tensor-s0.0      12        4    0.7746     2.0000       0.7746        2.0000         6      0.7746       2.0000        9
+    phi  acquired                   same       sibling binary-per_tensor-s0.0-rand      12        4    0.0189    16.0000       0.0189       16.0000        12      0.0189      16.0000       12
+    phi inherited                  cross         cross      binary-per_tensor-s0.0      12        4    0.7324    16.0000       0.6359        8.0000         9      0.7324      16.0000       12
+    phi inherited                  cross         cross binary-per_tensor-s0.0-rand      12        4    0.0068     8.0000       0.0068        8.0000        12      0.0068       8.0000       12
+    phi inherited              exogenous            gt      binary-per_tensor-s0.0      12        4    0.7172     4.0000       0.7172        4.0000         6      0.7172       4.0000        9
+    phi inherited              exogenous            gt binary-per_tensor-s0.0-rand      12        4    0.0049    16.0000       0.0049       16.0000        12      0.0049      16.0000       12
+    phi inherited                   null        random      binary-per_tensor-s0.0      12        4    0.6998    16.0000       0.1195        4.0000         6      0.4459       8.0000        9
+    phi inherited                   null        random binary-per_tensor-s0.0-rand      12        4    0.0092     8.0000       0.0092        8.0000        12      0.0092       8.0000       12
+    phi inherited                   same          self      binary-per_tensor-s0.0      12        4    0.5664    16.0000       0.3485        8.0000         9      0.5664      16.0000       12
+    phi inherited                   same          self binary-per_tensor-s0.0-rand      12        4    0.0051     8.0000       0.0051        8.0000        12      0.0051       8.0000       12
+    phi inherited                   same       sibling      binary-per_tensor-s0.0      12        4    0.7285    16.0000       0.4450        8.0000         9      0.7285      16.0000       12
+    phi inherited                   same       sibling binary-per_tensor-s0.0-rand      12        4    0.0049     8.0000       0.0049        8.0000        12      0.0049       8.0000       12
+   qwen  acquired                  cross         cross     binary-per_channel-s0.0       3        3    0.4840     8.0000          NaN           NaN         0      0.4578       2.0000        1
+   qwen  acquired                  cross         cross      binary-per_tensor-s0.0      12        4    0.5438     4.0000       0.5438        4.0000         3      0.5438       4.0000        8
+   qwen  acquired                  cross         cross binary-per_tensor-s0.0-rand       3        3   -0.0060     2.0000      -0.0060        2.0000         3     -0.0060       2.0000        3
+   qwen  acquired                  cross         cross      binary-per_tensor-s0.5       3        3    0.4721     8.0000          NaN           NaN         0      0.4703       2.0000        2
+   qwen  acquired                  cross         cross      binary-per_tensor-s0.9       3        3    0.4953     4.0000          NaN           NaN         0      0.4773       2.0000        1
+   qwen  acquired                  cross         cross     binary-per_tensor-s0.99       3        3    0.4575     8.0000          NaN           NaN         0      0.3876       4.0000        2
+   qwen  acquired                  cross         cross          binary-scalar-s0.0       3        3    0.5373     4.0000       0.4611        8.0000         2      0.5373       4.0000        3
+   qwen  acquired                  cross         cross                      fp--s0      12        4    0.5378     2.0000          NaN           NaN         0      0.5378       2.0000        5
+   qwen  acquired                  cross        cross2     binary-per_channel-s0.0       3        3    0.5405     8.0000          NaN           NaN         0      0.4575       4.0000        2
+   qwen  acquired                  cross        cross2      binary-per_tensor-s0.0      12        4    0.5394     8.0000       0.3910        2.0000         2      0.5394       8.0000        9
+   qwen  acquired                  cross        cross2 binary-per_tensor-s0.0-rand       3        3   -0.0105     2.0000      -0.0105        2.0000         3     -0.0105       2.0000        3
+   qwen  acquired                  cross        cross2      binary-per_tensor-s0.5       3        3    0.5049     8.0000          NaN           NaN         0      0.4413       4.0000        2
+   qwen  acquired                  cross        cross2      binary-per_tensor-s0.9       3        3    0.4186     4.0000          NaN           NaN         0      0.4186       4.0000        2
+   qwen  acquired                  cross        cross2     binary-per_tensor-s0.99       3        3    0.4957     8.0000          NaN           NaN         0      0.3322       2.0000        1
+   qwen  acquired                  cross        cross2          binary-scalar-s0.0       3        3    0.4672     8.0000       0.4194        4.0000         2      0.4672       8.0000        3
+   qwen  acquired                  cross        cross2                      fp--s0      12        4    0.5395     4.0000          NaN           NaN         0      0.5367       4.0000        4
+   qwen  acquired              exogenous            gt     binary-per_channel-s0.0       3        3    0.1694     2.0000       0.1694        2.0000         2      0.1694       2.0000        2
+   qwen  acquired              exogenous            gt      binary-per_tensor-s0.0      12        4    0.4338     2.0000       0.4338        2.0000         6      0.4338       2.0000        9
+   qwen  acquired              exogenous            gt binary-per_tensor-s0.0-rand       3        3   -0.0138     2.0000      -0.0138        2.0000         3     -0.0138       2.0000        3
+   qwen  acquired              exogenous            gt      binary-per_tensor-s0.5       3        3    0.2912     2.0000       0.2912        2.0000         2      0.2912       2.0000        2
+   qwen  acquired              exogenous            gt      binary-per_tensor-s0.9       3        3    0.2099     2.0000       0.2099        2.0000         1      0.2099       2.0000        2
+   qwen  acquired              exogenous            gt     binary-per_tensor-s0.99       3        3    0.4093     2.0000       0.4093        2.0000         2      0.4093       2.0000        3
+   qwen  acquired              exogenous            gt          binary-scalar-s0.0       3        3    0.4972     2.0000       0.4972        2.0000         1      0.4972       2.0000        3
+   qwen  acquired              exogenous            gt                      fp--s0      12        4    0.5253    16.0000       0.0959        2.0000         2      0.0959       2.0000        4
+   qwen  acquired                   null        random      binary-per_tensor-s0.0      12        4    0.5193    16.0000       0.5105        4.0000         7      0.5105       4.0000        8
+   qwen  acquired                   null        random                      fp--s0      12        4    0.5444    16.0000       0.4689        4.0000         4      0.4689       4.0000        5
+   qwen  acquired                   same          self     binary-per_channel-s0.0       3        3    0.5359     4.0000          NaN           NaN         0      0.5359       4.0000        2
+   qwen  acquired                   same          self      binary-per_tensor-s0.0      12        4    0.5364    16.0000       0.5249        8.0000         3      0.5249       8.0000        9
+   qwen  acquired                   same          self binary-per_tensor-s0.0-rand       3        3   -0.0079     4.0000      -0.0079        4.0000         3     -0.0079       4.0000        3
+   qwen  acquired                   same          self      binary-per_tensor-s0.5       3        3    0.5349     4.0000          NaN           NaN         0      0.5349       4.0000        3
+   qwen  acquired                   same          self      binary-per_tensor-s0.9       3        3    0.4762     4.0000          NaN           NaN         0      0.4762       4.0000        2
+   qwen  acquired                   same          self     binary-per_tensor-s0.99       3        3    0.4722     8.0000          NaN           NaN         0      0.3920       4.0000        2
+   qwen  acquired                   same          self          binary-scalar-s0.0       3        3    0.5255     8.0000       0.4592        4.0000         2      0.5255       8.0000        3
+   qwen  acquired                   same          self                      fp--s0      12        4    0.5452     8.0000          NaN           NaN         0      0.5176       4.0000        6
+   qwen  acquired                   same       sibling     binary-per_channel-s0.0       3        3    0.4842     8.0000       0.3805        2.0000         1      0.4842       8.0000        3
+   qwen  acquired                   same       sibling      binary-per_tensor-s0.0      12        4    0.5460     8.0000       0.4386        4.0000         4      0.5460       8.0000       10
+   qwen  acquired                   same       sibling binary-per_tensor-s0.0-rand       3        3   -0.0070     8.0000      -0.0070        8.0000         3     -0.0070       8.0000        3
+   qwen  acquired                   same       sibling      binary-per_tensor-s0.5       3        3    0.5371     8.0000       0.4866        4.0000         2      0.5371       8.0000        3
+   qwen  acquired                   same       sibling      binary-per_tensor-s0.9       3        3    0.4958     8.0000          NaN           NaN         0      0.4958       8.0000        3
+   qwen  acquired                   same       sibling     binary-per_tensor-s0.99       3        3    0.3508     8.0000          NaN           NaN         0      0.3508       8.0000        3
+   qwen  acquired                   same       sibling          binary-scalar-s0.0       3        3    0.5385     8.0000       0.5385        8.0000         3      0.5385       8.0000        3
+   qwen  acquired                   same       sibling                      fp--s0      12        4    0.5367     4.0000       0.5236        4.0000         2      0.5275       8.0000        6
+   qwen inherited                  cross         cross     binary-per_channel-s0.0       3        3    0.6692     8.0000       0.6692        8.0000         3      0.6692       8.0000        3
+   qwen inherited                  cross         cross      binary-per_tensor-s0.0      12        4    0.6863    16.0000       0.6306        8.0000         9      0.6863      16.0000       11
+   qwen inherited                  cross         cross binary-per_tensor-s0.0-rand       3        3   -0.0012     4.0000      -0.0012        4.0000         3     -0.0012       4.0000        3
+   qwen inherited                  cross         cross      binary-per_tensor-s0.5       3        3    0.6333     8.0000       0.6333        8.0000         3      0.6333       8.0000        3
+   qwen inherited                  cross         cross      binary-per_tensor-s0.9       3        3    0.6761     8.0000       0.6761        8.0000         3      0.6761       8.0000        3
+   qwen inherited                  cross         cross     binary-per_tensor-s0.99       3        3    0.6733     8.0000       0.6733        8.0000         3      0.6733       8.0000        3
+   qwen inherited                  cross         cross          binary-scalar-s0.0       3        3    0.2978     8.0000       0.2978        8.0000         3      0.2978       8.0000        3
+   qwen inherited                  cross         cross                      fp--s0      12        4    0.6846     8.0000       0.6505        4.0000         6      0.6842       8.0000        8
+   qwen inherited                  cross        cross2     binary-per_channel-s0.0       3        3    0.5175     8.0000       0.2941        4.0000         2      0.5175       8.0000        3
+   qwen inherited                  cross        cross2      binary-per_tensor-s0.0      12        4    0.6115    16.0000       0.6115       16.0000        11      0.6115      16.0000       12
+   qwen inherited                  cross        cross2 binary-per_tensor-s0.0-rand       3        3    0.0002     2.0000       0.0002        2.0000         3      0.0002       2.0000        3
+   qwen inherited                  cross        cross2      binary-per_tensor-s0.5       3        3    0.4892     8.0000       0.4892        8.0000         3      0.4892       8.0000        3
+   qwen inherited                  cross        cross2      binary-per_tensor-s0.9       3        3    0.4903     8.0000       0.2763        4.0000         2      0.4903       8.0000        3
+   qwen inherited                  cross        cross2     binary-per_tensor-s0.99       3        3    0.4012     8.0000       0.4012        8.0000         3      0.4012       8.0000        3
+   qwen inherited                  cross        cross2          binary-scalar-s0.0       3        3    0.3086     8.0000       0.3086        8.0000         3      0.3086       8.0000        3
+   qwen inherited                  cross        cross2                      fp--s0      12        4    0.6744    16.0000       0.6136        8.0000         8      0.6261       8.0000        9
+   qwen inherited              exogenous            gt     binary-per_channel-s0.0       3        3    0.5277     8.0000       0.4741        4.0000         1      0.4741       4.0000        2
+   qwen inherited              exogenous            gt      binary-per_tensor-s0.0      12        4    0.6636    16.0000       0.5652        2.0000         6      0.6010       8.0000        9
+   qwen inherited              exogenous            gt binary-per_tensor-s0.0-rand       3        3    0.0016     2.0000       0.0016        2.0000         3      0.0016       2.0000        3
+   qwen inherited              exogenous            gt      binary-per_tensor-s0.5       3        3    0.5020     2.0000       0.5020        2.0000         2      0.5020       2.0000        2
+   qwen inherited              exogenous            gt      binary-per_tensor-s0.9       3        3    0.5780     8.0000       0.4736        2.0000         2      0.4736       2.0000        2
+   qwen inherited              exogenous            gt     binary-per_tensor-s0.99       3        3    0.5985     2.0000       0.5985        2.0000         3      0.5985       2.0000        3
+   qwen inherited              exogenous            gt          binary-scalar-s0.0       3        3    0.6400     4.0000       0.6400        4.0000         2      0.6400       4.0000        3
+   qwen inherited              exogenous            gt                      fp--s0      12        4    0.6809    16.0000       0.4547        2.0000         3      0.5495       4.0000        6
+   qwen inherited                   null        random      binary-per_tensor-s0.0      12        4    0.6746    16.0000       0.5282        8.0000         9      0.6441      16.0000       11
+   qwen inherited                   null        random                      fp--s0      12        4    0.6765    16.0000       0.5510        4.0000         6      0.6760       8.0000        9
+   qwen inherited                   same          self     binary-per_channel-s0.0       3        3    0.1479     8.0000       0.1479        8.0000         3      0.1479       8.0000        3
+   qwen inherited                   same          self      binary-per_tensor-s0.0      12        4    0.6373    16.0000       0.6373       16.0000        11      0.6373      16.0000       12
+   qwen inherited                   same          self binary-per_tensor-s0.0-rand       3        3   -0.0004     2.0000      -0.0004        2.0000         3     -0.0004       2.0000        3
+   qwen inherited                   same          self      binary-per_tensor-s0.5       3        3    0.1392     8.0000       0.1392        8.0000         3      0.1392       8.0000        3
+   qwen inherited                   same          self      binary-per_tensor-s0.9       3        3    0.1695     8.0000       0.1695        8.0000         3      0.1695       8.0000        3
+   qwen inherited                   same          self     binary-per_tensor-s0.99       3        3   -0.0326     2.0000      -0.0326        2.0000         3     -0.0326       2.0000        3
+   qwen inherited                   same          self          binary-scalar-s0.0       3        3    0.0203     8.0000       0.0203        8.0000         3      0.0203       8.0000        3
+   qwen inherited                   same          self                      fp--s0      12        4    0.6862    16.0000       0.6664        8.0000         8      0.6664       8.0000        9
+   qwen inherited                   same       sibling     binary-per_channel-s0.0       3        3    0.6135     8.0000       0.6135        8.0000         3      0.6135       8.0000        3
+   qwen inherited                   same       sibling      binary-per_tensor-s0.0      12        4    0.6821    16.0000       0.4612        8.0000         9      0.6567      16.0000       10
+   qwen inherited                   same       sibling binary-per_tensor-s0.0-rand       3        3    0.0019     2.0000       0.0019        2.0000         3      0.0019       2.0000        3
+   qwen inherited                   same       sibling      binary-per_tensor-s0.5       3        3    0.6126     8.0000       0.6126        8.0000         3      0.6126       8.0000        3
+   qwen inherited                   same       sibling      binary-per_tensor-s0.9       3        3    0.6248     8.0000       0.6248        8.0000         3      0.6248       8.0000        3
+   qwen inherited                   same       sibling     binary-per_tensor-s0.99       3        3    0.0028     8.0000       0.0028        8.0000         3      0.0028       8.0000        3
+   qwen inherited                   same       sibling          binary-scalar-s0.0       3        3    0.2552     8.0000       0.2552        8.0000         3      0.2552       8.0000        3
+   qwen inherited                   same       sibling                      fp--s0      12        4    0.6866    16.0000       0.4351        4.0000         6      0.6813       8.0000        9
+   smol  acquired                  cross         cross      binary-per_tensor-s0.0      12        4    0.5030     8.0000       0.4661        4.0000         6      0.5030       8.0000        8
+   smol  acquired                  cross         cross binary-per_tensor-s0.0-rand      12        4    0.0398    16.0000       0.0398       16.0000        12      0.0398      16.0000       12
+   smol  acquired              exogenous            gt      binary-per_tensor-s0.0      12        4    0.4968    16.0000       0.4496        2.0000         5      0.4496       2.0000        9
+   smol  acquired              exogenous            gt binary-per_tensor-s0.0-rand      12        4    0.0442    16.0000       0.0442       16.0000        11      0.0442      16.0000       12
+   smol  acquired                   null        random      binary-per_tensor-s0.0      12        4    0.4959    16.0000       0.4732        8.0000         7      0.4796       4.0000       10
+   smol  acquired                   null        random binary-per_tensor-s0.0-rand      12        4    0.0204    16.0000       0.0159       16.0000        11      0.0204      16.0000       12
+   smol  acquired                   same          self      binary-per_tensor-s0.0      12        4    0.5035    16.0000       0.3258        2.0000         3      0.4959       8.0000        7
+   smol  acquired                   same          self binary-per_tensor-s0.0-rand      12        4    0.0414    16.0000       0.0177       16.0000        11      0.0414      16.0000       12
+   smol  acquired                   same       sibling      binary-per_tensor-s0.0      12        4    0.4905    16.0000       0.4670        4.0000         6      0.4825       8.0000        9
+   smol  acquired                   same       sibling binary-per_tensor-s0.0-rand      12        4    0.0352    16.0000       0.0352       16.0000        11      0.0352      16.0000       12
+   smol inherited                  cross         cross      binary-per_tensor-s0.0      12        4    0.6415    16.0000       0.6415       16.0000        12      0.6415      16.0000       12
+   smol inherited                  cross         cross binary-per_tensor-s0.0-rand      12        4    0.0046     4.0000       0.0046        4.0000        10      0.0046       4.0000       12
+   smol inherited              exogenous            gt      binary-per_tensor-s0.0      12        4    0.7996    16.0000       0.7489        4.0000         4      0.7656       4.0000        7
+   smol inherited              exogenous            gt binary-per_tensor-s0.0-rand      12        4    0.0110    16.0000       0.0110       16.0000        12      0.0110      16.0000       12
+   smol inherited                   null        random      binary-per_tensor-s0.0      12        4    0.7262    16.0000       0.2301        8.0000         6      0.6654      16.0000       11
+   smol inherited                   null        random binary-per_tensor-s0.0-rand      12        4    0.0083    16.0000       0.0083       16.0000        12      0.0083      16.0000       12
+   smol inherited                   same          self      binary-per_tensor-s0.0      12        4    0.3823    16.0000       0.3823       16.0000        10      0.3823      16.0000       12
+   smol inherited                   same          self binary-per_tensor-s0.0-rand      12        4    0.0066    16.0000       0.0066       16.0000        12      0.0066      16.0000       12
+   smol inherited                   same       sibling      binary-per_tensor-s0.0      12        4    0.4491    16.0000       0.4491       16.0000        12      0.4491      16.0000       12
+   smol inherited                   same       sibling binary-per_tensor-s0.0-rand      12        4    0.0073    16.0000       0.0073       16.0000        11      0.0073      16.0000       12
+
+  -- ALPHA TRACE (never a single scalar); printed for binary-per_tensor-s0.0 and fp--s0 only, 300 further rows for the ablation variants are returned by frontier() --
+    arm    origin designer_family_factor designer_role                variant   alpha  n   dBias  dBias_sd  d_mmlu    ppl_ratio  frac_collateral_ok
+  gemma  acquired                  cross         cross binary-per_tensor-s0.0  2.0000  3  0.4648    0.0306  0.0033       1.0043              1.0000
+  gemma  acquired                  cross         cross binary-per_tensor-s0.0  4.0000  3  0.5422    0.0288  0.0050       1.0215              1.0000
+  gemma  acquired                  cross         cross binary-per_tensor-s0.0  8.0000  3  0.5806    0.0221 -0.0067       1.1012              0.6667
+  gemma  acquired                  cross         cross binary-per_tensor-s0.0 16.0000  3  0.6054    0.0158 -0.0500       1.5544              0.0000
+  gemma  acquired              exogenous            gt binary-per_tensor-s0.0  2.0000  3 -0.1285    0.0276 -0.0133       1.0020              0.6667
+  gemma  acquired              exogenous            gt binary-per_tensor-s0.0  4.0000  3 -0.5550    0.0706 -0.0183       1.0158              0.6667
+  gemma  acquired              exogenous            gt binary-per_tensor-s0.0  8.0000  3 -0.7615    0.0809 -0.0317       1.0898              0.0000
+  gemma  acquired              exogenous            gt binary-per_tensor-s0.0 16.0000  3 -0.3926    0.1281 -0.0667       1.5190              0.0000
+  gemma  acquired                   null        random binary-per_tensor-s0.0  2.0000  3  0.2116    0.3575 -0.0183       1.0032              0.6667
+  gemma  acquired                   null        random binary-per_tensor-s0.0  4.0000  3  0.2991    0.2093 -0.0250       1.0183              0.3333
+  gemma  acquired                   null        random binary-per_tensor-s0.0  8.0000  3  0.4807    0.1049 -0.0350       1.0947              0.0000
+  gemma  acquired                   null        random binary-per_tensor-s0.0 16.0000  3  0.5439    0.0088 -0.0950       1.6451              0.0000
+  gemma  acquired                   same          self binary-per_tensor-s0.0  2.0000  3  0.4836    0.0185 -0.0050       1.0072              1.0000
+  gemma  acquired                   same          self binary-per_tensor-s0.0  4.0000  3  0.6180    0.0084 -0.0083       1.0292              1.0000
+  gemma  acquired                   same          self binary-per_tensor-s0.0  8.0000  3  0.5848    0.0204 -0.0167       1.1398              0.0000
+  gemma  acquired                   same          self binary-per_tensor-s0.0 16.0000  3  0.4897    0.0562 -0.0633       1.9250              0.0000
+  gemma  acquired                   same       sibling binary-per_tensor-s0.0  2.0000  3  0.4148    0.0280  0.0033       1.0044              1.0000
+  gemma  acquired                   same       sibling binary-per_tensor-s0.0  4.0000  3  0.5358    0.0181 -0.0067       1.0203              1.0000
+  gemma  acquired                   same       sibling binary-per_tensor-s0.0  8.0000  3  0.5953    0.0128 -0.0300       1.0882              0.0000
+  gemma  acquired                   same       sibling binary-per_tensor-s0.0 16.0000  3  0.5688    0.0398 -0.0600       1.4984              0.0000
+  gemma inherited                  cross         cross binary-per_tensor-s0.0  2.0000  3  0.0411    0.0138 -0.0133       0.9961              0.6667
+  gemma inherited                  cross         cross binary-per_tensor-s0.0  4.0000  3  0.2282    0.0345 -0.0133       0.9963              1.0000
+  gemma inherited                  cross         cross binary-per_tensor-s0.0  8.0000  3  0.6145    0.0429 -0.0083       1.0078              1.0000
+  gemma inherited                  cross         cross binary-per_tensor-s0.0 16.0000  3  0.8190    0.0396 -0.0117       1.1163              0.0000
+  gemma inherited              exogenous            gt binary-per_tensor-s0.0  2.0000  3  0.8561    0.0015 -0.0283       0.9954              0.0000
+  gemma inherited              exogenous            gt binary-per_tensor-s0.0  4.0000  3  0.5330    0.0469 -0.0333       1.0168              0.0000
+  gemma inherited              exogenous            gt binary-per_tensor-s0.0  8.0000  3  0.4522    0.1070 -0.0533       1.2976              0.0000
+  gemma inherited              exogenous            gt binary-per_tensor-s0.0 16.0000  3  0.6091    0.1388 -0.0650     154.9737              0.0000
+  gemma inherited                   null        random binary-per_tensor-s0.0  2.0000  3  0.0475    0.0255 -0.0067       1.0031              1.0000
+  gemma inherited                   null        random binary-per_tensor-s0.0  4.0000  3  0.1968    0.1016 -0.0183       1.0129              0.3333
+  gemma inherited                   null        random binary-per_tensor-s0.0  8.0000  3  0.5546    0.2220 -0.0283       1.0618              0.3333
+  gemma inherited                   null        random binary-per_tensor-s0.0 16.0000  3  0.8070    0.0573 -0.0567       1.4112              0.0000
+  gemma inherited                   same          self binary-per_tensor-s0.0  2.0000  3  0.0518    0.0112 -0.0033       1.0036              1.0000
+  gemma inherited                   same          self binary-per_tensor-s0.0  4.0000  3  0.1617    0.0355 -0.0050       1.0098              1.0000
+  gemma inherited                   same          self binary-per_tensor-s0.0  8.0000  3  0.4116    0.0612  0.0017       1.0253              1.0000
+  gemma inherited                   same          self binary-per_tensor-s0.0 16.0000  3  0.7026    0.0686 -0.0167       1.0936              0.0000
+  gemma inherited                   same       sibling binary-per_tensor-s0.0  2.0000  3  0.5295    0.0126 -0.0217       0.9920              0.0000
+  gemma inherited                   same       sibling binary-per_tensor-s0.0  4.0000  3  0.7948    0.0266 -0.0367       0.9949              0.0000
+  gemma inherited                   same       sibling binary-per_tensor-s0.0  8.0000  3  0.8430    0.0062 -0.0383       1.0437              0.0000
+  gemma inherited                   same       sibling binary-per_tensor-s0.0 16.0000  3  0.8096    0.0198 -0.0633       2.6898              0.0000
+  llama  acquired                  cross         cross binary-per_tensor-s0.0  2.0000  3  0.2623    0.0207  0.0067       1.0148              1.0000
+  llama  acquired                  cross         cross binary-per_tensor-s0.0  4.0000  3  0.4665    0.0117 -0.0100       1.0506              1.0000
+  llama  acquired                  cross         cross binary-per_tensor-s0.0  8.0000  3  0.5080    0.0120 -0.0733       1.2349              0.0000
+  llama  acquired                  cross         cross binary-per_tensor-s0.0 16.0000  3  0.5177    0.0075 -0.2150       4.4735              0.0000
+  llama  acquired                  cross         cross                 fp--s0  2.0000  3  0.4692    0.0150 -0.0033       1.0394              1.0000
+  llama  acquired                  cross         cross                 fp--s0  4.0000  3  0.5156    0.0036 -0.0667       1.1761              0.0000
+  llama  acquired                  cross         cross                 fp--s0  8.0000  3  0.5119    0.0167 -0.1917       2.7471              0.0000
+  llama  acquired                  cross         cross                 fp--s0 16.0000  3  0.5224    0.0025 -0.1683    1083.2105              0.0000
+  llama  acquired                  cross        cross2 binary-per_tensor-s0.0  2.0000  3  0.4404    0.0135  0.0183       1.0202              1.0000
+  llama  acquired                  cross        cross2 binary-per_tensor-s0.0  4.0000  3  0.5223    0.0029  0.0167       1.0851              1.0000
+  llama  acquired                  cross        cross2 binary-per_tensor-s0.0  8.0000  3  0.5166    0.0076 -0.0433       1.4799              0.0000
+  llama  acquired                  cross        cross2 binary-per_tensor-s0.0 16.0000  3  0.5063    0.0225 -0.1167      19.8304              0.0000
+  llama  acquired                  cross        cross2                 fp--s0  2.0000  3  0.5222    0.0014  0.0233       1.0751              1.0000
+  llama  acquired                  cross        cross2                 fp--s0  4.0000  3  0.4861    0.0057 -0.0383       1.4035              0.0000
+  llama  acquired                  cross        cross2                 fp--s0  8.0000  3  0.4222    0.0042 -0.1633      11.3118              0.0000
+  llama  acquired                  cross        cross2                 fp--s0 16.0000  3  0.5196    0.0039 -0.1833    6908.7868              0.0000
+  llama  acquired              exogenous            gt binary-per_tensor-s0.0  2.0000  3  0.4090    0.0120 -0.0117       1.0352              0.6667
+  llama  acquired              exogenous            gt binary-per_tensor-s0.0  4.0000  3  0.4049    0.0676 -0.0783       1.1731              0.0000
+  llama  acquired              exogenous            gt binary-per_tensor-s0.0  8.0000  3  0.4833    0.0416 -0.2033       4.2387              0.0000
+  llama  acquired              exogenous            gt binary-per_tensor-s0.0 16.0000  3  0.5117    0.0094 -0.2083   50401.4353              0.0000
+  llama  acquired              exogenous            gt                 fp--s0  2.0000  3  0.4132    0.0345 -0.0700       1.1119              0.0000
+  llama  acquired              exogenous            gt                 fp--s0  4.0000  3  0.4790    0.0181 -0.1883       2.0420              0.0000
+  llama  acquired              exogenous            gt                 fp--s0  8.0000  3  0.5161    0.0082 -0.2450    6471.5013              0.0000
+  llama  acquired              exogenous            gt                 fp--s0 16.0000  3  0.5117    0.0076 -0.2033 5613761.7609              0.0000
+  llama  acquired                   null        random binary-per_tensor-s0.0  2.0000  3  0.0972    0.1546 -0.0100       1.0163              1.0000
+  llama  acquired                   null        random binary-per_tensor-s0.0  4.0000  3  0.2868    0.2211 -0.0450       1.0629              0.0000
+  llama  acquired                   null        random binary-per_tensor-s0.0  8.0000  3  0.4315    0.0808 -0.1467       1.3603              0.0000
+  llama  acquired                   null        random binary-per_tensor-s0.0 16.0000  3  0.5047    0.0145 -0.2133      21.7548              0.0000
+  llama  acquired                   null        random                 fp--s0  2.0000  3  0.2758    0.2367 -0.0400       1.0505              0.0000
+  llama  acquired                   null        random                 fp--s0  4.0000  3  0.4420    0.0877 -0.1267       1.2682              0.0000
+  llama  acquired                   null        random                 fp--s0  8.0000  3  0.4959    0.0213 -0.1800       8.0340              0.0000
+  llama  acquired                   null        random                 fp--s0 16.0000  3  0.5189    0.0031 -0.2033    5593.9246              0.0000
+  llama  acquired                   same          self binary-per_tensor-s0.0  2.0000  3  0.4145    0.0024  0.0217       1.0224              1.0000
+  llama  acquired                   same          self binary-per_tensor-s0.0  4.0000  3  0.5088    0.0019 -0.0067       1.0795              1.0000
+  llama  acquired                   same          self binary-per_tensor-s0.0  8.0000  3  0.5223    0.0029 -0.0817       1.3909              0.0000
+  llama  acquired                   same          self binary-per_tensor-s0.0 16.0000  3  0.4962    0.0373 -0.2200       9.3839              0.0000
+  llama  acquired                   same          self                 fp--s0  2.0000  3  0.5136    0.0026  0.0033       1.0550              1.0000
+  llama  acquired                   same          self                 fp--s0  4.0000  3  0.5171    0.0007 -0.0417       1.2532              0.0000
+  llama  acquired                   same          self                 fp--s0  8.0000  3  0.5111    0.0080 -0.1933       3.3884              0.0000
+  llama  acquired                   same          self                 fp--s0 16.0000  3  0.5159    0.0082 -0.1583    9973.0585              0.0000
+  llama  acquired                   same       sibling binary-per_tensor-s0.0  2.0000  3  0.3921    0.0025  0.0200       1.0260              1.0000
+  llama  acquired                   same       sibling binary-per_tensor-s0.0  4.0000  3  0.4882    0.0045 -0.0050       1.0930              1.0000
+  llama  acquired                   same       sibling binary-per_tensor-s0.0  8.0000  3  0.5044    0.0101 -0.0700       1.5114              0.0000
+  llama  acquired                   same       sibling binary-per_tensor-s0.0 16.0000  3  0.5133    0.0028 -0.2117      47.2563              0.0000
+  llama  acquired                   same       sibling                 fp--s0  2.0000  3  0.4913    0.0058 -0.0117       1.0726              0.6667
+  llama  acquired                   same       sibling                 fp--s0  4.0000  3  0.5162    0.0085 -0.0617       1.3662              0.0000
+  llama  acquired                   same       sibling                 fp--s0  8.0000  3  0.5211    0.0008 -0.1267      10.1796              0.0000
+  llama  acquired                   same       sibling                 fp--s0 16.0000  3  0.5226    0.0037 -0.1550   39752.3553              0.0000
+  llama inherited                  cross         cross binary-per_tensor-s0.0  2.0000  3  0.0290    0.0659  0.0183       1.0091              1.0000
+  llama inherited                  cross         cross binary-per_tensor-s0.0  4.0000  3  0.4101    0.1009  0.0133       1.0372              1.0000
+  llama inherited                  cross         cross binary-per_tensor-s0.0  8.0000  3  0.7372    0.0166  0.0150       1.1491              0.0000
+  llama inherited                  cross         cross binary-per_tensor-s0.0 16.0000  3  0.7010    0.0510 -0.0967       2.1603              0.0000
+  llama inherited                  cross         cross                 fp--s0  2.0000  3  0.5554    0.0318  0.0033       1.0292              1.0000
+  llama inherited                  cross         cross                 fp--s0  4.0000  3  0.7369    0.0120  0.0050       1.1276              0.0000
+  llama inherited                  cross         cross                 fp--s0  8.0000  3  0.7054    0.0831 -0.0883       1.8283              0.0000
+  llama inherited                  cross         cross                 fp--s0 16.0000  3  0.7538    0.0207 -0.2133      76.9558              0.0000
+  llama inherited                  cross        cross2 binary-per_tensor-s0.0  2.0000  3  0.2214    0.0129  0.0000       0.9988              1.0000
+  llama inherited                  cross        cross2 binary-per_tensor-s0.0  4.0000  3  0.4527    0.0213 -0.0017       1.0055              1.0000
+  llama inherited                  cross        cross2 binary-per_tensor-s0.0  8.0000  3  0.6732    0.0162  0.0167       1.0466              1.0000
+  llama inherited                  cross        cross2 binary-per_tensor-s0.0 16.0000  3  0.7306    0.0323 -0.0217       1.4517              0.0000
+  llama inherited                  cross        cross2                 fp--s0  2.0000  3  0.5889    0.0119  0.0317       1.0052              1.0000
+  llama inherited                  cross        cross2                 fp--s0  4.0000  3  0.7306    0.0035  0.0267       1.0446              1.0000
+  llama inherited                  cross        cross2                 fp--s0  8.0000  3  0.7439    0.0023 -0.0717       1.3949              0.0000
+  llama inherited                  cross        cross2                 fp--s0 16.0000  3  0.7156    0.0129 -0.1767      48.7150              0.0000
+  llama inherited              exogenous            gt binary-per_tensor-s0.0  2.0000  3  0.7290    0.0274 -0.0100       1.0292              1.0000
+  llama inherited              exogenous            gt binary-per_tensor-s0.0  4.0000  3  0.5023    0.0481 -0.0250       1.2245              0.0000
+  llama inherited              exogenous            gt binary-per_tensor-s0.0  8.0000  3  0.6651    0.0522 -0.0800      25.2322              0.0000
+  llama inherited              exogenous            gt binary-per_tensor-s0.0 16.0000  3  0.7670    0.0003 -0.1200  499023.2063              0.0000
+  llama inherited              exogenous            gt                 fp--s0  2.0000  3  0.5429    0.0809 -0.0050       1.2426              0.0000
+  llama inherited              exogenous            gt                 fp--s0  4.0000  3  0.5747    0.1072 -0.1100      14.0323              0.0000
+  llama inherited              exogenous            gt                 fp--s0  8.0000  3  0.7366    0.0530 -0.1350   71191.0817              0.0000
+  llama inherited              exogenous            gt                 fp--s0 16.0000  3  0.7661    0.0018 -0.1050   30920.9362              0.0000
+  llama inherited                   null        random binary-per_tensor-s0.0  2.0000  3  0.0504    0.0500  0.0033       1.0091              1.0000
+  llama inherited                   null        random binary-per_tensor-s0.0  4.0000  3  0.1745    0.1027  0.0067       1.0395              0.6667
+  llama inherited                   null        random binary-per_tensor-s0.0  8.0000  3  0.4477    0.1444 -0.0117       1.1632              0.0000
+  llama inherited                   null        random binary-per_tensor-s0.0 16.0000  3  0.7412    0.0092 -0.1717       3.4308              0.0000
+  llama inherited                   null        random                 fp--s0  2.0000  3  0.1959    0.1114 -0.0100       1.0287              0.6667
+  llama inherited                   null        random                 fp--s0  4.0000  3  0.5186    0.1054 -0.0200       1.1326              0.0000
+  llama inherited                   null        random                 fp--s0  8.0000  3  0.7059    0.0274 -0.1217       2.3389              0.0000
+  llama inherited                   null        random                 fp--s0 16.0000  3  0.7498    0.0148 -0.2150     357.2119              0.0000
+  llama inherited                   same          self binary-per_tensor-s0.0  2.0000  3  0.0910    0.0246  0.0000       1.0065              0.6667
+  llama inherited                   same          self binary-per_tensor-s0.0  4.0000  3  0.2437    0.0615  0.0050       1.0167              1.0000
+  llama inherited                   same          self binary-per_tensor-s0.0  8.0000  3  0.4981    0.0671 -0.0017       1.0642              1.0000
+  llama inherited                   same          self binary-per_tensor-s0.0 16.0000  3  0.6996    0.0248 -0.0183       1.4313              0.0000
+  llama inherited                   same          self                 fp--s0  2.0000  3  0.4258    0.0663  0.0033       1.0156              1.0000
+  llama inherited                   same          self                 fp--s0  4.0000  3  0.6380    0.0386 -0.0217       1.0590              0.6667
+  llama inherited                   same          self                 fp--s0  8.0000  3  0.7212    0.0424 -0.0300       1.3175              0.0000
+  llama inherited                   same          self                 fp--s0 16.0000  3  0.7492    0.0153 -0.1567     188.2628              0.0000
+  llama inherited                   same       sibling binary-per_tensor-s0.0  2.0000  3  0.1774    0.0050  0.0100       1.0115              1.0000
+  llama inherited                   same       sibling binary-per_tensor-s0.0  4.0000  3  0.5068    0.0357  0.0150       1.0365              1.0000
+  llama inherited                   same       sibling binary-per_tensor-s0.0  8.0000  3  0.7318    0.0280  0.0233       1.1613              0.0000
+  llama inherited                   same       sibling binary-per_tensor-s0.0 16.0000  3  0.7150    0.0366 -0.1267       3.1999              0.0000
+  llama inherited                   same       sibling                 fp--s0  2.0000  3  0.7052    0.0282  0.0183       1.0313              1.0000
+  llama inherited                   same       sibling                 fp--s0  4.0000  3  0.7657    0.0014  0.0300       1.1445              0.0000
+  llama inherited                   same       sibling                 fp--s0  8.0000  3  0.7200    0.0416 -0.0483       2.4074              0.0000
+  llama inherited                   same       sibling                 fp--s0 16.0000  3  0.7417    0.0265 -0.2400    1249.5183              0.0000
+    phi  acquired                  cross         cross binary-per_tensor-s0.0  2.0000  3  0.7239    0.0257  0.0250       1.0038              1.0000
+    phi  acquired                  cross         cross binary-per_tensor-s0.0  4.0000  3  0.7511    0.0087  0.0167       1.0216              1.0000
+    phi  acquired                  cross         cross binary-per_tensor-s0.0  8.0000  3  0.6498    0.0516  0.0217       1.1128              0.0000
+    phi  acquired                  cross         cross binary-per_tensor-s0.0 16.0000  3  0.4380    0.0899 -0.0950       4.9129              0.0000
+    phi  acquired              exogenous            gt binary-per_tensor-s0.0  2.0000  3  0.2088    0.0276  0.0000       1.0072              1.0000
+    phi  acquired              exogenous            gt binary-per_tensor-s0.0  4.0000  3  0.1005    0.0222  0.0267       1.0531              1.0000
+    phi  acquired              exogenous            gt binary-per_tensor-s0.0  8.0000  3  0.1637    0.0599 -0.0200       1.9101              0.0000
+    phi  acquired              exogenous            gt binary-per_tensor-s0.0 16.0000  3  0.3427    0.0084 -0.3117    3604.6743              0.0000
+    phi  acquired                   null        random binary-per_tensor-s0.0  2.0000  3  0.4488    0.2791 -0.0067       1.0097              1.0000
+    phi  acquired                   null        random binary-per_tensor-s0.0  4.0000  3  0.5148    0.1070  0.0033       1.0368              1.0000
+    phi  acquired                   null        random binary-per_tensor-s0.0  8.0000  3  0.6485    0.0619 -0.0050       1.1753              0.0000
+    phi  acquired                   null        random binary-per_tensor-s0.0 16.0000  3  0.6751    0.0462 -0.1083       3.4730              0.0000
+    phi  acquired                   same          self binary-per_tensor-s0.0  2.0000  3  0.7089    0.0067  0.0133       1.0061              1.0000
+    phi  acquired                   same          self binary-per_tensor-s0.0  4.0000  3  0.7307    0.0146  0.0250       1.0227              1.0000
+    phi  acquired                   same          self binary-per_tensor-s0.0  8.0000  3  0.7517    0.0089  0.0117       1.1172              0.0000
+    phi  acquired                   same          self binary-per_tensor-s0.0 16.0000  3  0.7296    0.0490 -0.0750       4.3085              0.0000
+    phi  acquired                   same       sibling binary-per_tensor-s0.0  2.0000  3  0.7732    0.0011  0.0217       1.0116              1.0000
+    phi  acquired                   same       sibling binary-per_tensor-s0.0  4.0000  3  0.7572    0.0141  0.0167       1.0382              1.0000
+    phi  acquired                   same       sibling binary-per_tensor-s0.0  8.0000  3  0.7298    0.0125  0.0017       1.1728              0.0000
+    phi  acquired                   same       sibling binary-per_tensor-s0.0 16.0000  3  0.6644    0.1256 -0.0917      12.4719              0.0000
+    phi inherited                  cross         cross binary-per_tensor-s0.0  2.0000  3  0.0664    0.0192 -0.0033       1.0028              1.0000
+    phi inherited                  cross         cross binary-per_tensor-s0.0  4.0000  3  0.2915    0.0234  0.0017       1.0067              1.0000
+    phi inherited                  cross         cross binary-per_tensor-s0.0  8.0000  3  0.6107    0.0253  0.0000       1.0261              1.0000
+    phi inherited                  cross         cross binary-per_tensor-s0.0 16.0000  3  0.7291    0.0042 -0.0133       1.1497              0.0000
+    phi inherited              exogenous            gt binary-per_tensor-s0.0  2.0000  3  0.6050    0.0040  0.0083       1.0263              1.0000
+    phi inherited              exogenous            gt binary-per_tensor-s0.0  4.0000  3  0.6899    0.0268  0.0083       1.0621              1.0000
+    phi inherited              exogenous            gt binary-per_tensor-s0.0  8.0000  3  0.6548    0.0468 -0.0083       1.2092              0.0000
+    phi inherited              exogenous            gt binary-per_tensor-s0.0 16.0000  3  0.6687    0.0302 -0.0817      11.1852              0.0000
+    phi inherited                   null        random binary-per_tensor-s0.0  2.0000  3  0.0173    0.0201 -0.0050       1.0046              1.0000
+    phi inherited                   null        random binary-per_tensor-s0.0  4.0000  3  0.0993    0.0273 -0.0067       1.0082              1.0000
+    phi inherited                   null        random binary-per_tensor-s0.0  8.0000  3  0.3255    0.1043 -0.0350       1.0382              0.0000
+    phi inherited                   null        random binary-per_tensor-s0.0 16.0000  3  0.6590    0.0372 -0.0567       1.3804              0.0000
+    phi inherited                   same          self binary-per_tensor-s0.0  2.0000  3  0.0280    0.0042 -0.0017       1.0114              1.0000
+    phi inherited                   same          self binary-per_tensor-s0.0  4.0000  3  0.1317    0.0172  0.0017       1.0199              1.0000
+    phi inherited                   same          self binary-per_tensor-s0.0  8.0000  3  0.2847    0.0553  0.0017       1.0478              1.0000
+    phi inherited                   same          self binary-per_tensor-s0.0 16.0000  3  0.4203    0.1267 -0.0133       1.1267              0.0000
+    phi inherited                   same       sibling binary-per_tensor-s0.0  2.0000  3  0.0171    0.0052 -0.0033       1.0088              1.0000
+    phi inherited                   same       sibling binary-per_tensor-s0.0  4.0000  3  0.1200    0.0108 -0.0017       1.0195              1.0000
+    phi inherited                   same       sibling binary-per_tensor-s0.0  8.0000  3  0.3911    0.0467 -0.0050       1.0496              1.0000
+    phi inherited                   same       sibling binary-per_tensor-s0.0 16.0000  3  0.6672    0.0554 -0.0033       1.1379              0.0000
+   qwen  acquired                  cross         cross binary-per_tensor-s0.0  2.0000  3  0.4159    0.0089 -0.0233       1.0061              0.3333
+   qwen  acquired                  cross         cross binary-per_tensor-s0.0  4.0000  3  0.5381    0.0097 -0.0200       1.0217              0.3333
+   qwen  acquired                  cross         cross binary-per_tensor-s0.0  8.0000  3  0.4334    0.0034 -0.0317       1.0880              0.3333
+   qwen  acquired                  cross         cross binary-per_tensor-s0.0 16.0000  3  0.5223    0.0324 -0.1033       1.6341              0.0000
+   qwen  acquired                  cross         cross                 fp--s0  2.0000  3  0.5288    0.0080 -0.0267       1.0245              0.0000
+   qwen  acquired                  cross         cross                 fp--s0  4.0000  3  0.4447    0.0362 -0.0417       1.1057              0.0000
+   qwen  acquired                  cross         cross                 fp--s0  8.0000  3  0.4847    0.0369 -0.1217       1.7792              0.0000
+   qwen  acquired                  cross         cross                 fp--s0 16.0000  3  0.4630    0.0689 -0.3883     153.5607              0.0000
+   qwen  acquired                  cross        cross2 binary-per_tensor-s0.0  2.0000  3  0.3770    0.0123 -0.0150       1.0041              0.3333
+   qwen  acquired                  cross        cross2 binary-per_tensor-s0.0  4.0000  3  0.4090    0.0297 -0.0217       1.0173              0.3333
+   qwen  acquired                  cross        cross2 binary-per_tensor-s0.0  8.0000  3  0.4960    0.0377 -0.0317       1.0767              0.0000
+   qwen  acquired                  cross        cross2 binary-per_tensor-s0.0 16.0000  3  0.3954    0.0338 -0.1233       1.6832              0.0000
+   qwen  acquired                  cross        cross2                 fp--s0  2.0000  3  0.4279    0.0121 -0.0333       1.0204              0.0000
+   qwen  acquired                  cross        cross2                 fp--s0  4.0000  3  0.5369    0.0024 -0.0517       1.1078              0.0000
+   qwen  acquired                  cross        cross2                 fp--s0  8.0000  3  0.3729    0.1068 -0.1617       2.4276              0.0000
+   qwen  acquired                  cross        cross2                 fp--s0 16.0000  3  0.4981    0.0553 -0.3517     288.9863              0.0000
+   qwen  acquired              exogenous            gt binary-per_tensor-s0.0  2.0000  3  0.4150    0.0210 -0.0017       1.0078              1.0000
+   qwen  acquired              exogenous            gt binary-per_tensor-s0.0  4.0000  3  0.1214    0.0216 -0.0067       1.0294              1.0000
+   qwen  acquired              exogenous            gt binary-per_tensor-s0.0  8.0000  3 -0.0658    0.1578 -0.0267       1.1554              0.0000
+   qwen  acquired              exogenous            gt binary-per_tensor-s0.0 16.0000  3  0.2610    0.0889 -0.2067       6.9528              0.0000
+   qwen  acquired              exogenous            gt                 fp--s0  2.0000  3  0.0797    0.0144 -0.0100       1.0278              0.6667
+   qwen  acquired              exogenous            gt                 fp--s0  4.0000  3 -0.1007    0.0745 -0.0500       1.1231              0.0000
+   qwen  acquired              exogenous            gt                 fp--s0  8.0000  3  0.2168    0.1013 -0.2033       3.7365              0.0000
+   qwen  acquired              exogenous            gt                 fp--s0 16.0000  3  0.4922    0.0405 -0.4167   14241.7113              0.0000
+   qwen  acquired                   null        random binary-per_tensor-s0.0  2.0000  3  0.1472    0.2007  0.0033       1.0020              1.0000
+   qwen  acquired                   null        random binary-per_tensor-s0.0  4.0000  3  0.2900    0.2314 -0.0033       1.0077              1.0000
+   qwen  acquired                   null        random binary-per_tensor-s0.0  8.0000  3  0.3453    0.1796 -0.0450       1.0368              0.3333
+   qwen  acquired                   null        random binary-per_tensor-s0.0 16.0000  3  0.5053    0.0154 -0.1383       1.2428              0.0000
+   qwen  acquired                   null        random                 fp--s0  2.0000  3  0.2630    0.2189 -0.0067       1.0073              1.0000
+   qwen  acquired                   null        random                 fp--s0  4.0000  3  0.3457    0.1480 -0.0367       1.0347              0.3333
+   qwen  acquired                   null        random                 fp--s0  8.0000  3  0.4802    0.0520 -0.1483       1.2541              0.0000
+   qwen  acquired                   null        random                 fp--s0 16.0000  3  0.5162    0.0291 -0.3200      24.0779              0.0000
+   qwen  acquired                   same          self binary-per_tensor-s0.0  2.0000  3  0.3875    0.0115 -0.0200       1.0032              0.3333
+   qwen  acquired                   same          self binary-per_tensor-s0.0  4.0000  3  0.4671    0.0132 -0.0250       1.0138              0.3333
+   qwen  acquired                   same          self binary-per_tensor-s0.0  8.0000  3  0.5061    0.0298 -0.0217       1.0604              0.3333
+   qwen  acquired                   same          self binary-per_tensor-s0.0 16.0000  3  0.4368    0.0863 -0.1483       1.4053              0.0000
+   qwen  acquired                   same          self                 fp--s0  2.0000  3  0.4681    0.0100 -0.0367       1.0165              0.0000
+   qwen  acquired                   same          self                 fp--s0  4.0000  3  0.5040    0.0208 -0.0317       1.0773              0.0000
+   qwen  acquired                   same          self                 fp--s0  8.0000  3  0.5042    0.0356 -0.1733       1.6166              0.0000
+   qwen  acquired                   same          self                 fp--s0 16.0000  3  0.5117    0.0237 -0.3633     106.8108              0.0000
+   qwen  acquired                   same       sibling binary-per_tensor-s0.0  2.0000  3  0.3216    0.0122 -0.0117       1.0023              0.6667
+   qwen  acquired                   same       sibling binary-per_tensor-s0.0  4.0000  3  0.4240    0.0183 -0.0150       1.0120              0.6667
+   qwen  acquired                   same       sibling binary-per_tensor-s0.0  8.0000  3  0.5378    0.0119 -0.0217       1.0539              0.0000
+   qwen  acquired                   same       sibling binary-per_tensor-s0.0 16.0000  3  0.5152    0.0262 -0.0467       1.3462              0.0000
+   qwen  acquired                   same       sibling                 fp--s0  2.0000  3  0.4209    0.0210 -0.0300       1.0131              0.3333
+   qwen  acquired                   same       sibling                 fp--s0  4.0000  3  0.5247    0.0115 -0.0283       1.0604              0.3333
+   qwen  acquired                   same       sibling                 fp--s0  8.0000  3  0.5081    0.0299 -0.0583       1.4070              0.0000
+   qwen  acquired                   same       sibling                 fp--s0 16.0000  3  0.5263    0.0127 -0.3417      16.8677              0.0000
+   qwen inherited                  cross         cross binary-per_tensor-s0.0  2.0000  3  0.0789    0.0155  0.0083       1.0026              1.0000
+   qwen inherited                  cross         cross binary-per_tensor-s0.0  4.0000  3  0.3086    0.0233  0.0150       1.0104              1.0000
+   qwen inherited                  cross         cross binary-per_tensor-s0.0  8.0000  3  0.6154    0.0155  0.0083       1.0402              1.0000
+   qwen inherited                  cross         cross binary-per_tensor-s0.0 16.0000  3  0.6847    0.0015 -0.0067       1.2311              0.0000
+   qwen inherited                  cross         cross                 fp--s0  2.0000  3  0.3813    0.0174  0.0150       1.0109              1.0000
+   qwen inherited                  cross         cross                 fp--s0  4.0000  3  0.6399    0.0164  0.0133       1.0406              1.0000
+   qwen inherited                  cross         cross                 fp--s0  8.0000  3  0.6831    0.0023  0.0000       1.2445              0.0000
+   qwen inherited                  cross         cross                 fp--s0 16.0000  3  0.6807    0.0035 -0.1233       5.1885              0.0000
+   qwen inherited                  cross        cross2 binary-per_tensor-s0.0  2.0000  3  0.0969    0.0179  0.0100       1.0023              1.0000
+   qwen inherited                  cross        cross2 binary-per_tensor-s0.0  4.0000  3  0.2150    0.0384  0.0033       1.0075              1.0000
+   qwen inherited                  cross        cross2 binary-per_tensor-s0.0  8.0000  3  0.4117    0.0493 -0.0033       1.0204              1.0000
+   qwen inherited                  cross        cross2 binary-per_tensor-s0.0 16.0000  3  0.5754    0.0350 -0.0133       1.0762              0.6667
+   qwen inherited                  cross        cross2                 fp--s0  2.0000  3  0.2340    0.0332 -0.0033       1.0014              1.0000
+   qwen inherited                  cross        cross2                 fp--s0  4.0000  3  0.4468    0.0409 -0.0033       1.0097              1.0000
+   qwen inherited                  cross        cross2                 fp--s0  8.0000  3  0.6082    0.0210 -0.0167       1.0493              0.6667
+   qwen inherited                  cross        cross2                 fp--s0 16.0000  3  0.6471    0.0238 -0.0717       1.3718              0.0000
+   qwen inherited              exogenous            gt binary-per_tensor-s0.0  2.0000  3  0.5563    0.0155  0.0083       1.0124              1.0000
+   qwen inherited              exogenous            gt binary-per_tensor-s0.0  4.0000  3  0.4374    0.0290  0.0050       1.0433              1.0000
+   qwen inherited              exogenous            gt binary-per_tensor-s0.0  8.0000  3  0.5161    0.0919  0.0083       1.2101              0.0000
+   qwen inherited              exogenous            gt binary-per_tensor-s0.0 16.0000  3  0.6067    0.0593 -0.0917       3.0348              0.0000
+   qwen inherited              exogenous            gt                 fp--s0  2.0000  3  0.4404    0.0217 -0.0017       1.0379              1.0000
+   qwen inherited              exogenous            gt                 fp--s0  4.0000  3  0.4922    0.0555  0.0000       1.1647              0.0000
+   qwen inherited              exogenous            gt                 fp--s0  8.0000  3  0.5928    0.0440 -0.1000       2.2118              0.0000
+   qwen inherited              exogenous            gt                 fp--s0 16.0000  3  0.6447    0.0554 -0.4300      82.9119              0.0000
+   qwen inherited                   null        random binary-per_tensor-s0.0  2.0000  3  0.0648    0.0270  0.0083       1.0042              1.0000
+   qwen inherited                   null        random binary-per_tensor-s0.0  4.0000  3  0.1769    0.0556  0.0050       1.0129              1.0000
+   qwen inherited                   null        random binary-per_tensor-s0.0  8.0000  3  0.4386    0.0777  0.0033       1.0509              1.0000
+   qwen inherited                   null        random binary-per_tensor-s0.0 16.0000  3  0.6441    0.0304 -0.0250       1.2517              0.0000
+   qwen inherited                   null        random                 fp--s0  2.0000  3  0.1669    0.0733  0.0067       1.0109              1.0000
+   qwen inherited                   null        random                 fp--s0  4.0000  3  0.4326    0.1041  0.0050       1.0442              1.0000
+   qwen inherited                   null        random                 fp--s0  8.0000  3  0.6585    0.0206 -0.0233       1.2111              0.0000
+   qwen inherited                   null        random                 fp--s0 16.0000  3  0.6703    0.0056 -0.2767       4.0120              0.0000
+   qwen inherited                   same          self binary-per_tensor-s0.0  2.0000  3 -0.0042    0.0113  0.0033       1.0038              1.0000
+   qwen inherited                   same          self binary-per_tensor-s0.0  4.0000  3  0.0242    0.0440 -0.0033       1.0088              1.0000
+   qwen inherited                   same          self binary-per_tensor-s0.0  8.0000  3  0.1472    0.1423 -0.0050       1.0246              1.0000
+   qwen inherited                   same          self binary-per_tensor-s0.0 16.0000  3  0.3840    0.2194 -0.0033       1.0771              0.6667
+   qwen inherited                   same          self                 fp--s0  2.0000  3  0.0100    0.0549  0.0067       1.0091              1.0000
+   qwen inherited                   same          self                 fp--s0  4.0000  3  0.1657    0.1694 -0.0033       1.0245              1.0000
+   qwen inherited                   same          self                 fp--s0  8.0000  3  0.4262    0.2082 -0.0067       1.0757              0.6667
+   qwen inherited                   same          self                 fp--s0 16.0000  3  0.6591    0.0243 -0.0617       1.3529              0.0000
+   qwen inherited                   same       sibling binary-per_tensor-s0.0  2.0000  3 -0.0873    0.0326  0.0033       1.0019              1.0000
+   qwen inherited                   same       sibling binary-per_tensor-s0.0  4.0000  3 -0.0269    0.0962  0.0033       1.0086              1.0000
+   qwen inherited                   same       sibling binary-per_tensor-s0.0  8.0000  3  0.2744    0.1767  0.0067       1.0313              1.0000
+   qwen inherited                   same       sibling binary-per_tensor-s0.0 16.0000  3  0.6412    0.0504 -0.0317       1.1546              0.0000
+   qwen inherited                   same       sibling                 fp--s0  2.0000  3 -0.0198    0.0775  0.0000       1.0039              1.0000
+   qwen inherited                   same       sibling                 fp--s0  4.0000  3  0.2930    0.1231  0.0083       1.0195              1.0000
+   qwen inherited                   same       sibling                 fp--s0  8.0000  3  0.6607    0.0185 -0.0200       1.1178              0.0000
+   qwen inherited                   same       sibling                 fp--s0 16.0000  3  0.6530    0.0428 -0.1833       2.5317              0.0000
+   smol  acquired                  cross         cross binary-per_tensor-s0.0  2.0000  3  0.2634    0.0096  0.0050       1.0020              1.0000
+   smol  acquired                  cross         cross binary-per_tensor-s0.0  4.0000  3  0.4583    0.0104 -0.0067       1.0117              1.0000
+   smol  acquired                  cross         cross binary-per_tensor-s0.0  8.0000  3  0.4913    0.0157 -0.0450       1.0502              0.0000
+   smol  acquired                  cross         cross binary-per_tensor-s0.0 16.0000  3  0.4813    0.0028 -0.1533       1.4192              0.0000
+   smol  acquired              exogenous            gt binary-per_tensor-s0.0  2.0000  3  0.4401    0.0091 -0.0017       1.0080              1.0000
+   smol  acquired              exogenous            gt binary-per_tensor-s0.0  4.0000  3  0.3743    0.0167 -0.0150       1.0273              0.6667
+   smol  acquired              exogenous            gt binary-per_tensor-s0.0  8.0000  3  0.4053    0.0242 -0.0183       1.1129              0.0000
+   smol  acquired              exogenous            gt binary-per_tensor-s0.0 16.0000  3  0.4801    0.0145 -0.0983       2.1458              0.0000
+   smol  acquired                   null        random binary-per_tensor-s0.0  2.0000  3  0.1401    0.2308 -0.0050       1.0013              1.0000
+   smol  acquired                   null        random binary-per_tensor-s0.0  4.0000  3  0.2275    0.3201 -0.0100       1.0064              0.6667
+   smol  acquired                   null        random binary-per_tensor-s0.0  8.0000  3  0.3097    0.2858 -0.0067       1.0266              0.6667
+   smol  acquired                   null        random binary-per_tensor-s0.0 16.0000  3  0.4057    0.1227 -0.0483       1.1251              0.0000
+   smol  acquired                   same          self binary-per_tensor-s0.0  2.0000  3  0.3226    0.0031 -0.0083       1.0025              1.0000
+   smol  acquired                   same          self binary-per_tensor-s0.0  4.0000  3  0.4692    0.0070 -0.0250       1.0122              0.0000
+   smol  acquired                   same          self binary-per_tensor-s0.0  8.0000  3  0.4889    0.0082 -0.0450       1.0566              0.0000
+   smol  acquired                   same          self binary-per_tensor-s0.0 16.0000  3  0.4820    0.0195 -0.1067       1.4625              0.0000
+   smol  acquired                   same       sibling binary-per_tensor-s0.0  2.0000  3  0.3444    0.0071  0.0017       1.0043              1.0000
+   smol  acquired                   same       sibling binary-per_tensor-s0.0  4.0000  3  0.4591    0.0072 -0.0017       1.0166              1.0000
+   smol  acquired                   same       sibling binary-per_tensor-s0.0  8.0000  3  0.4693    0.0152 -0.0317       1.0784              0.0000
+   smol  acquired                   same       sibling binary-per_tensor-s0.0 16.0000  3  0.4629    0.0242 -0.0917       2.3990              0.0000
+   smol inherited                  cross         cross binary-per_tensor-s0.0  2.0000  3  0.0424    0.0031 -0.0017       1.0016              1.0000
+   smol inherited                  cross         cross binary-per_tensor-s0.0  4.0000  3  0.1543    0.0138  0.0067       1.0039              1.0000
+   smol inherited                  cross         cross binary-per_tensor-s0.0  8.0000  3  0.3605    0.0228  0.0133       1.0140              1.0000
+   smol inherited                  cross         cross binary-per_tensor-s0.0 16.0000  3  0.6078    0.0410  0.0133       1.0506              1.0000
+   smol inherited              exogenous            gt binary-per_tensor-s0.0  2.0000  3  0.6356    0.0095 -0.0117       1.0013              1.0000
+   smol inherited              exogenous            gt binary-per_tensor-s0.0  4.0000  3  0.7591    0.0090 -0.0233       1.0140              0.3333
+   smol inherited              exogenous            gt binary-per_tensor-s0.0  8.0000  3  0.7407    0.0170 -0.0417       1.1427              0.0000
+   smol inherited              exogenous            gt binary-per_tensor-s0.0 16.0000  3  0.7828    0.0275 -0.0900      14.7224              0.0000
+   smol inherited                   null        random binary-per_tensor-s0.0  2.0000  3 -0.0215    0.0256  0.0050       1.0041              1.0000
+   smol inherited                   null        random binary-per_tensor-s0.0  4.0000  3 -0.0005    0.0699 -0.0133       1.0109              0.6667
+   smol inherited                   null        random binary-per_tensor-s0.0  8.0000  3  0.1683    0.2086 -0.0083       1.0339              0.3333
+   smol inherited                   null        random binary-per_tensor-s0.0 16.0000  3  0.5629    0.2322 -0.0233       1.1482              0.0000
+   smol inherited                   same          self binary-per_tensor-s0.0  2.0000  3  0.0152    0.0028 -0.0100       1.0014              1.0000
+   smol inherited                   same          self binary-per_tensor-s0.0  4.0000  3  0.0464    0.0031 -0.0117       1.0015              1.0000
+   smol inherited                   same          self binary-per_tensor-s0.0  8.0000  3  0.1433    0.0125 -0.0183       1.0040              0.3333
+   smol inherited                   same          self binary-per_tensor-s0.0 16.0000  3  0.3604    0.0191 -0.0067       1.0114              1.0000
+   smol inherited                   same       sibling binary-per_tensor-s0.0  2.0000  3  0.0056    0.0049 -0.0067       1.0000              1.0000
+   smol inherited                   same       sibling binary-per_tensor-s0.0  4.0000  3  0.0277    0.0069 -0.0067       1.0001              1.0000
+   smol inherited                   same       sibling binary-per_tensor-s0.0  8.0000  3  0.1327    0.0128  0.0000       1.0020              1.0000
+   smol inherited                   same       sibling binary-per_tensor-s0.0 16.0000  3  0.4191    0.0332  0.0083       1.0134              1.0000
+
+==============================================================================
+3. PRIMARY INFERENTIAL QUANTITY -- origin x designer_family (design.md §6)
+==============================================================================
+
+  --- POOLED over arms ---
+  model    : mixedlm (random intercept | (arm, seed), lbfgs)
+  formula  : bias_reduction ~ C(origin, Treatment('inherited')) * C(designer_family_factor, Treatment('cross')) + C(arm)
+  subset   : signal=endogenous, variant=binary-per_tensor-s0.0, collateral budget=strict, arm=pooled
+  term     : C(origin, Treatment('inherited'))[T.acquired]:C(designer_family_factor, Treatment('cross'))[T.same]
+  estimate : +0.1962   95% CI [+0.1073, +0.2851]   p = 1.524e-05
+  n        : 96 units over 3 seeds (random intercept | (arm, seed)) {'acquired/cross': 19, 'acquired/same': 29, 'inherited/cross': 21, 'inherited/same': 27}
+  cell means (dBias):
+      acquired/cross           +0.5288
+      acquired/same            +0.5312
+      inherited/cross          +0.5787
+      inherited/same           +0.3852
+
+  --- ARM = gemma ---
+  model    : mixedlm (random intercept | seed, powell)
+  formula  : bias_reduction ~ C(origin, Treatment('inherited')) * C(designer_family_factor, Treatment('cross'))
+  subset   : signal=endogenous, variant=binary-per_tensor-s0.0, collateral budget=strict, arm=gemma
+  term     : C(origin, Treatment('inherited'))[T.acquired]:C(designer_family_factor, Treatment('cross'))[T.same]
+  estimate : +0.2123   95% CI [+0.1143, +0.3104]   p = 2.198e-05
+  n        : 15 units over 3 seeds (random intercept | seed) {'acquired/cross': 3, 'acquired/same': 6, 'inherited/cross': 3, 'inherited/same': 3}
+  cell means (dBias):
+      acquired/cross           +0.5675
+      acquired/same            +0.5769
+      inherited/cross          +0.6145
+      inherited/same           +0.4116
+
+  --- ARM = llama ---
+  model    : mixedlm (random intercept | seed, powell)
+  formula  : bias_reduction ~ C(origin, Treatment('inherited')) * C(designer_family_factor, Treatment('cross'))
+  subset   : signal=endogenous, variant=binary-per_tensor-s0.0, collateral budget=strict, arm=llama
+  term     : C(origin, Treatment('inherited'))[T.acquired]:C(designer_family_factor, Treatment('cross'))[T.same]
+  estimate : +0.0433   95% CI [-0.0916, +0.1782]   p = 0.529
+  n        : 24 units over 3 seeds (random intercept | seed) {'acquired/cross': 6, 'acquired/same': 6, 'inherited/cross': 6, 'inherited/same': 6}
+  cell means (dBias):
+      acquired/cross           +0.4944
+      acquired/same            +0.4985
+      inherited/cross          +0.5417
+      inherited/same           +0.5024
+
+  --- ARM = phi ---
+  model    : mixedlm (random intercept | seed, powell)
+  formula  : bias_reduction ~ C(origin, Treatment('inherited')) * C(designer_family_factor, Treatment('cross'))
+  subset   : signal=endogenous, variant=binary-per_tensor-s0.0, collateral budget=strict, arm=phi
+  term     : C(origin, Treatment('inherited'))[T.acquired]:C(designer_family_factor, Treatment('cross'))[T.same]
+  estimate : +0.2714   95% CI [+0.1776, +0.3651]   p = 1.396e-08
+  n        : 18 units over 3 seeds (random intercept | seed) {'acquired/cross': 3, 'acquired/same': 6, 'inherited/cross': 3, 'inherited/same': 6}
+  cell means (dBias):
+      acquired/cross           +0.7535
+      acquired/same            +0.7520
+      inherited/cross          +0.6107
+      inherited/same           +0.3379
+
+  --- ARM = qwen ---
+  model    : mixedlm (random intercept | seed, powell)
+  formula  : bias_reduction ~ C(origin, Treatment('inherited')) * C(designer_family_factor, Treatment('cross'))
+  subset   : signal=endogenous, variant=binary-per_tensor-s0.0, collateral budget=strict, arm=qwen
+  term     : C(origin, Treatment('inherited'))[T.acquired]:C(designer_family_factor, Treatment('cross'))[T.same]
+  estimate : +0.2529   95% CI [+0.0181, +0.4878]   p = 0.0348
+  n        : 21 units over 3 seeds (random intercept | seed) {'acquired/cross': 4, 'acquired/same': 5, 'inherited/cross': 6, 'inherited/same': 6}
+  cell means (dBias):
+      acquired/cross           +0.4357
+      acquired/same            +0.4189
+      inherited/cross          +0.5673
+      inherited/same           +0.2975
+
+  --- ARM = smol ---
+  model    : mixedlm (random intercept | seed, lbfgs)
+  formula  : bias_reduction ~ C(origin, Treatment('inherited')) * C(designer_family_factor, Treatment('cross'))
+  subset   : signal=endogenous, variant=binary-per_tensor-s0.0, collateral budget=strict, arm=smol
+  term     : C(origin, Treatment('inherited'))[T.acquired]:C(designer_family_factor, Treatment('cross'))[T.same]
+  estimate : +0.1506   95% CI [+0.0462, +0.2551]   p = 0.004714
+  n        : 18 units over 3 seeds (random intercept | seed) {'acquired/cross': 3, 'acquired/same': 6, 'inherited/cross': 3, 'inherited/same': 6}
+  cell means (dBias):
+      acquired/cross           +0.4583
+      acquired/same            +0.3908
+      inherited/cross          +0.6078
+      inherited/same           +0.3897
+
+  orientation: positive = same-family does relatively better on ACQUIRED than on INHERITED bias, vs cross-family (H2).
+
+==============================================================================
+4. BOOTSTRAP INTERACTION (resampling seeds AND designers)
+==============================================================================
+  contrast : [dBias(acq,same) - dBias(inh,same)] - [dBias(acq,cross) - dBias(inh,cross)]
+  point    : +0.1959
+  boot mean: +0.1958   95% CI [+0.0659, +0.3225]   (n_boot=2000/2000)
+  P(boot > 0) = 0.998   P(boot < 0) = 0.002
+  units    : 96 (3 seeds, 10 designers), budget=strict
+
+==============================================================================
+4b. EXPERIMENT A -- ARM REPLICATION (make-or-break; experiments_v2.md)
+==============================================================================
+  arms: ['gemma', 'llama', 'phi', 'qwen', 'smol']  (n=5, A2/A3 need >= 3 arms)
+
+  PER-ARM FOREST of the origin x designer_family interaction (pooled-only reporting is banned, §N):
+  scale: -0.138 ............................. +0.534   ('|'=0, 'o'=estimate, '[ ]'=95% CI)
+    POOLED |         |      [=====o=====]                | +0.1962 [+0.1093, +0.2832]* n=96
+     gemma |         |       [=====o=====]               | +0.2123 [+0.1143, +0.3104]* n=15
+     llama |   [=====|==o========]                       | +0.0433 [-0.0916, +0.1782]  n=24
+       phi |         |           [=====o=====]           | +0.2714 [+0.1776, +0.3651]* n=18
+      qwen |         |[===============o==============]   | +0.2529 [+0.0181, +0.4878]* n=21
+      smol |         |  [======o======]                  | +0.1506 [+0.0462, +0.2551]* n=18
+
+  tidy table (also returned by per_arm_interactions() for the figures script):
+   scope    arm status  n  n_seeds  estimate   ci_lo  ci_hi  pvalue  positive  ci_excludes_0
+  pooled POOLED     ok 96        3    0.1962  0.1093 0.2832  0.0000      True           True
+     arm  gemma     ok 15        3    0.2123  0.1143 0.3104  0.0000      True           True
+     arm  llama     ok 24        3    0.0433 -0.0916 0.1782  0.5290      True          False
+     arm    phi     ok 18        3    0.2714  0.1776 0.3651  0.0000      True           True
+     arm   qwen     ok 21        3    0.2529  0.0181 0.4878  0.0348      True           True
+     arm   smol     ok 18        3    0.1506  0.0462 0.2551  0.0047      True           True
+
+  A1 pooled interaction (ARM AS RANDOM EFFECT):
+     estimate +0.1962  95% CI [+0.1093, +0.2832]  p=9.76e-06  n=96  [mixedlm (random intercept | arm, lbfgs)]
+     -> A1 PASS
+
+  A2 per-arm replication: positive in 5/5 arms (need >= 3), CI excludes 0 in 4 (need >= 2)
+     positive arms: ['gemma', 'llama', 'phi', 'qwen', 'smol']   CI-significant arms: ['gemma', 'phi', 'qwen', 'smol']   computable: 5/5
+     -> A2 PASS
+
+  A3 blind-spot null-equivalence -- (same - partition-null) on INHERITED, per arm:
+        gemma  +0.1468  95% CI [-0.3564, +0.4223]  -> AT CHANCE
+        llama  +0.3443  95% CI [+0.2760, +0.4342]  -> above null
+          phi  +0.2386  95% CI [+0.1514, +0.3224]  -> above null
+         qwen  -0.1411  95% CI [-0.3442, +0.0696]  -> AT CHANCE
+         smol  +0.3193  95% CI [+0.1534, +0.4547]  -> above null
+     at chance in 2/5 computable arms (need >= 3)
+     -> A3 FAIL
+
+  A4 acquired non-specificity -- pooled (cross - same) on ACQUIRED:
+     -0.0024  95% CI [-0.1266, +0.0960]  P(>0)=0.416
+     -> A4 PASS (covers 0, effect is inherited-specific)
+
+  KILL / DEMOTE: triggered=False
+     law claim survives Experiment A so far (spine = full (c), proceed to C -> B)
+
+==============================================================================
+5. MECHANISM TEST -- endogenous vs exogenous signal (design.md §5.6★, H3)
+==============================================================================
+  budget: strict
+     origin designer_family_factor  n  dBias     sd
+   acquired                  cross  9 0.5808 0.1320
+   acquired              exogenous  3 0.4401 0.0091
+   acquired                   same 29 0.5312 0.1413
+  inherited                  cross  9 0.5742 0.1342
+  inherited              exogenous  3 0.7457 0.0087
+  inherited                   same 27 0.3852 0.1291
+
+  gaps (bootstrap over seeds and designers):
+    acquired:deficit_endo              +0.0496  95% CI [-0.1002, +0.2293]  P(>0)=0.705
+    acquired:exo_vs_cross              -0.1407  95% CI [-0.3134, -0.0355]  P(>0)=0.000
+    acquired:exo_vs_same               -0.0911  95% CI [-0.1811, -0.0063]  P(>0)=0.019
+    inherited:deficit_endo             +0.1890  95% CI [+0.0326, +0.3151]  P(>0)=0.991
+    inherited:exo_vs_cross             +0.1715  95% CI [+0.0725, +0.3198]  P(>0)=1.000
+    inherited:exo_vs_same              +0.3605  95% CI [+0.2977, +0.4322]  P(>0)=1.000
+
+  H3 verdict: blind spot present (endogenous) = True; closed under exogenous = False  => H3 supported = False
+
+==============================================================================
+5b. RANDOM-PARTITION NULL (designer_role='random')
+==============================================================================
+  Same sentence pool, partition drawn at random, NO designer. If the null
+  matches the elicited designers, no designer-family claim is interpretable.
+
+  frontier dBias by origin x family factor (budget=strict):
+     origin designer_family_factor  n  dBias     sd
+   acquired                  cross 19 0.5288 0.1147
+   acquired              exogenous 14 0.2227 0.3153
+   acquired                   null 14 0.3310 0.2553
+   acquired                   same 29 0.5312 0.1413
+  inherited                  cross 21 0.5787 0.0970
+  inherited              exogenous 12 0.6619 0.0751
+  inherited                   null 15 0.2063 0.2182
+  inherited                   same 27 0.3852 0.1291
+
+  gaps vs the null (bootstrap over seeds and designers):
+    acquired:cross_minus_null            +0.1978  95% CI [+0.0158, +0.4195]  P(>0)=1.000
+    acquired:exogenous_minus_null        -0.1083  95% CI [-0.2177, +0.0582]  P(>0)=0.042
+    acquired:same_minus_null             +0.2002  95% CI [+0.0119, +0.4294]  P(>0)=0.987
+    inherited:cross_minus_null           +0.3725  95% CI [+0.2237, +0.4270]  P(>0)=1.000
+    inherited:exogenous_minus_null       +0.4556  95% CI [+0.4159, +0.4791]  P(>0)=1.000
+    inherited:same_minus_null            +0.1789  95% CI [+0.1077, +0.2585]  P(>0)=1.000
+    pooled:cross_minus_null              +0.2886  95% CI [+0.1581, +0.3941]  P(>0)=1.000
+    pooled:exogenous_minus_null          +0.1589  95% CI [+0.1045, +0.2408]  P(>0)=1.000
+    pooled:same_minus_null               +0.1943  95% CI [+0.0989, +0.3178]  P(>0)=1.000
+
+==============================================================================
+5c. ARM x DESIGNER_FAMILY -- bidirectional control (design.md §5.1)
+==============================================================================
+  inherited row, frontier dBias (budget=strict), arms present: ['gemma', 'llama', 'phi', 'qwen', 'smol']
+    arm designer_family_factor  n  dBias     sd
+  gemma                  cross  3 0.6145 0.0429
+  gemma                   same  3 0.4116 0.0612
+  llama                  cross  6 0.5417 0.1579
+  llama                   same  6 0.5024 0.0483
+    phi                  cross  3 0.6107 0.0253
+    phi                   same  6 0.3379 0.0741
+   qwen                  cross  6 0.5673 0.0855
+   qwen                   same  6 0.2975 0.2166
+   smol                  cross  3 0.6078 0.0410
+   smol                   same  6 0.3897 0.0403
+
+  relation view -- (cross - same) per arm (must be POSITIVE IN EVERY ARM):
+    arm=gemma      +0.2029  95% CI [+0.0869, +0.2883]  P(>0)=1.000
+    arm=llama      +0.0392  95% CI [-0.1614, +0.2090]  P(>0)=0.643
+    arm=phi        +0.2728  95% CI [+0.1764, +0.3759]  P(>0)=1.000
+    arm=qwen       +0.2698  95% CI [+0.0820, +0.4466]  P(>0)=0.991
+    arm=smol       +0.2181  95% CI [+0.1833, +0.2675]  P(>0)=1.000
+
+  lineage view -- mean dBias by arm x designer lineage:
+    arm designer_family  n  dBias
+  gemma           gemma  3 0.4116
+  gemma           llama  3 0.6145
+  llama           gemma  3 0.6732
+  llama           llama  6 0.5024
+  llama            qwen  3 0.4101
+    phi           llama  3 0.6107
+    phi             phi  6 0.3379
+   qwen           gemma  3 0.5192
+   qwen           llama  3 0.6154
+   qwen            qwen  6 0.2975
+   smol           llama  3 0.6078
+   smol          smollm  6 0.3897
+
+  does each lineage's advantage FLIP when the arm flips?
+    gemma        as-cross +0.5962 vs as-same +0.4116  flip=+0.1846 (FLIPS as predicted)
+    llama        as-cross +0.6121 vs as-same +0.5024  flip=+0.1097 (FLIPS as predicted)
+    phi          not testable (lineage never appears in both roles (n_as_same=6, n_as_cross=0))
+    qwen         as-cross +0.4101 vs as-same +0.2975  flip=+0.1126 (FLIPS as predicted)
+    smollm       not testable (lineage never appears in both roles (n_as_same=0, n_as_cross=6))
+
+  verdict: relation-consistent across arms=True (CI-strict=False), lineage flips=True over 3 testable lineage(s)
+
+==============================================================================
+5d. DIRECTION ALIGNMENT -- cosine(v_role, v_exogenous_gt) from the 20k-d sketches
+==============================================================================
+  Did the designer find the RIGHT direction, not merely a large one?
+  sketches: 162 files, 30 gt references, 162 aligned, 0 unreadable/mid-write
+
+  mean cosine to the ground-truth direction, by family factor:
+  designer_family_factor  n  cos_mean  cos_sd
+                   cross 42    0.0674  0.1706
+                    null 30   -0.0328  0.1335
+                    same 60    0.0694  0.1748
+
+  ... by origin x family factor:
+     origin designer_family_factor  n  cos_mean  cos_sd
+   acquired                  cross 21   -0.0156  0.1327
+   acquired                   null 15    0.0011  0.1829
+   acquired                   same 30    0.0158  0.1361
+  inherited                  cross 21    0.1503  0.1660
+  inherited                   null 15   -0.0668  0.0318
+  inherited                   same 30    0.1231  0.1941
+
+  alignment vs frontier bias reduction (n_merged=151):
+    all              n=151  pearson r=+0.043 [-0.1171, +0.2017] p=0.597  |  spearman rho=+0.195 [+0.0348, +0.3452] p=0.0165
+    endogenous_only  n=125  pearson r=+0.269 [+0.0979, +0.4245] p=0.00243  |  spearman rho=+0.253 [+0.0787, +0.4131] p=0.00435
+    acquired         n= 76  pearson r=-0.410 [-0.5819, -0.2037] p=0.000232  |  spearman rho=-0.384 [-0.5663, -0.1652] p=0.000623
+    inherited        n= 75  pearson r=+0.615 [+0.4515, +0.7391] p=4.23e-09  |  spearman rho=+0.727 [+0.5804, +0.8282] p=1.49e-13
+
+==============================================================================
+6. BLIND-SPOT CORRELATION -- does elicited contrast predict removal? (design.md §12/§8)
+==============================================================================
+  units: 102
+
+  predictor: elicit_contrast_gap
+    all          n=102  pearson r=+0.416 [+0.2416, +0.5652] p=1.34e-05  |  spearman rho=+0.288 [+0.0956, +0.4605] p=0.00328
+    acquired     n= 51  pearson r=-0.030 [-0.3029, +0.2479] p=0.836  |  spearman rho=-0.096 [-0.3625, +0.1851] p=0.503
+    inherited    n= 51  pearson r=+0.533 [+0.3014, +0.7048] p=5.72e-05  |  spearman rho=+0.485 [+0.2268, +0.6799] p=0.000307
+
+  predictor: vec_l2
+    all          n=102  pearson r=-0.067 [-0.2577, +0.1295] p=0.506  |  spearman rho=-0.106 [-0.2947, +0.0911] p=0.29
+    acquired     n= 51  pearson r=+0.048 [-0.2308, +0.3192] p=0.739  |  spearman rho=-0.057 [-0.3273, +0.2226] p=0.693
+    inherited    n= 51  pearson r=-0.034 [-0.3064, +0.2442] p=0.815  |  spearman rho=-0.024 [-0.2978, +0.2531] p=0.866
+
+  predictor: vec_cos_b_d
+    all          n=102  pearson r=-0.089 [-0.2787, +0.1072] p=0.373  |  spearman rho=-0.095 [-0.2843, +0.1021] p=0.344
+    acquired     n= 51  pearson r=-0.384 [-0.5963, -0.1211] p=0.00543  |  spearman rho=-0.537 [-0.7177, -0.2891] p=4.82e-05
+    inherited    n= 51  pearson r=-0.539 [-0.7095, -0.3099] p=4.42e-05  |  spearman rho=-0.602 [-0.7630, -0.3701] p=3e-06
+
+==============================================================================
+7. PRE-REGISTERED DECISION CRITERIA (design.md §7)
+==============================================================================
+  [PASS] SIGNAL_ABOVE_NULL
+          value     : {cross_minus_null=+0.2886, ci95=(+0.1581, +0.3941), P(>0)=+1.0000}
+          threshold : 95% CI on (cross - null) excludes 0
+          note      : gap: pooled:cross_minus_null; a null that matches the designers would void every designer-family claim
+  [N/A ] SIGN_NULL_FLAT
+          value     : {per_arm_mean={gemma=+0.0133, phi=+0.0027, qwen=-0.0066, smol=+0.0090}, worst=gemma, worst_abs_mean=+0.0133}
+          threshold : |mean dBias| < 0.05 in EVERY arm
+          note      : all covered arms flat; no sign-shuffle rows yet for arms ['llama']
+  [PASS] A1_pooled_interaction
+          value     : {estimate=+0.1962, ci95=(+0.1093, +0.2832), p=+9.76e-06}
+          threshold : estimate > 0 and 95% CI excludes 0 (arm as random effect)
+          note      : mixedlm (random intercept | arm, lbfgs)
+  [PASS] A2_per_arm_replication
+          value     : {n_arms=5, n_computable=5, n_positive=5, n_ci_excludes_0=4, arms_positive=(gemma, llama, phi, qwen, smol)}
+          threshold : >= 3 arms positive (ceil(0.6*5)) and >= 2 with CI excluding 0
+          note      : per-arm replication; pooled-only reporting is banned (§N)
+  [FAIL] A3_blind_spot_null_equivalence
+          value     : {n_at_chance=2, arms_at_chance=(gemma, qwen), n_computable=5}
+          threshold : >= 3 arms where (same - partition-null) on inherited has a CI covering 0
+          note      : same-family at chance on inherited bias = the blind spot
+  [PASS] A4_acquired_nonspecificity
+          value     : {cross_minus_same_acquired=-0.0024, ci95=(-0.1266, +0.0960)}
+          threshold : CI covers 0 on the ACQUIRED row (pooled)
+          note      : confirms the effect is inherited-specific, not a blanket cross-family advantage
+  [PASS] A_DEMOTE
+          value     : {n_arms_positive=5, n_computable=5, A1_passed=True, triggered=False}
+          threshold : TRIGGERS if interaction > 0 in <= 1 arm(s) or A1 fails
+          note      : law claim survives Experiment A so far (spine = full (c), proceed to C -> B)
+  [PASS] H2_interaction_significant
+          value     : {estimate=+0.1962, p=+1.52e-05, ci95=(+0.1073, +0.2851)}
+          threshold : p < 0.01 and estimate > 0
+          note      : mixedlm (random intercept | (arm, seed), lbfgs)
+  [FAIL] H2_inherited_ratio
+          value     : +0.6656
+          threshold : < 0.3
+          note      : dBias(inherited,same) / dBias(inherited,cross)
+  [PASS] H2_acquired_ratio
+          value     : +1.0045
+          threshold : > 0.8
+          note      : dBias(acquired,same) / dBias(acquired,cross)
+  [FAIL] H2_axis_coverage
+          value     : 2
+          threshold : >= 3 of 4 axes
+          note      : MVP (§11) runs 2 axes by design; this criterion cannot be met before the axis scale-up
+  [FAIL] H2_primary_success
+          value     : (True, False, True)
+          threshold : all of the above
+          note      : axis-coverage clause tracked separately
+  [PASS] BIDIRECTIONAL_CONSISTENT
+          value     : {arms=(gemma, llama, phi, qwen, smol), cross_minus_same_per_arm={gemma=+0.2029, llama=+0.0392, phi=+0.2728, qwen=+0.2698, smol=+0.2181}, lineage_flips=True}
+          threshold : (cross - same) > 0 in EVERY arm, and each lineage's advantage flips sign when the arm flips
+          note      : if the asymmetry were 'the cross lineage is simply stronger', it would not survive swapping the arms (CI-strict version: False)
+  [FAIL] H3_mechanism_success
+          value     : {deficit_endogenous=+0.1890, deficit_ci=(+0.0326, +0.3151), exogenous_vs_cross=+0.1715, exogenous_vs_cross_ci=(+0.0725, +0.3198)}
+          threshold : blind spot present under endogenous AND exogenous ~ cross (CI covers 0)
+          note      : exogenous arm has no designer, so the literal interaction is replaced by the inherited-row gap test (see mechanism_test)
+  [PASS] H1_binary_retention
+          value     : {median_ratio=+0.9896, iqr=(+0.8903, +1.0590), ratio_of_means=+0.9669}
+          threshold : median >= 0.7
+          note      : binary-per_tensor-s0.0 vs fp--s0 at MATCHED COLLATERAL (each variant at its own best alpha inside the strict budget); n=50 conditions, 0 dropped for fp_best <= 0
+  [PASS] H1_mmlu_cost
+          value     : -0.0034
+          threshold : <= 0.02
+          note      : mean MMLU drop of the binary edit at its frontier point
+  [PASS] KILL_PIVOT
+          value     : {cross_minus_same_on_inherited=+0.1829, ci95=(+0.0501, +0.2725), ci_width=+0.2224, triggered=False}
+          threshold : TRIGGERS if CI covers 0 and width <= 0.1
+          note      : passed=True means the thesis survives (no pivot to (b)); budget=strict
+
+  H1 detail (matched COLLATERAL -- the §7 gate):
+    frontier dBias  binary=+0.4623 (mean best alpha 6.20)  vs  fp=+0.4782 (mean best alpha 3.20)
+    retention       median=0.990  IQR=[0.890, 1.059]  range=[0.489, 5.242]  ratio-of-means=0.967
+    conditions      50 used of 50 (0 dropped: fp_best <= 0)   budget=strict
+    edit size       median 9824.1 KB
+    arm coverage    with fp: ['llama', 'qwen']; WITHOUT fp (skipped, H1 settled per experiments_v2.md §1): ['gemma', 'phi', 'smol']
+         gemma  skipped -- no full-precision rows in this arm (experiments_v2.md §1: H1 settled)
+         llama  median ratio=0.988 ratio-of-means=0.891  n=25 (dropped 0)
+           phi  skipped -- no full-precision rows in this arm (experiments_v2.md §1: H1 settled)
+          qwen  median ratio=1.017 ratio-of-means=1.068  n=25 (dropped 0)
+          smol  skipped -- no full-precision rows in this arm (experiments_v2.md §1: H1 settled)
+    [secondary diagnostic, CONFOUNDED -- matched alpha, n=288]: ratio-of-means=0.807, median pairwise=0.873
+
+==============================================================================
+end of report
+==============================================================================

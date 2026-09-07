@@ -1,0 +1,166 @@
+{
+ "artifact": "v9_regen",
+ "blocked": {
+  "v6trace/ste (\u00a711b STE vs sign_fp)": "no alpha_trace; cannot be re-scored",
+  "frontier edit arm: llama, qwen": "results/x has no trace and no re-scorable twin; those cells stay as-run, so the 8-cell frontier is MIXED-gate",
+  "t2x / v1 / x / x2": "v5-era panels, no traces; boundary exposure UNKNOWN"
+ },
+ "diff": {
+  "DEC :: C-a minus C-rand": {
+   "v8": "+0.0670 [+0.0292, +0.1106] (n=10, excludes 0)",
+   "v9": "+0.0682 [+0.0300, +0.1120] (n=10, excludes 0)",
+   "v8_point": 0.066968,
+   "v9_point": 0.06823,
+   "ci_status_change": "none"
+  },
+  "DEC :: Delta_location": {
+   "v8": "+0.3178 [+0.1973, +0.4482] (n=10, excludes 0)",
+   "v9": "+0.3487 [+0.2205, +0.4877] (n=10, excludes 0)",
+   "v8_point": 0.317781,
+   "v9_point": 0.348725,
+   "ci_status_change": "none"
+  },
+  "DEC :: Delta_null": {
+   "v8": "+0.3207 [+0.1987, +0.4525] (n=10, excludes 0)",
+   "v9": "+0.3518 [+0.2216, +0.4922] (n=10, excludes 0)",
+   "v8_point": 0.320652,
+   "v9_point": 0.35178,
+   "ci_status_change": "none"
+  },
+  "DEC :: Delta_selection": {
+   "v8": "+0.2537 [+0.1475, +0.3692] (n=10, excludes 0)",
+   "v9": "+0.2835 [+0.1692, +0.4072] (n=10, excludes 0)",
+   "v8_point": 0.253684,
+   "v9_point": 0.28355,
+   "ci_status_change": "none"
+  },
+  "DEC :: Delta_sign": {
+   "v8": "+0.3185 [+0.1965, +0.4502] (n=10, excludes 0)",
+   "v9": "+0.3496 [+0.2203, +0.4898] (n=10, excludes 0)",
+   "v8_point": 0.318493,
+   "v9_point": 0.3496,
+   "ci_status_change": "none"
+  },
+  "DEC :: Delta_tensor": {
+   "v8": "+0.3663 [+0.2354, +0.5130] (n=7, excludes 0)",
+   "v9": "+0.3809 [+0.2488, +0.5201] (n=7, excludes 0)",
+   "v8_point": 0.366336,
+   "v9_point": 0.380877,
+   "ci_status_change": "none"
+  },
+  "SPC small :: s=0.9": {
+   "v8": "+0.0440 [-0.0924, +0.1820] (n=4, covers 0)",
+   "v9": "+0.0665 [-0.0312, +0.1820] (n=4, covers 0)",
+   "v8_point": 0.043991,
+   "v9_point": 0.066538,
+   "ci_status_change": "none"
+  },
+  "SPC small :: s=0.99": {
+   "v8": "-0.1286 [-0.2077, -0.0308] (n=4, excludes 0)",
+   "v9": "-0.0754 [-0.1665, +0.0158] (n=4, covers 0)",
+   "v8_point": -0.128636,
+   "v9_point": -0.075355,
+   "ci_status_change": "CHANGED: excludes 0 -> covers 0"
+  },
+  "SPC small :: s=0.995": {
+   "v8": "-0.2644 [-0.2922, -0.2366] (n=4, excludes 0)",
+   "v9": "-0.2256 [-0.2847, -0.1555] (n=4, excludes 0)",
+   "v8_point": -0.264386,
+   "v9_point": -0.225596,
+   "ci_status_change": "none"
+  },
+  "SPC small :: s=0.999": {
+   "v8": "-0.4165 [-0.5131, -0.3307] (n=4, excludes 0)",
+   "v9": "-0.4165 [-0.5131, -0.3307] (n=4, excludes 0)",
+   "v8_point": -0.416525,
+   "v9_point": -0.416525,
+   "ci_status_change": "none"
+  },
+  "SPC big :: s=0.9": {
+   "v8": "-0.1083 [-0.2484, +0.0318] (n=2, covers 0)",
+   "v9": "+0.0157 [-0.0005, +0.0318] (n=2, covers 0)",
+   "v8_point": -0.108321,
+   "v9_point": 0.01565,
+   "ci_status_change": "none"
+  },
+  "SPC big :: s=0.99": {
+   "v8": "+0.0099 [+0.0063, +0.0135] (n=2, excludes 0)",
+   "v9": "+0.1120 [+0.0135, +0.2105] (n=2, excludes 0)",
+   "v8_point": 0.009907,
+   "v9_point": 0.11198,
+   "ci_status_change": "none"
+  },
+  "SPC big :: s=0.995": {
+   "v8": "+0.1308 [+0.0107, +0.2509] (n=2, excludes 0)",
+   "v9": "+0.1308 [+0.0107, +0.2509] (n=2, excludes 0)",
+   "v8_point": 0.130815,
+   "v9_point": 0.130815,
+   "ci_status_change": "none"
+  },
+  "SPC big :: s=0.999": {
+   "v8": "-0.0740 [-0.1210, -0.0270] (n=2, excludes 0)",
+   "v9": "-0.0740 [-0.1210, -0.0270] (n=2, excludes 0)",
+   "v8_point": -0.073999,
+   "v9_point": -0.073999,
+   "ci_status_change": "none"
+  },
+  "frontier :: edit - DPO": {
+   "v8": "+0.2926 [+0.0297, +0.5399] (n=8, excludes 0)",
+   "v9": "+0.2926 [+0.0297, +0.5399] (n=8, excludes 0)",
+   "v8_point": 0.292637,
+   "v9_point": 0.292637,
+   "ci_status_change": "none"
+  },
+  "frontier :: edit - SentenceDebias": {
+   "v8": "-0.0279 [-0.1092, +0.0426] (n=8, covers 0)",
+   "v9": "-0.0279 [-0.1092, +0.0426] (n=8, covers 0)",
+   "v8_point": -0.02795,
+   "v9_point": -0.02795,
+   "ci_status_change": "none"
+  },
+  "frontier :: edit - steering": {
+   "v8": "-0.0095 [-0.0834, +0.0558] (n=8, covers 0)",
+   "v9": "-0.0208 [-0.0957, +0.0495] (n=8, covers 0)",
+   "v8_point": -0.009528,
+   "v9_point": -0.020779,
+   "ci_status_change": "none"
+  },
+  "frontier :: edit - steering [re-scorable cells only]": {
+   "v8": "-0.0219 [-0.1600, +0.0891] (n=4, covers 0)",
+   "v9": "-0.0219 [-0.1600, +0.0891] (n=4, covers 0)",
+   "v8_point": -0.021895,
+   "v9_point": -0.021895,
+   "ci_status_change": "none"
+  }
+ },
+ "DEC_means_v9": {
+  "C-ref": 0.3532,
+  "C-a": 0.0696,
+  "C-rand": 0.0014,
+  "C-b": 0.0036,
+  "C-bottom": 0.0012,
+  "C-layershuf": 0.0045,
+  "C-tensorshuf": 0.0455
+ },
+ "DEC_means_v8": {
+  "C-ref": 0.322,
+  "C-a": 0.0684,
+  "C-rand": 0.0014,
+  "C-b": 0.0036,
+  "C-bottom": 0.001,
+  "C-layershuf": 0.0043,
+  "C-tensorshuf": 0.0342
+ },
+ "DEC_unanimity": {
+  "v8": 10,
+  "v9": 10
+ },
+ "frontier_edit_provenance": {
+  "gemma": "v6trace/x2 (re-scorable)",
+  "phi": "v6trace/x2 (re-scorable)",
+  "granite": "v6trace/x2 (re-scorable)",
+  "qwen": "results/x (NOT re-scorable \u2014 as-run)",
+  "llama": "results/x (NOT re-scorable \u2014 as-run)",
+  "falcon": "results/x (NOT re-scorable \u2014 as-run)"
+ }
+}

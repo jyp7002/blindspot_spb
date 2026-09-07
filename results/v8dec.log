@@ -1,0 +1,379 @@
+Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
+Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
+Loading checkpoint shards:   0%|                                                                          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00, 87.21it/s]
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[dec] support dump gemma|occ_gender|s0|gemma_3b.npz nnz=3,680,502 density=0.01000
+/opt/conda/lib/python3.13/site-packages/torch/utils/checkpoint.py:232: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  check_backward_validity(args)
+[dec] gemma  occ_gender           s0 C-ref            removal=+0.1353
+[dec] gemma  occ_gender           s0 C-a              removal=+0.0327
+[dec] gemma  occ_gender           s0 C-bottom         removal=+0.0023
+[dec] gemma  occ_gender           s0 C-b              removal=-0.0018
+[dec] gemma  occ_gender           s0 C-rand           removal=+0.0007
+[dec] gemma  occ_gender           s0 C-layershuf      removal=+0.0096
+[dec] gemma  occ_gender           s0 C-tensorshuf     removal=+0.0738
+[dec] gemma  occ_gender           s0 C-ref-no_k_proj  removal=+0.3455
+[dec] gemma  occ_gender           s0 C-ref-no_o_proj  removal=+0.1097
+[dec] gemma  occ_gender           s0 C-ref-no_q_proj  removal=+0.6366
+[dec] gemma  occ_gender           s0 C-ref-no_v_proj  removal=+0.2659
+[dec] support dump gemma|occ_gender|s1|gemma_3b.npz nnz=3,680,501 density=0.01000
+[dec] gemma  occ_gender           s1 C-ref            removal=+0.6164
+[dec] gemma  occ_gender           s1 C-a              removal=+0.0543
+[dec] gemma  occ_gender           s1 C-bottom         removal=+0.0016
+[dec] gemma  occ_gender           s1 C-b              removal=+0.0062
+[dec] gemma  occ_gender           s1 C-rand           removal=+0.0116
+[dec] gemma  occ_gender           s1 C-layershuf      removal=-0.0011
+[dec] gemma  occ_gender           s1 C-tensorshuf     removal=+0.0472
+[dec] gemma  occ_gender           s1 C-ref-no_k_proj  removal=+0.5980
+[dec] gemma  occ_gender           s1 C-ref-no_o_proj  removal=+0.4663
+[dec] gemma  occ_gender           s1 C-ref-no_q_proj  removal=+0.5995
+[dec] gemma  occ_gender           s1 C-ref-no_v_proj  removal=+0.1857
+[dec] support dump gemma|occ_gender|s2|gemma_3b.npz nnz=3,680,502 density=0.01000
+[dec] gemma  occ_gender           s2 C-ref            removal=+0.7853
+[dec] gemma  occ_gender           s2 C-a              removal=+0.1598
+[dec] gemma  occ_gender           s2 C-bottom         removal=+0.0013
+[dec] gemma  occ_gender           s2 C-b              removal=+0.0244
+[dec] gemma  occ_gender           s2 C-rand           removal=-0.0002
+[dec] gemma  occ_gender           s2 C-layershuf      removal=+0.0006
+[dec] gemma  occ_gender           s2 C-tensorshuf     removal=+0.5946
+[dec] gemma  occ_gender           s2 C-ref-no_k_proj  removal=+0.7856
+[dec] gemma  occ_gender           s2 C-ref-no_o_proj  removal=+0.6085
+[dec] gemma  occ_gender           s2 C-ref-no_q_proj  removal=+0.7567
+[dec] gemma  occ_gender           s2 C-ref-no_v_proj  removal=+0.6264
+[dec] ALL DONE
+Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
+Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
+Loading checkpoint shards:   0%|                                                                          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00, 96.51it/s]
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[dec] support dump llama|occ_gender|s0|llama_3b.npz nnz=7,046,431 density=0.01000
+/opt/conda/lib/python3.13/site-packages/torch/utils/checkpoint.py:232: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  check_backward_validity(args)
+[dec] llama  occ_gender           s0 C-ref            removal=+0.6721
+[dec] llama  occ_gender           s0 C-a              removal=+0.0484
+[dec] llama  occ_gender           s0 C-bottom         removal=+0.0015
+[dec] llama  occ_gender           s0 C-b              removal=+0.0049
+[dec] llama  occ_gender           s0 C-rand           removal=+0.0023
+[dec] llama  occ_gender           s0 C-layershuf      removal=+0.0039
+[dec] llama  occ_gender           s0 C-tensorshuf     removal=-0.0078
+[dec] llama  occ_gender           s0 C-ref-no_k_proj  removal=+0.6723
+[dec] llama  occ_gender           s0 C-ref-no_o_proj  removal=+0.5822
+[dec] llama  occ_gender           s0 C-ref-no_q_proj  removal=+0.7071
+[dec] llama  occ_gender           s0 C-ref-no_v_proj  removal=+0.3085
+[dec] support dump llama|occ_gender|s1|llama_3b.npz nnz=7,046,429 density=0.01000
+[dec] llama  occ_gender           s1 C-ref            removal=+0.4695
+[dec] llama  occ_gender           s1 C-a              removal=+0.0360
+[dec] llama  occ_gender           s1 C-bottom         removal=+0.0017
+[dec] llama  occ_gender           s1 C-b              removal=+0.0133
+[dec] llama  occ_gender           s1 C-rand           removal=+0.0031
+[dec] llama  occ_gender           s1 C-layershuf      removal=+0.0005
+[dec] llama  occ_gender           s1 C-tensorshuf     removal=-0.0040
+[dec] llama  occ_gender           s1 C-ref-no_k_proj  removal=+0.4913
+[dec] llama  occ_gender           s1 C-ref-no_o_proj  removal=+0.4671
+[dec] llama  occ_gender           s1 C-ref-no_q_proj  removal=+0.4901
+[dec] llama  occ_gender           s1 C-ref-no_v_proj  removal=+0.3672
+[dec] support dump llama|occ_gender|s2|llama_3b.npz nnz=7,046,428 density=0.01000
+[dec] llama  occ_gender           s2 C-ref            removal=+0.7027
+[dec] llama  occ_gender           s2 C-a              removal=+0.0446
+[dec] llama  occ_gender           s2 C-bottom         removal=-0.0035
+[dec] llama  occ_gender           s2 C-b              removal=+0.0050
+[dec] llama  occ_gender           s2 C-rand           removal=+0.0003
+[dec] llama  occ_gender           s2 C-layershuf      removal=+0.0223
+[dec] llama  occ_gender           s2 C-tensorshuf     removal=-0.0054
+[dec] llama  occ_gender           s2 C-ref-no_k_proj  removal=+0.7324
+[dec] llama  occ_gender           s2 C-ref-no_o_proj  removal=+0.6471
+[dec] llama  occ_gender           s2 C-ref-no_q_proj  removal=+0.7312
+[dec] llama  occ_gender           s2 C-ref-no_v_proj  removal=+0.3206
+[dec] ALL DONE
+Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
+Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
+Loading checkpoint shards:   0%|                                                                          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 1/2 [00:00<00:00,  6.51it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  7.71it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  7.50it/s]
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[dec] support dump qwen|occ_gender|s0|qwen_3b.npz nnz=3,397,387 density=0.01000
+/opt/conda/lib/python3.13/site-packages/torch/utils/checkpoint.py:232: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  check_backward_validity(args)
+[dec] qwen   occ_gender           s0 C-ref            removal=+0.4019
+[dec] qwen   occ_gender           s0 C-a              removal=-0.0115
+[dec] qwen   occ_gender           s0 C-bottom         removal=+0.0018
+[dec] qwen   occ_gender           s0 C-b              removal=+0.0016
+[dec] qwen   occ_gender           s0 C-rand           removal=+0.0015
+[dec] qwen   occ_gender           s0 C-layershuf      removal=+0.0021
+[dec] qwen   occ_gender           s0 C-tensorshuf     removal=-0.0002
+[dec] qwen   occ_gender           s0 C-ref-no_k_proj  removal=+0.3915
+[dec] qwen   occ_gender           s0 C-ref-no_o_proj  removal=+0.1533
+[dec] qwen   occ_gender           s0 C-ref-no_q_proj  removal=+0.1889
+[dec] qwen   occ_gender           s0 C-ref-no_v_proj  removal=-0.0418
+[dec] support dump qwen|occ_gender|s1|qwen_3b.npz nnz=3,397,387 density=0.01000
+[dec] qwen   occ_gender           s1 C-ref            removal=+0.2781
+[dec] qwen   occ_gender           s1 C-a              removal=-0.0091
+[dec] qwen   occ_gender           s1 C-bottom         removal=+0.0003
+[dec] qwen   occ_gender           s1 C-b              removal=+0.0048
+[dec] qwen   occ_gender           s1 C-rand           removal=+0.0028
+[dec] qwen   occ_gender           s1 C-layershuf      removal=-0.0017
+[dec] qwen   occ_gender           s1 C-tensorshuf     removal=-0.0047
+[dec] qwen   occ_gender           s1 C-ref-no_k_proj  removal=+0.2214
+[dec] qwen   occ_gender           s1 C-ref-no_o_proj  removal=-0.0274
+[dec] qwen   occ_gender           s1 C-ref-no_q_proj  removal=+0.2809
+[dec] qwen   occ_gender           s1 C-ref-no_v_proj  removal=-0.0135
+[dec] support dump qwen|occ_gender|s2|qwen_3b.npz nnz=3,397,387 density=0.01000
+[dec] qwen   occ_gender           s2 C-ref            removal=+0.4931
+[dec] qwen   occ_gender           s2 C-a              removal=-0.0112
+[dec] qwen   occ_gender           s2 C-bottom         removal=+0.0041
+[dec] qwen   occ_gender           s2 C-b              removal=+0.0015
+[dec] qwen   occ_gender           s2 C-rand           removal=+0.0054
+[dec] qwen   occ_gender           s2 C-layershuf      removal=+0.0049
+[dec] qwen   occ_gender           s2 C-tensorshuf     removal=-0.0002
+[dec] qwen   occ_gender           s2 C-ref-no_k_proj  removal=+0.4878
+[dec] qwen   occ_gender           s2 C-ref-no_o_proj  removal=+0.1731
+[dec] qwen   occ_gender           s2 C-ref-no_q_proj  removal=+0.3598
+[dec] qwen   occ_gender           s2 C-ref-no_v_proj  removal=-0.0726
+Using the latest cached version of the dataset since oskarvanderwal/bbq couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'Age' at /home/jovyan/.cache/huggingface/datasets/oskarvanderwal___bbq/Age/0.0.0/ab00114b0fbf59c7c539ff9158f6ce717d13ab63 (last modified on Mon Jul 20 06:59:10 2026).
+[dec] support dump qwen|bbq_Age|s0|qwen_3b.npz nnz=3,397,386 density=0.01000
+[dec] qwen   bbq_Age              s0 C-ref            removal=+0.2634
+[dec] qwen   bbq_Age              s0 C-a              removal=+0.1331
+[dec] qwen   bbq_Age              s0 C-bottom         removal=-0.0008
+[dec] qwen   bbq_Age              s0 C-b              removal=+0.0048
+[dec] qwen   bbq_Age              s0 C-rand           removal=-0.0003
+[dec] qwen   bbq_Age              s0 C-layershuf      removal=-0.0003
+[dec] qwen   bbq_Age              s0 C-tensorshuf     removal=-0.0005
+[dec] qwen   bbq_Age              s0 C-ref-no_k_proj  removal=+0.2632
+[dec] qwen   bbq_Age              s0 C-ref-no_o_proj  removal=+0.1689
+[dec] qwen   bbq_Age              s0 C-ref-no_q_proj  removal=+0.2910
+[dec] qwen   bbq_Age              s0 C-ref-no_v_proj  removal=+0.2841
+[dec] support dump qwen|bbq_Age|s1|qwen_3b.npz nnz=3,397,387 density=0.01000
+[dec] qwen   bbq_Age              s1 C-ref            removal=+0.2395
+[dec] qwen   bbq_Age              s1 C-a              removal=+0.1382
+[dec] qwen   bbq_Age              s1 C-bottom         removal=+0.0001
+[dec] qwen   bbq_Age              s1 C-b              removal=-0.0003
+[dec] qwen   bbq_Age              s1 C-rand           removal=+0.0037
+[dec] qwen   bbq_Age              s1 C-layershuf      removal=+0.0005
+[dec] qwen   bbq_Age              s1 C-tensorshuf     removal=+0.0007
+[dec] qwen   bbq_Age              s1 C-ref-no_k_proj  removal=+0.2457
+[dec] qwen   bbq_Age              s1 C-ref-no_o_proj  removal=+0.1986
+[dec] qwen   bbq_Age              s1 C-ref-no_q_proj  removal=+0.2601
+[dec] qwen   bbq_Age              s1 C-ref-no_v_proj  removal=+0.2697
+[dec] support dump qwen|bbq_Age|s2|qwen_3b.npz nnz=3,397,385 density=0.01000
+[dec] qwen   bbq_Age              s2 C-ref            removal=+0.2565
+[dec] qwen   bbq_Age              s2 C-a              removal=+0.1269
+[dec] qwen   bbq_Age              s2 C-bottom         removal=+0.0016
+[dec] qwen   bbq_Age              s2 C-b              removal=-0.0007
+[dec] qwen   bbq_Age              s2 C-rand           removal=-0.0002
+[dec] qwen   bbq_Age              s2 C-layershuf      removal=+0.0010
+[dec] qwen   bbq_Age              s2 C-tensorshuf     removal=+0.0092
+[dec] qwen   bbq_Age              s2 C-ref-no_k_proj  removal=+0.2611
+[dec] qwen   bbq_Age              s2 C-ref-no_o_proj  removal=+0.1725
+[dec] qwen   bbq_Age              s2 C-ref-no_q_proj  removal=+0.2757
+[dec] qwen   bbq_Age              s2 C-ref-no_v_proj  removal=+0.2781
+Using the latest cached version of the dataset since oskarvanderwal/bbq couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'Race_ethnicity' at /home/jovyan/.cache/huggingface/datasets/oskarvanderwal___bbq/Race_ethnicity/0.0.0/ab00114b0fbf59c7c539ff9158f6ce717d13ab63 (last modified on Mon Jul 20 06:59:02 2026).
+[dec] support dump qwen|bbq_Race_ethnicity|s0|qwen_3b.npz nnz=3,397,386 density=0.01000
+[dec] qwen   bbq_Race_ethnicity   s0 C-ref            removal=+0.2632
+[dec] qwen   bbq_Race_ethnicity   s0 C-a              removal=+0.0890
+[dec] qwen   bbq_Race_ethnicity   s0 C-bottom         removal=+0.0015
+[dec] qwen   bbq_Race_ethnicity   s0 C-b              removal=+0.0004
+[dec] qwen   bbq_Race_ethnicity   s0 C-rand           removal=+0.0007
+[dec] qwen   bbq_Race_ethnicity   s0 C-layershuf      removal=-0.0013
+[dec] qwen   bbq_Race_ethnicity   s0 C-tensorshuf     removal=+0.0061
+[dec] qwen   bbq_Race_ethnicity   s0 C-ref-no_k_proj  removal=+0.2613
+[dec] qwen   bbq_Race_ethnicity   s0 C-ref-no_o_proj  removal=+0.1327
+[dec] qwen   bbq_Race_ethnicity   s0 C-ref-no_q_proj  removal=+0.2465
+[dec] qwen   bbq_Race_ethnicity   s0 C-ref-no_v_proj  removal=+0.2464
+[dec] support dump qwen|bbq_Race_ethnicity|s1|qwen_3b.npz nnz=3,397,387 density=0.01000
+[dec] qwen   bbq_Race_ethnicity   s1 C-ref            removal=+0.2597
+[dec] qwen   bbq_Race_ethnicity   s1 C-a              removal=+0.1055
+[dec] qwen   bbq_Race_ethnicity   s1 C-bottom         removal=+0.0005
+[dec] qwen   bbq_Race_ethnicity   s1 C-b              removal=+0.0058
+[dec] qwen   bbq_Race_ethnicity   s1 C-rand           removal=+0.0014
+[dec] qwen   bbq_Race_ethnicity   s1 C-layershuf      removal=+0.0015
+[dec] qwen   bbq_Race_ethnicity   s1 C-tensorshuf     removal=+0.0013
+[dec] qwen   bbq_Race_ethnicity   s1 C-ref-no_k_proj  removal=+0.2621
+[dec] qwen   bbq_Race_ethnicity   s1 C-ref-no_o_proj  removal=+0.1370
+[dec] qwen   bbq_Race_ethnicity   s1 C-ref-no_q_proj  removal=+0.2685
+[dec] qwen   bbq_Race_ethnicity   s1 C-ref-no_v_proj  removal=+0.2653
+[dec] support dump qwen|bbq_Race_ethnicity|s2|qwen_3b.npz nnz=3,397,385 density=0.01000
+[dec] qwen   bbq_Race_ethnicity   s2 C-ref            removal=+0.2355
+[dec] qwen   bbq_Race_ethnicity   s2 C-a              removal=+0.1251
+[dec] qwen   bbq_Race_ethnicity   s2 C-bottom         removal=+0.0044
+[dec] qwen   bbq_Race_ethnicity   s2 C-b              removal=+0.0078
+[dec] qwen   bbq_Race_ethnicity   s2 C-rand           removal=+0.0007
+[dec] qwen   bbq_Race_ethnicity   s2 C-layershuf      removal=+0.0027
+[dec] qwen   bbq_Race_ethnicity   s2 C-tensorshuf     removal=+0.0000
+[dec] qwen   bbq_Race_ethnicity   s2 C-ref-no_k_proj  removal=+0.2375
+[dec] qwen   bbq_Race_ethnicity   s2 C-ref-no_o_proj  removal=+0.1680
+[dec] qwen   bbq_Race_ethnicity   s2 C-ref-no_q_proj  removal=+0.2549
+[dec] qwen   bbq_Race_ethnicity   s2 C-ref-no_v_proj  removal=+0.2491
+Using the latest cached version of the dataset since McGill-NLP/stereoset couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'intrasentence' at /home/jovyan/.cache/huggingface/datasets/McGill-NLP___stereoset/intrasentence/0.0.0/bf6e7ce50491784d094fb7afe60a70ecccb89035 (last modified on Mon Jul 20 06:59:49 2026).
+[dec] support dump qwen|ss_intra|s0|qwen_3b.npz nnz=3,397,387 density=0.01000
+[dec] qwen   ss_intra             s0 C-ref            removal=+0.0972
+[dec] qwen   ss_intra             s0 C-a              removal=+0.0098
+[dec] qwen   ss_intra             s0 C-bottom         removal=+0.0000
+[dec] qwen   ss_intra             s0 C-b              removal=-0.0007
+[dec] qwen   ss_intra             s0 C-rand           removal=+0.0014
+[dec] qwen   ss_intra             s0 C-layershuf      removal=+0.0026
+[dec] qwen   ss_intra             s0 C-tensorshuf     removal=+0.0005
+[dec] qwen   ss_intra             s0 C-ref-no_k_proj  removal=+0.0975
+[dec] qwen   ss_intra             s0 C-ref-no_o_proj  removal=+0.0052
+[dec] qwen   ss_intra             s0 C-ref-no_q_proj  removal=+0.0961
+[dec] qwen   ss_intra             s0 C-ref-no_v_proj  removal=+0.0806
+[dec] support dump qwen|ss_intra|s1|qwen_3b.npz nnz=3,397,387 density=0.01000
+[dec] qwen   ss_intra             s1 C-ref            removal=+0.1063
+[dec] qwen   ss_intra             s1 C-a              removal=+0.0163
+[dec] qwen   ss_intra             s1 C-bottom         removal=+0.0002
+[dec] qwen   ss_intra             s1 C-b              removal=-0.0001
+[dec] qwen   ss_intra             s1 C-rand           removal=+0.0001
+[dec] qwen   ss_intra             s1 C-layershuf      removal=+0.0011
+[dec] qwen   ss_intra             s1 C-tensorshuf     removal=+0.0014
+[dec] qwen   ss_intra             s1 C-ref-no_k_proj  removal=+0.1061
+[dec] qwen   ss_intra             s1 C-ref-no_o_proj  removal=+0.0082
+[dec] qwen   ss_intra             s1 C-ref-no_q_proj  removal=+0.1023
+[dec] qwen   ss_intra             s1 C-ref-no_v_proj  removal=+0.0558
+[dec] support dump qwen|ss_intra|s2|qwen_3b.npz nnz=3,397,386 density=0.01000
+[dec] qwen   ss_intra             s2 C-ref            removal=+0.1462
+[dec] qwen   ss_intra             s2 C-a              removal=+0.0147
+[dec] qwen   ss_intra             s2 C-bottom         removal=+0.0000
+[dec] qwen   ss_intra             s2 C-b              removal=+0.0008
+[dec] qwen   ss_intra             s2 C-rand           removal=-0.0000
+[dec] qwen   ss_intra             s2 C-layershuf      removal=+0.0026
+[dec] qwen   ss_intra             s2 C-tensorshuf     removal=+0.0011
+[dec] qwen   ss_intra             s2 C-ref-no_k_proj  removal=+0.1467
+[dec] qwen   ss_intra             s2 C-ref-no_o_proj  removal=+0.0479
+[dec] qwen   ss_intra             s2 C-ref-no_q_proj  removal=+0.1455
+[dec] qwen   ss_intra             s2 C-ref-no_v_proj  removal=+0.1051
+[dec] ALL DONE
+Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
+Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
+Loading checkpoint shards:   0%|                                                                          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 1/2 [00:00<00:00,  8.67it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00, 11.40it/s]
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[dec] phi projections=['qkv_proj'] -> N/A (structural): ['C-tensorshuf', 'C-ref-no_q_proj', 'C-ref-no_k_proj', 'C-ref-no_v_proj', 'C-ref-no_o_proj']
+[dec] support dump phi|occ_gender|s0|phi_3b.npz nnz=9,059,695 density=0.01000
+/opt/conda/lib/python3.13/site-packages/torch/utils/checkpoint.py:232: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  check_backward_validity(args)
+[dec] phi    occ_gender           s0 C-ref            removal=+0.0484
+[dec] phi    occ_gender           s0 C-a              removal=+0.0186
+[dec] phi    occ_gender           s0 C-bottom         removal=-0.0001
+[dec] phi    occ_gender           s0 C-b              removal=+0.0018
+[dec] phi    occ_gender           s0 C-rand           removal=+0.0006
+[dec] phi    occ_gender           s0 C-layershuf      removal=+0.0015
+[dec] phi projections=['qkv_proj'] -> N/A (structural): ['C-tensorshuf', 'C-ref-no_q_proj', 'C-ref-no_k_proj', 'C-ref-no_v_proj', 'C-ref-no_o_proj']
+[dec] support dump phi|occ_gender|s1|phi_3b.npz nnz=9,059,696 density=0.01000
+[dec] phi    occ_gender           s1 C-ref            removal=+0.1377
+[dec] phi    occ_gender           s1 C-a              removal=+0.0154
+[dec] phi    occ_gender           s1 C-bottom         removal=+0.0053
+[dec] phi    occ_gender           s1 C-b              removal=+0.0035
+[dec] phi    occ_gender           s1 C-rand           removal=-0.0002
+[dec] phi    occ_gender           s1 C-layershuf      removal=+0.0027
+[dec] phi projections=['qkv_proj'] -> N/A (structural): ['C-tensorshuf', 'C-ref-no_q_proj', 'C-ref-no_k_proj', 'C-ref-no_v_proj', 'C-ref-no_o_proj']
+[dec] support dump phi|occ_gender|s2|phi_3b.npz nnz=9,059,694 density=0.01000
+[dec] phi    occ_gender           s2 C-ref            removal=+0.0651
+[dec] phi    occ_gender           s2 C-a              removal=+0.0080
+[dec] phi    occ_gender           s2 C-bottom         removal=-0.0013
+[dec] phi    occ_gender           s2 C-b              removal=+0.0102
+[dec] phi    occ_gender           s2 C-rand           removal=+0.0001
+[dec] phi    occ_gender           s2 C-layershuf      removal=+0.0070
+Using the latest cached version of the dataset since oskarvanderwal/bbq couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'Age' at /home/jovyan/.cache/huggingface/datasets/oskarvanderwal___bbq/Age/0.0.0/ab00114b0fbf59c7c539ff9158f6ce717d13ab63 (last modified on Mon Jul 20 06:59:10 2026).
+[dec] phi projections=['qkv_proj'] -> N/A (structural): ['C-tensorshuf', 'C-ref-no_q_proj', 'C-ref-no_k_proj', 'C-ref-no_v_proj', 'C-ref-no_o_proj']
+[dec] support dump phi|bbq_Age|s0|phi_3b.npz nnz=9,059,697 density=0.01000
+[dec] phi    bbq_Age              s0 C-ref            removal=+0.3035
+[dec] phi    bbq_Age              s0 C-a              removal=+0.0779
+[dec] phi    bbq_Age              s0 C-bottom         removal=+0.0016
+[dec] phi    bbq_Age              s0 C-b              removal=+0.0035
+[dec] phi    bbq_Age              s0 C-rand           removal=-0.0005
+[dec] phi    bbq_Age              s0 C-layershuf      removal=+0.0070
+[dec] phi projections=['qkv_proj'] -> N/A (structural): ['C-tensorshuf', 'C-ref-no_q_proj', 'C-ref-no_k_proj', 'C-ref-no_v_proj', 'C-ref-no_o_proj']
+[dec] support dump phi|bbq_Age|s1|phi_3b.npz nnz=9,059,693 density=0.01000
+[dec] phi    bbq_Age              s1 C-ref            removal=+0.2197
+[dec] phi    bbq_Age              s1 C-a              removal=+0.0850
+[dec] phi    bbq_Age              s1 C-bottom         removal=+0.0000
+[dec] phi    bbq_Age              s1 C-b              removal=+0.0063
+[dec] phi    bbq_Age              s1 C-rand           removal=+0.0001
+[dec] phi    bbq_Age              s1 C-layershuf      removal=-0.0013
+[dec] phi projections=['qkv_proj'] -> N/A (structural): ['C-tensorshuf', 'C-ref-no_q_proj', 'C-ref-no_k_proj', 'C-ref-no_v_proj', 'C-ref-no_o_proj']
+[dec] support dump phi|bbq_Age|s2|phi_3b.npz nnz=9,059,697 density=0.01000
+[dec] phi    bbq_Age              s2 C-ref            removal=+0.2084
+[dec] phi    bbq_Age              s2 C-a              removal=+0.0708
+[dec] phi    bbq_Age              s2 C-bottom         removal=+0.0005
+[dec] phi    bbq_Age              s2 C-b              removal=-0.0004
+[dec] phi    bbq_Age              s2 C-rand           removal=+0.0000
+[dec] phi    bbq_Age              s2 C-layershuf      removal=+0.0084
+Using the latest cached version of the dataset since McGill-NLP/stereoset couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'intrasentence' at /home/jovyan/.cache/huggingface/datasets/McGill-NLP___stereoset/intrasentence/0.0.0/bf6e7ce50491784d094fb7afe60a70ecccb89035 (last modified on Mon Jul 20 06:59:49 2026).
+[dec] phi projections=['qkv_proj'] -> N/A (structural): ['C-tensorshuf', 'C-ref-no_q_proj', 'C-ref-no_k_proj', 'C-ref-no_v_proj', 'C-ref-no_o_proj']
+[dec] support dump phi|ss_intra|s0|phi_3b.npz nnz=9,059,697 density=0.01000
+[dec] phi    ss_intra             s0 C-ref            removal=+0.0988
+[dec] phi    ss_intra             s0 C-a              removal=+0.0111
+[dec] phi    ss_intra             s0 C-bottom         removal=+0.0005
+[dec] phi    ss_intra             s0 C-b              removal=+0.0006
+[dec] phi    ss_intra             s0 C-rand           removal=+0.0010
+[dec] phi    ss_intra             s0 C-layershuf      removal=+0.0009
+[dec] phi projections=['qkv_proj'] -> N/A (structural): ['C-tensorshuf', 'C-ref-no_q_proj', 'C-ref-no_k_proj', 'C-ref-no_v_proj', 'C-ref-no_o_proj']
+[dec] support dump phi|ss_intra|s1|phi_3b.npz nnz=9,059,695 density=0.01000
+[dec] phi    ss_intra             s1 C-ref            removal=+0.1026
+[dec] phi    ss_intra             s1 C-a              removal=+0.0113
+[dec] phi    ss_intra             s1 C-bottom         removal=+0.0010
+[dec] phi    ss_intra             s1 C-b              removal=+0.0010
+[dec] phi    ss_intra             s1 C-rand           removal=+0.0009
+[dec] phi    ss_intra             s1 C-layershuf      removal=-0.0002
+[dec] phi projections=['qkv_proj'] -> N/A (structural): ['C-tensorshuf', 'C-ref-no_q_proj', 'C-ref-no_k_proj', 'C-ref-no_v_proj', 'C-ref-no_o_proj']
+[dec] support dump phi|ss_intra|s2|phi_3b.npz nnz=9,059,697 density=0.01000
+[dec] phi    ss_intra             s2 C-ref            removal=+0.0653
+[dec] phi    ss_intra             s2 C-a              removal=+0.0091
+[dec] phi    ss_intra             s2 C-bottom         removal=+0.0004
+[dec] phi    ss_intra             s2 C-b              removal=+0.0011
+[dec] phi    ss_intra             s2 C-rand           removal=+0.0012
+[dec] phi    ss_intra             s2 C-layershuf      removal=+0.0003
+[dec] ALL DONE
+Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
+Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
+Loading checkpoint shards:   0%|                                                                          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 2/4 [00:00<00:00, 13.83it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 4/4 [00:00<00:00, 14.87it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 4/4 [00:00<00:00, 14.69it/s]
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[dec] support dump qwen7b|occ_gender|s0|qwen.npz nnz=8,220,836 density=0.01000
+/opt/conda/lib/python3.13/site-packages/torch/utils/checkpoint.py:232: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  check_backward_validity(args)
+[dec] qwen7b occ_gender           s0 C-ref            removal=+0.6652
+[dec] qwen7b occ_gender           s0 C-a              removal=+0.2220
+[dec] qwen7b occ_gender           s0 C-bottom         removal=+0.0014
+[dec] qwen7b occ_gender           s0 C-b              removal=+0.0004
+[dec] qwen7b occ_gender           s0 C-rand           removal=+0.0017
+[dec] qwen7b occ_gender           s0 C-layershuf      removal=+0.0296
+[dec] qwen7b occ_gender           s0 C-tensorshuf     removal=-0.0024
+[dec] qwen7b occ_gender           s0 C-ref-no_k_proj  removal=+0.6694
+[dec] qwen7b occ_gender           s0 C-ref-no_o_proj  removal=+0.5608
+[dec] qwen7b occ_gender           s0 C-ref-no_q_proj  removal=+0.6554
+[dec] qwen7b occ_gender           s0 C-ref-no_v_proj  removal=+0.7235
+[dec] support dump qwen7b|occ_gender|s1|qwen.npz nnz=8,220,834 density=0.01000
+[dec] qwen7b occ_gender           s1 C-ref            removal=+0.6672
+[dec] qwen7b occ_gender           s1 C-a              removal=+0.1766
+[dec] qwen7b occ_gender           s1 C-bottom         removal=-0.0024
+[dec] qwen7b occ_gender           s1 C-b              removal=+0.0015
+[dec] qwen7b occ_gender           s1 C-rand           removal=+0.0014
+[dec] qwen7b occ_gender           s1 C-layershuf      removal=-0.0029
+[dec] qwen7b occ_gender           s1 C-tensorshuf     removal=+0.0007
+[dec] qwen7b occ_gender           s1 C-ref-no_k_proj  removal=+0.6673
+[dec] qwen7b occ_gender           s1 C-ref-no_o_proj  removal=+0.4912
+[dec] qwen7b occ_gender           s1 C-ref-no_q_proj  removal=+0.6456
+[dec] qwen7b occ_gender           s1 C-ref-no_v_proj  removal=+0.7104
+[dec] support dump qwen7b|occ_gender|s2|qwen.npz nnz=8,220,835 density=0.01000
+[dec] qwen7b occ_gender           s2 C-ref            removal=+0.6577
+[dec] qwen7b occ_gender           s2 C-a              removal=+0.2424
+[dec] qwen7b occ_gender           s2 C-bottom         removal=+0.0056
+[dec] qwen7b occ_gender           s2 C-b              removal=-0.0003
+[dec] qwen7b occ_gender           s2 C-rand           removal=+0.0007
+[dec] qwen7b occ_gender           s2 C-layershuf      removal=+0.0235
+[dec] qwen7b occ_gender           s2 C-tensorshuf     removal=+0.0074
+[dec] qwen7b occ_gender           s2 C-ref-no_k_proj  removal=+0.6487
+[dec] qwen7b occ_gender           s2 C-ref-no_o_proj  removal=+0.6041
+[dec] qwen7b occ_gender           s2 C-ref-no_q_proj  removal=+0.6400
+[dec] qwen7b occ_gender           s2 C-ref-no_v_proj  removal=+0.6898
+[dec] ALL DONE

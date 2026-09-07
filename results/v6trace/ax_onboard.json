@@ -1,0 +1,102 @@
+{
+  "item_floor": 40,
+  "skew_floor": 0.02,
+  "axes": {
+    "bbq_Age": {
+      "n_probe": 460,
+      "n_edit": 460,
+      "g1_item_floor": true,
+      "g2_disjoint": true,
+      "n_overlap": 0
+    },
+    "bbq_Gender_identity": {
+      "n_probe": 685,
+      "n_edit": 685,
+      "g1_item_floor": true,
+      "g2_disjoint": true,
+      "n_overlap": 0
+    },
+    "bbq_Race_ethnicity": {
+      "n_probe": 821,
+      "n_edit": 821,
+      "g1_item_floor": true,
+      "g2_disjoint": true,
+      "n_overlap": 0
+    },
+    "bbq_Religion": {
+      "n_probe": 150,
+      "n_edit": 150,
+      "g1_item_floor": true,
+      "g2_disjoint": true,
+      "n_overlap": 0
+    }
+  },
+  "pre_skew": {
+    "qwen|bbq_Age": {
+      "pre_skew": 0.304393994808197,
+      "g3_polarity": true,
+      "g4_magnitude": true
+    },
+    "qwen|bbq_Gender_identity": {
+      "pre_skew": 0.1019250069221441,
+      "g3_polarity": true,
+      "g4_magnitude": true
+    },
+    "qwen|bbq_Race_ethnicity": {
+      "pre_skew": 0.2728874906988295,
+      "g3_polarity": true,
+      "g4_magnitude": true
+    },
+    "qwen|bbq_Religion": {
+      "pre_skew": 0.15077911218007406,
+      "g3_polarity": true,
+      "g4_magnitude": true
+    },
+    "phi|bbq_Age": {
+      "pre_skew": 0.3828564659408901,
+      "g3_polarity": true,
+      "g4_magnitude": true
+    },
+    "phi|bbq_Gender_identity": {
+      "pre_skew": 0.22219985453751837,
+      "g3_polarity": true,
+      "g4_magnitude": true
+    },
+    "phi|bbq_Race_ethnicity": {
+      "pre_skew": 0.33215947897512643,
+      "g3_polarity": true,
+      "g4_magnitude": true
+    },
+    "phi|bbq_Religion": {
+      "pre_skew": 0.2755482085545858,
+      "g3_polarity": true,
+      "g4_magnitude": true
+    },
+    "llama|bbq_Age": {
+      "pre_skew": 0.384526410828466,
+      "g3_polarity": true,
+      "g4_magnitude": true
+    },
+    "llama|bbq_Gender_identity": {
+      "pre_skew": 0.2296770071461253,
+      "g3_polarity": true,
+      "g4_magnitude": true
+    },
+    "llama|bbq_Race_ethnicity": {
+      "pre_skew": 0.3406039242622478,
+      "g3_polarity": true,
+      "g4_magnitude": true
+    },
+    "llama|bbq_Religion": {
+      "pre_skew": 0.31971495469411215,
+      "g3_polarity": true,
+      "g4_magnitude": true
+    }
+  },
+  "usable_axes": [
+    "bbq_Age",
+    "bbq_Gender_identity",
+    "bbq_Race_ethnicity",
+    "bbq_Religion"
+  ]
+}

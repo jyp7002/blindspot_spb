@@ -1,0 +1,31 @@
+# Run stack — GPU panels only (training contrast vectors, evaluating edits).
+#
+# THESE PINS ARE LOAD-BEARING, NOT COSMETIC. src/run_ws2_determinism.py
+# attributes a cross-panel MMLU divergence to a `transformers` rebuild
+# (5.14.1 -> 4.57.1), so a panel trained under a different stack is not
+# comparable to the published ones. PREREGISTRATION.md L545-547 records this
+# stack as the one the v8dec panel and its v10ext extension were run under.
+#
+# Install torch FIRST, from the cu128 index:
+#   pip install torch==2.11.0 --index-url https://download.pytorch.org/whl/cu128
+torch==2.11.0
+transformers==4.57.1
+peft==0.20.0
+datasets>=2.19
+accelerate>=0.34
+sentencepiece
+protobuf
+
+# 8-bit loading for the >=60B tier (llama70b / qwen72b in colab_t2t4.T4).
+bitsandbytes>=0.43
+
+# IFEval (INS-A arm) only.
+#
+# UNVERIFIED PIN. The lm-eval version used for the PUBLISHED IFEval numbers is
+# recorded nowhere in this repository -- not in PREREGISTRATION.md, not in the
+# run logs, not in the artifacts. The published arm reports
+# `inst_level_strict_acc,none` on 200 of 541 prompts. Before extending the
+# IFEval arm (v11 IFEVAL), either reproduce a published cell under this pin and
+# confirm it matches, or re-run the two published cells alongside the new ones
+# so the whole arm shares one harness version. Do not mix.
+lm-eval==0.4.5

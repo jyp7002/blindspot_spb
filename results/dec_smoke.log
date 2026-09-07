@@ -1,0 +1,21 @@
+Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
+Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
+Loading checkpoint shards:   0%|                                                                          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 1/2 [00:00<00:00,  4.34it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  8.18it/s]
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[dec] support dump gemma|occ_gender|s0|gemma_3b.npz nnz=3,680,502 density=0.01000
+/opt/conda/lib/python3.13/site-packages/torch/utils/checkpoint.py:232: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  check_backward_validity(args)
+[dec] gemma  occ_gender           s0 C-ref            removal=+0.1353
+[dec] gemma  occ_gender           s0 C-a              removal=+0.0327
+[dec] gemma  occ_gender           s0 C-bottom         removal=+0.0023
+[dec] gemma  occ_gender           s0 C-b              removal=-0.0018
+[dec] gemma  occ_gender           s0 C-rand           removal=+0.0007
+[dec] gemma  occ_gender           s0 C-layershuf      removal=+0.0096
+[dec] gemma  occ_gender           s0 C-tensorshuf     removal=+0.0738
+[dec] gemma  occ_gender           s0 C-ref-no_q_proj  removal=+0.6366
+[dec] gemma  occ_gender           s0 C-ref-no_k_proj  removal=+0.3455
+[dec] gemma  occ_gender           s0 C-ref-no_v_proj  removal=+0.2659
+[dec] gemma  occ_gender           s0 C-ref-no_o_proj  removal=+0.1097
+[dec] ALL DONE

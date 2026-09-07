@@ -1,0 +1,61 @@
+# ---------------------------------------------------------------------------
+# Blind_spot_spb / v11 — what does NOT go in the repo.
+#
+# Rule: analysis-grade artifacts (jsonl/json/csv panels, ~53 MB) are COMMITTED,
+# because `make freeze` must be reproducible from a clone. Weight-grade dumps
+# (~9.5 GB of trained contrast vectors) are NOT: they are regenerable by GPU
+# from the committed corpora + configs, and no number in the paper reads them
+# directly.
+# ---------------------------------------------------------------------------
+
+# --- weight-grade dumps: regenerable, huge ---
+# The support dumps live in <panel>/supports/*.npz. Naming only the panel dirs
+# missed them and staged 431 MB of tensors; scripts/pack_artifacts.sh had the
+# identical omission. Both now name the directory AND the extension.
+results/directions/
+results/directions_r128/
+results/sketches/
+results/sketches_expE/
+results/profiles/
+results/profiles_base/
+**/supports/
+checkpoints/
+*.npz
+*.npy
+*.safetensors
+*.bin
+*.pt
+
+# --- shipped result bundles (superseded by the committed panels) ---
+*.zip
+
+# --- editor / interpreter noise ---
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store
+
+# --- timestamped backups: the repo IS the history now ---
+*.bak
+*.bak_*
+*.orig
+
+# --- run-local scratch ---
+results/scratch/
+logs/*.log
+!logs/.gitkeep
+work/
+*.tmp
+
+# --- secrets: never ---
+.env
+.env.*
+*_token
+hf_token*
+
+# --- third-party checkouts: cloned, not vendored ---
+# Each carries its own .git, so committing them would either nest a foreign
+# history or create a gitlink nothing can resolve. external/README.md records
+# the exact commits instead.
+external/*
+!external/README.md

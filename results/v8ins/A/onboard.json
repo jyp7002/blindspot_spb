@@ -1,0 +1,18 @@
+{
+ "qwen7b_it|occ_gender": {
+  "pre_skew": 0.7472971918496807,
+  "mmlu": 0.74,
+  "ppl": 12.639070049117556,
+  "is_base": false,
+  "role": "self",
+  "designer": "qwen"
+ },
+ "llama8b_it|occ_gender": {
+  "pre_skew": 0.7547605897564991,
+  "mmlu": 0.72,
+  "ppl": 11.288519503298122,
+  "is_base": false,
+  "role": "self",
+  "designer": "llama"
+ }
+}

@@ -1,0 +1,8 @@
+# Analysis stack — everything `make freeze` needs. NO torch, NO GPU.
+# This is what runs on the local box to regenerate artifacts, figures and the
+# number audit. Keep it installable on a laptop.
+numpy>=2.0
+scipy>=1.14
+matplotlib>=3.9
+pandas>=2.2
+PyYAML>=6.0

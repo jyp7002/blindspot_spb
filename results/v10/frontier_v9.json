@@ -1,0 +1,1218 @@
+{
+ "artifact": "v10_frontier",
+ "blocked": {
+  "frontier DPO arm (all 8 cells)": "results_v9/v6trace/dpo rows are UNGATED; the arm was not re-gated. MIXED-gate.",
+  "frontier edit arm: llama, qwen": "results/x has no alpha_trace and no re-scorable twin; those 4 cells stay as-run -> the 8-cell frontier is MIXED-gate."
+ },
+ "cells": [
+  {
+   "axis": "occ_gender",
+   "cell": "gemma|occ_gender",
+   "edit_true_v9": true,
+   "methods": {
+    "DPO": {
+     "as_run": 0.0,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 172,
+      "marker": "\u1d43",
+      "marks_zeroed": true,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.000\u1d43",
+      "value": 0.0
+     },
+     "gate_mode": "UNGATED",
+     "is_measurement": false,
+     "n_seeds": 0,
+     "source": "results_v9/v6trace/dpo",
+     "true_v9": false,
+     "v9": 0.0,
+     "zeroed": true,
+     "zeroed_reason": "all 3 rows skipped (too_few_pairs; n_informative=[11, 12]) \u2014 no configuration was ever run"
+    },
+    "SentenceDebias": {
+     "as_run": 0.79477,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 172,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.795*",
+      "value": 0.795
+     },
+     "gate_mode": "integer-delta",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/sentdebias",
+     "true_v9": true,
+     "v9": 0.79477,
+     "zeroed": false
+    },
+    "edit": {
+     "as_run": 0.674084,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 172,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.674*",
+      "value": 0.674
+     },
+     "gate_mode": "integer",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/x2 (role=self)",
+     "true_v9": true,
+     "v9": 0.674084,
+     "zeroed": false
+    },
+    "steering": {
+     "as_run": 0.680387,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 172,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.680*",
+      "value": 0.68
+     },
+     "gate_mode": "integer-delta",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/steer",
+     "true_v9": true,
+     "v9": 0.680387,
+     "zeroed": false
+    }
+   },
+   "short": "gemma | occ",
+   "target": "gemma"
+  },
+  {
+   "axis": "crows_socioeconomic",
+   "cell": "gemma|crows_socioeconomic",
+   "edit_true_v9": true,
+   "methods": {
+    "DPO": {
+     "as_run": 0.0,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 176,
+      "marker": "\u1d43",
+      "marks_zeroed": true,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.000\u1d43",
+      "value": 0.0
+     },
+     "gate_mode": "UNGATED",
+     "is_measurement": false,
+     "n_seeds": 0,
+     "source": "results_v9/v6trace/dpo",
+     "true_v9": false,
+     "v9": 0.0,
+     "zeroed": true,
+     "zeroed_reason": "all 3 rows skipped (too_few_pairs; n_informative=[10]) \u2014 no configuration was ever run"
+    },
+    "SentenceDebias": {
+     "as_run": 0.007028,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 176,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.007*",
+      "value": 0.007
+     },
+     "gate_mode": "integer-delta",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/sentdebias",
+     "true_v9": true,
+     "v9": 0.007028,
+     "zeroed": false
+    },
+    "edit": {
+     "as_run": 0.122793,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 176,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.123*",
+      "value": 0.123
+     },
+     "gate_mode": "integer",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/x2 (role=self)",
+     "true_v9": true,
+     "v9": 0.122793,
+     "zeroed": false
+    },
+    "steering": {
+     "as_run": 0.001857,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 176,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.002*",
+      "value": 0.002
+     },
+     "gate_mode": "integer-delta",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/steer",
+     "true_v9": true,
+     "v9": 0.001857,
+     "zeroed": false
+    }
+   },
+   "short": "gemma | crows",
+   "target": "gemma"
+  },
+  {
+   "axis": "occ_gender",
+   "cell": "llama|occ_gender",
+   "edit_true_v9": false,
+   "methods": {
+    "DPO": {
+     "as_run": -0.0,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 173,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "\u22120.000*",
+      "value": -0.0
+     },
+     "gate_mode": "UNGATED",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/dpo",
+     "true_v9": false,
+     "v9": -0.0,
+     "zeroed": false
+    },
+    "SentenceDebias": {
+     "as_run": 0.701166,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 173,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.701*",
+      "value": 0.701
+     },
+     "gate_mode": "integer-delta",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/sentdebias",
+     "true_v9": true,
+     "v9": 0.701166,
+     "zeroed": false
+    },
+    "edit": {
+     "as_run": 0.747209,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 173,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.747*",
+      "value": 0.747
+     },
+     "gate_mode": "<as-run, ungated field>",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results/x (role=self; NOT re-scorable \u2014 no trace, no twin)",
+     "true_v9": false,
+     "v9": 0.747209,
+     "zeroed": false
+    },
+    "steering": {
+     "as_run": 0.639826,
+     "changed_by_v9": true,
+     "delta_v9_minus_asrun": 0.004647,
+     "draft": {
+      "line": 173,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": false,
+      "text": "+0.640*",
+      "value": 0.64
+     },
+     "gate_mode": "integer-delta",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/steer",
+     "true_v9": true,
+     "v9": 0.644472,
+     "zeroed": false
+    }
+   },
+   "short": "llama | occ",
+   "target": "llama"
+  },
+  {
+   "axis": "crows_socioeconomic",
+   "cell": "llama|crows_socioeconomic",
+   "edit_true_v9": false,
+   "methods": {
+    "DPO": {
+     "as_run": 0.0,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 178,
+      "marker": "\u1d43",
+      "marks_zeroed": true,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.000\u1d43",
+      "value": 0.0
+     },
+     "gate_mode": "UNGATED",
+     "is_measurement": false,
+     "n_seeds": 0,
+     "source": "results_v9/v6trace/dpo",
+     "true_v9": false,
+     "v9": 0.0,
+     "zeroed": true,
+     "zeroed_reason": "all 3 rows skipped (too_few_pairs; n_informative=[11]) \u2014 no configuration was ever run"
+    },
+    "SentenceDebias": {
+     "as_run": 0.027911,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 178,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.028*",
+      "value": 0.028
+     },
+     "gate_mode": "integer-delta",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/sentdebias",
+     "true_v9": true,
+     "v9": 0.027911,
+     "zeroed": false
+    },
+    "edit": {
+     "as_run": 0.039537,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 178,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.040*",
+      "value": 0.04
+     },
+     "gate_mode": "<as-run, ungated field>",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results/x (role=self; NOT re-scorable \u2014 no trace, no twin)",
+     "true_v9": false,
+     "v9": 0.039537,
+     "zeroed": false
+    },
+    "steering": {
+     "as_run": 0.015386,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 178,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.015*",
+      "value": 0.015
+     },
+     "gate_mode": "integer-delta",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/steer",
+     "true_v9": true,
+     "v9": 0.015386,
+     "zeroed": false
+    }
+   },
+   "short": "llama | crows",
+   "target": "llama"
+  },
+  {
+   "axis": "occ_gender",
+   "cell": "qwen|occ_gender",
+   "edit_true_v9": false,
+   "methods": {
+    "DPO": {
+     "as_run": -0.130453,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 174,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "\u22120.130*",
+      "value": -0.13
+     },
+     "gate_mode": "UNGATED",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/dpo",
+     "true_v9": false,
+     "v9": -0.130453,
+     "zeroed": false
+    },
+    "SentenceDebias": {
+     "as_run": 0.466603,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 174,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.467*",
+      "value": 0.467
+     },
+     "gate_mode": "integer-delta",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/sentdebias",
+     "true_v9": true,
+     "v9": 0.466603,
+     "zeroed": false
+    },
+    "edit": {
+     "as_run": 0.512394,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 174,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.512*",
+      "value": 0.512
+     },
+     "gate_mode": "<as-run, ungated field>",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results/x (role=self; NOT re-scorable \u2014 no trace, no twin)",
+     "true_v9": false,
+     "v9": 0.512394,
+     "zeroed": false
+    },
+    "steering": {
+     "as_run": 0.549578,
+     "changed_by_v9": true,
+     "delta_v9_minus_asrun": 0.085362,
+     "draft": {
+      "line": 174,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": false,
+      "matches_v9": true,
+      "text": "+0.635*",
+      "value": 0.635
+     },
+     "gate_mode": "integer-delta",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/steer",
+     "true_v9": true,
+     "v9": 0.63494,
+     "zeroed": false
+    }
+   },
+   "short": "qwen | occ",
+   "target": "qwen"
+  },
+  {
+   "axis": "crows_socioeconomic",
+   "cell": "qwen|crows_socioeconomic",
+   "edit_true_v9": false,
+   "methods": {
+    "DPO": {
+     "as_run": 0.276993,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 179,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.277*",
+      "value": 0.277
+     },
+     "gate_mode": "UNGATED",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/dpo",
+     "true_v9": false,
+     "v9": 0.276993,
+     "zeroed": false
+    },
+    "SentenceDebias": {
+     "as_run": 0.067443,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 179,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.067*",
+      "value": 0.067
+     },
+     "gate_mode": "integer-delta",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/sentdebias",
+     "true_v9": true,
+     "v9": 0.067443,
+     "zeroed": false
+    },
+    "edit": {
+     "as_run": -0.07129,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 179,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "\u22120.071*",
+      "value": -0.071
+     },
+     "gate_mode": "<as-run, ungated field>",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results/x (role=self; NOT re-scorable \u2014 no trace, no twin)",
+     "true_v9": false,
+     "v9": -0.07129,
+     "zeroed": false
+    },
+    "steering": {
+     "as_run": 0.011708,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 179,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.012*",
+      "value": 0.012
+     },
+     "gate_mode": "integer-delta",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/steer",
+     "true_v9": true,
+     "v9": 0.011708,
+     "zeroed": false
+    }
+   },
+   "short": "qwen | crows",
+   "target": "qwen"
+  },
+  {
+   "axis": "occ_gender",
+   "cell": "phi|occ_gender",
+   "edit_true_v9": true,
+   "methods": {
+    "DPO": {
+     "as_run": -0.124331,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 175,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "\u22120.124*",
+      "value": -0.124
+     },
+     "gate_mode": "UNGATED",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/dpo",
+     "true_v9": false,
+     "v9": -0.124331,
+     "zeroed": false
+    },
+    "SentenceDebias": {
+     "as_run": 0.549018,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 175,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.549*",
+      "value": 0.549
+     },
+     "gate_mode": "integer-delta",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/sentdebias",
+     "true_v9": true,
+     "v9": 0.549018,
+     "zeroed": false
+    },
+    "edit": {
+     "as_run": 0.319707,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 175,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.320*",
+      "value": 0.32
+     },
+     "gate_mode": "integer",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/x2 (role=self)",
+     "true_v9": true,
+     "v9": 0.319707,
+     "zeroed": false
+    },
+    "steering": {
+     "as_run": 0.538659,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 175,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.539*",
+      "value": 0.539
+     },
+     "gate_mode": "integer-delta",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/steer",
+     "true_v9": true,
+     "v9": 0.538659,
+     "zeroed": false
+    }
+   },
+   "short": "phi | occ",
+   "target": "phi"
+  },
+  {
+   "axis": "crows_socioeconomic",
+   "cell": "phi|crows_socioeconomic",
+   "edit_true_v9": true,
+   "methods": {
+    "DPO": {
+     "as_run": 0.027041,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 177,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.027*",
+      "value": 0.027
+     },
+     "gate_mode": "UNGATED",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/dpo",
+     "true_v9": false,
+     "v9": 0.027041,
+     "zeroed": false
+    },
+    "SentenceDebias": {
+     "as_run": 0.0,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 177,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.000*",
+      "value": 0.0
+     },
+     "gate_mode": "integer-delta",
+     "is_measurement": false,
+     "n_seeds": 0,
+     "source": "results_v9/v6trace/sentdebias",
+     "true_v9": true,
+     "v9": 0.0,
+     "zeroed": true,
+     "zeroed_reason": "budget-fail: 12 candidate rows, 0 in-budget (collateral_ok never true)"
+    },
+    "edit": {
+     "as_run": 0.045908,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 177,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.046*",
+      "value": 0.046
+     },
+     "gate_mode": "integer",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/x2 (role=self)",
+     "true_v9": true,
+     "v9": 0.045908,
+     "zeroed": false
+    },
+    "steering": {
+     "as_run": 0.029167,
+     "changed_by_v9": false,
+     "delta_v9_minus_asrun": 0.0,
+     "draft": {
+      "line": 177,
+      "marker": "*",
+      "marks_zeroed": false,
+      "matches_as_run": true,
+      "matches_v9": true,
+      "text": "+0.029*",
+      "value": 0.029
+     },
+     "gate_mode": "integer-delta",
+     "is_measurement": true,
+     "n_seeds": 3,
+     "source": "results_v9/v6trace/steer",
+     "true_v9": true,
+     "v9": 0.029167,
+     "zeroed": false
+    }
+   },
+   "short": "phi | crows",
+   "target": "phi"
+  }
+ ],
+ "cells_changed_by_v9": [
+  {
+   "as_run": 0.639826,
+   "cell": "llama|occ_gender",
+   "delta": 0.004647,
+   "method": "steering",
+   "v9": 0.644472
+  },
+  {
+   "as_run": 0.549578,
+   "cell": "qwen|occ_gender",
+   "delta": 0.085362,
+   "method": "steering",
+   "v9": 0.63494
+  }
+ ],
+ "conventions": {
+  "bootstrap": "paired, resamples the (target,axis) CELL, 10k, seed 0",
+  "budget_fail": "nan/missing -> 0.0 (kept in the pooled set, never dropped)",
+  "cell": "mean over seeds",
+  "logic_source": "src/v9_regen.py :: frontier/edit_arm/best_in_budget",
+  "selection": "argmax bias_reduction (or removal) over in-budget configs"
+ },
+ "dpo_gate": {
+  "as_run_gate_mode": [
+   "<as-run, no gate field>"
+  ],
+  "diagnostic": {
+   "available": true,
+   "flips": [],
+   "gate_modes": {
+    "integer-delta": 60
+   },
+   "n_rows_flipped": 0,
+   "n_trace_rows": 60,
+   "note": "ADVISORY ONLY. The published v9 frontier keeps the DPO arm UNGATED (v9_rescore routed it down the B-rows path, where the removal rows carry no collateral). This shows what re-gating from the trace would do; it is NOT substituted for any published value.",
+   "regated_cells": {
+    "llama|occ_gender": -0.0,
+    "phi|crows_socioeconomic": 0.027041,
+    "phi|occ_gender": -0.124331,
+    "qwen|crows_socioeconomic": 0.276993,
+    "qwen|occ_gender": -0.130453
+   }
+  },
+  "re_gated_under_v9": false,
+  "rescore_path": {
+   "n_rows": 69,
+   "path": "B-rows",
+   "ungated": 69
+  },
+  "statement": "Every DPO row carries v9_gate_mode=UNGATED. The v9 re-score could not re-gate this panel from removal.jsonl (no dmmlu / ppl_ratio on the rows), so the DPO arm's collateral_ok is the AS-RUN float gate. The DPO column of Table A is therefore not true-v9 either \u2014 a gate-mixing exposure the manuscript's disclosure (which names only the llama/qwen EDIT cells) does not cover.",
+  "v9_gate_mode": [
+   "UNGATED"
+  ]
+ },
+ "draft_table_a": [
+  {
+   "computed_v9": [
+    0.292637,
+    0.029724,
+    0.539852
+   ],
+   "draft": [
+    0.293,
+    0.03,
+    0.54
+   ],
+   "draft_line": 183,
+   "draft_text": "**edit \u2212 steering = \u22120.021 [\u22120.096, +0.050]; edit \u2212 SentenceDebias = \u22120.028 [\u22120.109, +0.043]; all three beat DPO (edit \u2212 DPO = +0.293 [+0.030, +0.540]).** The tie was pre-registered as a branch before any steering number existed, and it was **re-adjudicated after the v9 re-score under the same registered fork: no switch.**",
+   "estimand": "edit - DPO",
+   "matches_v9": true
+  },
+  {
+   "computed_v9": [
+    -0.02795,
+    -0.109219,
+    0.042567
+   ],
+   "draft": [
+    -0.028,
+    -0.109,
+    0.043
+   ],
+   "draft_line": 10,
+   "draft_text": "How much of a task vector is actually needed to preserve its behavioral effect? We train low-rank contrast vectors for social-bias removal from a model's own likelihood-based self-diagnosis, then strip them: magnitudes down to one bit per weight (sign-only, one scale per tensor) and coordinates down to 1% (magnitude top-k). Under a deployment-honest collateral budget \u2014 an integer-item MMLU criterion (\u2264 4 of 200 items), perplexity ratio \u2264 1.10, every metric measured with the intervention *active* \u2014 the stripped edit retains the effect, and a factorial decomposition shows where the information lives. The true sign field at magnitude-selected coordinates recovers +0.353 of bias; the same field at random coordinates recovers +0.070; sign permutation, layer shuffling, tensor shuffling, and bottom-magnitude support all collapse to \u2248 0. The selection effect, \u0394 = +0.284 [+0.169, +0.407], is unanimous across 10/10 cells spanning four benchmark families and two model tiers. The substructure is **concentrated, not exclusive** \u2014 the sign field at random coordinates still beats random signs (+0.068 [+0.030, +0.112]) \u2014 and the concentration is a **deployment-budget property**: the magnitude-selected support delivers the effect at low edit scale and low collateral, while under aggressive scale extension the random-coordinate field closes much of the gap. The practical consequence is a 0.4\u20131.6 MB mergeable patch with no additional inference-time intervention compute; at 8B, sparsity is what makes the edit deployable at all \u2014 every collateral-budget failure occurs at low sparsity, and the 99%-sparse edit outperforms dense (+0.112 [+0.014, +0.211]). Against activation steering and SentenceDebias driven by the *same* elicited signal at matched collateral and matched selection space, removal **ties** (edit \u2212 steering = \u22120.021 [\u22120.096, +0.050]; edit \u2212 SentenceDebias = \u22120.028 [\u22120.109, +0.043]); all three beat DPO trained on the same signal (+0.293 [+0.030, +0.540]); prompt-level self-debiasing fails the same budget in 16 of 18 conditions*. The evaluation protocol is a co-contribution: it caught three of our own implementation errors \u2014 two favoring our method, and a floating-point budget defect whose complete effect space we enumerate (138 of 40,401 grid pairs, every one a boundary case). A backfire regime at low pre-existing bias is characterized; an abstention gate built on it calibrates perfectly in-sample and does not survive held-out validation, which we report as a negative result.",
+   "estimand": "edit - SentenceDebias",
+   "matches_v9": true
+  },
+  {
+   "computed_v9": [
+    -0.02795,
+    -0.109219,
+    0.042567
+   ],
+   "draft": [
+    -0.028,
+    -0.109,
+    0.043
+   ],
+   "draft_line": 183,
+   "draft_text": "**edit \u2212 steering = \u22120.021 [\u22120.096, +0.050]; edit \u2212 SentenceDebias = \u22120.028 [\u22120.109, +0.043]; all three beat DPO (edit \u2212 DPO = +0.293 [+0.030, +0.540]).** The tie was pre-registered as a branch before any steering number existed, and it was **re-adjudicated after the v9 re-score under the same registered fork: no switch.**",
+   "estimand": "edit - SentenceDebias",
+   "matches_v9": true
+  },
+  {
+   "computed_v9": [
+    -0.020779,
+    -0.095652,
+    0.049546
+   ],
+   "draft": [
+    -0.021,
+    -0.096,
+    0.05
+   ],
+   "draft_line": 10,
+   "draft_text": "How much of a task vector is actually needed to preserve its behavioral effect? We train low-rank contrast vectors for social-bias removal from a model's own likelihood-based self-diagnosis, then strip them: magnitudes down to one bit per weight (sign-only, one scale per tensor) and coordinates down to 1% (magnitude top-k). Under a deployment-honest collateral budget \u2014 an integer-item MMLU criterion (\u2264 4 of 200 items), perplexity ratio \u2264 1.10, every metric measured with the intervention *active* \u2014 the stripped edit retains the effect, and a factorial decomposition shows where the information lives. The true sign field at magnitude-selected coordinates recovers +0.353 of bias; the same field at random coordinates recovers +0.070; sign permutation, layer shuffling, tensor shuffling, and bottom-magnitude support all collapse to \u2248 0. The selection effect, \u0394 = +0.284 [+0.169, +0.407], is unanimous across 10/10 cells spanning four benchmark families and two model tiers. The substructure is **concentrated, not exclusive** \u2014 the sign field at random coordinates still beats random signs (+0.068 [+0.030, +0.112]) \u2014 and the concentration is a **deployment-budget property**: the magnitude-selected support delivers the effect at low edit scale and low collateral, while under aggressive scale extension the random-coordinate field closes much of the gap. The practical consequence is a 0.4\u20131.6 MB mergeable patch with no additional inference-time intervention compute; at 8B, sparsity is what makes the edit deployable at all \u2014 every collateral-budget failure occurs at low sparsity, and the 99%-sparse edit outperforms dense (+0.112 [+0.014, +0.211]). Against activation steering and SentenceDebias driven by the *same* elicited signal at matched collateral and matched selection space, removal **ties** (edit \u2212 steering = \u22120.021 [\u22120.096, +0.050]; edit \u2212 SentenceDebias = \u22120.028 [\u22120.109, +0.043]); all three beat DPO trained on the same signal (+0.293 [+0.030, +0.540]); prompt-level self-debiasing fails the same budget in 16 of 18 conditions*. The evaluation protocol is a co-contribution: it caught three of our own implementation errors \u2014 two favoring our method, and a floating-point budget defect whose complete effect space we enumerate (138 of 40,401 grid pairs, every one a boundary case). A backfire regime at low pre-existing bias is characterized; an abstention gate built on it calibrates perfectly in-sample and does not survive held-out validation, which we report as a negative result.",
+   "estimand": "edit - steering",
+   "matches_v9": true
+  },
+  {
+   "computed_v9": [
+    -0.020779,
+    -0.095652,
+    0.049546
+   ],
+   "draft": [
+    -0.021,
+    -0.096,
+    0.05
+   ],
+   "draft_line": 183,
+   "draft_text": "**edit \u2212 steering = \u22120.021 [\u22120.096, +0.050]; edit \u2212 SentenceDebias = \u22120.028 [\u22120.109, +0.043]; all three beat DPO (edit \u2212 DPO = +0.293 [+0.030, +0.540]).** The tie was pre-registered as a branch before any steering number existed, and it was **re-adjudicated after the v9 re-score under the same registered fork: no switch.**",
+   "estimand": "edit - steering",
+   "matches_v9": true
+  },
+  {
+   "computed_v9": [
+    -0.021895,
+    -0.160029,
+    0.089126
+   ],
+   "draft": [
+    -0.022,
+    -0.16,
+    0.089
+   ],
+   "draft_line": 185,
+   "draft_text": "> **Gate-mixing disclosure.** The frontier's edit arm is not fully re-scorable: gemma and phi cells are true v9 (via an exact re-scorable twin, 108/108 agreement); llama and qwen edit cells remain as-run (their panel predates the alpha-trace fix). The boundary defect only *rejects* in-budget configurations, so every as-run selected value is a **lower bound** on its corrected counterpart per arm \u2014 but differences between arms are not similarly protected. Restricted to the four fully re-scorable cells: edit \u2212 steering = \u22120.022 [\u22120.160, +0.089], covers 0.",
+   "estimand": "edit - steering [re-scorable cells only]",
+   "matches_v9": true
+  }
+ ],
+ "edit_provenance": {
+  "as_run": {
+   "falcon": "results/x (NOT re-scorable \u2014 as-run)",
+   "gemma": "v6trace/x2 (re-scorable)",
+   "granite": "v6trace/x2 (re-scorable)",
+   "llama": "results/x (NOT re-scorable \u2014 as-run)",
+   "phi": "v6trace/x2 (re-scorable)",
+   "qwen": "results/x (NOT re-scorable \u2014 as-run)"
+  },
+  "v9": {
+   "falcon": "results/x (NOT re-scorable \u2014 as-run)",
+   "gemma": "v6trace/x2 (re-scorable)",
+   "granite": "v6trace/x2 (re-scorable)",
+   "llama": "results/x (NOT re-scorable \u2014 as-run)",
+   "phi": "v6trace/x2 (re-scorable)",
+   "qwen": "results/x (NOT re-scorable \u2014 as-run)"
+  }
+ },
+ "gate_summary": {
+  "edit_cells_as_run": [
+   "llama|crows_socioeconomic",
+   "llama|occ_gender",
+   "qwen|crows_socioeconomic",
+   "qwen|occ_gender"
+  ],
+  "edit_cells_true_v9": [
+   "gemma|crows_socioeconomic",
+   "gemma|occ_gender",
+   "phi|crows_socioeconomic",
+   "phi|occ_gender"
+  ],
+  "n_edit_cells_as_run": 4,
+  "n_true_v9_dots": {
+   "DPO": 0,
+   "SentenceDebias": 8,
+   "edit": 4,
+   "steering": 8
+  },
+  "n_true_v9_dots_total": 20,
+  "note": "`n_edit_cells_as_run` is the count the manuscript's Gate-mixing limitation must quote. `true_v9` is per (cell, method): the DPO column is false everywhere because that panel is UNGATED."
+ },
+ "generated_by": "src/v10_regen_frontier.py",
+ "headline_cells": [
+  "gemma|occ_gender",
+  "gemma|crows_socioeconomic",
+  "llama|occ_gender",
+  "llama|crows_socioeconomic",
+  "qwen|occ_gender",
+  "qwen|crows_socioeconomic",
+  "phi|occ_gender",
+  "phi|crows_socioeconomic"
+ ],
+ "methods": [
+  "edit",
+  "steering",
+  "SentenceDebias",
+  "DPO"
+ ],
+ "n_dots": 32,
+ "n_zeroed": 4,
+ "pooled_as_run": {
+  "edit - DPO": {
+   "hi": 0.539852,
+   "lo": 0.029724,
+   "n": 8,
+   "point": 0.292637,
+   "status": "excludes 0",
+   "text": "+0.2926 [+0.0297, +0.5399] (n=8, excludes 0)"
+  },
+  "edit - DPO [re-scorable cells only]": {
+   "hi": 0.444038,
+   "lo": 0.018867,
+   "n": 2,
+   "point": 0.231452,
+   "status": "excludes 0",
+   "text": "+0.2315 [+0.0189, +0.4440] (n=2, excludes 0)"
+  },
+  "edit - DPO [re-scorable, zeroed cells kept]": {
+   "hi": 0.559061,
+   "lo": 0.07083,
+   "n": 4,
+   "point": 0.314946,
+   "status": "excludes 0",
+   "text": "+0.3149 [+0.0708, +0.5591] (n=4, excludes 0)"
+  },
+  "edit - SentenceDebias": {
+   "hi": 0.042567,
+   "lo": -0.109219,
+   "n": 8,
+   "point": -0.02795,
+   "status": "covers 0",
+   "text": "-0.0279 [-0.1092, +0.0426] (n=8, covers 0)"
+  },
+  "edit - SentenceDebias [re-scorable cells only]": {
+   "hi": 0.115765,
+   "lo": -0.22931,
+   "n": 3,
+   "point": -0.078077,
+   "status": "covers 0",
+   "text": "-0.0781 [-0.2293, +0.1158] (n=3, covers 0)"
+  },
+  "edit - SentenceDebias [re-scorable, zeroed cells kept]": {
+   "hi": 0.080836,
+   "lo": -0.174998,
+   "n": 4,
+   "point": -0.047081,
+   "status": "covers 0",
+   "text": "-0.0471 [-0.1750, +0.0808] (n=4, covers 0)"
+  },
+  "edit - steering": {
+   "hi": 0.055829,
+   "lo": -0.083396,
+   "n": 8,
+   "point": -0.009528,
+   "status": "covers 0",
+   "text": "-0.0095 [-0.0834, +0.0558] (n=8, covers 0)"
+  },
+  "edit - steering [re-scorable cells only]": {
+   "hi": 0.089126,
+   "lo": -0.160029,
+   "n": 4,
+   "point": -0.021895,
+   "status": "covers 0",
+   "text": "-0.0219 [-0.1600, +0.0891] (n=4, covers 0)"
+  },
+  "edit - steering [re-scorable, zeroed cells kept]": {
+   "hi": 0.089126,
+   "lo": -0.160029,
+   "n": 4,
+   "point": -0.021895,
+   "status": "covers 0",
+   "text": "-0.0219 [-0.1600, +0.0891] (n=4, covers 0)"
+  }
+ },
+ "pooled_v9": {
+  "edit - DPO": {
+   "hi": 0.539852,
+   "lo": 0.029724,
+   "n": 8,
+   "point": 0.292637,
+   "status": "excludes 0",
+   "text": "+0.2926 [+0.0297, +0.5399] (n=8, excludes 0)"
+  },
+  "edit - DPO [re-scorable cells only]": {
+   "hi": 0.444038,
+   "lo": 0.018867,
+   "n": 2,
+   "point": 0.231452,
+   "status": "excludes 0",
+   "text": "+0.2315 [+0.0189, +0.4440] (n=2, excludes 0)"
+  },
+  "edit - DPO [re-scorable, zeroed cells kept]": {
+   "hi": 0.559061,
+   "lo": 0.07083,
+   "n": 4,
+   "point": 0.314946,
+   "status": "excludes 0",
+   "text": "+0.3149 [+0.0708, +0.5591] (n=4, excludes 0)"
+  },
+  "edit - SentenceDebias": {
+   "hi": 0.042567,
+   "lo": -0.109219,
+   "n": 8,
+   "point": -0.02795,
+   "status": "covers 0",
+   "text": "-0.0279 [-0.1092, +0.0426] (n=8, covers 0)"
+  },
+  "edit - SentenceDebias [re-scorable cells only]": {
+   "hi": 0.115765,
+   "lo": -0.22931,
+   "n": 3,
+   "point": -0.078077,
+   "status": "covers 0",
+   "text": "-0.0781 [-0.2293, +0.1158] (n=3, covers 0)"
+  },
+  "edit - SentenceDebias [re-scorable, zeroed cells kept]": {
+   "hi": 0.080836,
+   "lo": -0.174998,
+   "n": 4,
+   "point": -0.047081,
+   "status": "covers 0",
+   "text": "-0.0471 [-0.1750, +0.0808] (n=4, covers 0)"
+  },
+  "edit - steering": {
+   "hi": 0.049546,
+   "lo": -0.095652,
+   "n": 8,
+   "point": -0.020779,
+   "status": "covers 0",
+   "text": "-0.0208 [-0.0957, +0.0495] (n=8, covers 0)"
+  },
+  "edit - steering [re-scorable cells only]": {
+   "hi": 0.089126,
+   "lo": -0.160029,
+   "n": 4,
+   "point": -0.021895,
+   "status": "covers 0",
+   "text": "-0.0219 [-0.1600, +0.0891] (n=4, covers 0)"
+  },
+  "edit - steering [re-scorable, zeroed cells kept]": {
+   "hi": 0.089126,
+   "lo": -0.160029,
+   "n": 4,
+   "point": -0.021895,
+   "status": "covers 0",
+   "text": "-0.0219 [-0.1600, +0.0891] (n=4, covers 0)"
+  }
+ },
+ "purpose": "Fig 5 source + manuscript Table A, regenerated per cell.",
+ "reproduction": [
+  {
+   "computed": "+0.2926 [+0.0297, +0.5399] (n=8, excludes 0)",
+   "estimand": "edit - DPO",
+   "matches_diff_report": true,
+   "matches_method_v9": true,
+   "published_diff_report_v9": "+0.2926 [+0.0297, +0.5399] (n=8, excludes 0)",
+   "published_diff_report_v9_point": 0.292637,
+   "published_method_v9": [
+    0.2926,
+    0.0297,
+    0.5399
+   ]
+  },
+  {
+   "computed": "-0.0279 [-0.1092, +0.0426] (n=8, covers 0)",
+   "estimand": "edit - SentenceDebias",
+   "matches_diff_report": true,
+   "matches_method_v9": true,
+   "published_diff_report_v9": "-0.0279 [-0.1092, +0.0426] (n=8, covers 0)",
+   "published_diff_report_v9_point": -0.02795,
+   "published_method_v9": [
+    -0.0279,
+    -0.1092,
+    0.0426
+   ]
+  },
+  {
+   "computed": "-0.0208 [-0.0957, +0.0495] (n=8, covers 0)",
+   "estimand": "edit - steering",
+   "matches_diff_report": true,
+   "matches_method_v9": true,
+   "published_diff_report_v9": "-0.0208 [-0.0957, +0.0495] (n=8, covers 0)",
+   "published_diff_report_v9_point": -0.020779,
+   "published_method_v9": [
+    -0.0208,
+    -0.0957,
+    0.0495
+   ]
+  },
+  {
+   "computed": "-0.0219 [-0.1600, +0.0891] (n=4, covers 0)",
+   "estimand": "edit - steering [re-scorable cells only]",
+   "matches_diff_report": true,
+   "published_diff_report_v9": "-0.0219 [-0.1600, +0.0891] (n=4, covers 0)",
+   "published_diff_report_v9_point": -0.021895
+  },
+  {
+   "computed": "+0.2926 [+0.0297, +0.5399] (n=8, excludes 0)",
+   "estimand": "edit - DPO [as-run]",
+   "matches_diff_report": true,
+   "published_diff_report_v8": "+0.2926 [+0.0297, +0.5399] (n=8, excludes 0)",
+   "published_diff_report_v8_point": 0.292637
+  },
+  {
+   "computed": "-0.0279 [-0.1092, +0.0426] (n=8, covers 0)",
+   "estimand": "edit - SentenceDebias [as-run]",
+   "matches_diff_report": true,
+   "published_diff_report_v8": "-0.0279 [-0.1092, +0.0426] (n=8, covers 0)",
+   "published_diff_report_v8_point": -0.02795
+  },
+  {
+   "computed": "-0.0095 [-0.0834, +0.0558] (n=8, covers 0)",
+   "estimand": "edit - steering [as-run]",
+   "matches_diff_report": true,
+   "published_diff_report_v8": "-0.0095 [-0.0834, +0.0558] (n=8, covers 0)",
+   "published_diff_report_v8_point": -0.009528
+  },
+  {
+   "computed": "-0.0219 [-0.1600, +0.0891] (n=4, covers 0)",
+   "estimand": "edit - steering [re-scorable cells only] [as-run]",
+   "matches_diff_report": true,
+   "published_diff_report_v8": "-0.0219 [-0.1600, +0.0891] (n=4, covers 0)",
+   "published_diff_report_v8_point": -0.021895
+  }
+ ],
+ "restricted_estimate_availability": {
+  "note": "Only `edit - steering [re-scorable cells only]` exists in a published v9 artifact. The SentenceDebias and DPO restricted estimates emitted here are NEW; they have no published counterpart and must be labelled as v10 additions if cited. Note the two rules differ for those arms: v9_regen's rule intersects on cells the other arm HAS (dropping zeroed cells, so n<4), while the pooled convention keeps them (n=4). Both are emitted.",
+  "published": {
+   "edit - DPO [re-scorable cells only]": false,
+   "edit - DPO [re-scorable, zeroed cells kept]": false,
+   "edit - SentenceDebias [re-scorable cells only]": false,
+   "edit - SentenceDebias [re-scorable, zeroed cells kept]": false,
+   "edit - steering [re-scorable cells only]": true,
+   "edit - steering [re-scorable, zeroed cells kept]": false
+  }
+ },
+ "zeroed_cells": {
+  "DPO": [
+   "gemma|occ_gender",
+   "gemma|crows_socioeconomic",
+   "llama|crows_socioeconomic"
+  ],
+  "SentenceDebias": [
+   "phi|crows_socioeconomic"
+  ],
+  "edit": [],
+  "steering": []
+ }
+}

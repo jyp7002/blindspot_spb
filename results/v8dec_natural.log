@@ -1,0 +1,30 @@
+Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
+Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
+Loading checkpoint shards:   0%|                                                                          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████████████████████████████████                                 | 1/2 [00:00<00:00,  4.73it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  8.93it/s]
+`use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[nat] gemma|occ_gender s0 ||C-a||/||C-ref|| under natural = 0.1361
+/opt/conda/lib/python3.13/site-packages/torch/utils/checkpoint.py:232: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  check_backward_validity(args)
+[nat] gemma  occ_gender   s0 C-ref  removal=+0.1353
+[nat] gemma  occ_gender   s0 C-a    removal=+0.0049
+[nat] gemma|occ_gender s1 ||C-a||/||C-ref|| under natural = 0.1442
+[nat] gemma  occ_gender   s1 C-ref  removal=+0.6164
+[nat] gemma  occ_gender   s1 C-a    removal=+0.0053
+[nat] gemma|occ_gender s2 ||C-a||/||C-ref|| under natural = 0.1411
+[nat] gemma  occ_gender   s2 C-ref  removal=+0.7853
+[nat] gemma  occ_gender   s2 C-a    removal=+0.0174
+Loading checkpoint shards:   0%|                                                                          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00, 52.44it/s]
+Using the latest cached version of the dataset since oskarvanderwal/bbq couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'Age' at /home/jovyan/.cache/huggingface/datasets/oskarvanderwal___bbq/Age/0.0.0/ab00114b0fbf59c7c539ff9158f6ce717d13ab63 (last modified on Mon Jul 20 06:59:10 2026).
+[nat] qwen|bbq_Age s0 ||C-a||/||C-ref|| under natural = 0.1671
+[nat] qwen   bbq_Age      s0 C-ref  removal=+0.2634
+[nat] qwen   bbq_Age      s0 C-a    removal=+0.0262
+[nat] qwen|bbq_Age s1 ||C-a||/||C-ref|| under natural = 0.1690
+[nat] qwen   bbq_Age      s1 C-ref  removal=+0.2395
+[nat] qwen   bbq_Age      s1 C-a    removal=+0.0269
+[nat] qwen|bbq_Age s2 ||C-a||/||C-ref|| under natural = 0.1654
+[nat] qwen   bbq_Age      s2 C-ref  removal=+0.2565
+[nat] qwen   bbq_Age      s2 C-a    removal=+0.0244
+[nat] ALL DONE

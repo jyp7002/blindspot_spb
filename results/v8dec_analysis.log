@@ -1,0 +1,37 @@
+[dec] panel=v8dec  rows=285  cells=10
+[dec] budget-fail rows by condition: none
+
+  PER-CONDITION MEAN REMOVAL (over cells)
+    C-ref              +0.3220   (n_cells=10)
+    C-a                +0.0684   (n_cells=10)
+    C-bottom           +0.0010   (n_cells=10)
+    C-b                +0.0036   (n_cells=10)
+    C-rand             +0.0014   (n_cells=10)
+    C-layershuf        +0.0043   (n_cells=10)
+    C-tensorshuf       +0.0342   (n_cells=7)
+    C-ref-no_q_proj    +0.4111   (n_cells=7)
+    C-ref-no_k_proj    +0.4092   (n_cells=7)
+    C-ref-no_v_proj    +0.2812   (n_cells=7)
+    C-ref-no_o_proj    +0.2798   (n_cells=7)
+
+  ESTIMANDS (paired, cell bootstrap)
+    Delta_sign      (C-ref - C-b)                                  +0.3185 [+0.1965, +0.4502] (n=10, excludes 0)
+    Delta_selection (C-ref - C-a)                                  +0.2537 [+0.1475, +0.3692] (n=10, excludes 0)
+    Delta_bottom    (C-ref - C-bottom)                             +0.3210 [+0.1985, +0.4533] (n=10, excludes 0)
+    Delta_null      (C-ref - C-rand)                               +0.3207 [+0.1987, +0.4525] (n=10, excludes 0)
+    Delta_location  (C-ref - C-layershuf)                          +0.3178 [+0.1973, +0.4482] (n=10, excludes 0)
+    Delta_tensor    (C-ref - C-tensorshuf)                         +0.3663 [+0.2354, +0.5130] (n=7, excludes 0)
+    C-a - C-rand  (does the true sign field help at random coords?) +0.0670 [+0.0292, +0.1106] (n=10, excludes 0)
+    C-a - C-bottom                                                 +0.0673 [+0.0296, +0.1109] (n=10, excludes 0)
+
+  LEAVE-ONE-PROJECTION-OUT (SUP1 2)
+    C-ref - C-ref-no_q_proj      -0.0105 [-0.0683, +0.0434] (n=7, covers 0)
+    C-ref - C-ref-no_k_proj      -0.0086 [-0.0298, +0.0075] (n=7, covers 0)
+    C-ref - C-ref-no_v_proj      +0.1194 [+0.0096, +0.2501] (n=7, excludes 0)
+    C-ref - C-ref-no_o_proj      +0.1208 [+0.0789, +0.1829] (n=7, excludes 0)
+
+  ADJUDICATION: OUTCOME B (DARE-divergent)
+    Delta_selection CI excludes 0 at 79% of R(C-ref): the behavioural edit concentrates in a magnitude-identifiable sparse signed substructure.
+    Delta_selection = +0.2537 [+0.1475, +0.3692] (n=10, excludes 0); R(C-ref) = +0.3220
+
+[dec] wrote /home/jovyan/Blind_spot_spb/results/v8/dec_analysis.json

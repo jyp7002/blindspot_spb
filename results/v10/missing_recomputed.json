@@ -1,0 +1,403 @@
+{
+ "artifact": "v10_regen_missing",
+ "manuscript_claims": {
+  "contrast_gap": {
+   "as_run_cell": "+0.305 [-0.091, +0.694] (n=36 cells)",
+   "as_run_rows": 204,
+   "headline_as_run": "+0.583 [+0.267, +0.893] (n=36 cells over 1014 runs, excludes 0)",
+   "headline_v9": "+0.572 [+0.242, +0.890] (n=34 cells over 582 runs, excludes 0)",
+   "printed": "+0.507 [+0.220, +0.732], n = 504",
+   "printed_n504_population_note": "the printed n=504/26-cell shape reproduces ONLY under frozen-gap x as-run tree x roles {self,cross,same_large} x granite dropped x cells keyed (designer,axis), and gives r_cell=+0.711 - the shape matches, the value does not",
+   "v9_cell": "+0.246 [-0.178, +0.601] (n=34 cells)",
+   "v9_rows": 126
+  },
+  "env_200_splits": {
+   "as_run_joint": -0.0010944469764101155,
+   "as_run_pre_skew": 0.0005065942486214706,
+   "printed": "across 200 alternative splits the gate's mean utility gain is -0.0012",
+   "v9_joint": -0.005123279242327306,
+   "v9_pre_skew": -0.001155876563150984
+  }
+ },
+ "module": "src/v10_regen_missing.py",
+ "n_splits": 200,
+ "purpose": "compute the two manuscript numbers that had no script; analysis only, no GPU",
+ "trees": {
+  "as_run": {
+   "contrast_gap_correlation": {
+    "_note": "the manuscript prints '+0.507 [+0.220, +0.732], n = 504', i.e. a cell-level estimate labelled with the row count",
+    "_what": "correlation of contrast_gap with realized removal",
+    "cell_level": {
+     "hi": 0.6942654183154733,
+     "lo": -0.09106474430769326,
+     "n": 36,
+     "point": 0.3047266866429259,
+     "text": "+0.305 [-0.091, +0.694] (n=36 cells)"
+    },
+    "n_cells": 36,
+    "n_rows": 204,
+    "role": "self",
+    "row_level": {
+     "hi": 0.554574993277084,
+     "lo": 0.2571326162128055,
+     "n": 204,
+     "point": 0.41305744036199754,
+     "text": "+0.413 [+0.257, +0.555] (n=204 rows)"
+    }
+   },
+   "contrast_gap_headline": {
+    "_what": "Pearson correlation of corpus-build-time contrast_gap with realized removal, ALL designer roles pooled, aggregated to the target x axis cell",
+    "hi": 0.893118562857957,
+    "lo": 0.26737764943747955,
+    "n_cells": 36,
+    "n_rows": 1014,
+    "point": 0.5831658817998735,
+    "population": "every row of the 12 frozen EDIT_PANELS that joins to a corpus contrast_gap; all roles (self, cross, sibling, cross_large, cross_small, same_large); nan removal -> 0; no target, axis or designer excluded",
+    "resampling": "percentile bootstrap, 10000 resamples of the CELL, seed 0",
+    "size_absorbed": {
+     "_what": "OLS removal ~ contrast_gap + size_b on the same cells; 'absorbs designer size' == this size coefficient covers 0 while the gap coefficient does not",
+     "b_gap": 0.9891624972346383,
+     "b_size": 0.036470819176166125,
+     "gap_hi": 2.178164883001783,
+     "gap_lo": 0.24375893807035748,
+     "hi": 0.0886048297567358,
+     "lo": -0.0045596840980618595,
+     "units": "removal per B parameters"
+    },
+    "size_marginal": {
+     "_what": "designer size alone vs removal, same cells",
+     "hi": 0.6854518480110614,
+     "lo": 0.06688327066983771,
+     "point": 0.42486797507203494
+    },
+    "text": "+0.583 [+0.267, +0.893] (n=36 cells over 1014 runs, excludes 0)",
+    "unit": "target x axis cell (mean over designers, roles, panels, seeds)"
+   },
+   "contrast_gap_population_sensitivity": {
+    "_what": "the printed +0.507 (n=504, 26 cells) reproduces under NONE of these; no script or artifact exists to say which population was intended",
+    "any_population_matches_printed_n": false,
+    "n_rows_range": [
+     30,
+     1014
+    ],
+    "populations": {
+     "all roles": {
+      "n_cells": 36,
+      "n_rows": 1014,
+      "r_cell": 0.5831658817998735,
+      "r_row": 0.6893706791108808
+     },
+     "all roles, budget-fails dropped": {
+      "n_cells": 35,
+      "n_rows": 955,
+      "r_cell": 0.8339179830177884,
+      "r_row": 0.7494196262042877
+     },
+     "granite excluded": {
+      "n_cells": 30,
+      "n_rows": 918,
+      "r_cell": 0.8059450956406413,
+      "r_row": 0.7387100208713049
+     },
+     "occ+crows only": {
+      "n_cells": 18,
+      "n_rows": 906,
+      "r_cell": 0.5819472730500226,
+      "r_row": 0.6952815531331784
+     },
+     "occ+crows, granite excluded": {
+      "n_cells": 12,
+      "n_rows": 810,
+      "r_cell": 0.9693993791083816,
+      "r_row": 0.7490114289774962
+     },
+     "role=cross": {
+      "n_cells": 32,
+      "n_rows": 552,
+      "r_cell": 0.7735095381278133,
+      "r_row": 0.7863032068593667
+     },
+     "role=cross_large": {
+      "n_cells": 6,
+      "n_rows": 78,
+      "r_cell": 0.9703876857505108,
+      "r_row": 0.9296343985686
+     },
+     "role=cross_small": {
+      "n_cells": 6,
+      "n_rows": 90,
+      "r_cell": 0.9814378245298179,
+      "r_row": 0.6385227047203925
+     },
+     "role=same_large": {
+      "n_cells": 8,
+      "n_rows": 30,
+      "r_cell": 0.9449578139489281,
+      "r_row": 0.9334887763219689
+     },
+     "role=self": {
+      "n_cells": 36,
+      "n_rows": 204,
+      "r_cell": 0.3047266866429259,
+      "r_row": 0.41305744036199754
+     },
+     "role=sibling": {
+      "n_cells": 12,
+      "n_rows": 60,
+      "r_cell": -0.018148471177153038,
+      "r_row": 0.07380572091759094
+     }
+    },
+    "printed_n_cells": 26,
+    "printed_n_rows": 504,
+    "printed_r": 0.507,
+    "r_cell_range": [
+     -0.018148471177153038,
+     0.9814378245298179
+    ]
+   },
+   "env_split_sweep": {
+    "contrast_gap_gate": {
+     "frac_exceeding_plus_0.01": 0.0,
+     "frac_nondiscriminating": 0.34,
+     "frac_positive": 0.26,
+     "max": 0.005097381924627997,
+     "mean_utility_gain": -0.02250348423392012,
+     "median_utility_gain": 0.0,
+     "min": -0.21005100305819058,
+     "n_nondiscriminating": 68,
+     "n_splits": 200,
+     "sd": 0.05372813447528151
+    },
+    "joint_gate": {
+     "frac_exceeding_plus_0.01": 0.06,
+     "frac_nondiscriminating": 0.065,
+     "frac_positive": 0.525,
+     "max": 0.010811787395818673,
+     "mean_utility_gain": -0.0010944469764101155,
+     "median_utility_gain": 0.0002198884353686037,
+     "min": -0.05480983548205434,
+     "n_nondiscriminating": 13,
+     "n_splits": 200,
+     "sd": 0.010023264718762045
+    },
+    "pre_skew_gate": {
+     "frac_exceeding_plus_0.01": 0.06,
+     "frac_nondiscriminating": 0.075,
+     "frac_positive": 0.57,
+     "max": 0.010811787395818673,
+     "mean_utility_gain": 0.0005065942486214706,
+     "median_utility_gain": 0.00021988843536863145,
+     "min": -0.026686129267331077,
+     "n_nondiscriminating": 15,
+     "n_splits": 200,
+     "sd": 0.006131727828328843
+    }
+   },
+   "n_cells_self": 36,
+   "provenance": {
+    "n_corpora_with_gap": 198,
+    "n_rows": 1014,
+    "panels_absent": [],
+    "rows_unjoined_to_a_corpus": 129,
+    "tree": "as_run"
+   }
+  },
+  "v9": {
+   "contrast_gap_correlation": {
+    "_note": "the manuscript prints '+0.507 [+0.220, +0.732], n = 504', i.e. a cell-level estimate labelled with the row count",
+    "_what": "correlation of contrast_gap with realized removal",
+    "cell_level": {
+     "hi": 0.6008218293054861,
+     "lo": -0.17818855569230044,
+     "n": 34,
+     "point": 0.24577573145401696,
+     "text": "+0.246 [-0.178, +0.601] (n=34 cells)"
+    },
+    "n_cells": 34,
+    "n_rows": 126,
+    "role": "self",
+    "row_level": {
+     "hi": 0.49459283183106856,
+     "lo": 0.04743707184655058,
+     "n": 126,
+     "point": 0.28222313507872127,
+     "text": "+0.282 [+0.047, +0.495] (n=126 rows)"
+    }
+   },
+   "contrast_gap_headline": {
+    "_what": "Pearson correlation of corpus-build-time contrast_gap with realized removal, ALL designer roles pooled, aggregated to the target x axis cell",
+    "hi": 0.890028755492103,
+    "lo": 0.24226520941843202,
+    "n_cells": 34,
+    "n_rows": 582,
+    "point": 0.5717787948711553,
+    "population": "every row of the 12 frozen EDIT_PANELS that joins to a corpus contrast_gap; all roles (self, cross, sibling, cross_large, cross_small, same_large); nan removal -> 0; no target, axis or designer excluded",
+    "resampling": "percentile bootstrap, 10000 resamples of the CELL, seed 0",
+    "size_absorbed": {
+     "_what": "OLS removal ~ contrast_gap + size_b on the same cells; 'absorbs designer size' == this size coefficient covers 0 while the gap coefficient does not",
+     "b_gap": 0.9320452296478229,
+     "b_size": 0.036460136054931966,
+     "gap_hi": 2.09014228289823,
+     "gap_lo": 0.1881887358487472,
+     "hi": 0.097588213264861,
+     "lo": -0.007441191531806582,
+     "units": "removal per B parameters"
+    },
+    "size_marginal": {
+     "_what": "designer size alone vs removal, same cells",
+     "hi": 0.682751592502623,
+     "lo": 0.022319246466771758,
+     "point": 0.4151565617744423
+    },
+    "text": "+0.572 [+0.242, +0.890] (n=34 cells over 582 runs, excludes 0)",
+    "unit": "target x axis cell (mean over designers, roles, panels, seeds)"
+   },
+   "contrast_gap_population_sensitivity": {
+    "_what": "the printed +0.507 (n=504, 26 cells) reproduces under NONE of these; no script or artifact exists to say which population was intended",
+    "any_population_matches_printed_n": false,
+    "n_rows_range": [
+     12,
+     582
+    ],
+    "populations": {
+     "all roles": {
+      "n_cells": 34,
+      "n_rows": 582,
+      "r_cell": 0.5717787948711553,
+      "r_row": 0.6579895056420436
+     },
+     "all roles, budget-fails dropped": {
+      "n_cells": 33,
+      "n_rows": 546,
+      "r_cell": 0.8297263646428676,
+      "r_row": 0.7440054974225158
+     },
+     "granite excluded": {
+      "n_cells": 28,
+      "n_rows": 522,
+      "r_cell": 0.8014828815629923,
+      "r_row": 0.7301806722225381
+     },
+     "occ+crows only": {
+      "n_cells": 16,
+      "n_rows": 474,
+      "r_cell": 0.5667232335195419,
+      "r_row": 0.667352470618207
+     },
+     "occ+crows, granite excluded": {
+      "n_cells": 10,
+      "n_rows": 414,
+      "r_cell": 0.9659099332584894,
+      "r_row": 0.7520766971072115
+     },
+     "role=cross": {
+      "n_cells": 30,
+      "n_rows": 240,
+      "r_cell": 0.7964548688860729,
+      "r_row": 0.7943755165020063
+     },
+     "role=cross_large": {
+      "n_cells": 6,
+      "n_rows": 78,
+      "r_cell": 0.9715796362315935,
+      "r_row": 0.9293114666142371
+     },
+     "role=cross_small": {
+      "n_cells": 6,
+      "n_rows": 90,
+      "r_cell": 0.9809548126377561,
+      "r_row": 0.6283120806662821
+     },
+     "role=same_large": {
+      "n_cells": 4,
+      "n_rows": 12,
+      "r_cell": 0.9822187862862751,
+      "r_row": 0.9793617999725459
+     },
+     "role=self": {
+      "n_cells": 34,
+      "n_rows": 126,
+      "r_cell": 0.24577573145401696,
+      "r_row": 0.28222313507872127
+     },
+     "role=sibling": {
+      "n_cells": 12,
+      "n_rows": 36,
+      "r_cell": -0.024707496139640864,
+      "r_row": -0.020315703392221288
+     }
+    },
+    "printed_n_cells": 26,
+    "printed_n_rows": 504,
+    "printed_r": 0.507,
+    "r_cell_range": [
+     -0.024707496139640864,
+     0.9822187862862751
+    ]
+   },
+   "env_split_sweep": {
+    "contrast_gap_gate": {
+     "frac_exceeding_plus_0.01": 0.0,
+     "frac_nondiscriminating": 0.255,
+     "frac_positive": 0.15,
+     "max": 0.005437207386269877,
+     "mean_utility_gain": -0.028051452045326046,
+     "median_utility_gain": -0.0009124306726496084,
+     "min": -0.20446635771507415,
+     "n_nondiscriminating": 51,
+     "n_splits": 200,
+     "sd": 0.05890891521901476
+    },
+    "joint_gate": {
+     "frac_exceeding_plus_0.01": 0.005,
+     "frac_nondiscriminating": 0.055,
+     "frac_positive": 0.355,
+     "max": 0.011298025557813396,
+     "mean_utility_gain": -0.005123279242327306,
+     "median_utility_gain": -0.0010796283265231271,
+     "min": -0.08567039204347299,
+     "n_nondiscriminating": 11,
+     "n_splits": 200,
+     "sd": 0.012830825442683675
+    },
+    "pre_skew_gate": {
+     "frac_exceeding_plus_0.01": 0.015,
+     "frac_nondiscriminating": 0.07,
+     "frac_positive": 0.495,
+     "max": 0.011532573222206563,
+     "mean_utility_gain": -0.001155876563150984,
+     "median_utility_gain": 0.0,
+     "min": -0.026892048025265458,
+     "n_nondiscriminating": 14,
+     "n_splits": 200,
+     "sd": 0.006885210297035699
+    }
+   },
+   "n_cells_self": 34,
+   "provenance": {
+    "n_corpora_with_gap": 198,
+    "n_rows": 582,
+    "panels_absent": [
+     "t2x",
+     "v1",
+     "x",
+     "x2"
+    ],
+    "rows_unjoined_to_a_corpus": 129,
+    "tree": "v9"
+   }
+  }
+ },
+ "v9_restriction": {
+  "cells_lost": 2,
+  "note": "t2x, v1, x and x2 can never be re-scored, so the v9 arm runs on a strictly smaller row set",
+  "panels_absent_under_v9": [
+   "t2x",
+   "v1",
+   "x",
+   "x2"
+  ],
+  "rows_lost": 432
+ }
+}

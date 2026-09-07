@@ -1,0 +1,70 @@
+# v11 BIG — the 32B/70B tier. RUNS ELSEWHERE, not on the analysis box.
+#
+# WHAT THIS FIXES. Every "two model tiers" statement in the paper spans
+# 2.6B-3.8B and 7-9B. That is a 3x span, and the structural claim is offered as
+# a property of behavioural edits in general. A 32B cell makes it a 12x span; a
+# 70B cell makes it 27x. If the decomposition holds there, the concentration
+# result stops being a small-model result.
+#
+# WHY IT IS A SEPARATE CONFIG. The analysis box is one L40S (46 GB) and cannot
+# hold these in bf16 for TRAINING. colab_t2t4.load_model already knows the
+# tier split (bf16 <=32B, 8-bit >=60B) and the T4 arm has run 27B/32B/70B/72B
+# for skew profiling -- but INFERENCE ONLY. Nothing here has ever trained a
+# contrast vector above 8B.
+#
+# ---------------------------------------------------------------------------
+# READ BEFORE RENTING A NODE. Two things are known-unresolved, and both cost
+# money to discover late:
+#
+# 1. 8-BIT + TRAINING IS UNTESTED IN THIS CODEBASE. `eightbit: true` was only
+#    ever used for T4 inference. train_task_vector runs LoRA over the attention
+#    projections; PEFT on an 8-bit base needs prepare_model_for_kbit_training
+#    and colab_t2t4 does not call it. Treat llama70b as a STRETCH cell: run
+#    qwen32b (bf16) first and confirm the pipeline end-to-end before paying for
+#    a 70B node. `scripts/preflight.py --config configs/v11/big_v11.yaml`
+#    prints the VRAM estimate and refuses a node that cannot hold the cell.
+#
+# 2. dispatch=False IS REQUIRED FOR TRAINABLE TARGETS. colab_t2t4.load_model
+#    documents that device_map='auto' installs accelerate hooks that break
+#    training, so the big cells need a single device large enough for the whole
+#    model, not a sharded one. In practice: 32B bf16 needs ~64 GB + activations
+#    -> one 80 GB card. Multi-GPU sharded TRAINING is not supported by this
+#    code and adding it is a code change, not a config change.
+# ---------------------------------------------------------------------------
+#
+# SCOPE. One axis (occ_gender: the strongest, best-characterised axis, present
+# in every published tier) and one seed to start. The question at this tier is
+# "does Delta_selection stay positive and unanimous", which needs the seven
+# conditions, not three seeds. Widen only after the first cell lands.
+
+panel: v11big
+kind: dec
+out_panel: v11big
+base_on: v8dec
+
+density: 0.01
+scale_mode: ref_tensor
+alphas: [2, 4, 8, 16]     # frozen grid, so the cell is comparable to the panel
+seeds: [0]
+mmlu_n: 200
+
+cells:
+  # ---- primary: bf16 on one 80 GB card. Run this first. ----
+  - target: qwen32b
+    hf: Qwen/Qwen2.5-32B-Instruct
+    designer: qwen
+    axis: occ_gender
+    eightbit: false
+    note: "~64 GB bf16 weights; needs one >=80 GB device (dispatch=False)"
+
+  # ---- stretch: do NOT launch until qwen32b has completed. ----
+  - target: llama70b
+    hf: meta-llama/Llama-3.1-70B-Instruct
+    designer: llama
+    axis: occ_gender
+    eightbit: true
+    note: >
+      STRETCH. 8-bit + LoRA training is untested here (see header note 1).
+      ~70 GB in 8-bit before activations. Expect to need
+      prepare_model_for_kbit_training in colab_t2t4.train_task_vector, or a
+      >=2x80 GB bf16 node with sharded training support that does not exist yet.

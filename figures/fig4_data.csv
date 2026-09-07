@@ -1,0 +1,112 @@
+panel,kind,projection,depth_bin,cell,target,value,ci_lo,ci_hi,n,status,note
+left(a) heatmap,fold_enrichment_cell,q_proj,d1/8,,,0.212059,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,k_proj,d1/8,,,0.172362,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,v_proj,d1/8,,,0.837803,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,o_proj,d1/8,,,1.081998,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,q_proj,d2/8,,,0.151063,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,k_proj,d2/8,,,0.092079,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,v_proj,d2/8,,,0.145536,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,o_proj,d2/8,,,0.395572,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,q_proj,d3/8,,,0.643670,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,k_proj,d3/8,,,0.394036,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,v_proj,d3/8,,,0.187331,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,o_proj,d3/8,,,0.578642,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,q_proj,d4/8,,,0.716894,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,k_proj,d4/8,,,0.265075,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,v_proj,d4/8,,,0.348857,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,o_proj,d4/8,,,0.995895,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,q_proj,d5/8,,,0.901811,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,k_proj,d5/8,,,0.477274,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,v_proj,d5/8,,,0.506808,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,o_proj,d5/8,,,1.599055,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,q_proj,d6/8,,,1.269321,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,k_proj,d6/8,,,0.632212,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,v_proj,d6/8,,,0.790685,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,o_proj,d6/8,,,1.594064,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,q_proj,d7/8,,,1.599807,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,k_proj,d7/8,,,1.423730,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,v_proj,d7/8,,,0.604071,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,o_proj,d7/8,,,2.001596,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,q_proj,d8/8,,,1.097440,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,k_proj,d8/8,,,0.451682,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,v_proj,d8/8,,,1.570645,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,fold_enrichment_cell,o_proj,d8/8,,,2.257639,,,27,,mean over included dumps of that dump's own (k_cell/N_cell)/density_dump; hypergeometric null = 1.0; no zeroed non-measurements
+left(a) heatmap,projection_density_multiplier,q_proj,,,,0.833027,,,27,,"pooled marginal over support dumps, drawn as the x tick label; not a column mean of the panel"
+left(a) heatmap,projection_density_multiplier,k_proj,,,,0.489892,,,27,,"pooled marginal over support dumps, drawn as the x tick label; not a column mean of the panel"
+left(a) heatmap,projection_density_multiplier,v_proj,,,,0.641043,,,27,,"pooled marginal over support dumps, drawn as the x tick label; not a column mean of the panel"
+left(a) heatmap,projection_density_multiplier,o_proj,,,,1.319995,,,27,,"pooled marginal over support dumps, drawn as the x tick label; not a column mean of the panel"
+left(a) heatmap,per_target_late_over_early,,,,gemma (26L),0.469667,,,3,,"fractional-depth thirds (K=3) of the per-target native matrix, mean over layers and the 4 projections; footer (a), not a panel cell"
+left(a) heatmap,per_target_projection_mean,q_proj,,,gemma (26L),1.623280,,,3,,mean over that target's native layers; cited in the caption because the v<q ordering reverses for one target; not plotted
+left(a) heatmap,per_target_projection_mean,v_proj,,,gemma (26L),0.361565,,,3,,mean over that target's native layers; cited in the caption because the v<q ordering reverses for one target; not plotted
+left(a) heatmap,per_target_late_over_early,,,,llama (28L),1.960543,,,3,,"fractional-depth thirds (K=3) of the per-target native matrix, mean over layers and the 4 projections; footer (a), not a panel cell"
+left(a) heatmap,per_target_projection_mean,q_proj,,,llama (28L),0.888808,,,3,,mean over that target's native layers; cited in the caption because the v<q ordering reverses for one target; not plotted
+left(a) heatmap,per_target_projection_mean,v_proj,,,llama (28L),0.746405,,,3,,mean over that target's native layers; cited in the caption because the v<q ordering reverses for one target; not plotted
+left(a) heatmap,per_target_late_over_early,,,,qwen (36L),6.527965,,,12,,"fractional-depth thirds (K=3) of the per-target native matrix, mean over layers and the 4 projections; footer (a), not a panel cell"
+left(a) heatmap,per_target_projection_mean,q_proj,,,qwen (36L),0.748231,,,12,,mean over that target's native layers; cited in the caption because the v<q ordering reverses for one target; not plotted
+left(a) heatmap,per_target_projection_mean,v_proj,,,qwen (36L),0.527551,,,12,,mean over that target's native layers; cited in the caption because the v<q ordering reverses for one target; not plotted
+left(a) heatmap,per_target_late_over_early,,,,qwen7b (28L),6.000714,,,9,,"fractional-depth thirds (K=3) of the per-target native matrix, mean over layers and the 4 projections; footer (a), not a panel cell"
+left(a) heatmap,per_target_projection_mean,q_proj,,,qwen7b (28L),0.664077,,,9,,mean over that target's native layers; cited in the caption because the v<q ordering reverses for one target; not plotted
+left(a) heatmap,per_target_projection_mean,v_proj,,,qwen7b (28L),0.850405,,,9,,mean over that target's native layers; cited in the caption because the v<q ordering reverses for one target; not plotted
+left(a) heatmap,pooled_gradient_early,,,,,0.465424,,,27,,"K=3 view of the plotted (phi-excluded) population; caption number, not a panel cell. The draft's 0.41x->1.52x is the phi-INCLUDED 36-dump version"
+left(a) heatmap,pooled_gradient_middle,,,,,0.892673,,,27,,"K=3 view of the plotted (phi-excluded) population; caption number, not a panel cell. The draft's 0.41x->1.52x is the phi-INCLUDED 36-dump version"
+left(a) heatmap,pooled_gradient_late,,,,,1.647375,,,27,,"K=3 view of the plotted (phi-excluded) population; caption number, not a panel cell. The draft's 0.41x->1.52x is the phi-INCLUDED 36-dump version"
+left(a) heatmap,pooled_gradient_late_over_early,,,,,3.539513,,,27,,"K=3 view of the plotted (phi-excluded) population; caption number, not a panel cell. The draft's 0.41x->1.52x is the phi-INCLUDED 36-dump version"
+left(a) heatmap,n_support_dumps_included,,,,,27,,,27,,4 targets x 3 seeds x axes; 18 of the 27 are one axis (occ_gender) and 12 one designer (qwen_3b)
+left(a) heatmap,n_support_dumps_excluded_fused,,,,phi,9,,,,,phi fuses q/k/v into qkv_proj and never touches o_proj; a lone fused module has enrichment 1.0 by construction
+right(b) LOPO,lopo_per_cell_delta,q_proj,,gemma|occ_gender,,0.028594,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,q_proj,,llama|occ_gender,,-0.028059,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,q_proj,,qwen7b|occ_gender,,0.016349,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,q_proj,,qwen|bbq_Age,,-0.022484,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,q_proj,,qwen|bbq_Race_ethnicity,,-0.003840,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,q_proj,,qwen|occ_gender,,0.114515,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,q_proj,,qwen|ss_intra,,0.001943,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_delta_v9,q_proj,,,,0.015288,-0.012346,0.051768,7,covers 0,"droppable; paired 10k percentile bootstrap over 7 cells, seed 0, v9 integer-item gate; zero budget-fail rows in this arm"
+right(b) LOPO,lopo_cells_with_positive_delta,q_proj,,,,4,,,7,covers 0,"unanimity count, drawn in the x tick label"
+right(b) LOPO,lopo_delta_pct_of_C_ref_7cell,q_proj,,,,3.5858,,,7,,"right-hand axis; denominator is the 7-cell C-ref mean, never the 10-cell +0.3532"
+right(b) LOPO,lopo_per_cell_delta,k_proj,,gemma|occ_gender,,0.116506,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,k_proj,,llama|occ_gender,,-0.017212,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,k_proj,,qwen7b|occ_gender,,0.001531,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,k_proj,,qwen|bbq_Age,,-0.003513,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,k_proj,,qwen|bbq_Race_ethnicity,,-0.000830,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,k_proj,,qwen|occ_gender,,0.024125,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,k_proj,,qwen|ss_intra,,-0.000174,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_delta_v9,k_proj,,,,0.017205,-0.005846,0.053069,7,covers 0,"droppable; paired 10k percentile bootstrap over 7 cells, seed 0, v9 integer-item gate; zero budget-fail rows in this arm"
+right(b) LOPO,lopo_cells_with_positive_delta,k_proj,,,,3,,,7,covers 0,"unanimity count, drawn in the x tick label"
+right(b) LOPO,lopo_delta_pct_of_C_ref_7cell,k_proj,,,,4.0352,,,7,,"right-hand axis; denominator is the 7-cell C-ref mean, never the 10-cell +0.3532"
+right(b) LOPO,lopo_per_cell_delta,v_proj,,gemma|occ_gender,,0.333511,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,v_proj,,llama|occ_gender,,0.282683,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,v_proj,,qwen7b|occ_gender,,-0.044568,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,v_proj,,qwen|bbq_Age,,-0.024175,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,v_proj,,qwen|bbq_Race_ethnicity,,-0.000826,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,v_proj,,qwen|occ_gender,,0.433698,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,v_proj,,qwen|ss_intra,,0.021544,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_delta_v9,v_proj,,,,0.143124,0.020789,0.284639,7,excludes 0,"load-bearing; paired 10k percentile bootstrap over 7 cells, seed 0, v9 integer-item gate; zero budget-fail rows in this arm"
+right(b) LOPO,lopo_cells_with_positive_delta,v_proj,,,,4,,,7,excludes 0,"unanimity count, drawn in the x tick label"
+right(b) LOPO,lopo_delta_pct_of_C_ref_7cell,v_proj,,,,33.5686,,,7,,"right-hand axis; denominator is the 7-cell C-ref mean, never the 10-cell +0.3532"
+right(b) LOPO,lopo_per_cell_delta,o_proj,,gemma|occ_gender,,0.145107,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,o_proj,,llama|occ_gender,,0.049312,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,o_proj,,qwen7b|occ_gender,,0.111286,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,o_proj,,qwen|bbq_Age,,0.073147,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,o_proj,,qwen|bbq_Race_ethnicity,,0.106895,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,o_proj,,qwen|occ_gender,,0.250251,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_per_cell_delta,o_proj,,qwen|ss_intra,,0.096168,,,1,,"C-ref - LOPO on that (target,axis) cell, mean over its 3 seed rows; drawn as a dot"
+right(b) LOPO,lopo_delta_v9,o_proj,,,,0.118881,0.080022,0.168066,7,excludes 0,"load-bearing; paired 10k percentile bootstrap over 7 cells, seed 0, v9 integer-item gate; zero budget-fail rows in this arm"
+right(b) LOPO,lopo_cells_with_positive_delta,o_proj,,,,7,,,7,excludes 0,"unanimity count, drawn in the x tick label"
+right(b) LOPO,lopo_delta_pct_of_C_ref_7cell,o_proj,,,,27.8826,,,7,,"right-hand axis; denominator is the 7-cell C-ref mean, never the 10-cell +0.3532"
+right(b) LOPO,C_ref_mean_7_cell,,,,,0.426362,,,7,,right-axis denominator; the 10-cell C-ref mean would inflate every bar
+right(b) LOPO,C_ref_mean_all_dec_cells,,,,,0.353176,,,10,,NOT the denominator used here; listed so the two cannot be confused
+cross-panel,projection_density_multiplier_four_projection,k_proj,,,,0.489892,,,27,,four_projection = the 27 dumps the heatmap draws; lopo_matched = the 21 dumps behind the 7 LOPO cells
+cross-panel,projection_density_multiplier_four_projection,o_proj,,,,1.319995,,,27,,four_projection = the 27 dumps the heatmap draws; lopo_matched = the 21 dumps behind the 7 LOPO cells
+cross-panel,projection_density_multiplier_four_projection,q_proj,,,,0.833027,,,27,,four_projection = the 27 dumps the heatmap draws; lopo_matched = the 21 dumps behind the 7 LOPO cells
+cross-panel,projection_density_multiplier_four_projection,v_proj,,,,0.641043,,,27,,four_projection = the 27 dumps the heatmap draws; lopo_matched = the 21 dumps behind the 7 LOPO cells
+cross-panel,projection_density_multiplier_lopo_matched,k_proj,,,,0.488975,,,21,,four_projection = the 27 dumps the heatmap draws; lopo_matched = the 21 dumps behind the 7 LOPO cells
+cross-panel,projection_density_multiplier_lopo_matched,o_proj,,,,1.301205,,,21,,four_projection = the 27 dumps the heatmap draws; lopo_matched = the 21 dumps behind the 7 LOPO cells
+cross-panel,projection_density_multiplier_lopo_matched,q_proj,,,,0.866047,,,21,,four_projection = the 27 dumps the heatmap draws; lopo_matched = the 21 dumps behind the 7 LOPO cells
+cross-panel,projection_density_multiplier_lopo_matched,v_proj,,,,0.600090,,,21,,four_projection = the 27 dumps the heatmap draws; lopo_matched = the 21 dumps behind the 7 LOPO cells
+cross-panel,count_dec_cells_total,,,,,10,,,,,phi_exclusion block of lopo_v9.json
+cross-panel,count_excluded,,,,,True,,,,,phi_exclusion block of lopo_v9.json
+cross-panel,count_lopo_cells,,,,,7,,,,,phi_exclusion block of lopo_v9.json
+cross-panel,count_support_dumps_after_exclusion,,,,,27,,,,,phi_exclusion block of lopo_v9.json
+cross-panel,count_support_dumps_fused,,,,,9,,,,,phi_exclusion block of lopo_v9.json
+cross-panel,count_support_dumps_matched_to_lopo,,,,,21,,,,,phi_exclusion block of lopo_v9.json
+cross-panel,count_support_dumps_total,,,,,36,,,,,phi_exclusion block of lopo_v9.json

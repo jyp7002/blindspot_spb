@@ -1,0 +1,12 @@
+[auth] no HF_TOKEN in env — gated models (gemma/llama) will fail
+[t2x] axes=['occ_gender', 'crows_socioeconomic'] seeds=[0, 1, 2] targets=['qwen', 'llama', 'gemma', 'olmo']
+Using the latest cached version of the dataset since cais/mmlu couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'all' at /home/jovyan/.cache/huggingface/datasets/cais___mmlu/all/0.0.0/c30699e8356da336a370243923dbaf21066bb9fe (last modified on Mon Jul 20 06:57:17 2026).
+Using the latest cached version of the dataset since Salesforce/wikitext couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'wikitext-103-raw-v1' at /home/jovyan/.cache/huggingface/datasets/Salesforce___wikitext/wikitext-103-raw-v1/0.0.0/b08601e04326c79dfdd32d625aee71d232d685c3 (last modified on Mon Jul 20 06:52:28 2026).
+Loading weights:   0%|                                                       | 0/339 [00:00<?, ?it/s]Loading weights:  32%|█████████████▊                             | 109/339 [00:00<00:00, 1089.70it/s]Loading weights:  68%|█████████████████████████████▍             | 232/339 [00:00<00:00, 1148.55it/s]Loading weights: 100%|███████████████████████████████████████████| 339/339 [00:00<00:00, 1190.97it/s]
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[t2x] tgt=qwen     occ_gender           s1 self   <-qwen         removal=+0.6162
+[t2x] tgt=qwen     occ_gender           s1 sibling<-qwen_sib     removal=+0.7099
+[t2x] tgt=qwen     occ_gender           s1 cross  <-llama        removal=+0.6905
+[t2x] tgt=qwen     occ_gender           s1 cross  <-gemma        removal=+0.7069

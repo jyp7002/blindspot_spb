@@ -1,0 +1,1111 @@
+{
+ "alpha_extension": {
+  "_what": "sec 5.3's 'under aggressive alpha extension the gap shrinks to +0.096 and covers 0'",
+  "alphas_ever_probed": [
+   0.25,
+   0.5,
+   0.75,
+   1.0,
+   2.0,
+   4.0,
+   8.0,
+   16.0,
+   32.0,
+   64.0,
+   128.0
+  ],
+  "deployment_grid": [
+   2.0,
+   4.0,
+   8.0,
+   16.0
+  ],
+  "derivable": false,
+  "max_alpha": 128.0,
+  "n_trace_files_scanned": 28,
+  "what_IS_derivable": "the count of grid-capped C-a runs: 27 of 30 under v9 vs 26 of 30 as-run (see results/v10/dec_analysis_v9.json alpha_grid)",
+  "why_blocked": "no alpha above the grid maximum was ever probed, in any trace, anywhere in results/. The 'continuation' of grid-capped runs is therefore an extrapolation, not a measurement, and cannot be re-derived at any gate. It needs new GPU runs or it must leave the manuscript."
+ },
+ "artifact": "v10_regen_reclaim",
+ "c1_nulls": {
+  "_match_key": [
+   "target",
+   "axis",
+   "seed",
+   "designer",
+   "role"
+  ],
+  "_panels": [
+   [
+    "v6trace/mvb",
+    "v6trace/mvb_null_sign_shuffle",
+    "v6trace/mvb_null_partition"
+   ],
+   [
+    "v6trace/fxg",
+    "v6trace/fxnull_sign_shuffle",
+    "v6trace/fxnull_partition"
+   ],
+   [
+    "v6trace/ax",
+    "v6trace/ax_null_sign_shuffle",
+    "v6trace/ax_null_partition"
+   ],
+   [
+    "v6trace/ss",
+    "v6trace/ss_null_sign_shuffle",
+    "v6trace/ss_null_partition"
+   ]
+  ],
+  "_published_source": "src/method_evidence.py prints the sec 5.2 cells and the pooled +0.577 / +0.550 as HARDCODED literals; nothing computed them",
+  "_what": "sec 5.2 two-nulls table, re-derived under the v9 gate from re-scorable v6trace panels",
+  "per_cell": [
+   {
+    "axis": "crows_socioeconomic",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.0,
+    "panels": [
+     "v6trace/fxnull_partition",
+     "v6trace/fxnull_sign_shuffle",
+     "v6trace/mvb"
+    ],
+    "real": 0.0993952899016151,
+    "role": "same_large",
+    "target": "gemma"
+   },
+   {
+    "axis": "crows_socioeconomic",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.0,
+    "panels": [
+     "v6trace/fxnull_partition",
+     "v6trace/fxnull_sign_shuffle",
+     "v6trace/mvb"
+    ],
+    "real": 0.12279299525327458,
+    "role": "self",
+    "target": "gemma"
+   },
+   {
+    "axis": "occ_gender",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.12384670601983643,
+    "panels": [
+     "v6trace/fxnull_partition",
+     "v6trace/fxnull_sign_shuffle",
+     "v6trace/mvb"
+    ],
+    "real": 0.8419789954694638,
+    "role": "same_large",
+    "target": "gemma"
+   },
+   {
+    "axis": "occ_gender",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.08493239528913092,
+    "panels": [
+     "v6trace/fxnull_partition",
+     "v6trace/fxnull_sign_shuffle",
+     "v6trace/mvb"
+    ],
+    "real": 0.6740844999008093,
+    "role": "self",
+    "target": "gemma"
+   },
+   {
+    "axis": "bbq_Age",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": -0.0067813527756842755,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.34383538892303694,
+    "role": "self",
+    "target": "phi"
+   },
+   {
+    "axis": "bbq_Age",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.029013876206632983,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.31139181472253114,
+    "role": "cross",
+    "target": "phi"
+   },
+   {
+    "axis": "bbq_Gender_identity",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.08455712348585291,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.19775617360488632,
+    "role": "self",
+    "target": "phi"
+   },
+   {
+    "axis": "bbq_Gender_identity",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.06820113693710662,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.17103383396083713,
+    "role": "cross",
+    "target": "phi"
+   },
+   {
+    "axis": "bbq_Race_ethnicity",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.02759471275532484,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.27487605144664906,
+    "role": "self",
+    "target": "phi"
+   },
+   {
+    "axis": "bbq_Race_ethnicity",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": -0.04495540669038922,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.3091557549597817,
+    "role": "cross",
+    "target": "phi"
+   },
+   {
+    "axis": "bbq_Religion",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.014543439017401802,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.19993971665700275,
+    "role": "self",
+    "target": "phi"
+   },
+   {
+    "axis": "bbq_Religion",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.051991724967956544,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.24679750548468696,
+    "role": "cross",
+    "target": "phi"
+   },
+   {
+    "axis": "occ_gender",
+    "n_seeds": 15,
+    "null": "partition",
+    "null_value": 0.03151301986804834,
+    "panels": [
+     "v6trace/mvb",
+     "v6trace/mvb_null_partition",
+     "v6trace/mvb_null_sign_shuffle"
+    ],
+    "real": 0.6463142263033357,
+    "role": "cross_large",
+    "target": "phi"
+   },
+   {
+    "axis": "occ_gender",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.013629441658439934,
+    "panels": [
+     "v6trace/mvb",
+     "v6trace/mvb_null_partition",
+     "v6trace/mvb_null_sign_shuffle"
+    ],
+    "real": 0.31627045470506016,
+    "role": "self",
+    "target": "phi"
+   },
+   {
+    "axis": "ss_intra",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": -0.003277342732324736,
+    "panels": [
+     "v6trace/ss",
+     "v6trace/ss_null_partition",
+     "v6trace/ss_null_sign_shuffle"
+    ],
+    "real": 0.11416567715333586,
+    "role": "self",
+    "target": "phi"
+   },
+   {
+    "axis": "ss_intra",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": -0.0012481106199316954,
+    "panels": [
+     "v6trace/ss",
+     "v6trace/ss_null_partition",
+     "v6trace/ss_null_sign_shuffle"
+    ],
+    "real": 0.09915517021033086,
+    "role": "cross",
+    "target": "phi"
+   },
+   {
+    "axis": "bbq_Age",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.007793476616126893,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.262857885464378,
+    "role": "cross",
+    "target": "qwen"
+   },
+   {
+    "axis": "bbq_Age",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.023979388544524916,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.27700280210246203,
+    "role": "self",
+    "target": "qwen"
+   },
+   {
+    "axis": "bbq_Gender_identity",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": -0.05147164697484668,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.07037989217289464,
+    "role": "cross",
+    "target": "qwen"
+   },
+   {
+    "axis": "bbq_Gender_identity",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": -0.07788213999021952,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": -0.10159873266289703,
+    "role": "self",
+    "target": "qwen"
+   },
+   {
+    "axis": "bbq_Race_ethnicity",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.032816048032425306,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.22105837497486605,
+    "role": "cross",
+    "target": "qwen"
+   },
+   {
+    "axis": "bbq_Race_ethnicity",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": -0.011144454383385441,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.2301058877642156,
+    "role": "self",
+    "target": "qwen"
+   },
+   {
+    "axis": "bbq_Religion",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": -0.08112933185365463,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": -0.009518811437818742,
+    "role": "cross",
+    "target": "qwen"
+   },
+   {
+    "axis": "bbq_Religion",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.032380846606360536,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": -0.15460739188724096,
+    "role": "self",
+    "target": "qwen"
+   },
+   {
+    "axis": "crows_socioeconomic",
+    "n_seeds": 12,
+    "null": "partition",
+    "null_value": 0.003485001796899844,
+    "panels": [
+     "v6trace/mvb",
+     "v6trace/mvb_null_partition",
+     "v6trace/mvb_null_sign_shuffle"
+    ],
+    "real": 0.10670896301897924,
+    "role": "cross_large",
+    "target": "qwen"
+   },
+   {
+    "axis": "crows_socioeconomic",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.0,
+    "panels": [
+     "v6trace/mvb",
+     "v6trace/mvb_null_partition",
+     "v6trace/mvb_null_sign_shuffle"
+    ],
+    "real": -0.010976766431054394,
+    "role": "same_large",
+    "target": "qwen"
+   },
+   {
+    "axis": "crows_socioeconomic",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.007154489672461221,
+    "panels": [
+     "v6trace/mvb",
+     "v6trace/mvb_null_partition",
+     "v6trace/mvb_null_sign_shuffle"
+    ],
+    "real": -0.04746987098871274,
+    "role": "self",
+    "target": "qwen"
+   },
+   {
+    "axis": "occ_gender",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.09766315000411525,
+    "panels": [
+     "v6trace/fxnull_partition",
+     "v6trace/fxnull_sign_shuffle",
+     "v6trace/mvb"
+    ],
+    "real": 0.5823832279799898,
+    "role": "same_large",
+    "target": "qwen"
+   },
+   {
+    "axis": "occ_gender",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": 0.06799199412199641,
+    "panels": [
+     "v6trace/fxnull_partition",
+     "v6trace/fxnull_sign_shuffle",
+     "v6trace/mvb"
+    ],
+    "real": 0.37820130432499927,
+    "role": "self",
+    "target": "qwen"
+   },
+   {
+    "axis": "ss_intra",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": -0.013059049476811913,
+    "panels": [
+     "v6trace/ss",
+     "v6trace/ss_null_partition",
+     "v6trace/ss_null_sign_shuffle"
+    ],
+    "real": 0.15478556885980435,
+    "role": "cross",
+    "target": "qwen"
+   },
+   {
+    "axis": "ss_intra",
+    "n_seeds": 3,
+    "null": "partition",
+    "null_value": -0.007194947426588559,
+    "panels": [
+     "v6trace/ss",
+     "v6trace/ss_null_partition",
+     "v6trace/ss_null_sign_shuffle"
+    ],
+    "real": 0.12920046139457778,
+    "role": "self",
+    "target": "qwen"
+   },
+   {
+    "axis": "crows_socioeconomic",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": -0.001256764397140638,
+    "panels": [
+     "v6trace/fxnull_partition",
+     "v6trace/fxnull_sign_shuffle",
+     "v6trace/mvb"
+    ],
+    "real": 0.0993952899016151,
+    "role": "same_large",
+    "target": "gemma"
+   },
+   {
+    "axis": "crows_socioeconomic",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": -0.001017013261484558,
+    "panels": [
+     "v6trace/fxnull_partition",
+     "v6trace/fxnull_sign_shuffle",
+     "v6trace/mvb"
+    ],
+    "real": 0.12279299525327458,
+    "role": "self",
+    "target": "gemma"
+   },
+   {
+    "axis": "occ_gender",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.006716933863789872,
+    "panels": [
+     "v6trace/fxnull_partition",
+     "v6trace/fxnull_sign_shuffle",
+     "v6trace/mvb"
+    ],
+    "real": 0.8419789954694638,
+    "role": "same_large",
+    "target": "gemma"
+   },
+   {
+    "axis": "occ_gender",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.0034328771523116273,
+    "panels": [
+     "v6trace/fxnull_partition",
+     "v6trace/fxnull_sign_shuffle",
+     "v6trace/mvb"
+    ],
+    "real": 0.6740844999008093,
+    "role": "self",
+    "target": "gemma"
+   },
+   {
+    "axis": "bbq_Age",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.0001343396262846186,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.34383538892303694,
+    "role": "self",
+    "target": "phi"
+   },
+   {
+    "axis": "bbq_Age",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": -0.00018966802652329676,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.31139181472253114,
+    "role": "cross",
+    "target": "phi"
+   },
+   {
+    "axis": "bbq_Gender_identity",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": -0.0001763442426992353,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.19775617360488632,
+    "role": "self",
+    "target": "phi"
+   },
+   {
+    "axis": "bbq_Gender_identity",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": -5.515880538307464e-05,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.17103383396083713,
+    "role": "cross",
+    "target": "phi"
+   },
+   {
+    "axis": "bbq_Race_ethnicity",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": -0.00024901475066148776,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.27487605144664906,
+    "role": "self",
+    "target": "phi"
+   },
+   {
+    "axis": "bbq_Race_ethnicity",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": -6.551777401734664e-05,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.3091557549597817,
+    "role": "cross",
+    "target": "phi"
+   },
+   {
+    "axis": "bbq_Religion",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.0009996652603149563,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.19993971665700275,
+    "role": "self",
+    "target": "phi"
+   },
+   {
+    "axis": "bbq_Religion",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.00014263470967612601,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.24679750548468696,
+    "role": "cross",
+    "target": "phi"
+   },
+   {
+    "axis": "occ_gender",
+    "n_seeds": 15,
+    "null": "sign_shuffle",
+    "null_value": 0.001688188911796029,
+    "panels": [
+     "v6trace/mvb",
+     "v6trace/mvb_null_partition",
+     "v6trace/mvb_null_sign_shuffle"
+    ],
+    "real": 0.6463142263033357,
+    "role": "cross_large",
+    "target": "phi"
+   },
+   {
+    "axis": "occ_gender",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.0018770944555157598,
+    "panels": [
+     "v6trace/mvb",
+     "v6trace/mvb_null_partition",
+     "v6trace/mvb_null_sign_shuffle"
+    ],
+    "real": 0.31627045470506016,
+    "role": "self",
+    "target": "phi"
+   },
+   {
+    "axis": "ss_intra",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.0012901152338774906,
+    "panels": [
+     "v6trace/ss",
+     "v6trace/ss_null_partition",
+     "v6trace/ss_null_sign_shuffle"
+    ],
+    "real": 0.11416567715333586,
+    "role": "self",
+    "target": "phi"
+   },
+   {
+    "axis": "ss_intra",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.001320294656116559,
+    "panels": [
+     "v6trace/ss",
+     "v6trace/ss_null_partition",
+     "v6trace/ss_null_sign_shuffle"
+    ],
+    "real": 0.09915517021033086,
+    "role": "cross",
+    "target": "phi"
+   },
+   {
+    "axis": "bbq_Age",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.00216650098994157,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.262857885464378,
+    "role": "cross",
+    "target": "qwen"
+   },
+   {
+    "axis": "bbq_Age",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.0010883448780446743,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.27700280210246203,
+    "role": "self",
+    "target": "qwen"
+   },
+   {
+    "axis": "bbq_Gender_identity",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.0009316590580627088,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.07037989217289464,
+    "role": "cross",
+    "target": "qwen"
+   },
+   {
+    "axis": "bbq_Gender_identity",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.002293736859249667,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": -0.10159873266289703,
+    "role": "self",
+    "target": "qwen"
+   },
+   {
+    "axis": "bbq_Race_ethnicity",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.0007608263075376173,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.22105837497486605,
+    "role": "cross",
+    "target": "qwen"
+   },
+   {
+    "axis": "bbq_Race_ethnicity",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.0006565251003858666,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": 0.2301058877642156,
+    "role": "self",
+    "target": "qwen"
+   },
+   {
+    "axis": "bbq_Religion",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.00426815880669489,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": -0.009518811437818742,
+    "role": "cross",
+    "target": "qwen"
+   },
+   {
+    "axis": "bbq_Religion",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.0057515711254543704,
+    "panels": [
+     "v6trace/ax",
+     "v6trace/ax_null_partition",
+     "v6trace/ax_null_sign_shuffle"
+    ],
+    "real": -0.15460739188724096,
+    "role": "self",
+    "target": "qwen"
+   },
+   {
+    "axis": "crows_socioeconomic",
+    "n_seeds": 12,
+    "null": "sign_shuffle",
+    "null_value": 0.002480874227923024,
+    "panels": [
+     "v6trace/mvb",
+     "v6trace/mvb_null_partition",
+     "v6trace/mvb_null_sign_shuffle"
+    ],
+    "real": 0.10670896301897924,
+    "role": "cross_large",
+    "target": "qwen"
+   },
+   {
+    "axis": "crows_socioeconomic",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.0017402319945106308,
+    "panels": [
+     "v6trace/mvb",
+     "v6trace/mvb_null_partition",
+     "v6trace/mvb_null_sign_shuffle"
+    ],
+    "real": -0.010976766431054394,
+    "role": "same_large",
+    "target": "qwen"
+   },
+   {
+    "axis": "crows_socioeconomic",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.0013131374536558733,
+    "panels": [
+     "v6trace/mvb",
+     "v6trace/mvb_null_partition",
+     "v6trace/mvb_null_sign_shuffle"
+    ],
+    "real": -0.04746987098871274,
+    "role": "self",
+    "target": "qwen"
+   },
+   {
+    "axis": "occ_gender",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.005497821866203474,
+    "panels": [
+     "v6trace/fxnull_partition",
+     "v6trace/fxnull_sign_shuffle",
+     "v6trace/mvb"
+    ],
+    "real": 0.5823832279799898,
+    "role": "same_large",
+    "target": "qwen"
+   },
+   {
+    "axis": "occ_gender",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.004143079134214152,
+    "panels": [
+     "v6trace/fxnull_partition",
+     "v6trace/fxnull_sign_shuffle",
+     "v6trace/mvb"
+    ],
+    "real": 0.37820130432499927,
+    "role": "self",
+    "target": "qwen"
+   },
+   {
+    "axis": "ss_intra",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.0005985201820235911,
+    "panels": [
+     "v6trace/ss",
+     "v6trace/ss_null_partition",
+     "v6trace/ss_null_sign_shuffle"
+    ],
+    "real": 0.15478556885980435,
+    "role": "cross",
+    "target": "qwen"
+   },
+   {
+    "axis": "ss_intra",
+    "n_seeds": 3,
+    "null": "sign_shuffle",
+    "null_value": 0.000594903261233598,
+    "panels": [
+     "v6trace/ss",
+     "v6trace/ss_null_partition",
+     "v6trace/ss_null_sign_shuffle"
+    ],
+    "real": 0.12920046139457778,
+    "role": "self",
+    "target": "qwen"
+   }
+  ],
+  "pooled": {
+   "real_minus_partition [all_matched_cells]": {
+    "cell_unit": {
+     "hi": 0.32756014426106816,
+     "lo": 0.13847687047004742,
+     "n": 15,
+     "point": 0.22795870073412994,
+     "status": "excludes 0",
+     "text": "+0.2280 [+0.1385, +0.3276] (n=15, excludes 0)"
+    },
+    "sweep_unit": {
+     "hi": 0.28869532020551214,
+     "lo": 0.20253967327493627,
+     "n": 114,
+     "point": 0.24529970694833322,
+     "status": "excludes 0",
+     "text": "+0.2453 [+0.2025, +0.2887] (n=114, excludes 0)"
+    },
+    "unit_changes_status": false
+   },
+   "real_minus_partition [draft_table_cells]": {
+    "cell_unit": {
+     "hi": 0.7181322894496273,
+     "lo": 0.1032239612220794,
+     "n": 3,
+     "point": 0.46137691940296094,
+     "status": "excludes 0",
+     "text": "+0.4614 [+0.1032, +0.7181] (n=3, excludes 0)"
+    },
+    "sweep_unit": {
+     "hi": 0.5016615390419703,
+     "lo": 0.3190498006743127,
+     "n": 33,
+     "point": 0.40978865268736375,
+     "status": "excludes 0",
+     "text": "+0.4098 [+0.3190, +0.5017] (n=33, excludes 0)"
+    },
+    "unit_changes_status": false
+   },
+   "real_minus_sign_shuffle [all_matched_cells]": {
+    "cell_unit": {
+     "hi": 0.358883236364064,
+     "lo": 0.13947625901272473,
+     "n": 15,
+     "point": 0.24348252027953804,
+     "status": "excludes 0",
+     "text": "+0.2435 [+0.1395, +0.3589] (n=15, excludes 0)"
+    },
+    "sweep_unit": {
+     "hi": 0.30657687422665264,
+     "lo": 0.2144438207273821,
+     "n": 114,
+     "point": 0.26052016329969735,
+     "status": "excludes 0",
+     "text": "+0.2605 [+0.2144, +0.3066] (n=114, excludes 0)"
+    },
+    "unit_changes_status": false
+   },
+   "real_minus_sign_shuffle [draft_table_cells]": {
+    "cell_unit": {
+     "hi": 0.835262061605674,
+     "lo": 0.10422808879105622,
+     "n": 3,
+     "point": 0.5096924694215347,
+     "status": "excludes 0",
+     "text": "+0.5097 [+0.1042, +0.8353] (n=3, excludes 0)"
+    },
+    "sweep_unit": {
+     "hi": 0.5307099190826883,
+     "lo": 0.3389078496621241,
+     "n": 33,
+     "point": 0.4354270876342856,
+     "status": "excludes 0",
+     "text": "+0.4354 [+0.3389, +0.5307] (n=33, excludes 0)"
+    },
+    "unit_changes_status": false
+   }
+  }
+ },
+ "c2_sign_structure": {
+  "_gate": "v9 (results_v9/runs.jsonl carries v9_gate_mode)",
+  "_protocol": "Tq+k+v+o (frozen)",
+  "_what": "C2: real vs random-sign at matched scale and sparsity",
+  "cell_unit": {
+   "hi": 0.2128132561517952,
+   "lo": 0.04944526724515305,
+   "n": 44,
+   "point": 0.13544951400831165,
+   "status": "excludes 0",
+   "text": "+0.1354 [+0.0494, +0.2128] (n=44, excludes 0)"
+  },
+  "n_cells": 44,
+  "n_sweeps": 502,
+  "random_mean": 0.008713876900955896,
+  "real_mean": 0.22053213947470096,
+  "sweep_unit": {
+   "hi": 0.23598291052025244,
+   "lo": 0.1877762451439032,
+   "n": 502,
+   "point": 0.21181826257374506,
+   "status": "excludes 0",
+   "text": "+0.2118 [+0.1878, +0.2360] (n=502, excludes 0)"
+  },
+  "unit_changes_status": false
+ },
+ "c3_binarization": {
+  "_gate": "v9",
+  "_pairing": "same (target, axis, seed, designer) row, variant is the only difference",
+  "_source": [
+   "results_v9/v6trace/ablate (<=3.8B, 4 targets)",
+   "results_v9/v6trace/ablate_big (7-9B, 2 targets)"
+  ],
+  "_what": "C3: binarization vs full precision, paired on identical dW",
+  "tiers": {
+   "big": {
+    "binary_mean": 0.3224922588582872,
+    "cell_unit": {
+     "hi": -0.0015206549518792236,
+     "lo": -0.0102812037730783,
+     "n": 4,
+     "point": -0.005062901440553089,
+     "status": "excludes 0",
+     "text": "-0.0051 [-0.0103, -0.0015] (n=4, excludes 0)"
+    },
+    "fp_mean": 0.32755516029884024,
+    "n_cells": 4,
+    "n_sweeps": 24,
+    "panel": "v6trace/ablate_big",
+    "retention_pct": 98.45433622967992,
+    "sweep_unit": {
+     "hi": 0.005487367474407208,
+     "lo": -0.01719635877037057,
+     "n": 24,
+     "point": -0.005062901440553103,
+     "status": "covers 0",
+     "text": "-0.0051 [-0.0172, +0.0055] (n=24, covers 0)"
+    },
+    "targets": [
+     "llama",
+     "qwen"
+    ],
+    "unit_changes_status": true
+   },
+   "small": {
+    "binary_mean": 0.26193714923940625,
+    "cell_unit": {
+     "hi": 0.007415522406715301,
+     "lo": -0.0934289654642525,
+     "n": 8,
+     "point": -0.039845986868026984,
+     "status": "covers 0",
+     "text": "-0.0398 [-0.0934, +0.0074] (n=8, covers 0)"
+    },
+    "fp_mean": 0.3017831361074332,
+    "n_cells": 8,
+    "n_sweeps": 48,
+    "panel": "v6trace/ablate",
+    "retention_pct": 86.79648326875298,
+    "sweep_unit": {
+     "hi": -0.004611627305796798,
+     "lo": -0.08036162783963056,
+     "n": 48,
+     "point": -0.03984598686802697,
+     "status": "excludes 0",
+     "text": "-0.0398 [-0.0804, -0.0046] (n=48, excludes 0)"
+    },
+    "targets": [
+     "gemma",
+     "llama",
+     "phi",
+     "qwen"
+    ],
+    "unit_changes_status": true
+   }
+  }
+ },
+ "module": "src/v10_regen_reclaim.py",
+ "purpose": "derive the audit's as-run-only blockers from data already on disk, under the v9 gate, with no new compute",
+ "resampling_unit_note": "both units reported. method_evidence.py bootstraps the SWEEP; the project convention for every registered v9 estimand is the target x axis CELL. v5 banned per-seed pooling as anti-conservative, so cite the cell unit."
+}

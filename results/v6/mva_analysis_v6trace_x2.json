@@ -1,0 +1,848 @@
+{
+  "source_trace": "results/v6trace/x2/alpha_trace.jsonl",
+  "panel": "x2",
+  "strict_budget": {
+    "dmmlu": 0.02,
+    "pplr": 1.1,
+    "source": "colab_t2t4.collateral_ok"
+  },
+  "degen_pplr": 1.5,
+  "ref_removal": [
+    0.3,
+    0.4,
+    0.5,
+    0.6
+  ],
+  "n_alpha_evals": 432,
+  "n_sweeps": 108,
+  "n_cells": 6,
+  "n_duplicate_rows_dropped": 0,
+  "faithful": {
+    "checked": 108,
+    "mismatches": 0
+  },
+  "underpowered": false,
+  "underpowered_note": null,
+  "mv_a1": {
+    "levels": [
+      {
+        "level": "strict",
+        "dmmlu": 0.02,
+        "pplr": 1.1,
+        "cross_minus_self": [
+          0.02584521736363932,
+          -0.0926492111616944,
+          0.156525358083495
+        ],
+        "cross_minus_same": [
+          0.02584521736363932,
+          -0.09117193530797814,
+          0.15515874806488608
+        ],
+        "per_cell": [
+          {
+            "cell": "gemma|crows_socioeconomic",
+            "self": 0.12279299525327458,
+            "sibling": null,
+            "same": 0.12279299525327458,
+            "cross": 0.04102878736895183,
+            "cross_minus_self": -0.08176420788432276,
+            "cross_minus_same": -0.08176420788432276,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "gemma|occ_gender",
+            "self": 0.6740844999008093,
+            "sibling": null,
+            "same": 0.6740844999008093,
+            "cross": 0.49964878839631044,
+            "cross_minus_self": -0.17443571150449888,
+            "cross_minus_same": -0.17443571150449888,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "granite|crows_socioeconomic",
+            "self": 0.055320041124210816,
+            "sibling": null,
+            "same": 0.055320041124210816,
+            "cross": 0.009780972318131801,
+            "cross_minus_self": -0.04553906880607901,
+            "cross_minus_same": -0.04553906880607901,
+            "n_budget_fail": 6,
+            "fails": {
+              "self": 1,
+              "sibling": 0,
+              "cross": 5
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "granite|occ_gender",
+            "self": 0.0,
+            "sibling": null,
+            "same": 0.0,
+            "cross": 0.16703483458820706,
+            "cross_minus_self": 0.16703483458820706,
+            "cross_minus_same": 0.16703483458820706,
+            "n_budget_fail": 12,
+            "fails": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 9
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "phi|crows_socioeconomic",
+            "self": 0.04590758889220481,
+            "sibling": null,
+            "same": 0.04590758889220481,
+            "cross": 0.04795122950576072,
+            "cross_minus_self": 0.0020436406135559138,
+            "cross_minus_same": 0.0020436406135559138,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "phi|occ_gender",
+            "self": 0.3197072989477247,
+            "sibling": null,
+            "same": 0.3197072989477247,
+            "cross": 0.6074391161226983,
+            "cross_minus_self": 0.2877318171749736,
+            "cross_minus_same": 0.2877318171749736,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          }
+        ]
+      },
+      {
+        "level": "x1.5",
+        "dmmlu": 0.03,
+        "pplr": 1.1500000000000001,
+        "cross_minus_self": [
+          0.02487844005610317,
+          -0.0658015420723609,
+          0.1337853145189462
+        ],
+        "cross_minus_same": [
+          0.02487844005610317,
+          -0.06225448831355546,
+          0.13389131475037042
+        ],
+        "per_cell": [
+          {
+            "cell": "gemma|crows_socioeconomic",
+            "self": 0.1391182259995808,
+            "sibling": null,
+            "same": 0.1391182259995808,
+            "cross": 0.0419385370358016,
+            "cross_minus_self": -0.09717968896377918,
+            "cross_minus_same": -0.09717968896377918,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "gemma|occ_gender",
+            "self": 0.766612009886669,
+            "sibling": null,
+            "same": 0.766612009886669,
+            "cross": 0.6949650682561982,
+            "cross_minus_self": -0.0716469416304708,
+            "cross_minus_same": -0.0716469416304708,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "granite|crows_socioeconomic",
+            "self": 0.04801576544148054,
+            "sibling": null,
+            "same": 0.04801576544148054,
+            "cross": 0.006671396151993635,
+            "cross_minus_self": -0.041344369289486906,
+            "cross_minus_same": -0.041344369289486906,
+            "n_budget_fail": 3,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 3
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "granite|occ_gender",
+            "self": 0.19394261711957514,
+            "sibling": null,
+            "same": 0.19394261711957514,
+            "cross": 0.3135444967301787,
+            "cross_minus_self": 0.11960187961060356,
+            "cross_minus_same": 0.11960187961060356,
+            "n_budget_fail": 7,
+            "fails": {
+              "self": 2,
+              "sibling": 0,
+              "cross": 5
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "phi|crows_socioeconomic",
+            "self": 0.07092907539633816,
+            "sibling": null,
+            "same": 0.07092907539633816,
+            "cross": 0.05299224104992177,
+            "cross_minus_self": -0.017936834346416394,
+            "cross_minus_same": -0.017936834346416394,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "phi|occ_gender",
+            "self": 0.3726091406293162,
+            "sibling": null,
+            "same": 0.3726091406293162,
+            "cross": 0.6303857355854849,
+            "cross_minus_self": 0.2577765949561687,
+            "cross_minus_same": 0.2577765949561687,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          }
+        ]
+      },
+      {
+        "level": "x2",
+        "dmmlu": 0.04,
+        "pplr": 1.2000000000000002,
+        "cross_minus_self": [
+          0.05983222233698473,
+          -0.06714008063055855,
+          0.18722490609783826
+        ],
+        "cross_minus_same": [
+          0.05983222233698473,
+          -0.0657086465074009,
+          0.18722490609783826
+        ],
+        "per_cell": [
+          {
+            "cell": "gemma|crows_socioeconomic",
+            "self": 0.1391182259995808,
+            "sibling": null,
+            "same": 0.1391182259995808,
+            "cross": 0.0419385370358016,
+            "cross_minus_self": -0.09717968896377918,
+            "cross_minus_same": -0.09717968896377918,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "gemma|occ_gender",
+            "self": 0.766612009886669,
+            "sibling": null,
+            "same": 0.766612009886669,
+            "cross": 0.7084530771161995,
+            "cross_minus_self": -0.05815893277046946,
+            "cross_minus_same": -0.05815893277046946,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "granite|crows_socioeconomic",
+            "self": 0.07387883071751558,
+            "sibling": null,
+            "same": 0.07387883071751558,
+            "cross": 0.007131293208100084,
+            "cross_minus_self": -0.06674753750941549,
+            "cross_minus_same": -0.06674753750941549,
+            "n_budget_fail": 3,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 3
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "granite|occ_gender",
+            "self": 0.19394261711957514,
+            "sibling": null,
+            "same": 0.19394261711957514,
+            "cross": 0.4941570551655384,
+            "cross_minus_self": 0.30021443804596326,
+            "cross_minus_same": 0.30021443804596326,
+            "n_budget_fail": 3,
+            "fails": {
+              "self": 2,
+              "sibling": 0,
+              "cross": 1
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "phi|crows_socioeconomic",
+            "self": 0.07092907539633816,
+            "sibling": null,
+            "same": 0.07092907539633816,
+            "cross": 0.05410197732984557,
+            "cross_minus_self": -0.016827098066492595,
+            "cross_minus_same": -0.016827098066492595,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "phi|occ_gender",
+            "self": 0.3726091406293162,
+            "sibling": null,
+            "same": 0.3726091406293162,
+            "cross": 0.670301293915418,
+            "cross_minus_self": 0.2976921532861018,
+            "cross_minus_same": 0.2976921532861018,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          }
+        ]
+      },
+      {
+        "level": "unconstrained",
+        "dmmlu": null,
+        "pplr": null,
+        "cross_minus_self": [
+          0.04732456087280464,
+          -0.026790431401559314,
+          0.16281412976482604
+        ],
+        "cross_minus_same": [
+          0.04732456087280464,
+          -0.026790431401559314,
+          0.16263940129419674
+        ],
+        "per_cell": [
+          {
+            "cell": "gemma|crows_socioeconomic",
+            "self": 0.16121784661167352,
+            "sibling": null,
+            "same": 0.16121784661167352,
+            "cross": 0.12748968859975648,
+            "cross_minus_self": -0.03372815801191703,
+            "cross_minus_same": -0.03372815801191703,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "gemma|occ_gender",
+            "self": 0.7728891283567122,
+            "sibling": null,
+            "same": 0.7728891283567122,
+            "cross": 0.8280574155317847,
+            "cross_minus_self": 0.055168287175072495,
+            "cross_minus_same": 0.055168287175072495,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "granite|crows_socioeconomic",
+            "self": 0.13894934894502628,
+            "sibling": null,
+            "same": 0.13894934894502628,
+            "cross": 0.13698127380637234,
+            "cross_minus_self": -0.0019680751386539352,
+            "cross_minus_same": -0.0019680751386539352,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "granite|occ_gender",
+            "self": 0.8872104323621911,
+            "sibling": null,
+            "same": 0.8872104323621911,
+            "cross": 0.8677402145278457,
+            "cross_minus_self": -0.019470217834345438,
+            "cross_minus_same": -0.019470217834345438,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "phi|crows_socioeconomic",
+            "self": 0.1113075433775436,
+            "sibling": null,
+            "same": 0.1113075433775436,
+            "cross": 0.07538355367128238,
+            "cross_minus_self": -0.03592398970626122,
+            "cross_minus_same": -0.03592398970626122,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          },
+          {
+            "cell": "phi|occ_gender",
+            "self": 0.3726091406293162,
+            "sibling": null,
+            "same": 0.3726091406293162,
+            "cross": 0.6924786593822492,
+            "cross_minus_self": 0.31986951875293296,
+            "cross_minus_same": 0.31986951875293296,
+            "n_budget_fail": 0,
+            "fails": {
+              "self": 0,
+              "sibling": 0,
+              "cross": 0
+            },
+            "n_sweeps": {
+              "self": 3,
+              "sibling": 0,
+              "cross": 15
+            }
+          }
+        ]
+      }
+    ],
+    "cells": [
+      "gemma|crows_socioeconomic",
+      "gemma|occ_gender",
+      "granite|crows_socioeconomic",
+      "granite|occ_gender",
+      "phi|crows_socioeconomic",
+      "phi|occ_gender"
+    ],
+    "monotone": false
+  },
+  "mv_a2": {
+    "frontier": [
+      {
+        "ref_removal": 0.3,
+        "self_minus_cross": [
+          0.020897386007170244,
+          -0.036991249444578544,
+          0.10133760854997198
+        ],
+        "same_minus_cross": [
+          0.020897386007170244,
+          -0.036991249444578544,
+          0.10133760854997198
+        ],
+        "per_cell": [
+          {
+            "cell": "gemma|occ_gender",
+            "self": 1.0059135242370367,
+            "sibling": null,
+            "same": 1.0059135242370367,
+            "cross": 1.0429047736816153,
+            "self_minus_cross": -0.036991249444578544,
+            "same_minus_cross": -0.036991249444578544
+          },
+          {
+            "cell": "granite|occ_gender",
+            "self": 1.236536500419724,
+            "sibling": null,
+            "same": 1.236536500419724,
+            "cross": 1.135198891869752,
+            "self_minus_cross": 0.10133760854997198,
+            "same_minus_cross": 0.10133760854997198
+          },
+          {
+            "cell": "phi|occ_gender",
+            "self": 1.0134716325541178,
+            "sibling": null,
+            "same": 1.0134716325541178,
+            "cross": 1.0151258336380005,
+            "self_minus_cross": -0.0016542010838827004,
+            "same_minus_cross": -0.0016542010838827004
+          }
+        ]
+      },
+      {
+        "ref_removal": 0.4,
+        "self_minus_cross": [
+          0.013648746974126732,
+          -0.03253992554897489,
+          0.09391982937758625
+        ],
+        "same_minus_cross": [
+          0.013648746974126732,
+          -0.03253992554897489,
+          0.09391982937758625
+        ],
+        "per_cell": [
+          {
+            "cell": "gemma|occ_gender",
+            "self": 1.0189453187009418,
+            "sibling": null,
+            "same": 1.0189453187009418,
+            "cross": 1.0514852442499167,
+            "self_minus_cross": -0.03253992554897489,
+            "same_minus_cross": -0.03253992554897489
+          },
+          {
+            "cell": "granite|occ_gender",
+            "self": 1.236536500419724,
+            "sibling": null,
+            "same": 1.236536500419724,
+            "cross": 1.1426166710421377,
+            "self_minus_cross": 0.09391982937758625,
+            "same_minus_cross": 0.09391982937758625
+          },
+          {
+            "cell": "phi|occ_gender",
+            "self": 1.0072069703574664,
+            "sibling": null,
+            "same": 1.0072069703574664,
+            "cross": 1.0276406332636976,
+            "self_minus_cross": -0.020433662906231165,
+            "same_minus_cross": -0.020433662906231165
+          }
+        ]
+      },
+      {
+        "ref_removal": 0.5,
+        "self_minus_cross": [
+          0.006137983765998389,
+          -0.04578441863035687,
+          0.05806038616235365
+        ],
+        "same_minus_cross": [
+          0.006137983765998389,
+          -0.04578441863035687,
+          0.05806038616235365
+        ],
+        "per_cell": [
+          {
+            "cell": "gemma|occ_gender",
+            "self": 1.0189453187009418,
+            "sibling": null,
+            "same": 1.0189453187009418,
+            "cross": 1.0647297373312987,
+            "self_minus_cross": -0.04578441863035687,
+            "same_minus_cross": -0.04578441863035687
+          },
+          {
+            "cell": "granite|occ_gender",
+            "self": 1.236536500419724,
+            "sibling": null,
+            "same": 1.236536500419724,
+            "cross": 1.1784761142573703,
+            "self_minus_cross": 0.05806038616235365,
+            "same_minus_cross": 0.05806038616235365
+          }
+        ]
+      },
+      {
+        "ref_removal": 0.6,
+        "self_minus_cross": [
+          0.03575730506763897,
+          -0.04244539247211687,
+          0.1139600026073948
+        ],
+        "same_minus_cross": [
+          0.03575730506763897,
+          -0.04244539247211687,
+          0.1139600026073948
+        ],
+        "per_cell": [
+          {
+            "cell": "gemma|occ_gender",
+            "self": 1.0623741541272558,
+            "sibling": null,
+            "same": 1.0623741541272558,
+            "cross": 1.1048195465993726,
+            "self_minus_cross": -0.04244539247211687,
+            "same_minus_cross": -0.04244539247211687
+          },
+          {
+            "cell": "granite|occ_gender",
+            "self": 1.3157256854878898,
+            "sibling": null,
+            "same": 1.3157256854878898,
+            "cross": 1.201765682880495,
+            "self_minus_cross": 0.1139600026073948,
+            "same_minus_cross": 0.1139600026073948
+          }
+        ]
+      }
+    ],
+    "ceiling": {
+      "per_cell": [
+        {
+          "cell": "gemma|crows_socioeconomic",
+          "role": "self",
+          "in_budget": 0.12279299525327458,
+          "free": 0.16121784661167352,
+          "deficit": 0.03842485135839893
+        },
+        {
+          "cell": "gemma|crows_socioeconomic",
+          "role": "cross",
+          "in_budget": 0.04102878736895183,
+          "free": 0.06786004554393678,
+          "deficit": 0.026831258174984947
+        },
+        {
+          "cell": "gemma|occ_gender",
+          "role": "self",
+          "in_budget": 0.6740844999008093,
+          "free": 0.7728891283567122,
+          "deficit": 0.09880462845590288
+        },
+        {
+          "cell": "gemma|occ_gender",
+          "role": "cross",
+          "in_budget": 0.49964878839631044,
+          "free": 0.7513067458645655,
+          "deficit": 0.25165795746825503
+        },
+        {
+          "cell": "granite|crows_socioeconomic",
+          "role": "self",
+          "in_budget": 0.055320041124210816,
+          "free": 0.07387883071751558,
+          "deficit": 0.018558789593304766
+        },
+        {
+          "cell": "granite|crows_socioeconomic",
+          "role": "cross",
+          "in_budget": 0.009780972318131801,
+          "free": 0.057028261820475275,
+          "deficit": 0.04724728950234347
+        },
+        {
+          "cell": "granite|occ_gender",
+          "role": "self",
+          "in_budget": 0.0,
+          "free": 0.8531779114862289,
+          "deficit": 0.8531779114862289
+        },
+        {
+          "cell": "granite|occ_gender",
+          "role": "cross",
+          "in_budget": 0.16703483458820706,
+          "free": 0.5964043599072041,
+          "deficit": 0.429369525318997
+        },
+        {
+          "cell": "phi|crows_socioeconomic",
+          "role": "self",
+          "in_budget": 0.04590758889220481,
+          "free": 0.08673810681631398,
+          "deficit": 0.040830517924109175
+        },
+        {
+          "cell": "phi|crows_socioeconomic",
+          "role": "cross",
+          "in_budget": 0.04795122950576072,
+          "free": 0.05499615678491518,
+          "deficit": 0.007044927279154456
+        },
+        {
+          "cell": "phi|occ_gender",
+          "role": "self",
+          "in_budget": 0.3197072989477247,
+          "free": 0.3726091406293162,
+          "deficit": 0.05290184168159151
+        },
+        {
+          "cell": "phi|occ_gender",
+          "role": "cross",
+          "in_budget": 0.6074391161226983,
+          "free": 0.6878333216431929,
+          "deficit": 0.08039420552049459
+        }
+      ],
+      "summary": {
+        "self": [
+          0.183783090083256,
+          0.03461660691818468,
+          0.45496649903158093
+        ],
+        "cross": [
+          0.14042419387737157,
+          0.03479240850890625,
+          0.27123034206333646
+        ],
+        "self_minus_cross": [
+          0.04335889620588445,
+          -0.06994621760936429,
+          0.20817164756645143
+        ]
+      }
+    }
+  },
+  "boot": 10000,
+  "boot_seed": 0
+}

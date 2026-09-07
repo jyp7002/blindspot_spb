@@ -1,0 +1,377 @@
+{
+  "v1_gate": {
+    "cells": [
+      {
+        "target": "falcon",
+        "axis": "occ_gender",
+        "self": 0.5434172889042712,
+        "same_large": 0.5657927934171719,
+        "cross_mean": 0.5803027087677025,
+        "delta_sL_minus_cross": -0.014509915350530589,
+        "n_seed": 3,
+        "n_nan": 0
+      },
+      {
+        "target": "falcon",
+        "axis": "crows_socioeconomic",
+        "self": 0.0943171599114588,
+        "same_large": 0.05055320817370745,
+        "cross_mean": 0.03480365572049634,
+        "delta_sL_minus_cross": 0.015749552453211114,
+        "n_seed": 3,
+        "n_nan": 0
+      },
+      {
+        "target": "olmo",
+        "axis": "occ_gender",
+        "self": 0.7920627565555779,
+        "same_large": 0.822380623842451,
+        "cross_mean": 0.7777344979590417,
+        "delta_sL_minus_cross": 0.04464612588340933,
+        "n_seed": 3,
+        "n_nan": 0
+      },
+      {
+        "target": "olmo",
+        "axis": "crows_socioeconomic",
+        "self": 0.1021718202635299,
+        "same_large": -0.006407707236533962,
+        "cross_mean": 0.06621613816697466,
+        "delta_sL_minus_cross": -0.07262384540350862,
+        "n_seed": 3,
+        "n_nan": 0
+      },
+      {
+        "target": "qwen",
+        "axis": "occ_gender",
+        "self": 0.6117704441923105,
+        "same_large": 0.6920385767432752,
+        "cross_mean": 0.6604648762250098,
+        "delta_sL_minus_cross": 0.03157370051826536,
+        "n_seed": 3,
+        "n_nan": 0
+      },
+      {
+        "target": "qwen",
+        "axis": "crows_socioeconomic",
+        "self": 0.06395936058473217,
+        "same_large": 0.1801232607789742,
+        "cross_mean": 0.08960333646729936,
+        "delta_sL_minus_cross": 0.09051992431167484,
+        "n_seed": 3,
+        "n_nan": 0
+      }
+    ],
+    "delta_mean": 0.015892590402086904,
+    "delta_ci": [
+      -0.026061907099985366,
+      0.05512129645446479
+    ],
+    "covers_zero": true,
+    "verdict": "V1-a -> ABSTRACT A",
+    "selfsl_mean": -0.016130320884527555,
+    "selfsl_ci": [
+      -0.07293584575270247,
+      0.04354330498969475
+    ],
+    "max_seeds": 3
+  },
+  "t2x_headline": {
+    "occ_gender": {
+      "cross_minus_self": [
+        -0.009957193135175929,
+        -0.045943079631176914,
+        0.03316458917311388
+      ],
+      "cross_minus_same": [
+        0.06356578568616858,
+        -0.005000763801252639,
+        0.1321323351735898
+      ],
+      "per_target": [
+        {
+          "target": "gemma",
+          "self": 0.8038910856679164,
+          "same": 0.6554304159685639,
+          "cross": 0.791530642524756,
+          "cross_minus_self": -0.012360443143160427,
+          "cross_minus_same": 0.13610022655619214,
+          "n_nan": 0
+        },
+        {
+          "target": "llama",
+          "self": 0.7393867884514456,
+          "same": 0.554085052866609,
+          "cross": 0.6822494966575965,
+          "cross_minus_self": -0.057137291793849077,
+          "cross_minus_same": 0.12816444379098746,
+          "n_nan": 0
+        },
+        {
+          "target": "olmo",
+          "self": 0.7920627565555779,
+          "same": 0.7756231625047628,
+          "cross": 0.7702370218038088,
+          "cross_minus_self": -0.021825734751769077,
+          "cross_minus_same": -0.005386140700954001,
+          "n_nan": 0
+        },
+        {
+          "target": "qwen",
+          "self": 0.6117704441923105,
+          "same": 0.6678805282419367,
+          "cross": 0.6632651413403854,
+          "cross_minus_self": 0.051494697148074864,
+          "cross_minus_same": -0.004615386901551277,
+          "n_nan": 0
+        }
+      ]
+    },
+    "crows_socioeconomic": {
+      "cross_minus_self": [
+        -0.03185318277556766,
+        -0.0770539326607719,
+        0.011073612658552431
+      ],
+      "cross_minus_same": [
+        -0.017022977850233857,
+        -0.08003979569026667,
+        0.03755010635584827
+      ],
+      "per_target": [
+        {
+          "target": "gemma",
+          "self": 0.14280867114547613,
+          "same": 0.14958283466886182,
+          "cross": 0.038386820360671654,
+          "cross_minus_self": -0.10442185078480448,
+          "cross_minus_same": -0.11119601430819018,
+          "n_nan": 0
+        },
+        {
+          "target": "llama",
+          "self": 0.044781142427015676,
+          "same": 0.03640210397483767,
+          "cross": 0.0498309641383415,
+          "cross_minus_self": 0.005049821711325828,
+          "cross_minus_same": 0.013428860163503836,
+          "n_nan": 1
+        },
+        {
+          "target": "olmo",
+          "self": 0.1021718202635299,
+          "same": 0.08762106322502901,
+          "cross": 0.05703371462895887,
+          "cross_minus_self": -0.04513810563457103,
+          "cross_minus_same": -0.030587348596070138,
+          "n_nan": 0
+        },
+        {
+          "target": "qwen",
+          "self": 0.06395936058473217,
+          "same": 0.020794172850690146,
+          "cross": 0.08105676419051121,
+          "cross_minus_self": 0.017097403605779035,
+          "cross_minus_same": 0.060262591339821064,
+          "n_nan": 0
+        }
+      ]
+    }
+  },
+  "x_bridge": [
+    {
+      "target": "granite",
+      "size_b": 2.5,
+      "axis": "occ_gender",
+      "x3b_cross_minus_self": 0.1670348345882071,
+      "x3b_ci": [
+        0.09006564532224319,
+        0.23023870957757916
+      ],
+      "n_seed": 3,
+      "self_nan": 3,
+      "self_n": 3,
+      "fragile": true,
+      "sevenB_cross_minus_self": null,
+      "regime_3b": "penalty"
+    },
+    {
+      "target": "granite",
+      "size_b": 2.5,
+      "axis": "crows_socioeconomic",
+      "x3b_cross_minus_self": -0.04553906880607902,
+      "x3b_ci": [
+        -0.1071231708970181,
+        0.04936008176138237
+      ],
+      "n_seed": 3,
+      "self_nan": 1,
+      "self_n": 3,
+      "fragile": false,
+      "sevenB_cross_minus_self": null,
+      "regime_3b": "tie"
+    },
+    {
+      "target": "gemma",
+      "size_b": 2.6,
+      "axis": "occ_gender",
+      "x3b_cross_minus_self": -0.17443571150449877,
+      "x3b_ci": [
+        -0.3381627134772605,
+        -0.007364584588949619
+      ],
+      "n_seed": 3,
+      "self_nan": 0,
+      "self_n": 3,
+      "fragile": false,
+      "sevenB_cross_minus_self": -0.012360443143160427,
+      "regime_3b": "self-adv"
+    },
+    {
+      "target": "gemma",
+      "size_b": 2.6,
+      "axis": "crows_socioeconomic",
+      "x3b_cross_minus_self": -0.08176420788432277,
+      "x3b_ci": [
+        -0.12504913363345835,
+        -0.05407941175061603
+      ],
+      "n_seed": 3,
+      "self_nan": 0,
+      "self_n": 3,
+      "fragile": false,
+      "sevenB_cross_minus_self": -0.10442185078480448,
+      "regime_3b": "self-adv"
+    },
+    {
+      "target": "qwen",
+      "size_b": 3.1,
+      "axis": "occ_gender",
+      "x3b_cross_minus_self": 0.051034855238453414,
+      "x3b_ci": [
+        -0.12441665908919874,
+        0.16236431519007233
+      ],
+      "n_seed": 3,
+      "self_nan": 0,
+      "self_n": 3,
+      "fragile": false,
+      "sevenB_cross_minus_self": 0.051494697148074864,
+      "regime_3b": "tie"
+    },
+    {
+      "target": "qwen",
+      "size_b": 3.1,
+      "axis": "crows_socioeconomic",
+      "x3b_cross_minus_self": 0.2268690134203711,
+      "x3b_ci": [
+        0.15176845151324603,
+        0.27962442885997685
+      ],
+      "n_seed": 3,
+      "self_nan": 0,
+      "self_n": 3,
+      "fragile": false,
+      "sevenB_cross_minus_self": 0.017097403605779035,
+      "regime_3b": "penalty"
+    },
+    {
+      "target": "falcon",
+      "size_b": 3.2,
+      "axis": "occ_gender",
+      "x3b_cross_minus_self": 0.26423179036069694,
+      "x3b_ci": [
+        0.16432734086701262,
+        0.43200177578424376
+      ],
+      "n_seed": 3,
+      "self_nan": 1,
+      "self_n": 3,
+      "fragile": false,
+      "sevenB_cross_minus_self": 0.0368854198634313,
+      "regime_3b": "penalty"
+    },
+    {
+      "target": "falcon",
+      "size_b": 3.2,
+      "axis": "crows_socioeconomic",
+      "x3b_cross_minus_self": -0.06473389522049777,
+      "x3b_ci": [
+        -0.07953001038972721,
+        -0.054032684758652104
+      ],
+      "n_seed": 3,
+      "self_nan": 0,
+      "self_n": 3,
+      "fragile": false,
+      "sevenB_cross_minus_self": -0.059513504190962456,
+      "regime_3b": "self-adv"
+    },
+    {
+      "target": "llama",
+      "size_b": 3.2,
+      "axis": "occ_gender",
+      "x3b_cross_minus_self": -0.05000585124334955,
+      "x3b_ci": [
+        -0.07832807502768835,
+        -0.015211098399962153
+      ],
+      "n_seed": 3,
+      "self_nan": 0,
+      "self_n": 3,
+      "fragile": false,
+      "sevenB_cross_minus_self": -0.057137291793849077,
+      "regime_3b": "self-adv"
+    },
+    {
+      "target": "llama",
+      "size_b": 3.2,
+      "axis": "crows_socioeconomic",
+      "x3b_cross_minus_self": -0.006383897260177966,
+      "x3b_ci": [
+        -0.015381139378214989,
+        0.004562308621961025
+      ],
+      "n_seed": 3,
+      "self_nan": 0,
+      "self_n": 3,
+      "fragile": false,
+      "sevenB_cross_minus_self": 0.005049821711325828,
+      "regime_3b": "tie"
+    },
+    {
+      "target": "phi",
+      "size_b": 3.8,
+      "axis": "occ_gender",
+      "x3b_cross_minus_self": 0.2877318171749736,
+      "x3b_ci": [
+        0.21901686945081356,
+        0.361665273535919
+      ],
+      "n_seed": 3,
+      "self_nan": 0,
+      "self_n": 3,
+      "fragile": false,
+      "sevenB_cross_minus_self": null,
+      "regime_3b": "penalty"
+    },
+    {
+      "target": "phi",
+      "size_b": 3.8,
+      "axis": "crows_socioeconomic",
+      "x3b_cross_minus_self": 0.0020436406135559116,
+      "x3b_ci": [
+        -0.015387440282245007,
+        0.013456233712129811
+      ],
+      "n_seed": 3,
+      "self_nan": 0,
+      "self_n": 3,
+      "fragile": false,
+      "sevenB_cross_minus_self": null,
+      "regime_3b": "tie"
+    }
+  ],
+  "boot": 10000,
+  "boot_seed": 0
+}

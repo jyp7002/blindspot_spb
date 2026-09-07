@@ -1,0 +1,68 @@
+record_type,key,target,axis,axis_family,split,marker,fill_role,outline_role,pre_skew,removal,backfire,n_obs,n_seed,n_budget_fail,is_non_measurement,panels,contrast_gap,stat,value,ci_lo,ci_hi,n,note
+cell,qwen|crows_gender,qwen,crows_gender,CrowS,calibration,s,backfire,calibration_none,-0.001062,-0.003518,True,3,3,0,False,axes,-0.005089,,,,,,
+cell,qwen|crows_race-color,qwen,crows_race-color,CrowS,calibration,s,backfire,calibration_none,0.027360,-0.081558,True,3,3,0,False,axes,-0.032300,,,,,,
+cell,phi|crows_gender,phi,crows_gender,CrowS,calibration,s,measured,calibration_none,0.098171,0.013686,False,3,3,0,False,axes,-0.050891,,,,,,
+cell,qwen|bbq_Gender_identity,qwen,bbq_Gender_identity,BBQ,calibration,o,backfire,calibration_none,0.101925,-0.101599,True,3,3,0,False,ax,0.075426,,,,,,
+cell,phi|crows_race-color,phi,crows_race-color,CrowS,calibration,s,measured,calibration_none,0.115757,0.067076,False,3,3,0,False,axes,0.023256,,,,,,
+cell,qwen|crows_age,qwen,crows_age,CrowS,calibration,s,measured,calibration_none,0.126013,0.068328,False,3,3,0,False,axes,0.037879,,,,,,
+cell,phi|crows_socioeconomic,phi,crows_socioeconomic,CrowS,calibration,s,measured,calibration_none,0.142093,0.044747,False,6,3,0,False,mvb;v6trace_x2,0.127907,,,,,,
+cell,qwen|bbq_Religion,qwen,bbq_Religion,BBQ,held_out,o,backfire,held_out_heavy,0.150779,-0.154607,True,3,3,1,False,ax,0.315556,,,,,,"1 of 3 rows are budget-fails scored 0.0, so the plotted mean is shallower than the truth"
+cell,granite8|crows_socioeconomic,granite8,crows_socioeconomic,CrowS,calibration,s,measured,calibration_none,0.160131,0.011996,False,3,3,2,False,fxg,0.034884,,,,,,"2 of 3 rows are budget-fails scored 0.0, so the plotted mean is shallower than the truth"
+cell,phi|crows_age,phi,crows_age,CrowS,calibration,s,measured,calibration_none,0.164448,0.038847,False,3,3,0,False,axes,0.090909,,,,,,
+cell,phi|ss_intra,phi,ss_intra,StereoSet,calibration,D,measured,calibration_none,0.172975,0.114166,False,3,3,0,False,ss,0.086103,,,,,,
+cell,gemma|crows_socioeconomic,gemma,crows_socioeconomic,CrowS,held_out,s,measured,held_out_heavy,0.173754,0.126549,False,9,3,0,False,mvb;v6trace_t2x;v6trace_x2,0.009044,,,,,,
+cell,granite2|crows_socioeconomic,granite2,crows_socioeconomic,CrowS,held_out,s,measured,held_out_heavy,0.189098,0.005041,False,3,3,0,False,fxg,0.085271,,,,,,
+cell,granite|crows_socioeconomic,granite,crows_socioeconomic,CrowS,held_out,s,measured,held_out_heavy,0.198081,0.055320,False,3,3,1,False,v6trace_x2,0.085271,,,,,,"1 of 3 rows are budget-fails scored 0.0, so the plotted mean is shallower than the truth"
+cell,llama|crows_socioeconomic,llama,crows_socioeconomic,CrowS,held_out,s,measured,held_out_heavy,0.200534,0.040804,False,3,3,0,False,v6trace_t2x,0.093023,,,,,,
+cell,qwen|ss_intra,qwen,ss_intra,StereoSet,held_out,D,measured,held_out_heavy,0.206982,0.129200,False,3,3,0,False,ss,0.073441,,,,,,
+cell,phi|crows_religion,phi,crows_religion,CrowS,held_out,s,measured,held_out_heavy,0.219472,0.048197,False,3,3,0,False,axes,0.018868,,,,,,
+cell,phi|bbq_Gender_identity,phi,bbq_Gender_identity,BBQ,calibration,o,measured,calibration_none,0.222200,0.197756,False,3,3,0,False,ax,0.044282,,,,,,
+cell,qwen|crows_religion,qwen,crows_religion,CrowS,held_out,s,measured,held_out_heavy,0.247886,0.044073,False,3,3,0,False,axes,0.069182,,,,,,
+cell,qwen|crows_socioeconomic,qwen,crows_socioeconomic,CrowS,held_out,s,measured,held_out_heavy,0.256792,0.012646,False,6,3,0,False,mvb;v6trace_t2x,0.025194,,,,,,
+cell,olmo|crows_socioeconomic,olmo,crows_socioeconomic,CrowS,calibration,s,measured,calibration_none,0.256802,0.103021,False,3,3,0,False,v6trace_t2x,0.085271,,,,,,
+cell,qwen|bbq_Race_ethnicity,qwen,bbq_Race_ethnicity,BBQ,calibration,o,measured,calibration_none,0.272887,0.230106,False,3,3,0,False,ax,0.158343,,,,,,
+cell,phi|bbq_Religion,phi,bbq_Religion,BBQ,held_out,o,measured,held_out_heavy,0.275548,0.199940,False,3,3,0,False,ax,0.200000,,,,,,
+cell,qwen|bbq_Age,qwen,bbq_Age,BBQ,calibration,o,measured,calibration_none,0.304394,0.277003,False,3,3,0,False,ax,0.183333,,,,,,
+cell,phi|bbq_Race_ethnicity,phi,bbq_Race_ethnicity,BBQ,held_out,o,measured,held_out_heavy,0.332159,0.274876,False,3,3,0,False,ax,0.114089,,,,,,
+cell,phi|bbq_Age,phi,bbq_Age,BBQ,held_out,o,measured,held_out_heavy,0.382856,0.343835,False,3,3,0,False,ax,0.021739,,,,,,
+cell,qwen|occ_gender,qwen,occ_gender,templated,calibration,^,measured,calibration_none,0.700062,0.514040,False,6,3,0,False,mvb;v6trace_t2x,0.119213,,,,,,
+cell,phi|occ_gender,phi,occ_gender,templated,calibration,^,measured,calibration_none,0.731685,0.317989,False,6,3,0,False,mvb;v6trace_x2,0.011574,,,,,,
+cell,llama|occ_gender,llama,occ_gender,templated,calibration,^,measured,calibration_none,0.754761,0.487061,False,3,3,1,False,v6trace_t2x,0.493056,,,,,,"1 of 3 rows are budget-fails scored 0.0, so the plotted mean is shallower than the truth"
+cell,granite8|occ_gender,granite8,occ_gender,templated,excluded,^,non_measurement_hollow,excluded_hollow,0.805005,0.000000,False,3,3,3,True,fxg,0.398148,,,,,,"plotted removal 0.0 is manufactured by the nan->0 budget-fail rule, not measured; excluded from the annotated correlation"
+cell,olmo|occ_gender,olmo,occ_gender,templated,held_out,^,measured,held_out_heavy,0.835778,0.792047,False,3,3,0,False,v6trace_t2x,0.296296,,,,,,
+cell,gemma|occ_gender,gemma,occ_gender,templated,held_out,^,measured,held_out_heavy,0.847847,0.718275,False,9,3,0,False,mvb;v6trace_t2x;v6trace_x2,0.212191,,,,,,
+cell,granite2|occ_gender,granite2,occ_gender,templated,excluded,^,non_measurement_hollow,excluded_hollow,0.895374,0.000000,False,3,3,3,True,fxg,0.405093,,,,,,"plotted removal 0.0 is manufactured by the nan->0 budget-fail rule, not measured; excluded from the annotated correlation"
+cell,granite|occ_gender,granite,occ_gender,templated,excluded,^,non_measurement_hollow,excluded_hollow,0.896205,0.000000,False,3,3,3,True,v6trace_x2,0.405093,,,,,,"plotted removal 0.0 is manufactured by the nan->0 budget-fail rule, not measured; excluded from the annotated correlation"
+correlation,v9: non-excluded cells,,,,,,,,,,,,,,,,,pearson,0.916506,0.815669,0.965696,31,"annotated in panel A; percentile bootstrap over cells, anticonservative and not inferential at this n"
+correlation,v9: non-excluded cells,,,,,,,,,,,,,,,,,spearman,0.835484,0.621206,0.938462,31,"annotated in panel A; percentile bootstrap over cells, anticonservative and not inferential at this n"
+correlation,v9: all self cells,,,,,,,,,,,,,,,,,pearson,0.588899,0.214638,0.910438,34,"annotated in panel A; percentile bootstrap over cells, anticonservative and not inferential at this n"
+correlation,v9: all self cells,,,,,,,,,,,,,,,,,spearman,0.515818,0.119896,0.831012,34,"annotated in panel A; percentile bootstrap over cells, anticonservative and not inferential at this n"
+correlation,v9: BBQ cells (the +0.910 referent),,,,,,,,,,,,,,,,,pearson,0.933090,0.859951,0.992805,8,"annotated in panel A; percentile bootstrap over cells, anticonservative and not inferential at this n"
+correlation,v9: BBQ cells (the +0.910 referent),,,,,,,,,,,,,,,,,spearman,0.928571,0.600000,1.000000,8,"annotated in panel A; percentile bootstrap over cells, anticonservative and not inferential at this n"
+draft_comparison,fig6.corr_pre_skew_removal,,,,,,,,,,,,,,,,,pearson,0.910000,,,8,"draft line 203 prints the AS-RUN starred value ""corr = +0.910* over 8 held-out BBQ cells""; the v9 recomputation on the same 8 BBQ cells is 0.933090 (delta v9 - draft +0.023090); the figure shows the v9 value, and only 4 of 8 of those cells are held-out, so the draft's 'held-out BBQ' wording is wrong"
+fit,OLS over v9: non-excluded cells,,,,,,,,,,,,,,,,,slope,0.873871,,,31,"dashed line in panel A, fitted on the annotated cell set"
+fit,OLS over v9: non-excluded cells,,,,,,,,,,,,,,,,,intercept,-0.090784,,,31,"dashed line in panel A, fitted on the annotated cell set"
+family_count,BBQ,,,BBQ,,o,,,,,,,,,,,,n_cells,8,,,8,marker-shape legend annotation
+family_count,CrowS,,,CrowS,,s,,,,,,,,,,,,n_cells,16,,,16,marker-shape legend annotation
+family_count,templated,,,templated,,^,,,,,,,,,,,,n_cells,8,,,8,marker-shape legend annotation
+family_count,StereoSet,,,StereoSet,,D,,,,,,,,,,,,n_cells,2,,,2,"marker-shape legend annotation; 2 cells only, labelled 'not a population'"
+encoding_count,calibration,,,,,,,,,,,,,,,,,n_cells,17,,,34,legend / footnote annotation in the figure
+encoding_count,held_out,,,,,,,,,,,,,,,,,n_cells,14,,,34,legend / footnote annotation in the figure
+encoding_count,backfire,,,,,,,,,,,,,,,,,n_cells,4,,,34,legend / footnote annotation in the figure
+encoding_count,all_rows_budget_fail,,,,,,,,,,,,,,,,,n_cells,3,,,34,legend / footnote annotation in the figure
+encoding_count,partly_budget_fail,,,,,,,,,,,,,,,,,n_cells,4,,,34,legend / footnote annotation in the figure
+encoding_count,phi_cells,,,,,,,,,,,,,,,,,n_cells,11,,,34,legend / footnote annotation in the figure
+held_out_policy,edit-all,,,,held_out,,,,,,,,,,,,,utility,0.188300,0.061599,0.337446,14,"n_edited=14, rejects 0 of 14, edit_rate=1.000000, backfire_rate_edited=0.071429, tau=None, gamma=None; 10k cell bootstrap, not inferential at n=14"
+held_out_policy,pre-skew gate,,,,held_out,,,,,,,,,,,,,utility,0.188300,0.061599,0.337446,14,"n_edited=14, rejects 0 of 14, edit_rate=1.000000, backfire_rate_edited=0.071429, tau=0.115757, gamma=None; 10k cell bootstrap, not inferential at n=14"
+held_out_policy,contrast-gap gate,,,,held_out,,,,,,,,,,,,,utility,0.179261,0.051875,0.329794,14,"n_edited=13, rejects 1 of 14, edit_rate=0.928571, backfire_rate_edited=0.076923, tau=None, gamma=0.011574; 10k cell bootstrap, not inferential at n=14"
+held_out_policy,joint gate,,,,held_out,,,,,,,,,,,,,utility,0.179261,0.051875,0.329794,14,"n_edited=13, rejects 1 of 14, edit_rate=0.928571, backfire_rate_edited=0.076923, tau=0.115757, gamma=0.011574; 10k cell bootstrap, not inferential at n=14"
+calibration_policy,edit-all,,,,calibration,,,,,,,,,,,,,utility,0.135244,,,17,"backfire_rate_edited=0.176471, n_edited=17; quoted in the panel-B note"
+calibration_policy,edit-all,,,,calibration,,,,,,,,,,,,,backfire_rate_edited,0.176471,,,17,quoted in the panel-B note
+calibration_policy,joint gate,,,,calibration,,,,,,,,,,,,,utility,0.145420,,,17,"backfire_rate_edited=0.000000, n_edited=13; quoted in the panel-B note"
+calibration_policy,joint gate,,,,calibration,,,,,,,,,,,,,backfire_rate_edited,0.000000,,,17,quoted in the panel-B note
+calibration_policy,joint gate,,,,calibration,,,,,,,,,,,,,n_rejected,4,,,17,quoted in the panel-B note
+restriction,rows_dropped,,,,,,,,,,,,,,,,,n_rows,432,,,1014,"v9 keeps 582 of 1014 rows; rule: drop every EDIT_PANEL whose directory is in v10_common.NOT_RESCORABLE; panels: t2x, v1, x, x2, v6trace/ste"
+restriction,cells_dropped,,,,,,,,,,,,,,,,,n_cells,2,,,36,"falcon|crows_socioeconomic (split=held_out, panels=v1+x, as-run pre_skew=0.2713, removal=0.0895); falcon|occ_gender (split=held_out, panels=v1+x, as-run pre_skew=0.6456, removal=0.3460)"
+restriction,held_out_size,,,,,,,,,,,,,,,,,n_cells,14,,,16,"the frozen split was dealt over the 36 as-run cells; carried by cell identity, the v9 held-out half is smaller than the frozen one"
+gate,v9_gate_modes,,,,,,,,,,,,,,,,,n_rows,582,,,,"modes={'integer': 582}; every re-scorable ENV panel re-scored in 'integer' mode; no UNMATCHED or UNGATED rows, so the v9 set has no partial coverage"
+gate,self_rows_budget_fail,,,,,,,,,,,,,,,,,n_rows,14,,,126,budget-fail rows scored 0.0 inside the 34 plotted cells; the artifact's all-role count is 36

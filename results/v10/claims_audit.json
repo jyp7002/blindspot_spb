@@ -1,0 +1,369 @@
+{
+ "artifact": "v10_regen_claims",
+ "boundary_exposure": {
+  "_population_note": "panels created by v10 itself are excluded; this census describes the probe population the manuscript's sec 6 limitation refers to",
+  "_what": "probes within +-1 MMLU item of the 4-item budget",
+  "all_probes": {
+   "pct_of_total": 15.14,
+   "per_item_drop": {
+    "3": 590,
+    "4": 359,
+    "5": 256
+   },
+   "total": 7960,
+   "within_1": 1205
+  },
+  "excluded_post_hoc_panels": [
+   "v10ext"
+  ],
+  "manuscript_claim": {
+   "correct_statements": [
+    "833 of 5253 perplexity-passing probes (15.9%)",
+    "1205 of 7960 probes (15.1%)"
+   ],
+   "defect": "numerator is over the ppl-passing subset, denominator is over all probes; the two populations differ",
+   "denominator_7960_matches": true,
+   "numerator_833_matches": true,
+   "text": "833 probes - 10.5% of all 7,960 - sit within one item of the boundary"
+  },
+  "per_panel": {
+   "v6trace/ablate": 204,
+   "v6trace/ablate_big": 68,
+   "v6trace/ax": 43,
+   "v6trace/ax_null_partition": 33,
+   "v6trace/ax_null_sign_shuffle": 53,
+   "v6trace/axes": 37,
+   "v6trace/dpo": 5,
+   "v6trace/fxg": 3,
+   "v6trace/fxnull_partition": 14,
+   "v6trace/fxnull_sign_shuffle": 25,
+   "v6trace/mvb": 124,
+   "v6trace/mvb_null_partition": 25,
+   "v6trace/mvb_null_sign_shuffle": 38,
+   "v6trace/ss": 8,
+   "v6trace/ss_null_partition": 13,
+   "v6trace/ss_null_sign_shuffle": 10,
+   "v6trace/t2x": 80,
+   "v6trace/x2": 45,
+   "v6trace_3b/small": 94,
+   "v8dec": 129,
+   "v8dec_natural": 5,
+   "v8dec_smoke": 8,
+   "v8ins/A": 6,
+   "v8ins/B": 24,
+   "v8ins/BP": 32,
+   "v8spc/big": 27,
+   "v8spc/small": 52
+  },
+  "ppl_passing_probes": {
+   "pct_of_all_probes": 10.46,
+   "pct_of_ppl_passing": 15.86,
+   "per_item_drop": {
+    "3": 463,
+    "4": 241,
+    "5": 129
+   },
+   "total": 5253,
+   "within_1": 833
+  },
+  "trace_files": 27
+ },
+ "ci_flips_ablation_family": {
+  "v6trace/ablate": {
+   "binary-per_channel-s0.0": {
+    "cell": {
+     "as_run": "+0.0263 [-0.0150, +0.0809] (n=8, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "+0.0488 [-0.0049, +0.1072] (n=8, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "sweep": {
+     "as_run": "+0.0263 [-0.0126, +0.0652] (n=48, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": "covers 0 -> excludes 0",
+     "v9": "+0.0488 [+0.0117, +0.0911] (n=48, excludes 0)",
+     "v9_status": "excludes 0"
+    },
+    "unit_changes_v9_status": true
+   },
+   "binary-per_tensor-s0.5": {
+    "cell": {
+     "as_run": "+0.0232 [-0.0067, +0.0561] (n=8, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "+0.0330 [-0.0089, +0.0786] (n=8, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "sweep": {
+     "as_run": "+0.0232 [-0.0098, +0.0560] (n=48, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": "covers 0 -> excludes 0",
+     "v9": "+0.0330 [+0.0056, +0.0617] (n=48, excludes 0)",
+     "v9_status": "excludes 0"
+    },
+    "unit_changes_v9_status": true
+   },
+   "binary-per_tensor-s0.9": {
+    "cell": {
+     "as_run": "+0.0440 [-0.0032, +0.0975] (n=8, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "+0.0548 [-0.0021, +0.1178] (n=8, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "sweep": {
+     "as_run": "+0.0440 [-0.0035, +0.0961] (n=48, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": "covers 0 -> excludes 0",
+     "v9": "+0.0548 [+0.0140, +0.1014] (n=48, excludes 0)",
+     "v9_status": "excludes 0"
+    },
+    "unit_changes_v9_status": true
+   },
+   "binary-per_tensor-s0.99": {
+    "cell": {
+     "as_run": "-0.0158 [-0.0707, +0.0303] (n=8, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "-0.0084 [-0.0766, +0.0544] (n=8, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "sweep": {
+     "as_run": "-0.0158 [-0.0656, +0.0344] (n=48, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "-0.0084 [-0.0511, +0.0359] (n=48, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "unit_changes_v9_status": false
+   },
+   "binary-scalar-s0.0": {
+    "cell": {
+     "as_run": "+0.0130 [-0.0094, +0.0460] (n=8, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "+0.0206 [-0.0136, +0.0631] (n=8, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "sweep": {
+     "as_run": "+0.0130 [-0.0245, +0.0539] (n=48, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "+0.0206 [-0.0105, +0.0577] (n=48, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "unit_changes_v9_status": false
+   },
+   "fp": {
+    "cell": {
+     "as_run": "+0.0395 [+0.0011, +0.0828] (n=8, excludes 0)",
+     "as_run_status": "excludes 0",
+     "ci_status_change": "excludes 0 -> covers 0",
+     "v9": "+0.0398 [-0.0077, +0.0927] (n=8, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "sweep": {
+     "as_run": "+0.0395 [+0.0028, +0.0801] (n=48, excludes 0)",
+     "as_run_status": "excludes 0",
+     "ci_status_change": null,
+     "v9": "+0.0398 [+0.0046, +0.0790] (n=48, excludes 0)",
+     "v9_status": "excludes 0"
+    },
+    "unit_changes_v9_status": true
+   }
+  },
+  "v6trace/ablate_big": {
+   "binary-per_channel-s0.0": {
+    "cell": {
+     "as_run": "+0.0024 [-0.0090, +0.0163] (n=4, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "+0.0060 [-0.0090, +0.0270] (n=4, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "sweep": {
+     "as_run": "+0.0024 [-0.0123, +0.0182] (n=24, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "+0.0060 [-0.0088, +0.0215] (n=24, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "unit_changes_v9_status": false
+   },
+   "binary-per_tensor-s0.5": {
+    "cell": {
+     "as_run": "-0.0310 [-0.0750, -0.0048] (n=4, excludes 0)",
+     "as_run_status": "excludes 0",
+     "ci_status_change": "excludes 0 -> covers 0",
+     "v9": "+0.0003 [-0.0131, +0.0187] (n=4, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "sweep": {
+     "as_run": "-0.0310 [-0.1009, +0.0126] (n=24, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "+0.0003 [-0.0155, +0.0180] (n=24, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "unit_changes_v9_status": false
+   },
+   "binary-per_tensor-s0.9": {
+    "cell": {
+     "as_run": "-0.0262 [-0.0883, +0.0188] (n=4, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "+0.0059 [-0.0080, +0.0229] (n=4, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "sweep": {
+     "as_run": "-0.0262 [-0.0933, +0.0147] (n=24, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "+0.0059 [-0.0053, +0.0189] (n=24, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "unit_changes_v9_status": false
+   },
+   "binary-per_tensor-s0.99": {
+    "cell": {
+     "as_run": "-0.0093 [-0.0484, +0.0247] (n=4, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "+0.0311 [-0.0042, +0.0727] (n=4, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "sweep": {
+     "as_run": "-0.0093 [-0.0810, +0.0658] (n=24, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "+0.0311 [-0.0060, +0.0873] (n=24, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "unit_changes_v9_status": false
+   },
+   "binary-scalar-s0.0": {
+    "cell": {
+     "as_run": "-0.0058 [-0.0199, +0.0040] (n=4, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "+0.0260 [-0.0199, +0.0960] (n=4, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "sweep": {
+     "as_run": "-0.0058 [-0.0168, +0.0065] (n=24, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "+0.0260 [-0.0133, +0.0935] (n=24, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "unit_changes_v9_status": false
+   },
+   "fp": {
+    "cell": {
+     "as_run": "-0.0256 [-0.0884, +0.0100] (n=4, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": "covers 0 -> excludes 0",
+     "v9": "+0.0051 [+0.0015, +0.0103] (n=4, excludes 0)",
+     "v9_status": "excludes 0"
+    },
+    "sweep": {
+     "as_run": "-0.0256 [-0.0925, +0.0135] (n=24, covers 0)",
+     "as_run_status": "covers 0",
+     "ci_status_change": null,
+     "v9": "+0.0051 [-0.0053, +0.0170] (n=24, covers 0)",
+     "v9_status": "covers 0"
+    },
+    "unit_changes_v9_status": true
+   }
+  }
+ },
+ "ci_flips_outside_registered_set": [
+  {
+   "change": "covers 0 -> excludes 0",
+   "panel": "v6trace/ablate",
+   "unit": "sweep",
+   "variant": "binary-per_channel-s0.0"
+  },
+  {
+   "change": "covers 0 -> excludes 0",
+   "panel": "v6trace/ablate",
+   "unit": "sweep",
+   "variant": "binary-per_tensor-s0.5"
+  },
+  {
+   "change": "covers 0 -> excludes 0",
+   "panel": "v6trace/ablate",
+   "unit": "sweep",
+   "variant": "binary-per_tensor-s0.9"
+  },
+  {
+   "change": "excludes 0 -> covers 0",
+   "panel": "v6trace/ablate",
+   "unit": "cell",
+   "variant": "fp"
+  },
+  {
+   "change": "excludes 0 -> covers 0",
+   "panel": "v6trace/ablate_big",
+   "unit": "cell",
+   "variant": "binary-per_tensor-s0.5"
+  },
+  {
+   "change": "covers 0 -> excludes 0",
+   "panel": "v6trace/ablate_big",
+   "unit": "cell",
+   "variant": "fp"
+  }
+ ],
+ "ci_flips_registered": {
+  "changes": {
+   "SPC small :: s=0.99": "CHANGED: excludes 0 -> covers 0"
+  },
+  "n_registered_estimands": 18,
+  "n_status_changes": 1
+ },
+ "gate_effect_space": {
+  "all_disagreements_are_4_item_drops": true,
+  "disagreeing_pairs": 138,
+  "disagreements_by_item_drop": {
+   "4": 138
+  },
+  "grid_pairs_total": 40401,
+  "grid_side": 201
+ },
+ "manuscript_claim_exactly_one_flip": {
+  "defect": "the claim is unqualified in the draft but holds only over the estimands registered in v9_diff_report.json; the C5/C6 ablation family is re-scorable, was never re-scored into the diff, and does contain status changes",
+  "n_flips_found_outside_registered_set": 6,
+  "n_registered_estimands": 18,
+  "text": "changed 146 cell values and exactly one CI status",
+  "true_of_registered_set": true
+ },
+ "resampling_unit": {
+  "method_evidence_uses": "SWEEP (target, axis, seed, designer)",
+  "project_convention": "target x axis CELL (v9_regen.boot_paired)",
+  "variants_whose_v9_status_depends_on_the_unit": [
+   {
+    "panel": "v6trace/ablate",
+    "variant": "binary-per_channel-s0.0"
+   },
+   {
+    "panel": "v6trace/ablate",
+    "variant": "binary-per_tensor-s0.5"
+   },
+   {
+    "panel": "v6trace/ablate",
+    "variant": "binary-per_tensor-s0.9"
+   },
+   {
+    "panel": "v6trace/ablate",
+    "variant": "fp"
+   },
+   {
+    "panel": "v6trace/ablate_big",
+    "variant": "fp"
+   }
+  ],
+  "why_it_matters": "per-seed pooling is anti-conservative; the project banned it in v5. C3/C5/C6 as published use the sweep unit."
+ }
+}

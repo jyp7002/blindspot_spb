@@ -1,0 +1,1362 @@
+{
+  "qwen0.5b": {
+    "model": "Qwen/Qwen2.5-0.5B-Instruct",
+    "family": "qwen",
+    "size_b": 0.5,
+    "bbq": {
+      "Gender_identity": {
+        "acc_ambig": 0.08940397350993377,
+        "n_ambig": 302,
+        "frac_unknown_ambig": 0.08940397350993379,
+        "s_AMB_raw": 0.025454545454545396,
+        "s_AMB": 0.023178807947019816,
+        "acc_disambig": 0.5335570469798657,
+        "n_disambig": 298,
+        "frac_unknown_disambig": 0.01342281879194629,
+        "s_DIS": -0.03401360544217691
+      },
+      "Race_ethnicity": {
+        "acc_ambig": 0.07028753993610223,
+        "n_ambig": 313,
+        "frac_unknown_ambig": 0.07028753993610226,
+        "s_AMB_raw": 0.01718213058419238,
+        "s_AMB": 0.015974440894568634,
+        "acc_disambig": 0.5679442508710801,
+        "n_disambig": 287,
+        "frac_unknown_disambig": 0.020905923344947785,
+        "s_DIS": 0.003558718861210064
+      },
+      "Religion": {
+        "acc_ambig": 0.016891891891891893,
+        "n_ambig": 296,
+        "frac_unknown_ambig": 0.016891891891891886,
+        "s_AMB_raw": 0.06529209621993126,
+        "s_AMB": 0.06418918918918919,
+        "acc_disambig": 0.5756578947368421,
+        "n_disambig": 304,
+        "frac_unknown_disambig": 0.003289473684210509,
+        "s_DIS": 0.05610561056105601
+      },
+      "Age": {
+        "acc_ambig": 0.08881578947368421,
+        "n_ambig": 304,
+        "frac_unknown_ambig": 0.08881578947368418,
+        "s_AMB_raw": 0.11913357400722013,
+        "s_AMB": 0.10855263157894729,
+        "acc_disambig": 0.5101351351351351,
+        "n_disambig": 296,
+        "frac_unknown_disambig": 0.04391891891891897,
+        "s_DIS": 0.10954063604240272
+      },
+      "Nationality": {
+        "acc_ambig": 0.03896103896103896,
+        "n_ambig": 308,
+        "frac_unknown_ambig": 0.038961038961038974,
+        "s_AMB_raw": -0.03378378378378377,
+        "s_AMB": -0.03246753246753246,
+        "acc_disambig": 0.5308219178082192,
+        "n_disambig": 292,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": -0.047945205479452024
+      },
+      "Physical_appearance": {
+        "acc_ambig": 0.06885245901639345,
+        "n_ambig": 305,
+        "frac_unknown_ambig": 0.06885245901639347,
+        "s_AMB_raw": 0.09154929577464799,
+        "s_AMB": 0.08524590163934435,
+        "acc_disambig": 0.5288135593220339,
+        "n_disambig": 295,
+        "frac_unknown_disambig": 0.03050847457627115,
+        "s_DIS": 0.25174825174825166
+      },
+      "SES": {
+        "acc_ambig": 0.07586206896551724,
+        "n_ambig": 290,
+        "frac_unknown_ambig": 0.07586206896551728,
+        "s_AMB_raw": 0.17164179104477606,
+        "s_AMB": 0.15862068965517234,
+        "acc_disambig": 0.5419354838709678,
+        "n_disambig": 310,
+        "frac_unknown_disambig": 0.03870967741935483,
+        "s_DIS": 0.033557046979865834
+      },
+      "Sexual_orientation": {
+        "acc_ambig": 0.0429042904290429,
+        "n_ambig": 303,
+        "frac_unknown_ambig": 0.04290429042904287,
+        "s_AMB_raw": 0.034482758620689724,
+        "s_AMB": 0.03300330033003307,
+        "acc_disambig": 0.5084175084175084,
+        "n_disambig": 297,
+        "frac_unknown_disambig": 0.0033670033670033517,
+        "s_DIS": 0.027027027027026973
+      },
+      "Disability_status": {
+        "acc_ambig": 0.13924050632911392,
+        "n_ambig": 316,
+        "frac_unknown_ambig": 0.1392405063291139,
+        "s_AMB_raw": -0.02941176470588236,
+        "s_AMB": -0.025316455696202538,
+        "acc_disambig": 0.5246478873239436,
+        "n_disambig": 284,
+        "frac_unknown_disambig": 0.03169014084507038,
+        "s_DIS": 0.06909090909090909
+      }
+    },
+    "stereoset": {
+      "gender": {
+        "SS": 61.3682092555332,
+        "LMS": 82.09255533199196,
+        "ICAT": 63.42764838528151,
+        "n": 497
+      },
+      "race": {
+        "SS": 53.900000000000006,
+        "LMS": 83.35000000000001,
+        "ICAT": 76.8487,
+        "n": 1000
+      },
+      "religion": {
+        "SS": 52.86624203821656,
+        "LMS": 85.03184713375796,
+        "ICAT": 80.15741003691834,
+        "n": 157
+      },
+      "profession": {
+        "SS": 59.4,
+        "LMS": 83.3,
+        "ICAT": 67.6396,
+        "n": 1000
+      }
+    },
+    "crows": {
+      "gender": {
+        "crows_pct": 47.32824427480916,
+        "n": 262
+      },
+      "race-color": {
+        "crows_pct": 45.666666666666664,
+        "n": 300
+      },
+      "religion": {
+        "crows_pct": 50.476190476190474,
+        "n": 105
+      },
+      "age": {
+        "crows_pct": 52.87356321839081,
+        "n": 87
+      },
+      "nationality": {
+        "crows_pct": 44.0251572327044,
+        "n": 159
+      },
+      "sexual-orientation": {
+        "crows_pct": 66.66666666666666,
+        "n": 84
+      },
+      "physical-appearance": {
+        "crows_pct": 57.14285714285714,
+        "n": 63
+      },
+      "disability": {
+        "crows_pct": 70.0,
+        "n": 60
+      },
+      "socioeconomic": {
+        "crows_pct": 63.372093023255815,
+        "n": 172
+      }
+    }
+  },
+  "qwen1.5b": {
+    "model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "family": "qwen",
+    "size_b": 1.5,
+    "bbq": {
+      "Gender_identity": {
+        "acc_ambig": 0.20198675496688742,
+        "n_ambig": 302,
+        "frac_unknown_ambig": 0.20198675496688745,
+        "s_AMB_raw": 0.29460580912863077,
+        "s_AMB": 0.2350993377483444,
+        "acc_disambig": 0.8489932885906041,
+        "n_disambig": 298,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": 0.046979865771812124
+      },
+      "Race_ethnicity": {
+        "acc_ambig": 0.14376996805111822,
+        "n_ambig": 313,
+        "frac_unknown_ambig": 0.1437699680511182,
+        "s_AMB_raw": 0.09701492537313428,
+        "s_AMB": 0.08306709265175714,
+        "acc_disambig": 0.9128919860627178,
+        "n_disambig": 287,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": 0.03832752613240409
+      },
+      "Religion": {
+        "acc_ambig": 0.22972972972972974,
+        "n_ambig": 296,
+        "frac_unknown_ambig": 0.22972972972972971,
+        "s_AMB_raw": 0.07017543859649122,
+        "s_AMB": 0.05405405405405405,
+        "acc_disambig": 0.8585526315789473,
+        "n_disambig": 304,
+        "frac_unknown_disambig": 0.02631578947368418,
+        "s_DIS": 0.013513513513513598
+      },
+      "Age": {
+        "acc_ambig": 0.12828947368421054,
+        "n_ambig": 304,
+        "frac_unknown_ambig": 0.1282894736842105,
+        "s_AMB_raw": 0.290566037735849,
+        "s_AMB": 0.25328947368421045,
+        "acc_disambig": 0.8851351351351351,
+        "n_disambig": 296,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": 0.04054054054054057
+      },
+      "Nationality": {
+        "acc_ambig": 0.2435064935064935,
+        "n_ambig": 308,
+        "frac_unknown_ambig": 0.24350649350649356,
+        "s_AMB_raw": 0.10729613733905574,
+        "s_AMB": 0.08116883116883114,
+        "acc_disambig": 0.886986301369863,
+        "n_disambig": 292,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": -0.047945205479452024
+      },
+      "Physical_appearance": {
+        "acc_ambig": 0.10491803278688525,
+        "n_ambig": 305,
+        "frac_unknown_ambig": 0.10491803278688527,
+        "s_AMB_raw": 0.6190476190476191,
+        "s_AMB": 0.5540983606557377,
+        "acc_disambig": 0.8610169491525423,
+        "n_disambig": 295,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": 0.12542372881355934
+      },
+      "SES": {
+        "acc_ambig": 0.3413793103448276,
+        "n_ambig": 290,
+        "frac_unknown_ambig": 0.3413793103448276,
+        "s_AMB_raw": 0.31937172774869116,
+        "s_AMB": 0.21034482758620693,
+        "acc_disambig": 0.8935483870967742,
+        "n_disambig": 310,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": -0.006451612903225823
+      },
+      "Sexual_orientation": {
+        "acc_ambig": 0.1551155115511551,
+        "n_ambig": 303,
+        "frac_unknown_ambig": 0.1551155115511551,
+        "s_AMB_raw": 0.015625,
+        "s_AMB": 0.013201320132013201,
+        "acc_disambig": 0.8619528619528619,
+        "n_disambig": 297,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": 0.01683501683501687
+      },
+      "Disability_status": {
+        "acc_ambig": 0.04430379746835443,
+        "n_ambig": 316,
+        "frac_unknown_ambig": 0.044303797468354444,
+        "s_AMB_raw": 0.6688741721854305,
+        "s_AMB": 0.639240506329114,
+        "acc_disambig": 0.7640845070422535,
+        "n_disambig": 284,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": 0.147887323943662
+      }
+    },
+    "stereoset": {
+      "gender": {
+        "SS": 65.3923541247485,
+        "LMS": 80.98591549295774,
+        "ICAT": 56.05463768526653,
+        "n": 497
+      },
+      "race": {
+        "SS": 57.8,
+        "LMS": 83.85000000000001,
+        "ICAT": 70.76940000000002,
+        "n": 1000
+      },
+      "religion": {
+        "SS": 57.961783439490446,
+        "LMS": 84.07643312101911,
+        "ICAT": 70.68846606353199,
+        "n": 157
+      },
+      "profession": {
+        "SS": 61.199999999999996,
+        "LMS": 82.75,
+        "ICAT": 64.214,
+        "n": 1000
+      }
+    },
+    "crows": {
+      "gender": {
+        "crows_pct": 48.091603053435115,
+        "n": 262
+      },
+      "race-color": {
+        "crows_pct": 47.0,
+        "n": 300
+      },
+      "religion": {
+        "crows_pct": 51.42857142857142,
+        "n": 105
+      },
+      "age": {
+        "crows_pct": 66.66666666666666,
+        "n": 87
+      },
+      "nationality": {
+        "crows_pct": 45.911949685534594,
+        "n": 159
+      },
+      "sexual-orientation": {
+        "crows_pct": 75.0,
+        "n": 84
+      },
+      "physical-appearance": {
+        "crows_pct": 60.317460317460316,
+        "n": 63
+      },
+      "disability": {
+        "crows_pct": 73.33333333333333,
+        "n": 60
+      },
+      "socioeconomic": {
+        "crows_pct": 67.44186046511628,
+        "n": 172
+      }
+    }
+  },
+  "qwen3b": {
+    "model": "Qwen/Qwen2.5-3B-Instruct",
+    "family": "qwen",
+    "size_b": 3.1,
+    "bbq": {
+      "Gender_identity": {
+        "acc_ambig": 0.9105960264900662,
+        "n_ambig": 302,
+        "frac_unknown_ambig": 0.9105960264900662,
+        "s_AMB_raw": 0.5555555555555556,
+        "s_AMB": 0.04966887417218544,
+        "acc_disambig": 0.7885906040268457,
+        "n_disambig": 298,
+        "frac_unknown_disambig": 0.16778523489932884,
+        "s_DIS": -0.06451612903225812
+      },
+      "Race_ethnicity": {
+        "acc_ambig": 0.8945686900958466,
+        "n_ambig": 313,
+        "frac_unknown_ambig": 0.8945686900958466,
+        "s_AMB_raw": -0.1515151515151515,
+        "s_AMB": -0.015974440894568693,
+        "acc_disambig": 0.8710801393728222,
+        "n_disambig": 287,
+        "frac_unknown_disambig": 0.11846689895470386,
+        "s_DIS": 0.01976284584980248
+      },
+      "Religion": {
+        "acc_ambig": 0.8851351351351351,
+        "n_ambig": 296,
+        "frac_unknown_ambig": 0.8851351351351351,
+        "s_AMB_raw": 0.588235294117647,
+        "s_AMB": 0.06756756756756759,
+        "acc_disambig": 0.7960526315789473,
+        "n_disambig": 304,
+        "frac_unknown_disambig": 0.14144736842105265,
+        "s_DIS": 0.07279693486590033
+      },
+      "Age": {
+        "acc_ambig": 0.7828947368421053,
+        "n_ambig": 304,
+        "frac_unknown_ambig": 0.7828947368421053,
+        "s_AMB_raw": 0.7878787878787878,
+        "s_AMB": 0.17105263157894732,
+        "acc_disambig": 0.8074324324324325,
+        "n_disambig": 296,
+        "frac_unknown_disambig": 0.14189189189189189,
+        "s_DIS": -0.03149606299212604
+      },
+      "Nationality": {
+        "acc_ambig": 0.9188311688311688,
+        "n_ambig": 308,
+        "frac_unknown_ambig": 0.9188311688311688,
+        "s_AMB_raw": -0.6,
+        "s_AMB": -0.04870129870129873,
+        "acc_disambig": 0.8698630136986302,
+        "n_disambig": 292,
+        "frac_unknown_disambig": 0.11643835616438358,
+        "s_DIS": -0.12403100775193798
+      },
+      "Physical_appearance": {
+        "acc_ambig": 0.6491803278688525,
+        "n_ambig": 305,
+        "frac_unknown_ambig": 0.6491803278688524,
+        "s_AMB_raw": 0.9626168224299065,
+        "s_AMB": 0.33770491803278685,
+        "acc_disambig": 0.752542372881356,
+        "n_disambig": 295,
+        "frac_unknown_disambig": 0.17627118644067796,
+        "s_DIS": 0.12757201646090532
+      },
+      "SES": {
+        "acc_ambig": 0.7551724137931034,
+        "n_ambig": 290,
+        "frac_unknown_ambig": 0.7551724137931035,
+        "s_AMB_raw": 0.352112676056338,
+        "s_AMB": 0.08620689655172414,
+        "acc_disambig": 0.9,
+        "n_disambig": 310,
+        "frac_unknown_disambig": 0.09354838709677415,
+        "s_DIS": -0.08185053380782914
+      },
+      "Sexual_orientation": {
+        "acc_ambig": 0.8316831683168316,
+        "n_ambig": 303,
+        "frac_unknown_ambig": 0.8316831683168316,
+        "s_AMB_raw": -0.13725490196078427,
+        "s_AMB": -0.0231023102310231,
+        "acc_disambig": 0.797979797979798,
+        "n_disambig": 297,
+        "frac_unknown_disambig": 0.16835016835016836,
+        "s_DIS": -0.012145748987854255
+      },
+      "Disability_status": {
+        "acc_ambig": 0.6455696202531646,
+        "n_ambig": 316,
+        "frac_unknown_ambig": 0.6455696202531646,
+        "s_AMB_raw": 0.5892857142857142,
+        "s_AMB": 0.20886075949367086,
+        "acc_disambig": 0.8204225352112676,
+        "n_disambig": 284,
+        "frac_unknown_disambig": 0.17253521126760563,
+        "s_DIS": -0.04680851063829783
+      }
+    },
+    "stereoset": {
+      "gender": {
+        "SS": 64.1851106639839,
+        "LMS": 84.20523138832998,
+        "ICAT": 60.31602087373334,
+        "n": 497
+      },
+      "race": {
+        "SS": 59.099999999999994,
+        "LMS": 84.1,
+        "ICAT": 68.7938,
+        "n": 1000
+      },
+      "religion": {
+        "SS": 56.05095541401274,
+        "LMS": 84.39490445859873,
+        "ICAT": 74.18150837762181,
+        "n": 157
+      },
+      "profession": {
+        "SS": 62.7,
+        "LMS": 83.39999999999999,
+        "ICAT": 62.216399999999986,
+        "n": 1000
+      }
+    },
+    "crows": {
+      "gender": {
+        "crows_pct": 53.05343511450382,
+        "n": 262
+      },
+      "race-color": {
+        "crows_pct": 49.0,
+        "n": 300
+      },
+      "religion": {
+        "crows_pct": 60.0,
+        "n": 105
+      },
+      "age": {
+        "crows_pct": 64.36781609195403,
+        "n": 87
+      },
+      "nationality": {
+        "crows_pct": 52.83018867924528,
+        "n": 159
+      },
+      "sexual-orientation": {
+        "crows_pct": 71.42857142857143,
+        "n": 84
+      },
+      "physical-appearance": {
+        "crows_pct": 63.49206349206349,
+        "n": 63
+      },
+      "disability": {
+        "crows_pct": 73.33333333333333,
+        "n": 60
+      },
+      "socioeconomic": {
+        "crows_pct": 67.44186046511628,
+        "n": 172
+      }
+    }
+  },
+  "smol1.7b": {
+    "model": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+    "family": "smollm",
+    "size_b": 1.7,
+    "bbq": {
+      "Gender_identity": {
+        "acc_ambig": 0.016556291390728478,
+        "n_ambig": 302,
+        "frac_unknown_ambig": 0.01655629139072845,
+        "s_AMB_raw": 0.19191919191919182,
+        "s_AMB": 0.18874172185430454,
+        "acc_disambig": 0.7046979865771812,
+        "n_disambig": 298,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": 0.02684563758389258
+      },
+      "Race_ethnicity": {
+        "acc_ambig": 0.07028753993610223,
+        "n_ambig": 313,
+        "frac_unknown_ambig": 0.07028753993610226,
+        "s_AMB_raw": 0.08591065292096212,
+        "s_AMB": 0.07987220447284338,
+        "acc_disambig": 0.7421602787456446,
+        "n_disambig": 287,
+        "frac_unknown_disambig": 0.006968641114982632,
+        "s_DIS": 0.010526315789473717
+      },
+      "Religion": {
+        "acc_ambig": 0.0,
+        "n_ambig": 296,
+        "frac_unknown_ambig": 0.0,
+        "s_AMB_raw": 0.1283783783783783,
+        "s_AMB": 0.1283783783783783,
+        "acc_disambig": 0.694078947368421,
+        "n_disambig": 304,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": 0.14473684210526305
+      },
+      "Age": {
+        "acc_ambig": 0.0,
+        "n_ambig": 304,
+        "frac_unknown_ambig": 0.0,
+        "s_AMB_raw": 0.13157894736842102,
+        "s_AMB": 0.13157894736842102,
+        "acc_disambig": 0.5506756756756757,
+        "n_disambig": 296,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": 0.07432432432432434
+      },
+      "Nationality": {
+        "acc_ambig": 0.00974025974025974,
+        "n_ambig": 308,
+        "frac_unknown_ambig": 0.009740259740259716,
+        "s_AMB_raw": -0.016393442622950838,
+        "s_AMB": -0.016233766233766253,
+        "acc_disambig": 0.678082191780822,
+        "n_disambig": 292,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": -0.047945205479452024
+      },
+      "Physical_appearance": {
+        "acc_ambig": 0.013114754098360656,
+        "n_ambig": 305,
+        "frac_unknown_ambig": 0.013114754098360604,
+        "s_AMB_raw": 0.5016611295681064,
+        "s_AMB": 0.49508196721311487,
+        "acc_disambig": 0.6440677966101694,
+        "n_disambig": 295,
+        "frac_unknown_disambig": 0.003389830508474523,
+        "s_DIS": 0.27210884353741505
+      },
+      "SES": {
+        "acc_ambig": 0.020689655172413793,
+        "n_ambig": 290,
+        "frac_unknown_ambig": 0.020689655172413834,
+        "s_AMB_raw": 0.09859154929577474,
+        "s_AMB": 0.09655172413793112,
+        "acc_disambig": 0.6967741935483871,
+        "n_disambig": 310,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": -0.006451612903225823
+      },
+      "Sexual_orientation": {
+        "acc_ambig": 0.013201320132013201,
+        "n_ambig": 303,
+        "frac_unknown_ambig": 0.01320132013201325,
+        "s_AMB_raw": 0.12374581939799323,
+        "s_AMB": 0.12211221122112202,
+        "acc_disambig": 0.6060606060606061,
+        "n_disambig": 297,
+        "frac_unknown_disambig": 0.0033670033670033517,
+        "s_DIS": 0.0
+      },
+      "Disability_status": {
+        "acc_ambig": 0.00949367088607595,
+        "n_ambig": 316,
+        "frac_unknown_ambig": 0.009493670886076,
+        "s_AMB_raw": 0.13738019169329063,
+        "s_AMB": 0.1360759493670885,
+        "acc_disambig": 0.647887323943662,
+        "n_disambig": 284,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": 0.12676056338028174
+      }
+    },
+    "stereoset": {
+      "gender": {
+        "SS": 64.58752515090544,
+        "LMS": 84.40643863179075,
+        "ICAT": 59.780817702998675,
+        "n": 497
+      },
+      "race": {
+        "SS": 59.599999999999994,
+        "LMS": 83.45,
+        "ICAT": 67.42760000000001,
+        "n": 1000
+      },
+      "religion": {
+        "SS": 62.42038216560509,
+        "LMS": 84.07643312101911,
+        "ICAT": 63.19120451133921,
+        "n": 157
+      },
+      "profession": {
+        "SS": 62.9,
+        "LMS": 83.5,
+        "ICAT": 61.957,
+        "n": 1000
+      }
+    },
+    "crows": {
+      "gender": {
+        "crows_pct": 55.72519083969466,
+        "n": 262
+      },
+      "race-color": {
+        "crows_pct": 51.33333333333333,
+        "n": 300
+      },
+      "religion": {
+        "crows_pct": 66.66666666666666,
+        "n": 105
+      },
+      "age": {
+        "crows_pct": 62.06896551724138,
+        "n": 87
+      },
+      "nationality": {
+        "crows_pct": 44.65408805031446,
+        "n": 159
+      },
+      "sexual-orientation": {
+        "crows_pct": 69.04761904761905,
+        "n": 84
+      },
+      "physical-appearance": {
+        "crows_pct": 61.904761904761905,
+        "n": 63
+      },
+      "disability": {
+        "crows_pct": 75.0,
+        "n": 60
+      },
+      "socioeconomic": {
+        "crows_pct": 68.02325581395348,
+        "n": 172
+      }
+    }
+  },
+  "phi3.5": {
+    "model": "microsoft/Phi-3.5-mini-instruct",
+    "family": "phi",
+    "size_b": 3.8,
+    "bbq": {
+      "Gender_identity": {
+        "acc_ambig": 0.8178807947019867,
+        "n_ambig": 302,
+        "frac_unknown_ambig": 0.8178807947019868,
+        "s_AMB_raw": 0.5636363636363637,
+        "s_AMB": 0.1026490066225166,
+        "acc_disambig": 0.9295302013422819,
+        "n_disambig": 298,
+        "frac_unknown_disambig": 0.07046979865771807,
+        "s_DIS": -0.054151624548736454
+      },
+      "Race_ethnicity": {
+        "acc_ambig": 0.9073482428115016,
+        "n_ambig": 313,
+        "frac_unknown_ambig": 0.9073482428115016,
+        "s_AMB_raw": -0.1724137931034483,
+        "s_AMB": -0.01597444089456869,
+        "acc_disambig": 0.9686411149825784,
+        "n_disambig": 287,
+        "frac_unknown_disambig": 0.03135888501742157,
+        "s_DIS": -0.021582733812949617
+      },
+      "Religion": {
+        "acc_ambig": 0.8716216216216216,
+        "n_ambig": 296,
+        "frac_unknown_ambig": 0.8716216216216216,
+        "s_AMB_raw": 0.4736842105263157,
+        "s_AMB": 0.06081081081081081,
+        "acc_disambig": 0.7927631578947368,
+        "n_disambig": 304,
+        "frac_unknown_disambig": 0.1282894736842105,
+        "s_DIS": 0.07169811320754715
+      },
+      "Age": {
+        "acc_ambig": 0.7335526315789473,
+        "n_ambig": 304,
+        "frac_unknown_ambig": 0.7335526315789473,
+        "s_AMB_raw": 0.8024691358024691,
+        "s_AMB": 0.21381578947368424,
+        "acc_disambig": 0.9155405405405406,
+        "n_disambig": 296,
+        "frac_unknown_disambig": 0.07770270270270274,
+        "s_DIS": -0.01098901098901095
+      },
+      "Nationality": {
+        "acc_ambig": 0.9285714285714286,
+        "n_ambig": 308,
+        "frac_unknown_ambig": 0.9285714285714286,
+        "s_AMB_raw": -0.9090909090909091,
+        "s_AMB": -0.0649350649350649,
+        "acc_disambig": 0.8561643835616438,
+        "n_disambig": 292,
+        "frac_unknown_disambig": 0.09589041095890416,
+        "s_DIS": -0.08333333333333337
+      },
+      "Physical_appearance": {
+        "acc_ambig": 0.7344262295081967,
+        "n_ambig": 305,
+        "frac_unknown_ambig": 0.7344262295081967,
+        "s_AMB_raw": 0.9753086419753085,
+        "s_AMB": 0.25901639344262295,
+        "acc_disambig": 0.7864406779661017,
+        "n_disambig": 295,
+        "frac_unknown_disambig": 0.12542372881355934,
+        "s_DIS": 0.03875968992248069
+      },
+      "SES": {
+        "acc_ambig": 0.9103448275862069,
+        "n_ambig": 290,
+        "frac_unknown_ambig": 0.9103448275862069,
+        "s_AMB_raw": 0.6153846153846154,
+        "s_AMB": 0.05517241379310343,
+        "acc_disambig": 0.9161290322580645,
+        "n_disambig": 310,
+        "frac_unknown_disambig": 0.08387096774193548,
+        "s_DIS": -0.05633802816901412
+      },
+      "Sexual_orientation": {
+        "acc_ambig": 0.9141914191419142,
+        "n_ambig": 303,
+        "frac_unknown_ambig": 0.9141914191419142,
+        "s_AMB_raw": 0.0,
+        "s_AMB": 0.0,
+        "acc_disambig": 0.9191919191919192,
+        "n_disambig": 297,
+        "frac_unknown_disambig": 0.06734006734006737,
+        "s_DIS": 0.032490974729241895
+      },
+      "Disability_status": {
+        "acc_ambig": 0.7436708860759493,
+        "n_ambig": 316,
+        "frac_unknown_ambig": 0.7436708860759493,
+        "s_AMB_raw": 0.2098765432098766,
+        "s_AMB": 0.053797468354430396,
+        "acc_disambig": 0.9154929577464789,
+        "n_disambig": 284,
+        "frac_unknown_disambig": 0.07042253521126762,
+        "s_DIS": -0.030303030303030276
+      }
+    },
+    "stereoset": {
+      "gender": {
+        "SS": 66.39839034205231,
+        "LMS": 81.28772635814889,
+        "ICAT": 54.62796902137169,
+        "n": 497
+      },
+      "race": {
+        "SS": 57.3,
+        "LMS": 80.75,
+        "ICAT": 68.9605,
+        "n": 1000
+      },
+      "religion": {
+        "SS": 51.59235668789809,
+        "LMS": 83.12101910828027,
+        "ICAT": 80.47385289464077,
+        "n": 157
+      },
+      "profession": {
+        "SS": 61.7,
+        "LMS": 77.85,
+        "ICAT": 59.63309999999999,
+        "n": 1000
+      }
+    },
+    "crows": {
+      "gender": {
+        "crows_pct": 58.778625954198475,
+        "n": 262
+      },
+      "race-color": {
+        "crows_pct": 55.00000000000001,
+        "n": 300
+      },
+      "religion": {
+        "crows_pct": 68.57142857142857,
+        "n": 105
+      },
+      "age": {
+        "crows_pct": 65.51724137931035,
+        "n": 87
+      },
+      "nationality": {
+        "crows_pct": 53.459119496855344,
+        "n": 159
+      },
+      "sexual-orientation": {
+        "crows_pct": 77.38095238095238,
+        "n": 84
+      },
+      "physical-appearance": {
+        "crows_pct": 68.25396825396825,
+        "n": 63
+      },
+      "disability": {
+        "crows_pct": 71.66666666666667,
+        "n": 60
+      },
+      "socioeconomic": {
+        "crows_pct": 70.34883720930233,
+        "n": 172
+      }
+    }
+  },
+  "llama1b": {
+    "model": "meta-llama/Llama-3.2-1B-Instruct",
+    "family": "llama",
+    "size_b": 1.2,
+    "bbq": {
+      "Gender_identity": {
+        "acc_ambig": 0.12582781456953643,
+        "n_ambig": 302,
+        "frac_unknown_ambig": 0.1258278145695364,
+        "s_AMB_raw": 0.10606060606060597,
+        "s_AMB": 0.09271523178807939,
+        "acc_disambig": 0.674496644295302,
+        "n_disambig": 298,
+        "frac_unknown_disambig": 0.07046979865771807,
+        "s_DIS": 0.09025270758122739
+      },
+      "Race_ethnicity": {
+        "acc_ambig": 0.3226837060702875,
+        "n_ambig": 313,
+        "frac_unknown_ambig": 0.3226837060702875,
+        "s_AMB_raw": 0.04716981132075482,
+        "s_AMB": 0.03194888178913745,
+        "acc_disambig": 0.6236933797909407,
+        "n_disambig": 287,
+        "frac_unknown_disambig": 0.132404181184669,
+        "s_DIS": -0.03614457831325302
+      },
+      "Religion": {
+        "acc_ambig": 0.11824324324324324,
+        "n_ambig": 296,
+        "frac_unknown_ambig": 0.1182432432432432,
+        "s_AMB_raw": 0.17241379310344818,
+        "s_AMB": 0.15202702702702695,
+        "acc_disambig": 0.6578947368421053,
+        "n_disambig": 304,
+        "frac_unknown_disambig": 0.03947368421052633,
+        "s_DIS": 0.013698630136986356
+      },
+      "Age": {
+        "acc_ambig": 0.17434210526315788,
+        "n_ambig": 304,
+        "frac_unknown_ambig": 0.17434210526315785,
+        "s_AMB_raw": 0.1394422310756973,
+        "s_AMB": 0.1151315789473685,
+        "acc_disambig": 0.5202702702702703,
+        "n_disambig": 296,
+        "frac_unknown_disambig": 0.06418918918918914,
+        "s_DIS": -0.07581227436823101
+      },
+      "Nationality": {
+        "acc_ambig": 0.19805194805194806,
+        "n_ambig": 308,
+        "frac_unknown_ambig": 0.19805194805194803,
+        "s_AMB_raw": 0.044534412955465674,
+        "s_AMB": 0.03571428571428578,
+        "acc_disambig": 0.541095890410959,
+        "n_disambig": 292,
+        "frac_unknown_disambig": 0.15410958904109584,
+        "s_DIS": -0.004048582995951455
+      },
+      "Physical_appearance": {
+        "acc_ambig": 0.10491803278688525,
+        "n_ambig": 305,
+        "frac_unknown_ambig": 0.10491803278688527,
+        "s_AMB_raw": 0.32600732600732596,
+        "s_AMB": 0.2918032786885245,
+        "acc_disambig": 0.6,
+        "n_disambig": 295,
+        "frac_unknown_disambig": 0.037288135593220306,
+        "s_DIS": 0.1619718309859155
+      },
+      "SES": {
+        "acc_ambig": 0.15517241379310345,
+        "n_ambig": 290,
+        "frac_unknown_ambig": 0.15517241379310343,
+        "s_AMB_raw": 0.05306122448979589,
+        "s_AMB": 0.04482758620689653,
+        "acc_disambig": 0.6258064516129033,
+        "n_disambig": 310,
+        "frac_unknown_disambig": 0.041935483870967794,
+        "s_DIS": -0.0033670033670033517
+      },
+      "Sexual_orientation": {
+        "acc_ambig": 0.17491749174917492,
+        "n_ambig": 303,
+        "frac_unknown_ambig": 0.17491749174917492,
+        "s_AMB_raw": 0.09600000000000009,
+        "s_AMB": 0.07920792079207928,
+        "acc_disambig": 0.5252525252525253,
+        "n_disambig": 297,
+        "frac_unknown_disambig": 0.11111111111111116,
+        "s_DIS": 0.030303030303030276
+      },
+      "Disability_status": {
+        "acc_ambig": 0.2626582278481013,
+        "n_ambig": 316,
+        "frac_unknown_ambig": 0.2626582278481012,
+        "s_AMB_raw": 0.2618025751072961,
+        "s_AMB": 0.19303797468354425,
+        "acc_disambig": 0.5105633802816901,
+        "n_disambig": 284,
+        "frac_unknown_disambig": 0.14084507042253525,
+        "s_DIS": 0.19672131147540983
+      }
+    },
+    "stereoset": {
+      "gender": {
+        "SS": 62.37424547283702,
+        "LMS": 83.29979879275655,
+        "ICAT": 62.684355630766504,
+        "n": 497
+      },
+      "race": {
+        "SS": 56.10000000000001,
+        "LMS": 82.89999999999999,
+        "ICAT": 72.78619999999998,
+        "n": 1000
+      },
+      "religion": {
+        "SS": 54.14012738853503,
+        "LMS": 82.48407643312102,
+        "ICAT": 75.6541847539454,
+        "n": 157
+      },
+      "profession": {
+        "SS": 59.8,
+        "LMS": 81.89999999999999,
+        "ICAT": 65.8476,
+        "n": 1000
+      }
+    },
+    "crows": {
+      "gender": {
+        "crows_pct": 54.19847328244275,
+        "n": 262
+      },
+      "race-color": {
+        "crows_pct": 39.0,
+        "n": 300
+      },
+      "religion": {
+        "crows_pct": 59.04761904761905,
+        "n": 105
+      },
+      "age": {
+        "crows_pct": 67.81609195402298,
+        "n": 87
+      },
+      "nationality": {
+        "crows_pct": 49.685534591194966,
+        "n": 159
+      },
+      "sexual-orientation": {
+        "crows_pct": 69.04761904761905,
+        "n": 84
+      },
+      "physical-appearance": {
+        "crows_pct": 58.730158730158735,
+        "n": 63
+      },
+      "disability": {
+        "crows_pct": 63.33333333333333,
+        "n": 60
+      },
+      "socioeconomic": {
+        "crows_pct": 65.11627906976744,
+        "n": 172
+      }
+    }
+  },
+  "llama3b": {
+    "model": "meta-llama/Llama-3.2-3B-Instruct",
+    "family": "llama",
+    "size_b": 3.2,
+    "bbq": {
+      "Gender_identity": {
+        "acc_ambig": 0.17549668874172186,
+        "n_ambig": 302,
+        "frac_unknown_ambig": 0.17549668874172186,
+        "s_AMB_raw": 0.357429718875502,
+        "s_AMB": 0.2947019867549669,
+        "acc_disambig": 0.889261744966443,
+        "n_disambig": 298,
+        "frac_unknown_disambig": 0.016778523489932917,
+        "s_DIS": 0.04436860068259385
+      },
+      "Race_ethnicity": {
+        "acc_ambig": 0.22044728434504793,
+        "n_ambig": 313,
+        "frac_unknown_ambig": 0.2204472843450479,
+        "s_AMB_raw": 0.16393442622950816,
+        "s_AMB": 0.1277955271565495,
+        "acc_disambig": 0.9616724738675958,
+        "n_disambig": 287,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": 0.010452961672473782
+      },
+      "Religion": {
+        "acc_ambig": 0.27364864864864863,
+        "n_ambig": 296,
+        "frac_unknown_ambig": 0.2736486486486487,
+        "s_AMB_raw": 0.2930232558139534,
+        "s_AMB": 0.21283783783783775,
+        "acc_disambig": 0.9111842105263158,
+        "n_disambig": 304,
+        "frac_unknown_disambig": 0.02631578947368418,
+        "s_DIS": 0.06756756756756754
+      },
+      "Age": {
+        "acc_ambig": 0.07236842105263158,
+        "n_ambig": 304,
+        "frac_unknown_ambig": 0.07236842105263153,
+        "s_AMB_raw": 0.5106382978723405,
+        "s_AMB": 0.4736842105263158,
+        "acc_disambig": 0.847972972972973,
+        "n_disambig": 296,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": 0.04729729729729737
+      },
+      "Nationality": {
+        "acc_ambig": 0.24025974025974026,
+        "n_ambig": 308,
+        "frac_unknown_ambig": 0.24025974025974028,
+        "s_AMB_raw": -0.017094017094017144,
+        "s_AMB": -0.012987012987013024,
+        "acc_disambig": 0.9623287671232876,
+        "n_disambig": 292,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": -0.047945205479452024
+      },
+      "Physical_appearance": {
+        "acc_ambig": 0.20327868852459016,
+        "n_ambig": 305,
+        "frac_unknown_ambig": 0.2032786885245902,
+        "s_AMB_raw": 0.5555555555555556,
+        "s_AMB": 0.4426229508196721,
+        "acc_disambig": 0.8915254237288136,
+        "n_disambig": 295,
+        "frac_unknown_disambig": 0.0,
+        "s_DIS": 0.07796610169491536
+      },
+      "SES": {
+        "acc_ambig": 0.10344827586206896,
+        "n_ambig": 290,
+        "frac_unknown_ambig": 0.10344827586206895,
+        "s_AMB_raw": 0.12307692307692308,
+        "s_AMB": 0.11034482758620691,
+        "acc_disambig": 0.9709677419354839,
+        "n_disambig": 310,
+        "frac_unknown_disambig": 0.003225806451612856,
+        "s_DIS": -0.009708737864077666
+      },
+      "Sexual_orientation": {
+        "acc_ambig": 0.23432343234323433,
+        "n_ambig": 303,
+        "frac_unknown_ambig": 0.23432343234323427,
+        "s_AMB_raw": 0.18103448275862077,
+        "s_AMB": 0.13861386138613865,
+        "acc_disambig": 0.9663299663299664,
+        "n_disambig": 297,
+        "frac_unknown_disambig": 0.0033670033670033517,
+        "s_DIS": 0.020270270270270174
+      },
+      "Disability_status": {
+        "acc_ambig": 0.15822784810126583,
+        "n_ambig": 316,
+        "frac_unknown_ambig": 0.15822784810126578,
+        "s_AMB_raw": 0.4436090225563909,
+        "s_AMB": 0.3734177215189873,
+        "acc_disambig": 0.8908450704225352,
+        "n_disambig": 284,
+        "frac_unknown_disambig": 0.0035211267605633756,
+        "s_DIS": 0.03886925795053009
+      }
+    },
+    "stereoset": {
+      "gender": {
+        "SS": 65.3923541247485,
+        "LMS": 82.69617706237425,
+        "ICAT": 57.23840022023489,
+        "n": 497
+      },
+      "race": {
+        "SS": 57.699999999999996,
+        "LMS": 83.45,
+        "ICAT": 70.59870000000001,
+        "n": 1000
+      },
+      "religion": {
+        "SS": 54.14012738853503,
+        "LMS": 83.7579617834395,
+        "ICAT": 76.82258915168974,
+        "n": 157
+      },
+      "profession": {
+        "SS": 61.1,
+        "LMS": 82.95,
+        "ICAT": 64.5351,
+        "n": 1000
+      }
+    },
+    "crows": {
+      "gender": {
+        "crows_pct": 56.87022900763359,
+        "n": 262
+      },
+      "race-color": {
+        "crows_pct": 46.0,
+        "n": 300
+      },
+      "religion": {
+        "crows_pct": 67.61904761904762,
+        "n": 105
+      },
+      "age": {
+        "crows_pct": 67.81609195402298,
+        "n": 87
+      },
+      "nationality": {
+        "crows_pct": 55.9748427672956,
+        "n": 159
+      },
+      "sexual-orientation": {
+        "crows_pct": 80.95238095238095,
+        "n": 84
+      },
+      "physical-appearance": {
+        "crows_pct": 68.25396825396825,
+        "n": 63
+      },
+      "disability": {
+        "crows_pct": 68.33333333333333,
+        "n": 60
+      },
+      "socioeconomic": {
+        "crows_pct": 69.18604651162791,
+        "n": 172
+      }
+    }
+  },
+  "gemma2b": {
+    "model": "google/gemma-2-2b-it",
+    "family": "gemma",
+    "size_b": 2.6,
+    "bbq": {
+      "Gender_identity": {
+        "acc_ambig": 0.6887417218543046,
+        "n_ambig": 302,
+        "frac_unknown_ambig": 0.6887417218543046,
+        "s_AMB_raw": 0.42553191489361697,
+        "s_AMB": 0.13245033112582782,
+        "acc_disambig": 0.8624161073825504,
+        "n_disambig": 298,
+        "frac_unknown_disambig": 0.08724832214765099,
+        "s_DIS": -0.014705882352941124
+      },
+      "Race_ethnicity": {
+        "acc_ambig": 0.645367412140575,
+        "n_ambig": 313,
+        "frac_unknown_ambig": 0.645367412140575,
+        "s_AMB_raw": -0.027027027027026973,
+        "s_AMB": -0.009584664536741196,
+        "acc_disambig": 0.9407665505226481,
+        "n_disambig": 287,
+        "frac_unknown_disambig": 0.013937282229965153,
+        "s_DIS": 0.0035335689045936647
+      },
+      "Religion": {
+        "acc_ambig": 0.8006756756756757,
+        "n_ambig": 296,
+        "frac_unknown_ambig": 0.8006756756756757,
+        "s_AMB_raw": 0.016949152542372836,
+        "s_AMB": 0.00337837837837837,
+        "acc_disambig": 0.7138157894736842,
+        "n_disambig": 304,
+        "frac_unknown_disambig": 0.23355263157894735,
+        "s_DIS": 0.09012875536480691
+      },
+      "Age": {
+        "acc_ambig": 0.5592105263157895,
+        "n_ambig": 304,
+        "frac_unknown_ambig": 0.5592105263157895,
+        "s_AMB_raw": 0.4328358208955223,
+        "s_AMB": 0.19078947368421048,
+        "acc_disambig": 0.8378378378378378,
+        "n_disambig": 296,
+        "frac_unknown_disambig": 0.04391891891891897,
+        "s_DIS": 0.10247349823321561
+      },
+      "Nationality": {
+        "acc_ambig": 0.7564935064935064,
+        "n_ambig": 308,
+        "frac_unknown_ambig": 0.7564935064935066,
+        "s_AMB_raw": 0.01333333333333342,
+        "s_AMB": 0.0032467532467532682,
+        "acc_disambig": 0.8698630136986302,
+        "n_disambig": 292,
+        "frac_unknown_disambig": 0.05136986301369861,
+        "s_DIS": -0.010830324909747335
+      },
+      "Physical_appearance": {
+        "acc_ambig": 0.8491803278688524,
+        "n_ambig": 305,
+        "frac_unknown_ambig": 0.8491803278688524,
+        "s_AMB_raw": 0.826086956521739,
+        "s_AMB": 0.12459016393442622,
+        "acc_disambig": 0.7084745762711865,
+        "n_disambig": 295,
+        "frac_unknown_disambig": 0.1559322033898305,
+        "s_DIS": 0.11646586345381515
+      },
+      "SES": {
+        "acc_ambig": 0.7379310344827587,
+        "n_ambig": 290,
+        "frac_unknown_ambig": 0.7379310344827585,
+        "s_AMB_raw": 0.7105263157894737,
+        "s_AMB": 0.18620689655172412,
+        "acc_disambig": 0.8806451612903226,
+        "n_disambig": 310,
+        "frac_unknown_disambig": 0.09354838709677415,
+        "s_DIS": -0.10320284697508897
+      },
+      "Sexual_orientation": {
+        "acc_ambig": 0.9141914191419142,
+        "n_ambig": 303,
+        "frac_unknown_ambig": 0.9141914191419142,
+        "s_AMB_raw": 0.0,
+        "s_AMB": 0.0,
+        "acc_disambig": 0.8148148148148148,
+        "n_disambig": 297,
+        "frac_unknown_disambig": 0.09090909090909094,
+        "s_DIS": 0.014814814814814836
+      },
+      "Disability_status": {
+        "acc_ambig": 0.7436708860759493,
+        "n_ambig": 316,
+        "frac_unknown_ambig": 0.7436708860759493,
+        "s_AMB_raw": 0.45679012345679015,
+        "s_AMB": 0.11708860759493674,
+        "acc_disambig": 0.7676056338028169,
+        "n_disambig": 284,
+        "frac_unknown_disambig": 0.14084507042253525,
+        "s_DIS": 0.0901639344262295
+      }
+    },
+    "stereoset": {
+      "gender": {
+        "SS": 66.19718309859155,
+        "LMS": 86.21730382293762,
+        "ICAT": 58.28775469719726,
+        "n": 497
+      },
+      "race": {
+        "SS": 56.10000000000001,
+        "LMS": 85.65,
+        "ICAT": 75.20069999999998,
+        "n": 1000
+      },
+      "religion": {
+        "SS": 54.14012738853503,
+        "LMS": 85.98726114649682,
+        "ICAT": 78.86729684774231,
+        "n": 157
+      },
+      "profession": {
+        "SS": 62.8,
+        "LMS": 84.05,
+        "ICAT": 62.53320000000001,
+        "n": 1000
+      }
+    },
+    "crows": {
+      "gender": {
+        "crows_pct": 48.473282442748086,
+        "n": 262
+      },
+      "race-color": {
+        "crows_pct": 42.66666666666667,
+        "n": 300
+      },
+      "religion": {
+        "crows_pct": 63.8095238095238,
+        "n": 105
+      },
+      "age": {
+        "crows_pct": 68.96551724137932,
+        "n": 87
+      },
+      "nationality": {
+        "crows_pct": 55.34591194968554,
+        "n": 159
+      },
+      "sexual-orientation": {
+        "crows_pct": 71.42857142857143,
+        "n": 84
+      },
+      "physical-appearance": {
+        "crows_pct": 60.317460317460316,
+        "n": 63
+      },
+      "disability": {
+        "crows_pct": 66.66666666666666,
+        "n": 60
+      },
+      "socioeconomic": {
+        "crows_pct": 69.76744186046511,
+        "n": 172
+      }
+    }
+  }
+}

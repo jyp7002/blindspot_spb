@@ -1,0 +1,206 @@
+{
+  "qwen1.5b": {
+    "occ_gender": {
+      "biased": {
+        "congruence": 0.8958333333333334,
+        "refusal_rate": 0.0,
+        "n_usable": 144
+      },
+      "debiased": {
+        "congruence": 0.7638888888888888,
+        "refusal_rate": 0.0,
+        "n_usable": 144
+      },
+      "contrast_gap": 0.13194444444444453,
+      "mode": "forced_choice",
+      "axis": "occ_gender",
+      "n_items": 144
+    },
+    "gen_fm": {
+      "biased": {
+        "congruence": 0.5,
+        "refusal_rate": 0.0,
+        "n_usable": 120
+      },
+      "debiased": {
+        "congruence": 0.4666666666666667,
+        "refusal_rate": 0.0,
+        "n_usable": 120
+      },
+      "contrast_gap": 0.033333333333333326,
+      "mode": "forced_choice",
+      "axis": "gen_fm",
+      "n_items": 120
+    }
+  },
+  "qwen3b": {
+    "occ_gender": {
+      "biased": {
+        "congruence": 0.5069444444444444,
+        "refusal_rate": 0.0,
+        "n_usable": 144
+      },
+      "debiased": {
+        "congruence": 0.5,
+        "refusal_rate": 0.0,
+        "n_usable": 144
+      },
+      "contrast_gap": 0.00694444444444442,
+      "mode": "forced_choice",
+      "axis": "occ_gender",
+      "n_items": 144
+    },
+    "gen_fm": {
+      "biased": {
+        "congruence": 0.5,
+        "refusal_rate": 0.0,
+        "n_usable": 120
+      },
+      "debiased": {
+        "congruence": 0.45,
+        "refusal_rate": 0.0,
+        "n_usable": 120
+      },
+      "contrast_gap": 0.04999999999999999,
+      "mode": "forced_choice",
+      "axis": "gen_fm",
+      "n_items": 120
+    }
+  },
+  "llama3b": {
+    "occ_gender": {
+      "biased": {
+        "congruence": 0.5763888888888888,
+        "refusal_rate": 0.0,
+        "n_usable": 144
+      },
+      "debiased": {
+        "congruence": 0.5069444444444444,
+        "refusal_rate": 0.0,
+        "n_usable": 144
+      },
+      "contrast_gap": 0.06944444444444442,
+      "mode": "forced_choice",
+      "axis": "occ_gender",
+      "n_items": 144
+    },
+    "gen_fm": {
+      "biased": {
+        "congruence": 0.5083333333333333,
+        "refusal_rate": 0.0,
+        "n_usable": 120
+      },
+      "debiased": {
+        "congruence": 0.5,
+        "refusal_rate": 0.0,
+        "n_usable": 120
+      },
+      "contrast_gap": 0.008333333333333304,
+      "mode": "forced_choice",
+      "axis": "gen_fm",
+      "n_items": 120
+    }
+  },
+  "gemma2b": {
+    "occ_gender": {
+      "biased": {
+        "congruence": 0.5,
+        "refusal_rate": 0.0,
+        "n_usable": 144
+      },
+      "debiased": {
+        "congruence": 0.7152777777777778,
+        "refusal_rate": 0.0,
+        "n_usable": 144
+      },
+      "contrast_gap": -0.2152777777777778,
+      "mode": "forced_choice",
+      "axis": "occ_gender",
+      "n_items": 144
+    },
+    "gen_fm": {
+      "biased": {
+        "congruence": 0.5,
+        "refusal_rate": 0.0,
+        "n_usable": 120
+      },
+      "debiased": {
+        "congruence": 0.5,
+        "refusal_rate": 0.0,
+        "n_usable": 120
+      },
+      "contrast_gap": 0.0,
+      "mode": "forced_choice",
+      "axis": "gen_fm",
+      "n_items": 120
+    }
+  },
+  "phi3.5": {
+    "occ_gender": {
+      "biased": {
+        "congruence": 0.5694444444444444,
+        "refusal_rate": 0.0,
+        "n_usable": 144
+      },
+      "debiased": {
+        "congruence": 0.5208333333333334,
+        "refusal_rate": 0.0,
+        "n_usable": 144
+      },
+      "contrast_gap": 0.04861111111111105,
+      "mode": "forced_choice",
+      "axis": "occ_gender",
+      "n_items": 144
+    },
+    "gen_fm": {
+      "biased": {
+        "congruence": 0.5,
+        "refusal_rate": 0.0,
+        "n_usable": 120
+      },
+      "debiased": {
+        "congruence": 0.5,
+        "refusal_rate": 0.0,
+        "n_usable": 120
+      },
+      "contrast_gap": 0.0,
+      "mode": "forced_choice",
+      "axis": "gen_fm",
+      "n_items": 120
+    }
+  },
+  "smol1.7b": {
+    "occ_gender": {
+      "biased": {
+        "congruence": 0.3680555555555556,
+        "refusal_rate": 0.0,
+        "n_usable": 144
+      },
+      "debiased": {
+        "congruence": 0.5,
+        "refusal_rate": 0.0,
+        "n_usable": 144
+      },
+      "contrast_gap": -0.13194444444444442,
+      "mode": "forced_choice",
+      "axis": "occ_gender",
+      "n_items": 144
+    },
+    "gen_fm": {
+      "biased": {
+        "congruence": 0.44166666666666665,
+        "refusal_rate": 0.0,
+        "n_usable": 120
+      },
+      "debiased": {
+        "congruence": 0.5,
+        "refusal_rate": 0.0,
+        "n_usable": 120
+      },
+      "contrast_gap": -0.05833333333333335,
+      "mode": "forced_choice",
+      "axis": "gen_fm",
+      "n_items": 120
+    }
+  }
+}
