@@ -143,6 +143,7 @@ def _run_ifeval(u):
     _ensure_corpus(u)
     sys.argv = ["run_ins.py", "A"]        # ARM is read from argv at import
     import run_ins
+    run_ins.PANEL = u["panel"]          # stamped into every row
     run_ins.OUT = os.path.join(run_ins.C.RESULTS, u["panel"])
     run_ins.TARGETS_A = [(u["target"], u["hf"], u["designer"], False, "self")]
     run_ins.AXES_A = [u["axis"]]

@@ -211,16 +211,40 @@ def main():
                                     target=fam, axis=ax, seed=s, designer=dn,
                                     condition=cond, alpha=float(al),
                                     dmmlu=pre["mmlu_acc"] - post["mmlu_acc"],
+                                    # v11: persist the raw accuracies and the
+                                    # denominator they sit on. This trace stored
+                                    # only the DIFFERENCE, so a re-scorer had to
+                                    # assume 200 items (v9_gate.mmlu_ok_delta)
+                                    # and could not recover the endpoints at all.
+                                    # The v9 re-score was possible only because
+                                    # alphas were persisted; keeping the raw
+                                    # values makes the same trick available for
+                                    # anything that changes the MMLU probe.
+                                    pre_mmlu=pre["mmlu_acc"],
+                                    post_mmlu=post["mmlu_acc"],
+                                    n_items=pre.get("n_items", MMLU_N),
                                     ppl_ratio=post["ppl"] / pre["ppl"],
                                     collateral_ok=bool(ok),
                                     bias_reduction=float(r))) + "\n")
                             if ok:
                                 best = r if np.isnan(best) else max(best, r)
                         del E
-                        row = dict(panel="v8dec", target=fam, axis=ax, seed=s,
+                        # v11: the panel name was the LITERAL "v8dec" here, so
+                        # every row this runner ever wrote claimed to be the
+                        # published panel no matter where it was written --
+                        # which is why results_v9/v8dec_smoke/removal.jsonl
+                        # carries panel=='v8dec' and analysis code has a
+                        # standing "never glob v8dec*" workaround. A scale-up
+                        # panel would have been indistinguishable from the
+                        # published one in its own rows. PANEL is "v8dec" when
+                        # DEC_PANEL is unset, so replaying the published panel
+                        # still stamps "v8dec"; the row also gains an n_items
+                        # field, so it is schema-compatible, not byte-identical.
+                        row = dict(panel=PANEL, target=fam, axis=ax, seed=s,
                                    role="self", designer=dn, condition=cond,
                                    removal=best, pre_skew=pre["skew"],
                                    density=DENSITY, scale_mode=SCALE_MODE,
+                                   n_items=pre.get("n_items", MMLU_N),
                                    n_flips=meta.get("n_flips"),
                                    n_params=meta.get("n_params"),
                                    frobenius=meta.get("frobenius"))

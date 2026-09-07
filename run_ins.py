@@ -48,7 +48,12 @@ ARM = (sys.argv[1] if len(sys.argv) > 1 else "A").upper()
 PLAIN_TEMPLATE = (
     "{% for m in messages %}{{ m['content'] }}"
     "{% if not loop.last %}\n\n{% endif %}{% endfor %}")
-OUT = os.path.join(C.RESULTS, "v8ins", ARM)  # A / B / BP
+# v11: the panel name was written into every row as the LITERAL "v8ins",
+# the same defect run_dec.py carried -- rows from any other panel claimed
+# to be the published one. PANEL defaults to "v8ins", so the published
+# arm still stamps "v8ins".
+PANEL = os.environ.get("INS_PANEL", "v8ins")
+OUT = os.path.join(C.RESULTS, PANEL, ARM)  # A / B / BP
 ALPHAS = (2, 4, 8, 16)
 IFEVAL_LIMIT = 200          # stated bound, not full 541
 
@@ -165,7 +170,7 @@ def main():
                             if base_if:
                                 with open(fp_out, "a") as f:
                                     f.write(json.dumps(dict(
-                                        panel="v8ins", arm=ARM, target=label, axis=ax,
+                                        panel=PANEL, arm=ARM, target=label, axis=ax,
                                         seed=s, condition="unedited", removal=0.0,
                                         pre_skew=pre["skew"], ifeval=base_if,
                                         ifeval_limit=IFEVAL_LIMIT)) + "\n")
@@ -218,7 +223,7 @@ def main():
                         del E
                         with open(fp_out, "a") as f:
                             f.write(json.dumps(dict(
-                                panel="v8ins", arm=ARM, target=label, axis=ax, seed=s,
+                                panel=PANEL, arm=ARM, target=label, axis=ax, seed=s,
                                 condition=cond, removal=best, pre_skew=pre["skew"],
                                 selected_alpha=best_alpha, is_base=is_base,
                                 role=role, designer=dn,

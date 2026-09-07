@@ -170,8 +170,31 @@ def main():
           "n_items=len(mmlu_rows)" in src)
     check("alpha_trace persists n_items", 'n_items=pre.get("n_items", 200)' in src)
 
+    # -- 5. no runner stamps a HARDCODED panel name into its rows --
+    #
+    # run_dec.py wrote `panel="v8dec"` as a literal, so every row it ever
+    # produced claimed to be the published panel regardless of where it was
+    # written. That is the origin of the standing "never glob v8dec*" caveat,
+    # and under a scale-up it would have made a new panel indistinguishable
+    # from the published one inside its own artifacts. run_ins.py had the same
+    # defect in two places. Both now read a PANEL variable.
+    import re
+    for runner in ("run_dec.py", "run_alpha_ext.py", "run_ins.py"):
+        text = open(os.path.join(REPO, runner)).read()
+        # strip comments so the explanatory notes above don't trip the check
+        body = "\n".join(l.split("#")[0] for l in text.splitlines())
+        bad = re.findall(r'panel\s*=\s*["\'][^"\']+["\']', body)
+        check(f"{runner} does not hardcode a panel name (found {bad})", not bad)
+
+    # -- 6. the DEC trace keeps the raw MMLU endpoints, not just their delta --
+    dec = open(os.path.join(REPO, "run_dec.py")).read()
+    check("run_dec trace persists pre_mmlu/post_mmlu/n_items",
+          all(k in dec for k in ("pre_mmlu=pre[", "post_mmlu=post[",
+                                 'n_items=pre.get("n_items"')))
+
+    n_checks = 12
     print(f"v11 gate selftest: {'PASS' if not fails else str(len(fails)) + ' FAILED'}"
-          f"  ({8 - len(fails)}/8 checks)")
+          f"  ({n_checks - len(fails)}/{n_checks} checks)")
     return not fails
 
 
