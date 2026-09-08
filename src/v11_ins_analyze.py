@@ -29,6 +29,8 @@ import json
 import os
 import sys
 
+import numpy as np
+
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(REPO, "src"))
 import v11_panel as P  # noqa: E402
@@ -120,6 +122,35 @@ def main():
             if r["removal_published"] is not None:
                 print(f"   {'':26s} removal published {r['removal_published']:+.4f}  "
                       f"re-run {r['removal_rerun']:+.4f}")
+
+    # Pooled over cells, the unit this project resamples at. n is small (6) and
+    # the interval is correspondingly wide; that is the honest shape of the arm.
+    vals = [c["sign_minus_random"] for c in out["cells"].values()
+            if c["sign_minus_random"] is not None]
+    if len(vals) > 1:
+        rng = np.random.default_rng(0)
+        arr = np.asarray(vals)
+        boots = np.array([rng.choice(arr, arr.size, replace=True).mean()
+                          for _ in range(10_000)])
+        lo, hi = (float(x) for x in np.percentile(boots, [2.5, 97.5]))
+        out["pooled"] = {"n_cells": len(vals), "mean": float(arr.mean()),
+                         "ci_lo": lo, "ci_hi": hi,
+                         "covers_zero": bool(lo < 0 < hi),
+                         "mean_in_instructions": float(arr.mean() * 318)}
+        print(f"\npooled over {len(vals)} cells: {arr.mean():+.4f} "
+              f"[{lo:+.4f}, {hi:+.4f}] = {arr.mean()*318:+.1f} instructions  "
+              f"{'covers 0' if lo < 0 < hi else 'EXCLUDES 0'}")
+
+        # Descriptive only, and deliberately not offered as a finding: n=6, and
+        # the sign says a STRONGER edit costs LESS instruction-following, which
+        # is the opposite of the concern it would be answering. Noise until
+        # measured on more cells.
+        rem = [out["cells"][k]["removal_sign_only"] for k in out["cells"]
+               if out["cells"][k]["sign_minus_random"] is not None]
+        if all(r is not None for r in rem) and len(rem) > 2:
+            out["corr_removal_cost"] = float(np.corrcoef(rem, vals)[0, 1])
+            print(f"corr(removal, sign-random) = {out['corr_removal_cost']:+.3f} "
+                  "(descriptive; n is too small to read)")
 
     done = sum(1 for c in out["cells"].values() if c["complete"])
     print(f"\ncells complete: {done}/{len(out['cells'])}")

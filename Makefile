@@ -22,7 +22,7 @@ REGEN_STAMPS  = $(addprefix $(V10)/,dec_analysis_v9.json spc_v9.json frontier_v9
                                     lopo_v9.json sup1_matrix.json env_v9.json patch_sizes.json claims_audit.json artifact_sizes.json reclaimed.json missing_recomputed.json starred_sources.json alpha_extension.json lineage_h2.json padding_recompute.json)
 
 .PHONY: all regen manifest figures audit report verify freeze clean-figures clean-v10 help \
-        v11-check v11-preflight v11-plan v11-dec
+        v11-check v11-preflight v11-plan v11-dec v11-ext v11-ins v11-report
 
 all: regen manifest figures audit
 
@@ -83,6 +83,17 @@ v11-preflight:
 ## v11-dec — the three registered Delta_selection reportings (§v11.F)
 v11-dec:
 	$(PY) $(SRC)/v11_dec_analyze.py
+
+## v11-ext — alpha-extension saturation (§v11.C)
+v11-ext:
+	$(PY) $(SRC)/v11_ext_analyze.py
+
+## v11-ins — IFEval generation collateral + reproduction of the published cells
+v11-ins:
+	$(PY) $(SRC)/v11_ins_analyze.py
+
+## v11-report — all three v11 analyses
+v11-report: v11-dec v11-ext v11-ins
 
 ## v11-plan — write work/<panel>.units.json for one config (CFG=... required)
 v11-plan:
