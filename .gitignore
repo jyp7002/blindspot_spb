@@ -42,7 +42,11 @@ __pycache__/
 
 # --- run-local scratch ---
 results/scratch/
-logs/*.log
+# Run logs, including per-panel subdirectories (logs/v11dec/unit_7.log) and the
+# plan snapshots the launcher writes beside them. `logs/*.log` matched only the
+# top level and left every panel directory showing as untracked.
+logs/**
+!logs/
 !logs/.gitkeep
 work/
 *.tmp
