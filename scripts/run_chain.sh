@@ -5,8 +5,11 @@ set -uo pipefail
 cd "$(dirname "$0")/.."
 log(){ echo "[$(date -u +%H:%M:%S)] $*"; }
 
-# 1. wait for any live queue (two on one GPU would OOM)
-while pgrep -f submit_local.sh >/dev/null; do sleep 60; done
+# 1. wait for any live queue (two on one GPU would OOM).
+# Checks the pidfile, NOT `pgrep -f submit_local.sh` -- that matched this very
+# script's own command line and deadlocked the chain for six hours.
+queue_live(){ [ -f logs/.queue.pid ] && kill -0 "$(cat logs/.queue.pid 2>/dev/null)" 2>/dev/null; }
+while queue_live; do sleep 60; done
 log "no queue running"
 
 # 2. alphaext — finish it if anything is left

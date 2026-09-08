@@ -23,6 +23,20 @@ mkdir -p "$LOGDIR"
 # workers then index into a different plan than the one they were sized for and
 # start reporting "index out of range". Copy it once and work from the copy, so
 # re-planning during a run is safe and simply takes effect on the NEXT queue.
+# A REAL LOCK, NOT A COMMAND-LINE STRING MATCH. Waiting on
+# `pgrep -f submit_local.sh` deadlocks: any watcher whose own command line
+# contains that string matches itself, so two waiters keep each other alive
+# forever. It cost a 6-hour idle GPU. Anything that needs to know whether a
+# queue is live checks this pidfile instead.
+QUEUE_PID_FILE="logs/.queue.pid"
+mkdir -p logs
+if [ -f "$QUEUE_PID_FILE" ] && kill -0 "$(cat "$QUEUE_PID_FILE" 2>/dev/null)" 2>/dev/null; then
+  echo "another queue is live (pid $(cat "$QUEUE_PID_FILE")); refusing to start a second on one GPU"
+  exit 1
+fi
+echo $$ > "$QUEUE_PID_FILE"
+trap 'rm -f "$QUEUE_PID_FILE"' EXIT
+
 UNITS="$LOGDIR/plan.snapshot.json"
 cp "$UNITS_IN" "$UNITS"
 echo "plan snapshot: $UNITS_IN -> $UNITS"

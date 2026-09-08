@@ -29,3 +29,10 @@ bitsandbytes>=0.43
 # confirm it matches, or re-run the two published cells alongside the new ones
 # so the whole arm shares one harness version. Do not mix.
 lm-eval==0.4.5
+# IFEval's own checkers are NOT pulled in by lm-eval itself. Without these the
+# task raises ModuleNotFoundError, run_ins.ifeval() catches it and returns None,
+# and the run completes with rows that simply have no IFEval measurement -- a
+# silent hole rather than a crash. scripts/preflight.py now imports them.
+langdetect
+immutabledict
+nltk

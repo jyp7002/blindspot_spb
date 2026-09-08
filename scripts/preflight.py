@@ -57,7 +57,7 @@ def say(status, msg, detail=""):
 
 
 # ------------------------------------------------------------------ checks --
-def check_versions(strict):
+def check_versions(strict, cfg_kind=None):
     if sys.version_info < (3, 9):
         say(FAIL, f"python {sys.version_info.major}.{sys.version_info.minor} "
                   "is below the 3.9 floor")
@@ -80,6 +80,18 @@ def check_versions(strict):
         except ImportError:
             say(FAIL if strict else WARN, f"{mod} MISSING",
                 "pip install -r requirements-run.txt")
+
+    # IFEval's checkers, needed only by the ifeval panel. lm-eval does not
+    # depend on them, and their absence is SILENT: run_ins.ifeval() catches the
+    # ImportError and returns None, so the panel finishes with no measurement.
+    if cfg_kind == "ifeval":
+        for mod in ("langdetect", "immutabledict", "nltk"):
+            try:
+                importlib.import_module(mod)
+                say(OK, f"{mod} present (IFEval checker)")
+            except ImportError:
+                say(FAIL, f"{mod} MISSING — IFEval would silently score nothing",
+                    "pip install -r requirements-run.txt")
 
     for mod in ("numpy", "yaml"):
         try:
@@ -219,7 +231,8 @@ def main():
           + (f"  config={a.config} ({len(cfg['cells'])} cells)" if cfg else ""))
     print("-" * 70)
 
-    check_versions(strict=a.strict_versions or bool(a.config))
+    check_versions(strict=a.strict_versions or bool(a.config),
+                   cfg_kind=(cfg or {}).get('kind'))
     check_selftests()
     if not a.no_gpu:
         check_gpu(cfg)
