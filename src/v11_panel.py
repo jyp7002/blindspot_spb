@@ -47,6 +47,9 @@ DEC_CONDITIONS = ["C-ref", "C-a", "C-b", "C-rand", "C-bottom",
 DEC_LOPO = ["C-ref-no_q_proj", "C-ref-no_k_proj",
             "C-ref-no_v_proj", "C-ref-no_o_proj"]
 
+# run_ins.py CONDITIONS. `unedited` is a baseline row, not an edit condition.
+INS_CONDITIONS = ["fp", "sign_only", "sparse99", "random_sign"]
+
 KINDS = ("dec", "alphaext", "ifeval")
 
 
@@ -212,10 +215,18 @@ def done(u):
         return True
 
     if u["kind"] == "ifeval":
-        return any(
-            r.get("target") == u["target"] and r.get("axis") == u["axis"]
-            and r.get("seed") == u["seed"] and r.get("ifeval") is not None
-            for r in _rows(panel, "removal.jsonl"))
+        # Every edit condition must have a row, not just SOME row with an
+        # IFEval score. The old test passed as soon as the `unedited` baseline
+        # landed -- which run_ins writes FIRST -- so a cell counted as complete
+        # while it was still running, and a cell that died after the baseline
+        # would have been skipped on resume, leaving a baseline with no
+        # measurement beside it. `ifeval` being None is a legitimate outcome
+        # (no configuration in budget at the selected alpha), so completeness
+        # is judged on the rows existing, matching run_ins.py's own resume key.
+        have = {r.get("condition") for r in _rows(panel, "removal.jsonl")
+                if r.get("target") == u["target"] and r.get("axis") == u["axis"]
+                and r.get("seed") == u["seed"]}
+        return set(INS_CONDITIONS).issubset(have)
 
     raise ValueError(f"unknown kind {u['kind']!r}")
 
@@ -249,7 +260,32 @@ def selftest():
     except Exception as e:
         fails.append(f"could not cross-check run_dec conditions: {e}")
 
-    # 3. the mmlu_n guard actually refuses a bad count
+    # 3. ifeval completeness must not be satisfied by the baseline row alone
+    import tempfile as _tf, json as _json, shutil as _sh
+    _d = _tf.mkdtemp()
+    try:
+        pdir = os.path.join(_d, "tpanel"); os.makedirs(pdir)
+        u = dict(panel="tpanel", kind="ifeval", target="t", axis="a", seed=0,
+                 designer="d")
+        fp = os.path.join(pdir, "removal.jsonl")
+        _globals_results = RESULTS
+        globals()["RESULTS"] = _d
+        with open(fp, "w") as f:
+            f.write(_json.dumps(dict(target="t", axis="a", seed=0,
+                                     condition="unedited", ifeval={"x": 1})) + "\n")
+        if done(u):
+            fails.append("ifeval done() satisfied by the unedited baseline alone")
+        with open(fp, "a") as f:
+            for c in INS_CONDITIONS:
+                f.write(_json.dumps(dict(target="t", axis="a", seed=0,
+                                         condition=c, ifeval=None)) + "\n")
+        if not done(u):
+            fails.append("ifeval done() rejects a cell with every condition present")
+        globals()["RESULTS"] = _globals_results
+    finally:
+        _sh.rmtree(_d, ignore_errors=True)
+
+    # 4. the mmlu_n guard actually refuses a bad count
     import tempfile
     for bad in (201, 37):
         with tempfile.NamedTemporaryFile("w", suffix=".yaml", delete=False) as f:
