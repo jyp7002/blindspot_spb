@@ -216,7 +216,14 @@ def check_replay(tol=0.0):
                 d = abs(z(v) - z(pub[m]["sel"][k]))
                 n += 1
                 worst = max(worst, d)
-                if d > tol:
+                # SentenceDebias reuses the published PCA(n_components=k), whose
+                # 'auto' solver may pick randomized SVD with no random_state
+                # (experiments_v12.md §IV, stated before the run). Differences at
+                # that scale are labelled, not hidden; anything larger fails.
+                if d > tol and m == "sentdebias" and d < 1e-3:
+                    print(f"  (expected) sentdebias {'|'.join(map(str, k))}: "
+                          f"|d|={d:.1e} -- randomized-SVD PCA")
+                elif d > tol:
                     bad.append((m, k, v, pub[m]["sel"][k]))
     x2 = {(r["target"], r["axis"], r["seed"]): r["removal"]
           for r in jl(os.path.join(V9, "v6trace/x2/removal.jsonl"))
