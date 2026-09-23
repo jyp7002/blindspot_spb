@@ -84,8 +84,11 @@ def check_versions(strict, cfg_kind=None):
     # IFEval's checkers, needed only by the ifeval panel. lm-eval does not
     # depend on them, and their absence is SILENT: run_ins.ifeval() catches the
     # ImportError and returns None, so the panel finishes with no measurement.
-    if cfg_kind == "ifeval":
-        for mod in ("langdetect", "immutabledict", "nltk"):
+    # v12: the frontier panel runs IFEval too (every method, seed 0), and its
+    # SentenceDebias arm needs sklearn's PCA.
+    if cfg_kind in ("ifeval", "frontier"):
+        for mod in ("lm_eval", "langdetect", "immutabledict", "nltk") + \
+                (("sklearn",) if cfg_kind == "frontier" else ()):
             try:
                 importlib.import_module(mod)
                 say(OK, f"{mod} present (IFEval checker)")

@@ -156,7 +156,54 @@ def _run_ifeval(u):
     run_ins.main()
 
 
-RUNNERS = {"dec": _run_dec, "alphaext": _run_alphaext, "ifeval": _run_ifeval}
+def _run_opsel(u):
+    _ensure_corpus(u)
+    os.environ["OPSEL_PANEL"] = u["panel"]
+    import run_opsel as R
+    R.PANEL = u["panel"]
+    R.OUT = os.path.join(R.C.RESULTS, u["panel"])
+    R.CELLS = [(u["target"], u["hf"], u["designer"], u["axis"],
+                u.get("designer_hf"))]
+    R.SEEDS = [u["seed"]]
+    R.PHASE = u.get("phase", "full")
+    R.ALPHAS = tuple(u["alphas"])
+    R.MMLU_N = u["mmlu_n"]
+    for key, attr in (("sparsities", "SPARSITIES"),
+                      ("extra_variants", "EXTRA_VARIANTS"),
+                      ("adaptive_variants", "ADAPTIVE"),
+                      ("mmlu1k_variants", "MMLU1K"),
+                      ("alpha_ladder", "LADDER"),
+                      ("refine_steps", "REFINE"),
+                      ("pstar_file", "PSTAR_FILE"),
+                      ("calib_n", "CALIB_N"),
+                      ("mmlu1k_all_alphas", "MMLU1K_ALL_ALPHAS")):
+        if key in u:
+            setattr(R, attr, u[key])
+    if R.PSTAR_FILE and not os.path.isabs(R.PSTAR_FILE):
+        R.PSTAR_FILE = os.path.join(REPO, R.PSTAR_FILE)
+    R.main()
+
+
+def _run_frontier(u):
+    _ensure_corpus(u)
+    os.environ["FRONTIER_PANEL"] = u["panel"]
+    import run_frontier as R
+    R.PANEL = u["panel"]
+    R.OUT = os.path.join(R.C.RESULTS, u["panel"])
+    R.CELLS = [(u["target"], u["hf"], u["designer"], u["axis"])]
+    R.SEEDS = [u["seed"]]
+    R.ALPHAS = tuple(u["alphas"])
+    R.MMLU_N = u["mmlu_n"]
+    for key, attr in (("methods", "METHODS"), ("mmlu1k", "MMLU1K"),
+                      ("ifeval_seeds", "IFEVAL_SEEDS"),
+                      ("ifeval_limit", "IFEVAL_LIMIT"), ("eval_batch", "BATCH")):
+        if key in u:
+            setattr(R, attr, u[key])
+    R.main()
+
+
+RUNNERS = {"dec": _run_dec, "alphaext": _run_alphaext, "ifeval": _run_ifeval,
+           "opsel": _run_opsel, "frontier": _run_frontier}
 
 
 def main():

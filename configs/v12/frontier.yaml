@@ -1,0 +1,51 @@
+# v12 FRONTIER — Table A re-measured with every configuration's collateral kept.
+#
+# WHAT THIS REMOVES FROM THE MANUSCRIPT. §5.7's gate-status disclosure exists
+# because (i) the llama/qwen edit cells come from panel `results/x`, which
+# persisted no alpha traces and cannot be re-scored, and (ii) the DPO column was
+# never re-gated. (ii) needs no GPU: results/v6trace/dpo/alpha_trace.jsonl has
+# every probe's dmmlu/ppl_ratio, and re-gating it flips 0 of 60 decisions
+# (results/v10/frontier_v9.json dpo_gate.diagnostic) -- src/v12_frontier.py
+# promotes that from advisory to the reported value. (i) is this panel.
+#
+# WHAT IT ADDS. IFEval for steering and SentenceDebias, under the conditions the
+# edit's IFEval arm used (seed 0, first 200 of 541 prompts, the SELECTED
+# configuration active during generation) -- the operational comparison Table 3
+# needs. And MMLU-1000 at every configuration of every method.
+#
+# REPLAY GUARD. All 8 cells x 3 methods x 3 seeds are re-measured, not just the
+# four as-run edit cells, so every method's published values are replayed:
+#   steering, SentenceDebias  vs results_v9/v6trace/{steer,sentdebias}
+#   edit (gemma)              vs results_v9/v6trace/x2  -- exact
+#   edit (phi)                published at eval batch 12; here 6 (uniform with
+#                             the other methods). Differences are App. G's batch-
+#                             composition effect; reported, not tuned away.
+# `python3 src/v12_frontier.py --check-replay`.
+#
+# Size: 24 units, <= 3.8B. Fits the L40S. IFEval adds 4 generations x 200
+# prompts per (target, axis) at seed 0.
+
+panel: v12frontier
+kind: frontier
+out_panel: v12frontier
+base_on: v6trace
+
+alphas: [2, 4, 8, 16]
+seeds: [0, 1, 2]
+mmlu_n: 200
+
+methods: [steering, sentdebias, edit]
+mmlu1k: true
+ifeval_seeds: [0]
+ifeval_limit: 200
+eval_batch: 6
+
+cells:
+  - {target: gemma, hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: occ_gender}
+  - {target: gemma, hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: crows_socioeconomic}
+  - {target: llama, hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: occ_gender}
+  - {target: llama, hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: crows_socioeconomic}
+  - {target: qwen,  hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: occ_gender}
+  - {target: qwen,  hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: crows_socioeconomic}
+  - {target: phi,   hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: occ_gender}
+  - {target: phi,   hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: crows_socioeconomic}

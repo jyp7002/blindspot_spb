@@ -50,7 +50,14 @@ DEC_LOPO = ["C-ref-no_q_proj", "C-ref-no_k_proj",
 # run_ins.py CONDITIONS. `unedited` is a baseline row, not an edit condition.
 INS_CONDITIONS = ["fp", "sign_only", "sparse99", "random_sign"]
 
-KINDS = ("dec", "alphaext", "ifeval")
+# v12: "opsel" = sparsity/binarization curve + adaptive operating point
+# (run_opsel.py, experiments_v12.md). Its extra fields travel on the unit.
+KINDS = ("dec", "alphaext", "ifeval", "opsel", "frontier")
+OPSEL_KEYS = ("phase", "sparsities", "extra_variants", "adaptive_variants",
+              "mmlu1k_variants", "alpha_ladder", "refine_steps", "pstar_file",
+              "calib_n", "mmlu1k_all_alphas")
+# v12: "frontier" = Table A methods re-measured with traces (run_frontier.py)
+FRONTIER_KEYS = ("methods", "mmlu1k", "ifeval_seeds", "ifeval_limit", "eval_batch")
 
 
 # --------------------------------------------------------------- config ----
@@ -70,6 +77,11 @@ def load(path):
     cfg.setdefault("scale_mode", "ref_tensor")
     cfg.setdefault("mmlu_n", 200)
     cfg.setdefault("out_panel", cfg["panel"])
+    if cfg["kind"] == "opsel":
+        cfg.setdefault("phase", "full")
+        if cfg["phase"] not in ("geometry", "full"):
+            raise ValueError(f"{path}: phase must be geometry|full, "
+                             f"got {cfg['phase']!r}")
     cfg["_path"] = path
     _check_mmlu_n(cfg, path)
     return cfg
@@ -155,6 +167,10 @@ def expand(cfg, only=None):
                                       cfg.get("ifeval_limit", 200)),
                 config=os.path.relpath(cfg["_path"], REPO),
             ))
+            if cfg["kind"] == "opsel":
+                units[-1].update({k: cfg[k] for k in OPSEL_KEYS if k in cfg})
+            if cfg["kind"] == "frontier":
+                units[-1].update({k: cfg[k] for k in FRONTIER_KEYS if k in cfg})
     return units
 
 
@@ -228,7 +244,36 @@ def done(u):
                 and r.get("seed") == u["seed"]}
         return set(INS_CONDITIONS).issubset(have)
 
+    if u["kind"] == "opsel":
+        mine = lambda r: (r.get("target") == u["target"]
+                          and r.get("axis") == u["axis"]
+                          and r.get("seed") == u["seed"]
+                          and r.get("designer") == u["designer"])
+        if u.get("phase", "full") == "geometry":
+            return any(mine(r) for r in _rows(panel, "geometry.jsonl"))
+        have = {r["variant"] for r in _rows(panel, "removal.jsonl") if mine(r)}
+        return set(opsel_variants(u)).issubset(have)
+
+    if u["kind"] == "frontier":
+        have = {(r.get("method"), r.get("row", "select"))
+                for r in _rows(panel, "removal.jsonl")
+                if r.get("target") == u["target"] and r.get("axis") == u["axis"]
+                and r.get("seed") == u["seed"]}
+        methods = u.get("methods", ["steering", "sentdebias", "edit"])
+        want = {(m, "select") for m in methods}
+        if u["seed"] in u.get("ifeval_seeds", [0]):
+            want |= {(m, "ifeval") for m in methods + ["unedited"]}
+        return want.issubset(have)
+
     raise ValueError(f"unknown kind {u['kind']!r}")
+
+
+def opsel_variants(u):
+    """The variant names an opsel unit must produce. Mirrors
+    run_opsel.variant_names, which cannot be imported here (torch)."""
+    sps = u.get("sparsities", [0.0, 0.5, 0.9, 0.95, 0.97, 0.99, 0.995, 0.999])
+    extra = u.get("extra_variants", ["fp"])
+    return list(extra) + [f"s{float(sp)}" for sp in sps]
 
 
 def pending(units):

@@ -1,0 +1,44 @@
+# v12 DEC-1K — the headline decomposition cells, re-read at 1000 MMLU items.
+#
+# WHY. The integer gate at 200 items allows 4 items; the manuscript reports that
+# 15.1% of probes sit within one item of that boundary and names >= 1000 items
+# as the forward fix. Re-running every panel at 1000 is a v12-scale program
+# (experiments_v11.md §II). This re-reads only the two conditions the headline
+# Delta_selection is made of, on the 10 published cells, and records MMLU-1000
+# at EVERY frozen α so the argmax the 1000-item gate would itself have chosen
+# can be recomputed -- not only whether the 200-item choice survives.
+#
+# REPRODUCTION GUARD. s0.99 is C-ref (binarize at 0.99 is bit-identical to
+# v8_edits C-ref, v8_edits.selftest) and C-a@0.01 is DEC's C-a with the same
+# ref_tensor scale, so the 200-item frozen removals must reproduce
+# results_v9/v8dec exactly. `src/v12_analyze.py --check-replay` checks it.
+
+panel: v12dec1k
+kind: opsel
+out_panel: v12dec1k
+base_on: v8dec
+
+phase: full
+density: 0.01
+scale_mode: ref_tensor
+alphas: [2, 4, 8, 16]
+seeds: [0, 1, 2]
+mmlu_n: 200
+
+sparsities: [0.99]
+extra_variants: ["C-a@0.01"]
+adaptive_variants: []
+mmlu1k_variants: [s0.99, "C-a@0.01"]
+mmlu1k_all_alphas: true
+
+cells:
+  - {target: gemma,  hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: occ_gender}
+  - {target: llama,  hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: occ_gender}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: occ_gender}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: occ_gender}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: bbq_Age}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: bbq_Age}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: bbq_Race_ethnicity}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: ss_intra}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: ss_intra}
+  - {target: qwen7b, hf: Qwen/Qwen2.5-7B-Instruct,         designer: qwen,     axis: occ_gender}

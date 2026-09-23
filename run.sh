@@ -10,6 +10,14 @@
 #   bash run.sh all          dec + alphaext + ifeval, in that order
 #   bash run.sh big          32B/70B -- needs a >=80 GB card, NOT this box
 #
+# v12 (experiments_v12.md) -- operating-point selection:
+#   bash run.sh opsel-cal       calibration panel, <=9B (33 units) -- p* is FIT here
+#   bash run.sh dec1k           headline DEC cells re-read at 1000 MMLU items
+#   bash run.sh opsel-big-geom  27B/32B PHASE A: geometry only, no probe (>=80 GB)
+#   bash run.sh frontier        Table A methods re-measured with traces + IFEval (24 units)
+#   bash run.sh opsel-big       27B/32B PHASE B: refuses without a frozen p*
+#                               (python3 src/v12_pstar.py fit && ... predict)
+#
 # Everything is resumable. If a run dies, re-run the same command: finished
 # units are skipped because completion is read from the artifacts on disk.
 #
@@ -25,6 +33,18 @@ declare -A CFG=(
   [alphaext]=configs/v11/alphaext_v11.yaml
   [ifeval]=configs/v11/ifeval_v11.yaml
   [big]=configs/v11/big_v11.yaml
+  [opsel-cal]=configs/v12/opsel_calib.yaml
+  [dec1k]=configs/v12/dec1k.yaml
+  [opsel-big-geom]=configs/v12/opsel_big.yaml
+  [opsel-big]=configs/v12/opsel_big.yaml
+  [frontier]=configs/v12/frontier.yaml
+)
+# opsel panels run in phases; the plan file carries the phase in its name
+declare -A PHASE=(
+  [opsel-cal]=full
+  [dec1k]=full
+  [opsel-big-geom]=geometry
+  [opsel-big]=full
 )
 # Order matters: dec produces the panel the alpha extension extends.
 ORDER=(dec alphaext ifeval)
@@ -33,9 +53,11 @@ status() {
   echo "==================================================================="
   echo " blindspot_spb — v11 scale-up status"
   echo "==================================================================="
-  for k in "${ORDER[@]}" big; do
+  for k in "${ORDER[@]}" big opsel-cal dec1k frontier opsel-big-geom opsel-big; do
     printf '\n--- %s (%s)\n' "$k" "${CFG[$k]}"
-    $PY scripts/plan.py "${CFG[$k]}" --dry-run 2>/dev/null \
+    local ph=""
+    [ -n "${PHASE[$k]:-}" ] && ph="--phase ${PHASE[$k]}"
+    $PY scripts/plan.py "${CFG[$k]}" $ph --dry-run 2>/dev/null \
       | grep -E '^(panel|cells|units|excluded)' | sed 's/^/    /'
   done
   cat <<'TXT'
@@ -66,12 +88,22 @@ run_one() {
     return 1
   }
 
-  $PY scripts/plan.py "$cfg" || return 1
+  local ph="" sfx=""
+  if [ -n "${PHASE[$key]:-}" ]; then
+    ph="--phase ${PHASE[$key]}"; sfx=".${PHASE[$key]}"
+  fi
+  if [ "$key" = "opsel-big" ] && [ ! -f results/v12/pstar_prediction.json ]; then
+    echo "REFUSED: no frozen p* prediction (results/v12/pstar_prediction.json)."
+    echo "Order: opsel-cal -> opsel-big-geom -> v12_pstar.py fit/predict -> opsel-big"
+    return 1
+  fi
+
+  $PY scripts/plan.py "$cfg" $ph || return 1
 
   local units="work/$($PY -c "
 import sys,yaml
 c=yaml.safe_load(open('$cfg'))
-print(c.get('out_panel', c['panel']))").units.json"
+print(c.get('out_panel', c['panel']))")${sfx}.units.json"
 
   local n
   n=$($PY -c "import json;print(len(json.load(open('$units'))['units']))" 2>/dev/null || echo 0)
@@ -96,7 +128,7 @@ case "${1:-status}" in
     python3 scripts/preflight.py --config configs/v11/ifeval_v11.yaml || exit 1
     python3 scripts/plan.py configs/v11/ifeval_v11.yaml --only published || exit 1
     WORKERS="$WORKERS" bash scripts/submit_local.sh work/v11ins.published.units.json ;;
-  dec|alphaext|ifeval|big) run_one "$1" ;;
+  dec|alphaext|ifeval|big|opsel-cal|dec1k|frontier|opsel-big-geom|opsel-big) run_one "$1" ;;
   all)
     rc=0
     for k in "${ORDER[@]}"; do run_one "$k" || rc=1; done
@@ -106,6 +138,6 @@ case "${1:-status}" in
     exit $rc ;;
   *)
     echo "unknown target: $1"
-    echo "usage: bash run.sh [status|dec|alphaext|ifeval-check|ifeval|all|big]"
+    echo "usage: bash run.sh [status|dec|alphaext|ifeval-check|ifeval|all|big|opsel-cal|dec1k|frontier|opsel-big-geom|opsel-big]"
     exit 2 ;;
 esac

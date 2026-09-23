@@ -1,0 +1,77 @@
+# v12 OPSEL-BIG — 27B/32B sparsity + binarization, and the HELD-OUT test of p*.
+#
+# RUNS ON A >=80 GB CARD, NOT ON THE ANALYSIS BOX. Same VRAM story as
+# configs/v11/big_v11.yaml (bf16 only, dispatch=False, one device; §v11.G/H).
+#
+# THIS PANEL RUNS IN TWO PHASES, IN THIS ORDER. Swapping them destroys the
+# held-out status of every cell here.
+#
+#   A  python3 scripts/plan.py configs/v12/opsel_big.yaml --phase geometry
+#      -> trains ΔW and records ONLY its |ΔW| geometry. No probe is evaluated.
+#      Ship results/v12big/geometry.jsonl back.
+#
+#   (on the analysis box, after opsel_calib is complete)
+#      python3 src/v12_pstar.py fit      # fits the rules on v12cal only
+#      python3 src/v12_pstar.py predict  # freezes p* for every cell below;
+#                                        # REFUSES if any curve row exists here
+#      commit results/v12/pstar_prediction.json, ship it to the GPU node
+#
+#   B  python3 scripts/plan.py configs/v12/opsel_big.yaml --phase full
+#      -> retrains (must reproduce the phase-A fingerprint, or the unit stops),
+#      measures the full curve AND the predicted p* point.
+#
+# The runner enforces the order: phase B refuses a cell whose prediction is
+# missing, was fit on this target, or was made from a different ΔW
+# (src/v12_opsel.load_pstar). `bash run.sh opsel-big-geom` / `opsel-big` wrap A/B.
+#
+# SEED 0 x occ_gender IS A REPLAY. v11big measured C-ref at 1% for both cells;
+# `s0.99` here is the same construction and must reproduce it.
+#
+# COST. Per unit: 11 variants x 4 frozen α + 5 adaptive variants x ~13 calib
+# probes + MMLU-1000 at the adaptive/frozen points of 4 variants -- roughly 2.5x
+# a v11big DEC unit. 12 units. Run gemma27b first (headroom), as in v11.
+
+panel: v12big
+kind: opsel
+out_panel: v12big
+base_on: v11big
+
+phase: full               # overridden to 'geometry' for phase A by --phase
+density: 0.01
+scale_mode: ref_tensor
+alphas: [2, 4, 8, 16]
+seeds: [0, 1, 2]
+mmlu_n: 200
+
+sparsities: [0.0, 0.5, 0.9, 0.95, 0.97, 0.99, 0.995, 0.999, 0.9995]   # published SPC grid + 99.95% (7-9B never left 90% retention by 99.9%)
+extra_variants: [fp, pstar, "C-a@0.01"]
+adaptive_variants: [fp, s0.0, s0.99, pstar, "C-a@0.01"]
+alpha_ladder: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+refine_steps: 3
+calib_n: 200
+mmlu1k_variants: [fp, s0.0, s0.99, pstar]
+mmlu1k_all_alphas: false  # 1000 items at 27-32B is the expensive probe; read
+                          # the selected points only
+pstar_file: results/v12/pstar_prediction.json
+
+cells:
+  - target: gemma27b
+    hf: google/gemma-2-27b-it
+    designer: gemma27b
+    designer_hf: google/gemma-2-27b-it
+    axis: occ_gender
+  - target: gemma27b
+    hf: google/gemma-2-27b-it
+    designer: gemma27b
+    designer_hf: google/gemma-2-27b-it
+    axis: bbq_Age
+  - target: qwen32b
+    hf: Qwen/Qwen2.5-32B-Instruct
+    designer: qwen32b
+    designer_hf: Qwen/Qwen2.5-32B-Instruct
+    axis: occ_gender
+  - target: qwen32b
+    hf: Qwen/Qwen2.5-32B-Instruct
+    designer: qwen32b
+    designer_hf: Qwen/Qwen2.5-32B-Instruct
+    axis: bbq_Age

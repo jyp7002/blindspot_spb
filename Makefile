@@ -22,6 +22,7 @@ REGEN_STAMPS  = $(addprefix $(V10)/,dec_analysis_v9.json spc_v9.json frontier_v9
                                     lopo_v9.json sup1_matrix.json env_v9.json patch_sizes.json claims_audit.json artifact_sizes.json reclaimed.json missing_recomputed.json starred_sources.json alpha_extension.json lineage_h2.json padding_recompute.json)
 
 .PHONY: all regen manifest figures audit report verify freeze clean-figures clean-v10 help \
+        v12-check v12-report \
         v11-check v11-preflight v11-plan v11-dec v11-ext v11-ins v11-findings v11-report
 
 all: regen manifest figures audit
@@ -62,6 +63,11 @@ verify:
 	$(PY) $(SRC)/v9_gate.py
 	$(PY) $(SRC)/v11_panel.py
 	$(PY) $(SRC)/v11_selftest.py
+	$(PY) $(SRC)/v12_geometry.py
+	$(PY) $(SRC)/v12_opsel.py
+	$(PY) $(SRC)/v12_pstar.py selftest
+	@$(PY) -c "import torch" 2>/dev/null && $(PY) $(SRC)/v12_selftest.py \
+	  || echo "v12 pipeline selftest: SKIPPED (needs torch)"
 	$(PY) -c "import sys; sys.path.insert(0,'$(SRC)'); import v10_common, v10_style; print('substrate OK')"
 
 # ---------------------------------------------------------------- v11 -----
@@ -80,9 +86,11 @@ v11-check:
 v11-preflight:
 	$(PY) scripts/preflight.py $(if $(CFG),--config $(CFG),)
 
-## v11-dec — the three registered Delta_selection reportings (§v11.F)
+## v11-dec — the three registered Delta_selection reportings (§v11.F): v11dec, v11big, pooled
 v11-dec:
 	$(PY) $(SRC)/v11_dec_analyze.py
+	$(PY) $(SRC)/v11_dec_analyze.py --panel v11big --config configs/v11/big_v11.yaml --out results/v11/big_v11.json
+	$(PY) $(SRC)/v11_dec_analyze.py --with-panel v11big --out results/v11/dec_big_v11.json
 
 ## v11-ext — alpha-extension saturation (§v11.C)
 v11-ext:
@@ -113,6 +121,20 @@ clean-figures:
 
 clean-v10:
 	rm -f $(REGEN_STAMPS) $(V10)/audit_report.json
+
+# ---------------------------------------------------------------- v12 -----
+# Operating-point selection (experiments_v12.md). Analysis-only targets.
+
+## v12-check — replay gates: every v12 panel must reproduce what it replays
+v12-check:
+	$(PY) $(SRC)/v12_analyze.py --check-replay
+	$(PY) $(SRC)/v12_frontier.py --check-replay
+
+## v12-report — opsel readings, frontier/Table 3, v12 figure panels
+v12-report:
+	$(PY) $(SRC)/v12_analyze.py
+	$(PY) $(SRC)/v12_frontier.py
+	$(PY) $(SRC)/v12_figures.py
 
 help:
 	@grep -E '^## ' $(MAKEFILE_LIST) | sed 's/^## /  /'

@@ -35,13 +35,22 @@ def main():
                     help="restrict to cells with this config key set truthy "
                          "(e.g. --only published, to replay just the cells "
                          "being checked for reproduction)")
+    ap.add_argument("--phase", default=None, choices=("geometry", "full"),
+                    help="opsel panels only: override the config's phase. "
+                         "Held-out cells run 'geometry' first (experiments_v12 §II)")
     a = ap.parse_args()
 
     cfg = v11_panel.load(a.config)
+    if a.phase:
+        if cfg["kind"] != "opsel":
+            raise SystemExit("--phase applies to opsel panels only")
+        cfg["phase"] = a.phase
     units = v11_panel.expand(cfg, only=a.only)
     todo = units if a.all else v11_panel.pending(units)
 
     suffix = f".{a.only}" if a.only else ""
+    if cfg["kind"] == "opsel":
+        suffix += f".{cfg['phase']}"
     out = a.out or os.path.join(REPO, "work",
                                 f"{cfg['out_panel']}{suffix}.units.json")
 

@@ -182,6 +182,26 @@ seconds. Verified against the published `v8dec` panel: it identifies exactly the
 
 ---
 
+## Operating-point selection (v12)
+
+`experiments_v12.md` is the design; nothing in it is registered until its §VI
+decisions are frozen into `PREREGISTRATION.md`. The fixed 1% and the fixed α grid
+become rules: p* from the edit's |ΔW| geometry (fitted ≤9B, **held out** at
+27B/32B), and α* from a calibration split that shares no item with evaluation.
+
+```bash
+bash run.sh opsel-cal && bash run.sh dec1k && bash run.sh frontier   # ≤9B
+bash run.sh opsel-big-geom                  # ≥80 GB: geometry only, no probe
+python3 src/v12_pstar.py fit && python3 src/v12_pstar.py predict     # freeze p*
+bash run.sh opsel-big                       # ≥80 GB: refuses without the prediction
+python3 src/v12_pstar.py validate && make v12-check v12-report
+```
+
+The held-out order is enforced by the code, not left to discipline: see
+`experiments_v12.md` §II.
+
+---
+
 ## Layout
 
 ```
