@@ -13,9 +13,9 @@ Design: `experiments_v11.md`. Amendments: `PREREGISTRATION.md` §v11.A–H.
 | `v11dec` | dec | 18 | 54/54 | 534 | 0 |
 | `v11ext` | alphaext | 10 | 30/30 | 120 | 0 |
 | `v11ins` | ifeval | 6 | 6/6 | 30 | 0 |
-| `v11big` | dec | 2 | 0/2 | 0 | 0 |
+| `v11big` | dec | 2 | 2/2 | 22 | 0 |
 
-`v11big` (Qwen2.5-32B, gemma-2-27b) is not run here: trainable targets load unsharded, so those cells need a single ≥80 GB card (`PREREGISTRATION.md` §v11.H).
+`v11big` (gemma-2-27b, Qwen2.5-32B) ran on a single ≥80 GB card elsewhere and was shipped back as `removal.jsonl` + `alpha_trace.jsonl`; every α-trace row is re-decided through `v9_gate` here (§3.4).
 
 ## 2. The published values reproduce first
 
@@ -111,18 +111,75 @@ C-a stops clearing the budget at **α = 256**, matching C-ref — the criterion 
 
 Every other collateral number in the paper is likelihood-only. This arm rested on two values, one of which was defended as "about 1.1 SE"; it now has an interval over three families and two axes.
 
+### 3.4 Big tier — 27B and 32B, and the pooled 20-cell panel
+
+Both cells are self-designers (§v11.H), one seed each, frozen α grid {2, 4, 8, 16}. Neither was ever published, so they enter reportings (b) and (c) only, under the same C-ref screen (§v11.F).
+
+| cell | C-ref | C-a | C-b | C-rand | C-layershuf | C-bottom | C-tensorshuf | Δ_selection | screen |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| `gemma27b|occ_gender` | +0.6674 | +0.4191 | +0.0109 | -0.0054 | -0.0065 | -0.0004 | +0.3004 | **+0.2483** | in |
+| `qwen32b|occ_gender` | +0.5416 | +0.1713 | -0.0007 | -0.0022 | -0.0121 | -0.0003 | -0.0009 | **+0.3704** | in |
+
+Per-projection ablations (C-ref with one projection removed):
+
+| cell | no_k_proj | no_o_proj | no_q_proj | no_v_proj |
+|---|---:|---:|---:|---:|
+| `gemma27b|occ_gender` | +0.5657 | +0.5585 | +0.6259 | +0.4262 |
+| `qwen32b|occ_gender` | +0.5315 | +0.3079 | +0.5393 | +0.5145 |
+
+The two cells alone: mean Δ_selection +0.3094, 2/2 positive. **At n = 2 the bootstrap 'interval' is just the two values** ([+0.2483, +0.3704]); it is not an inference and is not reported as one.
+
+Pooled with `v11dec` (`results/v11/dec_big_v11.json`):
+
+| population | n | Δ_selection | unanimity |
+|---|---:|---|---|
+| published 10 cells *(registered estimand)* | 10 | +0.2835 [+0.1695, +0.4080] **excludes 0** | 10/10 |
+| published + in-envelope new | 20 | +0.2005 [+0.1253, +0.2836] **excludes 0** | 19/20 |
+| all cells | 20 | +0.2005 [+0.1253, +0.2836] **excludes 0** | 19/20 |
+
+- Adding the big tier moves the scale-up estimate +0.1884 → **+0.2005** and narrows its interval; unanimity 17/18 → 19/20. `corr(C-ref, Δ)` over 20 cells = +0.860.
+- The size range the decomposition covers goes from 2.6–8B to **2.6–32B** (12×).
+- **Grid-limited, not budget-limited:** `gemma27b` C-a, `qwen32b` C-ref, `qwen32b` C-a still clear the budget at the top of the frozen grid (α = 16). Δ there is a deployment-grid value — the same qualifier §5.3 already attaches to the panel, and one the α-extension (§3.2) did not probe at this tier.
+- Budget failures in the reference arm: `gemma27b` C-ref at α = 16 (ppl ratio 1.55).
+
+**Tensor placement is family-dependent.** Shuffling tensor placement (C-tensorshuf) leaves a large share of the effect in every gemma cell, at both sizes, and ≈ 0 elsewhere:
+
+| cell | C-tensorshuf | C-ref | share |
+|---|---:|---:|---:|
+| `gemma|occ_gender` | +0.3170 | +0.6929 | 46% |
+| `gemma27b|occ_gender` | +0.3004 | +0.6674 | 45% |
+| `gemma|bbq_Age` | +0.2043 | +0.1709 | 120% |
+| `gemma|crows_socioeconomic` | +0.0633 | +0.0836 | 76% |
+| `llama8b|occ_gender` | +0.0490 | +0.6975 | 7% |
+| `qwen7b|bbq_Age` | +0.0043 | +0.3238 | 1% |
+| `llama|crows_socioeconomic` | +0.0038 | +0.0110 | 35% |
+| `qwen|bbq_Age` | +0.0035 | +0.2531 | 1% |
+| `qwen|bbq_Race_ethnicity` | +0.0025 | +0.2528 | 1% |
+| `qwen7b|occ_gender` | +0.0019 | +0.6634 | 0% |
+| `qwen|ss_intra` | +0.0010 | +0.1166 | 1% |
+| `llama|ss_intra` | +0.0004 | +0.0791 | 0% |
+| `llama8b|bbq_Age` | +0.0001 | +0.0230 | 1% |
+| `qwen32b|occ_gender` | -0.0009 | +0.5416 | -0% |
+| `qwen|occ_gender` | -0.0017 | +0.3910 | -0% |
+| `llama|occ_gender` | -0.0058 | +0.6148 | -1% |
+
+gemma: 4 cells, max |C-tensorshuf| of the rest 0.0490 over 12 cells. The manuscript's "destroy tensor placement and the effect vanishes" (and v3.1's "six of seven") therefore needs a family qualifier: the exception is gemma, and it persists from 2.6B to 27B, so it is not a size effect.
+
 ## 4. What changes in the manuscript
 
 Each of these is settled by a measurement above.
 
 | where | now | should be |
 |---|---|---|
-| Abstract | "unanimous across 10/10 cells" | 17/18 over 18 cells |
+| Abstract | "unanimous across 10/10 cells" | 19/20 over 20 cells, Δ = +0.201 [+0.125, +0.284] |
 | Abstract | "three benchmark families" | **four** — measured, not corrected away |
 | §5.3 | "the measured gap is an upper bound … has not saturated" | it saturates; the value at maximum admissible depth |
 | §5.7 method notes | IFEval llama8b -0.022 | -0.019 (one instruction of 318) |
 | §5.7 method notes | IFEval qwen7b +0.000 | +0.003 (one instruction of 318) |
 | Limitations | "IFEval 2 targets × 1 axis × 1 seed" | 3 × 2 × 1 |
+| Limitations | "2.6–8B targets" | 2.6–32B (DEC); the 27B/32B cells are one seed and one axis each |
+| Abstract / §1 / §5.3 | "two model tiers" | three: ≤3.8B, 7–9B, 27–32B |
+| §1 / §5.3 | "destroy … tensor placement and the effect vanishes" | vanishes outside gemma; gemma retains it at 2.6B and 27B (§3.4) |
 | Baselines cited but not run | PCGU, FairLoRA | add **CDA** and **dropout** — both are in bias-bench, which this paper cites as its port source, and both are training-time interventions that cannot be placed on a frontier defined by one elicited signal and four configurations |
 
 ## 5. Defects found while running this
@@ -147,7 +204,8 @@ Items 1–5 and 6–7 are pinned by regression tests in `src/v11_selftest.py` an
 
 ## 6. What this does not cover
 
-- **`v11big` has not run.** gemma-2-27b (~67 GiB with training) and Qwen2.5-32B (~77 GiB) each need a single ≥80 GB card. Llama-3.1-70B is dropped, not deferred: ~147 GiB on one device, and 8-bit is refused because it would confound base-weight precision with the edit structure being measured (§v11.G, §v11.H).
+- **The big tier is one seed and one axis per cell** (`occ_gender`), as configured. Its two Δ values are measurements, not an interval.
+- **Llama-3.1-70B is dropped, not deferred**: ~147 GiB on one device, and 8-bit is refused because it would confound base-weight precision with the edit structure being measured (§v11.G, §v11.H).
 - **One seed per IFEval cell**, unchanged from the published arm.
 - **MMLU stays at 200 items** by decision, not omission — raising it changes the gate's integer grid and nothing measured at 1,000 would be comparable to anything published at 200 (§v11.A).
 

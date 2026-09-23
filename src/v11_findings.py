@@ -11,11 +11,13 @@ gone green).
 """
 import json
 import os
+import re
 import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(REPO, "src"))
 import v11_panel as P  # noqa: E402
+import v9_gate as G  # noqa: E402
 
 OUT = os.path.join(REPO, "V11_FINDINGS.md")
 V11 = os.path.join(P.RESULTS, "v11")
@@ -43,8 +45,34 @@ def panel_stats(cfg_name, panel):
                 cells=len(cfg["cells"]))
 
 
+def family(target):
+    """gemma27b -> gemma, llama8b -> llama, qwen7b -> qwen, phi -> phi."""
+    return re.sub(r"\d+b$", "", target)
+
+
+def big_alpha_detail(panel="v11big"):
+    """Per (target, condition): alphas probed, and which pass the v9 gate.
+
+    Re-decided through v9_gate, never read from the row's own collateral_ok.
+    alpha_trace.jsonl is append-only, so the LAST row per key wins.
+    """
+    last = {}
+    for r in P._rows(panel, "alpha_trace.jsonl"):
+        last[(r["target"], r["condition"], r["alpha"])] = r
+    out = {}
+    for (t, c, al), r in sorted(last.items()):
+        ok, _ = G.collateral_ok_row(r, r.get("n_items", 200))
+        d = out.setdefault((t, c), {"probed": [], "ok": [], "ppl": {}})
+        d["probed"].append(al)
+        d["ppl"][al] = r.get("ppl_ratio")
+        if ok:
+            d["ok"].append(al)
+    return out
+
+
 def main():
     dec, ext, ins = load("dec_v11.json"), load("ext_v11.json"), load("ins_v11.json")
+    big, pooled = load("big_v11.json"), load("dec_big_v11.json")
     L = []
     A = L.append
 
@@ -87,9 +115,15 @@ def main():
         A(f"| `{panel}` | {kind} | {s['cells']} | {s['done']}/{s['total']} | "
           f"{n} | {fails} |")
     A("")
-    A("`v11big` (Qwen2.5-32B, gemma-2-27b) is not run here: trainable targets "
-      "load unsharded, so those cells need a single ≥80 GB card "
-      "(`PREREGISTRATION.md` §v11.H).")
+    if big:
+        A("`v11big` (gemma-2-27b, Qwen2.5-32B) ran on a single ≥80 GB card "
+          "elsewhere and was shipped back as `removal.jsonl` + "
+          "`alpha_trace.jsonl`; every α-trace row is re-decided through "
+          "`v9_gate` here (§3.4).")
+    else:
+        A("`v11big` (Qwen2.5-32B, gemma-2-27b) is not run here: trainable "
+          "targets load unsharded, so those cells need a single ≥80 GB card "
+          "(`PREREGISTRATION.md` §v11.H).")
     A("")
 
     # ------------------------------------------------ 2. reproduction anchors
@@ -236,6 +270,121 @@ def main():
               f"it would answer.")
             A("")
 
+    if big and pooled:
+        A("### 3.4 Big tier — 27B and 32B, and the pooled 20-cell panel")
+        A("")
+        A("Both cells are self-designers (§v11.H), one seed each, frozen α grid "
+          "{2, 4, 8, 16}. Neither was ever published, so they enter reportings "
+          "(b) and (c) only, under the same C-ref screen (§v11.F).")
+        A("")
+        conds = ["C-ref", "C-a", "C-b", "C-rand", "C-layershuf", "C-bottom",
+                 "C-tensorshuf"]
+        A("| cell | " + " | ".join(conds) + " | Δ_selection | screen |")
+        A("|---|" + "---:|" * len(conds) + "---:|---|")
+        for name, c in big["cells"].items():
+            cc = c["conditions"]
+            A(f"| `{name}` | " + " | ".join(
+                f"{cc[k]:+.4f}" if k in cc else "—" for k in conds) +
+              f" | **{c['delta_selection']:+.4f}** | "
+              f"{'in' if c['in_envelope'] else '**OUT**'} |")
+        A("")
+        abl = [k for k in next(iter(big["cells"].values()))["conditions"]
+               if k.startswith("C-ref-no_")]
+        if abl:
+            A("Per-projection ablations (C-ref with one projection removed):")
+            A("")
+            A("| cell | " + " | ".join(k.replace("C-ref-", "")
+                                         for k in abl) + " |")
+            A("|---|" + "---:|" * len(abl))
+            for name, c in big["cells"].items():
+                A(f"| `{name}` | " + " | ".join(
+                    f"{c['conditions'][k]:+.4f}" for k in abl) + " |")
+            A("")
+
+        gb = big["groups"]["c_all"]
+        A(f"The two cells alone: mean Δ_selection {gb['delta_selection']:+.4f}, "
+          f"{gb['unanimous']}/{gb['of']} positive. **At n = 2 the bootstrap "
+          f"'interval' is just the two values** "
+          f"([{gb['ci_lo']:+.4f}, {gb['ci_hi']:+.4f}]); it is not an "
+          f"inference and is not reported as one.")
+        A("")
+        A("Pooled with `v11dec` (`results/v11/dec_big_v11.json`):")
+        A("")
+        A("| population | n | Δ_selection | unanimity |")
+        A("|---|---:|---|---|")
+        label = {"a_published": "published 10 cells *(registered estimand)*",
+                 "b_published_plus_in_envelope": "published + in-envelope new",
+                 "c_all": "all cells"}
+        for k, g in pooled["groups"].items():
+            A(f"| {label[k]} | {g['n_cells']} | {g['delta_selection']:+.4f} "
+              f"[{g['ci_lo']:+.4f}, {g['ci_hi']:+.4f}] "
+              f"{'**excludes 0**' if g['excludes_zero'] else 'covers 0'} | "
+              f"{g['unanimous']}/{g['of']} |")
+        A("")
+        pb = pooled["groups"]["b_published_plus_in_envelope"]
+        db = dec["groups"]["b_published_plus_in_envelope"] if dec else None
+        if db:
+            A(f"- Adding the big tier moves the scale-up estimate "
+              f"{db['delta_selection']:+.4f} → **{pb['delta_selection']:+.4f}** "
+              f"and narrows its interval; unanimity {db['unanimous']}/{db['of']} "
+              f"→ {pb['unanimous']}/{pb['of']}. `corr(C-ref, Δ)` over "
+              f"{pb['n_cells']} cells = {pooled['corr_Cref_delta']:+.3f}.")
+        A("- The size range the decomposition covers goes from 2.6–8B to "
+          "**2.6–32B** (12×).")
+
+        # collateral at the frozen grid
+        det = big_alpha_detail()
+        grid_top = []
+        for name in big["cells"]:
+            t = name.split("|")[0]
+            for c in ("C-ref", "C-a"):
+                d = det.get((t, c))
+                if d and max(d["probed"]) in d["ok"]:
+                    grid_top.append(f"`{t}` {c}")
+        fails = []
+        for name in big["cells"]:
+            t = name.split("|")[0]
+            d = det.get((t, "C-ref"))
+            if d:
+                for al in d["probed"]:
+                    if al not in d["ok"]:
+                        fails.append(f"`{t}` C-ref at α = {al:g} "
+                                     f"(ppl ratio {d['ppl'][al]:.2f})")
+        if grid_top:
+            A(f"- **Grid-limited, not budget-limited:** "
+              f"{', '.join(grid_top)} still clear the budget at the top of the "
+              f"frozen grid (α = 16). Δ there is a deployment-grid value — the "
+              f"same qualifier §5.3 already attaches to the panel, and one the "
+              f"α-extension (§3.2) did not probe at this tier.")
+        if fails:
+            A(f"- Budget failures in the reference arm: {'; '.join(fails)}.")
+        A("")
+
+        # tensor placement, across every cell that measured it
+        ts = [(n, c["conditions"]["C-tensorshuf"], c["C_ref"])
+              for n, c in pooled["cells"].items()
+              if "C-tensorshuf" in c.get("conditions", {})]
+        if ts:
+            gem = [x for x in ts if family(x[0].split("|")[0]) == "gemma"]
+            oth = [x for x in ts if family(x[0].split("|")[0]) != "gemma"]
+            A("**Tensor placement is family-dependent.** Shuffling tensor "
+              "placement (C-tensorshuf) leaves a large share of the effect in "
+              "every gemma cell, at both sizes, and ≈ 0 elsewhere:")
+            A("")
+            A("| cell | C-tensorshuf | C-ref | share |")
+            A("|---|---:|---:|---:|")
+            for n, v, r in sorted(ts, key=lambda x: -x[1]):
+                share = f"{v / r:.0%}" if r > 0 else "—"
+                A(f"| `{n}` | {v:+.4f} | {r:+.4f} | {share} |")
+            A("")
+            A(f"gemma: {len(gem)} cells, max |C-tensorshuf| of the rest "
+              f"{max(abs(x[1]) for x in oth):.4f} over {len(oth)} cells. "
+              f"The manuscript's \"destroy tensor placement and the effect "
+              f"vanishes\" (and v3.1's \"six of seven\") therefore needs a "
+              f"family qualifier: the exception is gemma, and it persists from "
+              f"2.6B to 27B, so it is not a size effect.")
+            A("")
+
     # ------------------------------------------------------- 4. what it means
     A("## 4. What changes in the manuscript")
     A("")
@@ -244,9 +393,11 @@ def main():
     A("| where | now | should be |")
     A("|---|---|---|")
     if dec:
-        b = dec["groups"]["b_published_plus_in_envelope"]
+        b = (pooled or dec)["groups"]["b_published_plus_in_envelope"]
         A(f"| Abstract | \"unanimous across 10/10 cells\" | "
-          f"{b['unanimous']}/{b['of']} over {b['n_cells']} cells |")
+          f"{b['unanimous']}/{b['of']} over {b['n_cells']} cells, "
+          f"Δ = {b['delta_selection']:+.3f} [{b['ci_lo']:+.3f}, "
+          f"{b['ci_hi']:+.3f}] |")
         A(f"| Abstract | \"three benchmark families\" | "
           f"**four** — measured, not corrected away |")
     if ext:
@@ -263,6 +414,14 @@ def main():
               f"{p_['mean']:+.4f} [{p_['ci_lo']:+.4f}, {p_['ci_hi']:+.4f}] "
               f"over {p_['n_cells']} cells |")
     A("| Limitations | \"IFEval 2 targets × 1 axis × 1 seed\" | 3 × 2 × 1 |")
+    if big:
+        A("| Limitations | \"2.6–8B targets\" | 2.6–32B (DEC); the 27B/32B "
+          "cells are one seed and one axis each |")
+        A("| Abstract / §1 / §5.3 | \"two model tiers\" | three: ≤3.8B, "
+          "7–9B, 27–32B |")
+        A("| §1 / §5.3 | \"destroy … tensor placement and the effect "
+          "vanishes\" | vanishes outside gemma; gemma retains it at 2.6B and "
+          "27B (§3.4) |")
     A("| Baselines cited but not run | PCGU, FairLoRA | add **CDA** and "
       "**dropout** — both are in bias-bench, which this paper cites as its port "
       "source, and both are training-time interventions that cannot be placed "
@@ -321,11 +480,19 @@ def main():
     # --------------------------------------------------------- 6. what is not
     A("## 6. What this does not cover")
     A("")
-    A("- **`v11big` has not run.** gemma-2-27b (~67 GiB with training) and "
-      "Qwen2.5-32B (~77 GiB) each need a single ≥80 GB card. Llama-3.1-70B is "
-      "dropped, not deferred: ~147 GiB on one device, and 8-bit is refused "
-      "because it would confound base-weight precision with the edit structure "
-      "being measured (§v11.G, §v11.H).")
+    if big:
+        A("- **The big tier is one seed and one axis per cell** (`occ_gender`), "
+          "as configured. Its two Δ values are measurements, not an "
+          "interval.")
+        A("- **Llama-3.1-70B is dropped, not deferred**: ~147 GiB on one "
+          "device, and 8-bit is refused because it would confound base-weight "
+          "precision with the edit structure being measured (§v11.G, §v11.H).")
+    else:
+        A("- **`v11big` has not run.** gemma-2-27b (~67 GiB with training) "
+          "and Qwen2.5-32B (~77 GiB) each need a single ≥80 GB card. "
+          "Llama-3.1-70B is dropped, not deferred: ~147 GiB on one device, "
+          "and 8-bit is refused because it would confound base-weight "
+          "precision with the edit structure being measured (§v11.G, §v11.H).")
     A("- **One seed per IFEval cell**, unchanged from the published arm.")
     A("- **MMLU stays at 200 items** by decision, not omission — raising it "
       "changes the gate's integer grid and nothing measured at 1,000 would be "

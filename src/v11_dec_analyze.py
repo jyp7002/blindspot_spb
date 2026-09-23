@@ -24,6 +24,13 @@ anti-conservative.
 
   python3 src/v11_dec_analyze.py                 # -> results/v11/dec_v11.json
   python3 src/v11_dec_analyze.py --panel v11dec
+
+  # big tier alone, and pooled with v11dec (its cells are never "published",
+  # so they enter (b) and (c) only, screened by the same C-ref rule)
+  python3 src/v11_dec_analyze.py --panel v11big \
+      --config configs/v11/big_v11.yaml --out results/v11/big_v11.json
+  python3 src/v11_dec_analyze.py --with-panel v11big \
+      --out results/v11/dec_big_v11.json
 """
 import argparse
 import collections
@@ -79,6 +86,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--panel", default="v11dec")
     ap.add_argument("--config", default="configs/v11/dec_v11.yaml")
+    ap.add_argument("--with-panel", action="append", default=[],
+                    help="extra panel whose cells join (b)/(c); repeatable")
     ap.add_argument("--out", default=None)
     a = ap.parse_args()
 
@@ -86,6 +95,15 @@ def main():
     published = {(c["target"], c["axis"]) for c in cfg["cells"]
                  if c.get("published")}
     cells, nseeds = load_cells(a.panel)
+    origin = {k: a.panel for k in cells}
+    for extra in a.with_panel:
+        xc, xn = load_cells(extra)
+        clash = set(xc) & set(cells)
+        if clash:
+            raise SystemExit(f"{extra}: cells already in {a.panel}: {sorted(clash)}")
+        cells.update(xc)
+        nseeds.update(xn)
+        origin.update({k: extra for k in xc})
     keys = [k for k in cells if "C-a" in cells[k] and "C-ref" in cells[k]]
 
     def delta(k):
@@ -100,7 +118,7 @@ def main():
             [k for k in keys if k in published or screen[k]],
         "c_all": list(keys),
     }
-    out = {"panel": a.panel, "config": a.config, "n_boot": N_BOOT,
+    out = {"panel": a.panel, "with_panels": a.with_panel, "config": a.config, "n_boot": N_BOOT,
            "resampling_unit": "cell", "groups": {}, "cells": {}}
 
     for name, ks in groups.items():
@@ -115,11 +133,13 @@ def main():
 
     for k in sorted(keys, key=lambda x: -cells[x]["C-ref"]):
         out["cells"][f"{k[0]}|{k[1]}"] = {
+            "panel": origin[k],
             "published": k in published,
             "in_envelope": bool(screen[k]),
             "seeds": nseeds[k],
             "C_ref": cells[k]["C-ref"], "C_a": cells[k]["C-a"],
             "delta_selection": delta(k),
+            "conditions": dict(sorted(cells[k].items())),
         }
 
     # Descriptive, NOT a selection rule: how much of the pooled shift is simply
@@ -146,12 +166,16 @@ def main():
              "c_all": "(c) ALL cells"}
     for name, g in out["groups"].items():
         print(f"{label[name]}")
+        if not g["n_cells"]:
+            print("    n= 0  not applicable (no cells in this population)")
+            continue
         print(f"    n={g['n_cells']:2d}  {g['delta_selection']:+.4f} "
               f"[{g['ci_lo']:+.4f}, {g['ci_hi']:+.4f}]  "
               f"{'EXCLUDES 0' if g['excludes_zero'] else 'covers 0'}  "
               f"unanimity {g['unanimous']}/{g['of']}")
-    print(f"\ncorr(C-ref, Delta) = {out['corr_Cref_delta']:+.3f}  "
-          "(descriptive: weak cells have little effect to decompose)")
+    if out["corr_Cref_delta"] is not None:
+        print(f"\ncorr(C-ref, Delta) = {out['corr_Cref_delta']:+.3f}  "
+              "(descriptive: weak cells have little effect to decompose)")
     print(f"benchmark families: {out['families']} -> {len(out['families'])}\n")
     print(f"{'cell':30s} {'C-ref':>9s} {'C-a':>9s} {'Delta':>9s}  new? env?")
     for name, c in out["cells"].items():
