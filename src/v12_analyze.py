@@ -89,10 +89,13 @@ def tier_of(t):
 def check_replay(tol=0.0):
     pairs = []
 
-    def cmp(new_panel, ref_root, ref_panel, vmap, only=None):
+    def cmp(new_panel, ref_root, ref_panel, vmap, only=None, rename=None):
         new = {(r["target"], r["axis"], r["seed"], r["variant"]): r
                for r in rows(new_panel)}
-        ref = {(r["target"], r["axis"], r["seed"],
+        # `target` is not unique across tiers (README): the published 7-9B SPC
+        # panel calls qwen-7B "qwen". Rename before matching, never after.
+        rename = rename or {}
+        ref = {(rename.get(r["target"], r["target"]), r["axis"], r["seed"],
                 r.get("variant", r.get("condition"))): r
                for r in rows(ref_panel, root=ref_root)}
         for (t, a, s, vn), r in new.items():
@@ -106,7 +109,8 @@ def check_replay(tol=0.0):
 
     v9 = os.path.join(REPO, "results_v9")
     cmp("v12cal", os.path.join(v9, "v8spc"), "small", {})
-    cmp("v12cal", os.path.join(v9, "v8spc"), "big", {})
+    cmp("v12cal", os.path.join(v9, "v8spc"), "big", {},
+        rename={"qwen": "qwen7b", "llama": "llama8b"})
     cmp("v12dec1k", v9, "v8dec", {"s0.99": "C-ref", "C-a@0.01": "C-a"})
     cmp("v12big", RESULTS, "v11big", {"s0.99": "C-ref"},
         only=lambda t, a: a == "occ_gender")
