@@ -1272,3 +1272,46 @@ which stops at 7-9B, so `designer: qwen` on a 32B target would have resolved to
 Qwen2.5-7B: a SIBLING designer recorded as "self", inside a panel whose every
 other cell is self. Cells may now name `designer_hf` explicitly, and both
 big-tier cells elicit from their own checkpoint.
+
+## v12.A — Operating-point selection: design frozen (2026-09-23, before any v12 run)
+
+Registered before the first v12 unit. Design: experiments_v12.md. Code and
+configs: branch v12-opsel (configs/v12/*.yaml as of commit 3188b13, plus the
+criterion below coded in src/v12_pstar.py in the commit that adds this entry).
+
+PANELS. v12cal (fit population, <= 9B: 6 published SPC occ_gender cells
+replayed + 5 bbq_Age cells), v12big (HELD OUT: gemma-2-27b-it and
+Qwen2.5-32B-Instruct x {occ_gender, bbq_Age} x seeds {0,1,2}), v12dec1k,
+v12frontier.
+
+p*. Cell-level (seed-mean, nan -> 0). R(p) = removal(p) / removal(dense
+one-bit). p_true = LAST-SUCCESS: the smallest grid p with R >= rho,
+log-interpolated toward the next grid point; first-failure reported as a
+sensitivity only. Grid {0,.5,.9,.95,.97,.99,.995,.999,.9995}.
+  D1  rho   = 0.90
+  D2  floor = 0.05 (dense removal; cells below are reported, not fitted)
+  D3  primary rule = mass: tau = median M(p_true) over eligible v12cal cells,
+      p* = M^-1(tau) on the held-out cell's seed-mean geometry. pr / ent / gini
+      / fixed-1% are reported alongside; leave-one-target-out on v12cal is the
+      only admissible evidence for any rule change, and none is permitted after
+      `v12_pstar.py predict` has run.
+  D4  HELD-OUT SUCCESS: PASS iff R(p*) >= rho - 0.05 in >= 3 of the eligible
+      held-out cells (4 expected). Secondary, not part of the verdict:
+      |log2(p*/p_true)| <= 1.
+The prediction is frozen by `src/v12_pstar.py predict` from phase-A geometry
+before any v12big curve row exists; its sha256 is stamped on every pstar row.
+
+alpha*. First-failure on the ladder {1,2,4,...,512} + 3 log-bisection steps,
+gate = the v9 integer gate on MMLU validation (200 items) + WikiText validation
+(20 chunks); no bias probe is read.
+  D5  reported as the as-deployed removal at alpha*, with the rule's budget-pass
+      rate on the evaluation items beside it.
+The frozen {2,4,8,16} argmax is reported alongside everywhere.
+
+MMLU-1000 is a robustness reading of selected points (every alpha where
+configured), never a selection criterion. The registered gate stays at 200.
+  D6  second big-tier axis = bbq_Age.
+
+BOTH OUTCOMES, WRITTEN NOW. PASS -> the method section replaces "fixed 1%"
+with the rule. FAIL -> 1% stays a constant, the rule is reported as a negative
+result, and the paper makes no geometry-predicts-sparsity claim.

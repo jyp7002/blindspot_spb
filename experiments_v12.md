@@ -1,6 +1,6 @@
 # experiments_v12.md — OPERATING-POINT SELECTION (drafted 2026-09-23, nothing run)
 
-**Status:** design + code complete and self-tested; **not registered**. §VII is the
+**Status:** registered as PREREGISTRATION.md §v12.A (2026-09-23), defaults D1–D6 frozen as coded. §VII is the
 block to freeze into `PREREGISTRATION.md` once §VI's open decisions are settled.
 **Builds on:** v11 (`V11_FINDINGS.md`): DEC at 20 cells / 2.6–32B, α saturates at
 256, IFEval at 6 cells.

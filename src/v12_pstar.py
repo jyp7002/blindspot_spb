@@ -72,6 +72,11 @@ RHO = 0.90          # retention target
 FLOOR = 0.05        # minimum dense removal for a cell to have a p_true
 RULES = ("mass", "pr", "ent", "gini", "fixed")
 PRIMARY = "mass"
+# Held-out success criterion, PREREGISTRATION.md §v12.A (D4): the rule PASSES
+# iff R(p*) >= RHO - PASS_TOL in at least PASS_MIN of the eligible held-out
+# cells. Secondary, reported, not part of the verdict: |log2(p*/p_true)| <= 1.
+PASS_TOL = 0.05
+PASS_MIN = 3
 
 
 # ------------------------------------------------------------------ io ----
@@ -385,9 +390,24 @@ def cmd_validate(a):
                    seeds=curve["_seeds"].get("pstar"))
         rec["meets_rho"] = bool(rec["retention_at_pstar"] is not None
                                 and rec["retention_at_pstar"] >= rho)
+        rec["eligible"] = dense is not None and dense >= pred["fit"]["floor"]
+        rec["meets_criterion"] = bool(rec["retention_at_pstar"] is not None
+                                      and rec["retention_at_pstar"] >= rho - PASS_TOL)
+        rec["secondary_within_2x"] = (abs(rec["log2_err"]) <= 1
+                                      if rec["log2_err"] is not None else None)
         out["cells"][c] = rec
         rows.append(rec)
+    elig = [r for r in rows if r["eligible"]]
+    n_meet = sum(r["meets_criterion"] for r in elig)
+    complete = len(rows) == len(pred["cells"])
+    out["criterion"] = dict(
+        rule=f"R(p*) >= rho - {PASS_TOL} in >= {PASS_MIN} eligible held-out cells",
+        n_eligible=len(elig), n_meeting=n_meet, complete=complete,
+        verdict=("INCOMPLETE" if not complete else
+                 "PASS" if n_meet >= PASS_MIN else "FAIL"))
     json.dump(out, open(VAL_FP, "w"), indent=1)
+    print(f"criterion: {out['criterion']['rule']} -> {n_meet}/{len(elig)} eligible "
+          f"-> {out['criterion']['verdict']}")
     print(f"held-out validation (rho={rho}):")
     for c, r in out["cells"].items():
         if "p_star" not in r:
