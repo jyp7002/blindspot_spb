@@ -380,12 +380,12 @@ cells:
               all(v11_panel.done(u) for u in us))
         fr_rows = P._rows("stfr", "removal.jsonl")
         sel = [r for r in fr_rows if r.get("row") == "select"]
-        check("frontier select rows carry the 1000-item re-selection",
-              sel and all("removal_1k_gate" in r for r in sel))
+        check("frontier select rows carry the MMLU-1000 reading of the selected point",
+              sel and all((r.get("mmlu1k_selected") or {}).get("n_items") == 1000
+                          for r in sel if r.get("config")))
         tr = P._rows("stfr", "alpha_trace.jsonl")
         check("frontier trace persists collateral per configuration",
-              len(tr) == 8 and all("dmmlu_items" in t and "collateral_ok_1k" in t
-                                   for t in tr))
+              len(tr) == 8 and all("dmmlu_items" in t for t in tr))
 
         # 7. disjointness guard fires on overlap
         orig = run_opsel.load_mmlu_calib

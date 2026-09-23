@@ -102,8 +102,11 @@ def _last(rows, key):
 
 def curves(panel):
     """{(target, axis): {variant: cell-mean frozen removal}} plus seed counts."""
-    rows = _last(_rows(panel, "removal.jsonl"),
-                 lambda r: (r["target"], r["axis"], r["seed"], r["variant"]))
+    return curves_from_rows(_rows(panel, "removal.jsonl"))
+
+
+def curves_from_rows(rows):
+    rows = _last(rows, lambda r: (r["target"], r["axis"], r["seed"], r["variant"]))
     by = {}
     for r in rows:
         v = r["removal"]
@@ -115,6 +118,49 @@ def curves(panel):
         out[cell] = {vn: float(np.mean(list(sd.values()))) for vn, sd in vs.items()}
         out[cell]["_seeds"] = {vn: sorted(sd) for vn, sd in vs.items()}
     return out
+
+
+# Published SPC panels whose curves the fit uses directly (amendment §v12.B):
+# re-measuring them would only replay them. The published 7-9B tier names its
+# targets qwen/llama; the v12 panels call those qwen7b/llama8b.
+PUBLISHED_SPC = (("small", {}), ("big", {"qwen": "qwen7b", "llama": "llama8b"}))
+
+
+def published_spc_rows():
+    root = os.path.join(os.path.dirname(RESULTS.rstrip("/")), "results_v9") \
+        if not os.path.isdir(os.path.join(REPO, "results_v9")) \
+        else os.path.join(REPO, "results_v9")
+    out = []
+    for sub, rename in PUBLISHED_SPC:
+        for r in _rows_abs(os.path.join(root, "v8spc", sub, "removal.jsonl")):
+            out.append(dict(r, target=rename.get(r["target"], r["target"]),
+                            _source=f"results_v9/v8spc/{sub}"))
+    return out
+
+
+def _rows_abs(fp):
+    out = []
+    if os.path.exists(fp):
+        for ln in open(fp):
+            try:
+                out.append(json.loads(ln))
+            except Exception:
+                pass
+    return out
+
+
+def calibration_curves():
+    """Published SPC curves where they exist, v12cal rows for everything else.
+
+    A (target, axis, seed, variant) present in both comes from the PUBLISHED
+    panel: the v12cal row there is a replay point, checked by
+    `v12_analyze.py --check-replay`, not a second measurement to average in.
+    """
+    pub = published_spc_rows()
+    have = {(r["target"], r["axis"], r["seed"], r["variant"]) for r in pub}
+    new = [r for r in _rows(CAL_PANEL, "removal.jsonl")
+           if (r["target"], r["axis"], r["seed"], r["variant"]) not in have]
+    return curves_from_rows(pub + new)
 
 
 def geometries(panel):
@@ -226,7 +272,8 @@ def predict_p(rule, params, geom, margin=1.0):
 
 # ---------------------------------------------------------------- fit ----
 def calibration(rho, floor):
-    cv, gm = curves(CAL_PANEL), geometries(CAL_PANEL)
+    cv, gm = calibration_curves(), geometries(CAL_PANEL)
+    cv = {c: v for c, v in cv.items() if c in gm}      # a cell needs its geometry
     if not cv:
         raise SystemExit(f"no calibration rows in {RESULTS}/{CAL_PANEL}; "
                          "run configs/v12/opsel_calib.yaml first")
@@ -421,9 +468,15 @@ def cmd_validate(a):
 
 # -------------------------------------------------------------- utils ----
 def _input_shas(panel):
-    return {os.path.basename(p): file_sha(p)
-            for p in sorted(glob.glob(os.path.join(RESULTS, panel, "*.jsonl")))
-            if os.path.basename(p) in ("removal.jsonl", "geometry.jsonl")}
+    out = {os.path.basename(p): file_sha(p)
+           for p in sorted(glob.glob(os.path.join(RESULTS, panel, "*.jsonl")))
+           if os.path.basename(p) in ("removal.jsonl", "geometry.jsonl")}
+    if panel == CAL_PANEL:
+        for sub, _r in PUBLISHED_SPC:
+            fp = os.path.join(REPO, "results_v9", "v8spc", sub, "removal.jsonl")
+            if os.path.exists(fp):
+                out[f"published_v8spc_{sub}"] = file_sha(fp)
+    return out
 
 
 def _now():

@@ -1315,3 +1315,29 @@ configured), never a selection criterion. The registered gate stays at 200.
 BOTH OUTCOMES, WRITTEN NOW. PASS -> the method section replaces "fixed 1%"
 with the rule. FAIL -> 1% stays a constant, the rule is reported as a negative
 result, and the paper makes no geometry-predicts-sparsity claim.
+
+## v12.B — Cost amendment (2026-09-23, before any v12 result exists)
+
+Made ~3 minutes into the first v12cal unit, which had produced one geometry row
+(qwen|occ_gender|s0) and no removal, trace or evaluation output of any kind. No
+v12 result of any panel had been seen. Nothing below changes an estimand,
+D1-D6, or the held-out criterion; it removes measurements that no registered
+claim reads.
+
+v12cal. The six occ_gender cells take their sparsity curves from the published,
+re-scored panel results_v9/v8spc/{small,big} instead of re-measuring them. Each
+unit still trains ΔW (for the geometry) and measures s0.99 on the frozen grid,
+which is the published C-ref: a per-unit proof that the retrained ΔW is the one
+behind the published curve (make v12-check). A key present in both sources is
+read from the published panel. The five bbq_Age cells keep the full grid
+(+99.95%). Dropped from v12cal: fp, C-a@0.01, adaptive α, MMLU-1000.
+Consequence stated now: the occ curves have no 99.95% point, so a 7-9B occ
+cell that holds rho to 99.9% is censored at p = 0.001 (labelled, per v12.A).
+
+v12big. Grid {0, .9, .95, .99, .995, .999, .9995} (drops .5 and .97; the
+verdict reads R(p*) directly and never those two points). Adaptive α on s0.99,
+pstar, C-a@0.01 only. MMLU-1000 at the selected points of s0.99 and pstar.
+
+v12dec1k, v12frontier. MMLU-1000 at each unit's SELECTED configuration only
+(does the 200-item choice survive a 20-item budget?), not at every α/config;
+the 1000-item argmax is therefore not recomputed. IFEval unchanged.

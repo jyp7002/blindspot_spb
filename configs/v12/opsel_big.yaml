@@ -27,9 +27,9 @@
 # SEED 0 x occ_gender IS A REPLAY. v11big measured C-ref at 1% for both cells;
 # `s0.99` here is the same construction and must reproduce it.
 #
-# COST. Per unit: 11 variants x 4 frozen α + 5 adaptive variants x ~13 calib
-# probes + MMLU-1000 at the adaptive/frozen points of 4 variants -- roughly 2.5x
-# a v11big DEC unit. 12 units. Run gemma27b first (headroom), as in v11.
+# COST (amended §v12.B). Per unit: 10 variants x 4 frozen α (40 evals, about a
+# v11big DEC unit) + 3 adaptive variants x ~13 calibration probes + 4 MMLU-1000
+# reads -- roughly 2x a v11big unit. 12 units. Run gemma27b first (headroom).
 
 panel: v12big
 kind: opsel
@@ -43,15 +43,19 @@ alphas: [2, 4, 8, 16]
 seeds: [0, 1, 2]
 mmlu_n: 200
 
-sparsities: [0.0, 0.5, 0.9, 0.95, 0.97, 0.99, 0.995, 0.999, 0.9995]   # published SPC grid + 99.95% (7-9B never left 90% retention by 99.9%)
+# Amended §v12.B: the grid you asked for (dense -> 90/95/99/99.5/99.9) plus
+# 99.95%; 50% and 97% dropped (neither enters the held-out verdict, which reads
+# R(p*) directly). Adaptive α only where it carries a claim: the published
+# operating point, the predicted one, and the random-support arm
+# (Delta_selection under α*). MMLU-1000 at the selected points of those two.
+sparsities: [0.0, 0.9, 0.95, 0.99, 0.995, 0.999, 0.9995]
 extra_variants: [fp, pstar, "C-a@0.01"]
-adaptive_variants: [fp, s0.0, s0.99, pstar, "C-a@0.01"]
+adaptive_variants: [s0.99, pstar, "C-a@0.01"]
 alpha_ladder: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
 refine_steps: 3
 calib_n: 200
-mmlu1k_variants: [fp, s0.0, s0.99, pstar]
-mmlu1k_all_alphas: false  # 1000 items at 27-32B is the expensive probe; read
-                          # the selected points only
+mmlu1k_variants: [s0.99, pstar]
+mmlu1k_all_alphas: false  # selected points only
 pstar_file: results/v12/pstar_prediction.json
 
 cells:

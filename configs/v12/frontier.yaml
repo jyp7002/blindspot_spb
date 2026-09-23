@@ -11,7 +11,8 @@
 # WHAT IT ADDS. IFEval for steering and SentenceDebias, under the conditions the
 # edit's IFEval arm used (seed 0, first 200 of 541 prompts, the SELECTED
 # configuration active during generation) -- the operational comparison Table 3
-# needs. And MMLU-1000 at every configuration of every method.
+# needs. And MMLU-1000 at each method's SELECTED configuration (amendment
+# §v12.B; set mmlu1k_all_configs: true to read every configuration instead).
 #
 # REPLAY GUARD. All 8 cells x 3 methods x 3 seeds are re-measured, not just the
 # four as-run edit cells, so every method's published values are replayed:
@@ -36,6 +37,7 @@ mmlu_n: 200
 
 methods: [steering, sentdebias, edit]
 mmlu1k: true
+mmlu1k_all_configs: false
 ifeval_seeds: [0]
 ifeval_limit: 200
 eval_batch: 6

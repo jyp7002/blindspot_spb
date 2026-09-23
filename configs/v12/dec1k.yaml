@@ -4,9 +4,10 @@
 # 15.1% of probes sit within one item of that boundary and names >= 1000 items
 # as the forward fix. Re-running every panel at 1000 is a v12-scale program
 # (experiments_v11.md §II). This re-reads only the two conditions the headline
-# Delta_selection is made of, on the 10 published cells, and records MMLU-1000
-# at EVERY frozen α so the argmax the 1000-item gate would itself have chosen
-# can be recomputed -- not only whether the 200-item choice survives.
+# Delta_selection is made of, on the 10 published cells, at each unit's SELECTED
+# α (amendment §v12.B): does the 200-item choice survive a 20-item budget?
+# mmlu1k_all_alphas: true would also recompute the argmax a 1000-item gate
+# itself selects, at ~4x the MMLU cost.
 #
 # REPRODUCTION GUARD. s0.99 is C-ref (binarize at 0.99 is bit-identical to
 # v8_edits C-ref, v8_edits.selftest) and C-a@0.01 is DEC's C-a with the same
@@ -29,7 +30,7 @@ sparsities: [0.99]
 extra_variants: ["C-a@0.01"]
 adaptive_variants: []
 mmlu1k_variants: [s0.99, "C-a@0.01"]
-mmlu1k_all_alphas: true
+mmlu1k_all_alphas: false
 
 cells:
   - {target: gemma,  hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: occ_gender}

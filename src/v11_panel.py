@@ -57,7 +57,8 @@ OPSEL_KEYS = ("phase", "sparsities", "extra_variants", "adaptive_variants",
               "mmlu1k_variants", "alpha_ladder", "refine_steps", "pstar_file",
               "calib_n", "mmlu1k_all_alphas")
 # v12: "frontier" = Table A methods re-measured with traces (run_frontier.py)
-FRONTIER_KEYS = ("methods", "mmlu1k", "ifeval_seeds", "ifeval_limit", "eval_batch")
+FRONTIER_KEYS = ("methods", "mmlu1k", "mmlu1k_all_configs", "ifeval_seeds",
+                 "ifeval_limit", "eval_batch")
 
 
 # --------------------------------------------------------------- config ----
@@ -167,10 +168,15 @@ def expand(cfg, only=None):
                                       cfg.get("ifeval_limit", 200)),
                 config=os.path.relpath(cfg["_path"], REPO),
             ))
-            if cfg["kind"] == "opsel":
-                units[-1].update({k: cfg[k] for k in OPSEL_KEYS if k in cfg})
-            if cfg["kind"] == "frontier":
-                units[-1].update({k: cfg[k] for k in FRONTIER_KEYS if k in cfg})
+            # v12: panel-level run options, each overridable per cell (the
+            # calibration panel replays published curves on some cells and
+            # measures new ones on others, so their variant lists differ).
+            keys = {"opsel": OPSEL_KEYS, "frontier": FRONTIER_KEYS}.get(cfg["kind"], ())
+            for k in keys:
+                if k in cell:
+                    units[-1][k] = cell[k]
+                elif k in cfg:
+                    units[-1][k] = cfg[k]
     return units
 
 

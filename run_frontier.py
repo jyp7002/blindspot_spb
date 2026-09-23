@@ -74,6 +74,9 @@ ALPHAS = (2, 4, 8, 16)
 STEER_DEPTHS, STEER_STRENGTHS = [0.50, 0.75], [0.02, 0.04]
 SD_DEPTHS, SD_RANKS = [0.50, 0.75], [1, 2]
 MMLU1K = True
+MMLU1K_ALL_CONFIGS = False      # True: read MMLU-1000 at every configuration, so
+                                # the 1000-item argmax can be recomputed; False
+                                # (amendment §v12.B): the selected one only
 IFEVAL_SEEDS = [0]
 IFEVAL_LIMIT = 200
 BATCH = 6
@@ -228,7 +231,7 @@ def run_method(model, tok, fam, dn, ax, s, method, pre, pre_1k, mmlu, wt, mmlu1k
         try:
             post = C.fast_eval(model, tok, ax, mmlu, wt, BATCH)
             p1k = (C.eval_mmlu(model, tok, mmlu1k, batch_size=BATCH, n_rot=2)["mmlu_acc"]
-                   if MMLU1K else None)
+                   if MMLU1K and MMLU1K_ALL_CONFIGS else None)
         finally:
             undo()
         ok = C.collateral_ok(pre, post)
@@ -253,8 +256,26 @@ def run_method(model, tok, fam, dn, ax, s, method, pre, pre_1k, mmlu, wt, mmlu1k
                                         for lab, rw in results])
     best1k, best1k_label = (S.frozen_argmax(
         [(lab, rw["collateral_ok_1k"], rw["bias_reduction"]) for lab, rw in results])
-        if MMLU1K else (None, None))
+        if MMLU1K and MMLU1K_ALL_CONFIGS else (None, None))
     sel = dict(results)[best_label] if best_label else None
+    sel_1k = None
+    if MMLU1K and sel is not None:
+        if "post_mmlu1k" in sel:
+            p1k = sel["post_mmlu1k"]
+        else:
+            undo = dict(cfgs)[best_label]()
+            try:
+                p1k = C.eval_mmlu(model, tok, mmlu1k, batch_size=BATCH,
+                                  n_rot=2)["mmlu_acc"]
+            finally:
+                undo()
+        drop = (v9_gate.items_from_acc(pre_1k, 1000)
+                - v9_gate.items_from_acc(p1k, 1000))
+        mm_ok = v9_gate.mmlu_ok(pre_1k, p1k, n_items=1000)
+        sel_1k = dict(pre=pre_1k, post=p1k, n_items=1000, dmmlu_items=int(drop),
+                      budget_items=v9_gate.allowed_drop_items(1000),
+                      mmlu_ok=bool(mm_ok),
+                      ok=bool(mm_ok and v9_gate.ppl_ok(pre["ppl"], sel["post_ppl"])))
     if need_sel:
         _append("removal.jsonl", dict(
             key, row="select", removal=best, config=best_label,
@@ -262,6 +283,7 @@ def run_method(model, tok, fam, dn, ax, s, method, pre, pre_1k, mmlu, wt, mmlu1k
             n_configs=len(results),
             dmmlu_items=sel["dmmlu_items"] if sel else None,
             ppl_ratio=sel["ppl_ratio"] if sel else None,
+            mmlu1k_selected=sel_1k,
             removal_1k_gate=best1k, config_1k_gate=best1k_label))
     print(f"[frontier] {fam:6s} {ax:20s} s{s} {method:10s} best={best:+.4f} "
           f"@{best_label}  (1000-item gate: {best1k if best1k is None else f'{best1k:+.4f}'}"

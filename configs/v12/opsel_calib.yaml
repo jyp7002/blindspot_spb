@@ -1,23 +1,24 @@
-# v12 OPSEL-CALIB — the population the operating-point rules are FIT on.
+# v12 OPSEL-CALIB — the population the p* rule is FIT on.  (amended §v12.B)
 #
-# WHAT THIS IS. The sparsity/binarization curve of the published SPC panel,
-# replayed on the same six occ_gender cells, plus five bbq_Age cells so the p*
-# rule is not fit on a single axis. Every unit also records its |ΔW| geometry,
-# runs the adaptive-α rule at every sparsity level (so α*(p) is a measured
-# curve, not an assumption), and the DEC random-support arm C-a@0.01 (so
-# Delta_selection can be re-read under adaptive α).
+# WHAT THIS MEASURES, AND WHAT IT DELIBERATELY DOES NOT.
+# The p* rule needs two things per calibration cell: the |ΔW| geometry and the
+# sparsity curve. Nothing else here is needed for the fit, so nothing else runs:
 #
-# REPRODUCTION GUARD. The six occ_gender cells are the published SPC panel
-# (results_v9/v8spc/{small,big}): same targets, designers, seeds, training call,
-# frozen α grid. `python3 src/v12_analyze.py --check-replay` compares every
-# `s<sp>` frozen removal against the RE-SCORED tree (results_v9, not results/:
-# the as-run SPC tree carries the old float gate). Do not fit anything until it
-# passes.
+#   occ_gender, 6 cells   curves ALREADY PUBLISHED (results_v9/v8spc). Only the
+#                         geometry is new, plus s0.99 on the frozen grid -- the
+#                         published C-ref -- so every unit also proves the
+#                         retrained ΔW is the one behind the published curve.
+#   bbq_Age, 5 cells      no published curve: the full SPC grid (+99.95%) on the
+#                         frozen α grid.
 #
-# NOTHING HERE IS HELD OUT. The held-out cells are configs/v12/opsel_big.yaml,
-# and v12_pstar.py refuses to predict for a target that appears here.
+# NOT HERE (and why that loses nothing): adaptive α (the rule has no fitted
+# parameter; it is measured on the 27/32B tier), fp and C-a (binarization
+# retention and Delta_selection are published at <=9B and re-measured at
+# 27/32B), MMLU-1000 (dec1k re-reads the headline cells).
 #
-# Size: 11 cells x 3 seeds = 33 units, all <= 9B. Fits the L40S (46 GB).
+# REPLAY GUARD. `make v12-check`: every s0.99 row must equal results_v9/v8spc.
+#
+# Size: 33 units. occ units = training + 4 evals; bbq units = training + 36.
 
 panel: v12cal
 kind: opsel
@@ -25,36 +26,29 @@ out_panel: v12cal
 base_on: v8spc
 
 phase: full
-density: 0.01             # unused by opsel variants; kept for the loader
-scale_mode: ref_tensor     # C-a@0.01 uses ref_tensor, exactly like DEC
-alphas: [2, 4, 8, 16]      # frozen grid: the published estimand
+density: 0.01
+scale_mode: ref_tensor
+alphas: [2, 4, 8, 16]
 seeds: [0, 1, 2]
 mmlu_n: 200
 
-sparsities: [0.0, 0.5, 0.9, 0.95, 0.97, 0.99, 0.995, 0.999, 0.9995]   # published SPC grid + 99.95% (7-9B never left 90% retention by 99.9%)
-extra_variants: [fp, "C-a@0.01"]
-# α*(p) is measured along the WHOLE curve here: this is the data the joint
-# operating-point rule is built from. Small models, so affordable.
-adaptive_variants: [fp, s0.0, s0.5, s0.9, s0.95, s0.97, s0.99, s0.995, s0.999, "C-a@0.01"]
-alpha_ladder: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
-refine_steps: 3
-calib_n: 200
-mmlu1k_variants: [fp, s0.0, s0.99]
-mmlu1k_all_alphas: true
+sparsities: [0.0, 0.5, 0.9, 0.95, 0.97, 0.99, 0.995, 0.999, 0.9995]
+extra_variants: []
+adaptive_variants: []
+mmlu1k_variants: []
 
 cells:
-  # ---- published SPC, replayed (results_v9/v8spc/small) ----
-  - {target: qwen,    hf: Qwen/Qwen2.5-3B-Instruct,          designer: qwen_3b,  axis: occ_gender, published: true}
-  - {target: phi,     hf: microsoft/Phi-3.5-mini-instruct,   designer: phi_3b,   axis: occ_gender, published: true}
-  - {target: gemma,   hf: google/gemma-2-2b-it,              designer: gemma_3b, axis: occ_gender, published: true}
-  - {target: llama,   hf: meta-llama/Llama-3.2-3B-Instruct,  designer: llama_3b, axis: occ_gender, published: true}
-  # ---- published SPC, replayed (results_v9/v8spc/big) ----
-  - {target: qwen7b,  hf: Qwen/Qwen2.5-7B-Instruct,          designer: qwen,     axis: occ_gender, published: true}
-  - {target: llama8b, hf: meta-llama/Llama-3.1-8B-Instruct,  designer: llama,    axis: occ_gender, published: true}
-  # ---- NEW: second axis, so the rule is not an occ_gender rule ----
+  # ---- published SPC curves: geometry + the s0.99 replay point only ----
+  - {target: qwen,    hf: Qwen/Qwen2.5-3B-Instruct,          designer: qwen_3b,  axis: occ_gender, published: true, sparsities: [0.99]}
+  - {target: phi,     hf: microsoft/Phi-3.5-mini-instruct,   designer: phi_3b,   axis: occ_gender, published: true, sparsities: [0.99]}
+  - {target: gemma,   hf: google/gemma-2-2b-it,              designer: gemma_3b, axis: occ_gender, published: true, sparsities: [0.99]}
+  - {target: llama,   hf: meta-llama/Llama-3.2-3B-Instruct,  designer: llama_3b, axis: occ_gender, published: true, sparsities: [0.99]}
+  - {target: qwen7b,  hf: Qwen/Qwen2.5-7B-Instruct,          designer: qwen,     axis: occ_gender, published: true, sparsities: [0.99]}
+  - {target: llama8b, hf: meta-llama/Llama-3.1-8B-Instruct,  designer: llama,    axis: occ_gender, published: true, sparsities: [0.99]}
+  # ---- NEW: second axis, full curve, so the rule is not an occ_gender rule ----
   - {target: qwen,    hf: Qwen/Qwen2.5-3B-Instruct,          designer: qwen_3b,  axis: bbq_Age}
   - {target: phi,     hf: microsoft/Phi-3.5-mini-instruct,   designer: phi_3b,   axis: bbq_Age}
   - {target: gemma,   hf: google/gemma-2-2b-it,              designer: gemma_3b, axis: bbq_Age}
   - {target: qwen7b,  hf: Qwen/Qwen2.5-7B-Instruct,          designer: qwen,     axis: bbq_Age}
   - {target: llama8b, hf: meta-llama/Llama-3.1-8B-Instruct,  designer: llama,    axis: bbq_Age,
-     note: "DEC C-ref +0.023: expected to fall under the dense-removal floor and be excluded from the fit (reported, not dropped)"}
+     note: "DEC C-ref +0.023: expected below the 0.05 floor -- reported, not fitted"}

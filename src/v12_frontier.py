@@ -272,6 +272,17 @@ def main():
                       cell_override=None if new else {"edit": edit_cells}),
     )
     if new:
+        surv = {}
+        for m in ("edit", "steering", "sentdebias"):
+            k1 = [r.get("mmlu1k_selected") for r in jl(os.path.join(RESULTS, PANEL,
+                                                                    "removal.jsonl"))
+                  if r.get("method") == m and r.get("row", "select") == "select"
+                  and r.get("mmlu1k_selected")]
+            surv[m] = dict(n=len(k1), fail_at_1000=sum(not x["ok"] for x in k1),
+                           median_drop_items_of_1000=statistics.median(
+                               [x["dmmlu_items"] for x in k1]) if k1 else None)
+        out["selected_points_at_1000"] = surv
+    if new and any(v is not None for v in arms["edit"]["sel1k"].values()):
         e1k = cell_mean(arms["edit"]["sel1k"])
         out["pooled_1000_item_gate"] = {
             "edit - steering": pooled(e1k, cell_mean(arms["steering"]["sel1k"])),
@@ -285,6 +296,9 @@ def main():
           f"{dpo_meta['n_trace_rows']} decisions flip; zeroed {dpo_meta['zeroed']}")
     for k, d in out["pooled"].items():
         print(f"  {k:24s} {V.fmt(d, 3)}")
+    for m, d in out.get("selected_points_at_1000", {}).items():
+        print(f"  {m:10s} selected points failing at 1000 items: "
+              f"{d['fail_at_1000']}/{d['n']}  (median drop {d['median_drop_items_of_1000']})")
     for k, d in out.get("pooled_1000_item_gate", {}).items():
         print(f"  {k:24s} {V.fmt(d, 3)}   [1000-item gate]")
     print("\nTable 3")

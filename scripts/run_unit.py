@@ -195,6 +195,7 @@ def _run_frontier(u):
     R.ALPHAS = tuple(u["alphas"])
     R.MMLU_N = u["mmlu_n"]
     for key, attr in (("methods", "METHODS"), ("mmlu1k", "MMLU1K"),
+                      ("mmlu1k_all_configs", "MMLU1K_ALL_CONFIGS"),
                       ("ifeval_seeds", "IFEVAL_SEEDS"),
                       ("ifeval_limit", "IFEVAL_LIMIT"), ("eval_batch", "BATCH")):
         if key in u:

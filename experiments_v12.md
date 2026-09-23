@@ -1,7 +1,10 @@
 # experiments_v12.md — OPERATING-POINT SELECTION (drafted 2026-09-23, nothing run)
 
-**Status:** registered as PREREGISTRATION.md §v12.A (2026-09-23), defaults D1–D6 frozen as coded. §VII is the
-block to freeze into `PREREGISTRATION.md` once §VI's open decisions are settled.
+**Status:** registered as PREREGISTRATION.md §v12.A (2026-09-23, before any
+run), D1–D6 frozen at the coded defaults. **Amended §v12.B** (cost, before any
+result): v12cal reuses the published occ curves and drops fp / C-a / α* /
+MMLU-1000; v12big drops 50%/97% and narrows α* and MMLU-1000; MMLU-1000 is read at
+selected points only everywhere. Where this file says otherwise, §v12.B wins.
 **Builds on:** v11 (`V11_FINDINGS.md`): DEC at 20 cells / 2.6–32B, α saturates at
 256, IFEval at 6 cells.
 
