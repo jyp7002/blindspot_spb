@@ -1,0 +1,635 @@
+{
+ "created": "2026-09-24T07:47:32+00:00",
+ "rho": 0.9,
+ "floor": 0.05,
+ "margin": 1.0,
+ "primary": "mass",
+ "params": {
+  "mass": {
+   "tau": 0.059262132296326535
+  },
+  "pr": {
+   "a": -4.000466398324806
+  },
+  "ent": {
+   "a": -4.329165991254561
+  },
+  "gini": {
+   "a": -34.276764015530084,
+   "b": 59.462495275512836
+  },
+  "fixed": {
+   "p": 0.01
+  }
+ },
+ "fit_cells": [
+  "gemma|bbq_Age",
+  "gemma|occ_gender",
+  "llama|occ_gender",
+  "llama8b|bbq_Age",
+  "llama8b|occ_gender",
+  "phi|bbq_Age",
+  "phi|occ_gender",
+  "qwen|bbq_Age",
+  "qwen|occ_gender",
+  "qwen7b|bbq_Age",
+  "qwen7b|occ_gender"
+ ],
+ "fit_targets": [
+  "gemma",
+  "llama",
+  "llama8b",
+  "phi",
+  "qwen",
+  "qwen7b"
+ ],
+ "calibration_cells": [
+  {
+   "cell": "gemma|bbq_Age",
+   "p_true": 0.003303649789865663,
+   "status": "ok",
+   "dense": 0.15276396965634997,
+   "p_true_first_failure": 0.37251221212903496,
+   "status_first_failure": "ok",
+   "n_seeds": 3
+  },
+  {
+   "cell": "gemma|occ_gender",
+   "p_true": 0.006598773469242956,
+   "status": "ok",
+   "dense": 0.6740844999008093,
+   "p_true_first_failure": 0.03540480538228371,
+   "status_first_failure": "ok",
+   "n_seeds": 3
+  },
+  {
+   "cell": "llama|occ_gender",
+   "p_true": 0.03003273960233765,
+   "status": "ok",
+   "dense": 0.747831318308103,
+   "p_true_first_failure": 0.03003273960233765,
+   "status_first_failure": "ok",
+   "n_seeds": 3
+  },
+  {
+   "cell": "llama8b|bbq_Age",
+   "p_true": 0.19334563129965113,
+   "status": "ok",
+   "dense": 0.0860693302707396,
+   "p_true_first_failure": 0.19334563129965113,
+   "status_first_failure": "ok",
+   "n_seeds": 3
+  },
+  {
+   "cell": "llama8b|occ_gender",
+   "p_true": 0.0010000000000000009,
+   "status": "censored",
+   "dense": 0.48706055900156775,
+   "p_true_first_failure": 0.0010000000000000009,
+   "status_first_failure": "censored",
+   "n_seeds": 3
+  },
+  {
+   "cell": "phi|bbq_Age",
+   "p_true": 0.008411764605665704,
+   "status": "ok",
+   "dense": 0.34383538892303694,
+   "p_true_first_failure": 0.16741629544341702,
+   "status_first_failure": "ok",
+   "n_seeds": 3
+  },
+  {
+   "cell": "phi|occ_gender",
+   "p_true": 0.23794946701694317,
+   "status": "ok",
+   "dense": 0.31627045470506016,
+   "p_true_first_failure": 0.23794946701694317,
+   "status_first_failure": "ok",
+   "n_seeds": 3
+  },
+  {
+   "cell": "qwen|bbq_Age",
+   "p_true": 0.0033712628690318676,
+   "status": "ok",
+   "dense": 0.27700280210246203,
+   "p_true_first_failure": 0.050265985869246695,
+   "status_first_failure": "ok",
+   "n_seeds": 3
+  },
+  {
+   "cell": "qwen|occ_gender",
+   "p_true": 0.008951839814005881,
+   "status": "ok",
+   "dense": 0.37820130432499927,
+   "p_true_first_failure": 0.008951839814005881,
+   "status_first_failure": "ok",
+   "n_seeds": 3
+  },
+  {
+   "cell": "qwen7b|bbq_Age",
+   "p_true": 0.029283299572962735,
+   "status": "ok",
+   "dense": 0.37402709705242215,
+   "p_true_first_failure": 0.633791793473941,
+   "status_first_failure": "ok",
+   "n_seeds": 3
+  },
+  {
+   "cell": "qwen7b|occ_gender",
+   "p_true": 0.0019829057963880593,
+   "status": "ok",
+   "dense": 0.6498586758632202,
+   "p_true_first_failure": 0.0019829057963880593,
+   "status_first_failure": "ok",
+   "n_seeds": 3
+  }
+ ],
+ "loo": {
+  "mass": {
+   "n": 11,
+   "median_abs_log2_err": 1.8116292731311578,
+   "frac_meets_rho": 0.45454545454545453,
+   "median_p_hat": 0.008753554420747994,
+   "per_cell": [
+    {
+     "cell": "gemma|bbq_Age",
+     "p_hat": 0.011597082723476962,
+     "p_true": 0.003303649789865663,
+     "log2_err": 1.8116292731311578,
+     "retention_at_p_hat": 1.0876180922133774,
+     "meets_rho": true
+    },
+    {
+     "cell": "gemma|occ_gender",
+     "p_hat": 0.008436975644056065,
+     "p_true": 0.006598773469242956,
+     "log2_err": 0.3545280446938785,
+     "retention_at_p_hat": 0.9755821281394307,
+     "meets_rho": true
+    },
+    {
+     "cell": "llama|occ_gender",
+     "p_hat": 0.007683813603613453,
+     "p_true": 0.03003273960233765,
+     "log2_err": -1.9666416571131584,
+     "retention_at_p_hat": 0.7747845168923274,
+     "meets_rho": false
+    },
+    {
+     "cell": "llama8b|bbq_Age",
+     "p_hat": 0.009195086298147206,
+     "p_true": 0.19334563129965113,
+     "log2_err": -4.394175241704174,
+     "retention_at_p_hat": 0.24551054300375647,
+     "meets_rho": false
+    },
+    {
+     "cell": "llama8b|occ_gender",
+     "p_hat": 0.009172281731786166,
+     "p_true": 0.0010000000000000009,
+     "log2_err": 3.1972806687879247,
+     "retention_at_p_hat": 1.4424681111605473,
+     "meets_rho": true
+    },
+    {
+     "cell": "phi|bbq_Age",
+     "p_hat": 0.0077146756697536205,
+     "p_true": 0.008411764605665704,
+     "log2_err": -0.12480297215621704,
+     "retention_at_p_hat": 0.868824013830664,
+     "meets_rho": false
+    },
+    {
+     "cell": "phi|occ_gender",
+     "p_hat": 0.006517091366482571,
+     "p_true": 0.23794946701694317,
+     "log2_err": -5.190283191798034,
+     "retention_at_p_hat": 0.27565982534447975,
+     "meets_rho": false
+    },
+    {
+     "cell": "qwen|bbq_Age",
+     "p_hat": 0.009463802712296333,
+     "p_true": 0.0033712628690318676,
+     "log2_err": 1.4891308751339198,
+     "retention_at_p_hat": 0.9189743422887976,
+     "meets_rho": true
+    },
+    {
+     "cell": "qwen|occ_gender",
+     "p_hat": 0.007725545792811977,
+     "p_true": 0.008951839814005881,
+     "log2_err": -0.21254736082673412,
+     "retention_at_p_hat": 0.721798421382832,
+     "meets_rho": false
+    },
+    {
+     "cell": "qwen7b|bbq_Age",
+     "p_hat": 0.009157716298952807,
+     "p_true": 0.029283299572962735,
+     "log2_err": -1.6770183453350649,
+     "retention_at_p_hat": 0.8642813041160227,
+     "meets_rho": false
+    },
+    {
+     "cell": "qwen7b|occ_gender",
+     "p_hat": 0.008753554420747994,
+     "p_true": 0.0019829057963880593,
+     "log2_err": 2.142252808982927,
+     "retention_at_p_hat": 1.019941760101799,
+     "meets_rho": true
+    }
+   ]
+  },
+  "pr": {
+   "n": 11,
+   "median_abs_log2_err": 1.746858909907447,
+   "frac_meets_rho": 0.45454545454545453,
+   "median_p_hat": 0.008704256026463488,
+   "per_cell": [
+    {
+     "cell": "gemma|bbq_Age",
+     "p_hat": 0.010270767736841397,
+     "p_true": 0.003303649789865663,
+     "log2_err": 1.6364113625680408,
+     "retention_at_p_hat": 1.1132854685341025,
+     "meets_rho": true
+    },
+    {
+     "cell": "gemma|occ_gender",
+     "p_hat": 0.008704256026463488,
+     "p_true": 0.006598773469242956,
+     "log2_err": 0.3995231005534615,
+     "retention_at_p_hat": 0.9851746614482026,
+     "meets_rho": true
+    },
+    {
+     "cell": "llama|occ_gender",
+     "p_hat": 0.007651626875158077,
+     "p_true": 0.03003273960233765,
+     "log2_err": -1.9726976555404423,
+     "retention_at_p_hat": 0.774031171231738,
+     "meets_rho": false
+    },
+    {
+     "cell": "llama8b|bbq_Age",
+     "p_hat": 0.008773907771775637,
+     "p_true": 0.19334563129965113,
+     "log2_err": -4.461818815117488,
+     "retention_at_p_hat": 0.23319730031646274,
+     "meets_rho": false
+    },
+    {
+     "cell": "llama8b|occ_gender",
+     "p_hat": 0.008806244863685657,
+     "p_true": 0.0010000000000000009,
+     "log2_err": 3.1385269599588357,
+     "retention_at_p_hat": 1.4473468183742204,
+     "meets_rho": true
+    },
+    {
+     "cell": "phi|bbq_Age",
+     "p_hat": 0.007049404518705169,
+     "p_true": 0.008411764605665704,
+     "log2_err": -0.2549070838349351,
+     "retention_at_p_hat": 0.8363237943551823,
+     "meets_rho": false
+    },
+    {
+     "cell": "phi|occ_gender",
+     "p_hat": 0.006427766950529171,
+     "p_true": 0.23794946701694317,
+     "log2_err": -5.210193790150879,
+     "retention_at_p_hat": 0.27269206164227094,
+     "meets_rho": false
+    },
+    {
+     "cell": "qwen|bbq_Age",
+     "p_hat": 0.008985915304363878,
+     "p_true": 0.0033712628690318676,
+     "log2_err": 1.4143763403486038,
+     "retention_at_p_hat": 0.9238009977737004,
+     "meets_rho": true
+    },
+    {
+     "cell": "qwen|occ_gender",
+     "p_hat": 0.008098014374849442,
+     "p_true": 0.008951839814005881,
+     "log2_err": -0.14461601671852767,
+     "retention_at_p_hat": 0.778752658361275,
+     "meets_rho": false
+    },
+    {
+     "cell": "qwen7b|bbq_Age",
+     "p_hat": 0.008724952682277307,
+     "p_true": 0.029283299572962735,
+     "log2_err": -1.746858909907447,
+     "retention_at_p_hat": 0.8635334435211711,
+     "meets_rho": false
+    },
+    {
+     "cell": "qwen7b|occ_gender",
+     "p_hat": 0.008499095814990696,
+     "p_true": 0.0019829057963880593,
+     "log2_err": 2.0996932269850093,
+     "retention_at_p_hat": 1.0197601494702158,
+     "meets_rho": true
+    }
+   ]
+  },
+  "ent": {
+   "n": 11,
+   "median_abs_log2_err": 1.7767184301958294,
+   "frac_meets_rho": 0.45454545454545453,
+   "median_p_hat": 0.00854622788483306,
+   "per_cell": [
+    {
+     "cell": "gemma|bbq_Age",
+     "p_hat": 0.009544514041843633,
+     "p_true": 0.003303649789865663,
+     "log2_err": 1.530610985765931,
+     "retention_at_p_hat": 1.1103563445009712,
+     "meets_rho": true
+    },
+    {
+     "cell": "gemma|occ_gender",
+     "p_hat": 0.00882487960553287,
+     "p_true": 0.006598773469242956,
+     "log2_err": 0.4193787043756965,
+     "retention_at_p_hat": 0.9894076941090568,
+     "meets_rho": true
+    },
+    {
+     "cell": "llama|occ_gender",
+     "p_hat": 0.007597503675485935,
+     "p_true": 0.03003273960233765,
+     "log2_err": -1.9829387114991577,
+     "retention_at_p_hat": 0.7727572186112102,
+     "meets_rho": false
+    },
+    {
+     "cell": "llama8b|bbq_Age",
+     "p_hat": 0.008569951309718755,
+     "p_true": 0.19334563129965113,
+     "log2_err": -4.495751348780969,
+     "retention_at_p_hat": 0.22702051956834562,
+     "meets_rho": false
+    },
+    {
+     "cell": "llama8b|occ_gender",
+     "p_hat": 0.008607981816179023,
+     "p_true": 0.0010000000000000009,
+     "log2_err": 3.1056750302950866,
+     "retention_at_p_hat": 1.4500747303550596,
+     "meets_rho": true
+    },
+    {
+     "cell": "phi|bbq_Age",
+     "p_hat": 0.006777512168865133,
+     "p_true": 0.008411764605665704,
+     "log2_err": -0.3116526799493396,
+     "retention_at_p_hat": 0.8221486518159564,
+     "meets_rho": false
+    },
+    {
+     "cell": "phi|occ_gender",
+     "p_hat": 0.006482266497523484,
+     "p_true": 0.23794946701694317,
+     "log2_err": -5.1980130791456505,
+     "retention_at_p_hat": 0.27450765107598807,
+     "meets_rho": false
+    },
+    {
+     "cell": "qwen|bbq_Age",
+     "p_hat": 0.008711653691230841,
+     "p_true": 0.0033712628690318676,
+     "log2_err": 1.369657481033427,
+     "retention_at_p_hat": 0.926688348062376,
+     "meets_rho": true
+    },
+    {
+     "cell": "qwen|occ_gender",
+     "p_hat": 0.008307752266226934,
+     "p_true": 0.008951839814005881,
+     "log2_err": -0.10772602442635827,
+     "retention_at_p_hat": 0.8096815526842617,
+     "meets_rho": false
+    },
+    {
+     "cell": "qwen7b|bbq_Age",
+     "p_hat": 0.00854622788483306,
+     "p_true": 0.029283299572962735,
+     "log2_err": -1.7767184301958294,
+     "retention_at_p_hat": 0.8632137044305498,
+     "meets_rho": false
+    },
+    {
+     "cell": "qwen7b|occ_gender",
+     "p_hat": 0.008429168699915496,
+     "p_true": 0.0019829057963880593,
+     "log2_err": 2.0877742171106166,
+     "retention_at_p_hat": 1.0197092885639398,
+     "meets_rho": true
+    }
+   ]
+  },
+  "gini": {
+   "n": 11,
+   "median_abs_log2_err": 1.6703378131577495,
+   "frac_meets_rho": 0.5454545454545454,
+   "median_p_hat": 0.009743301616368908,
+   "per_cell": [
+    {
+     "cell": "gemma|bbq_Age",
+     "p_hat": 0.001924508717140828,
+     "p_true": 0.003303649789865663,
+     "log2_err": -0.7795705531228322,
+     "retention_at_p_hat": 0.7807841116239942,
+     "meets_rho": false
+    },
+    {
+     "cell": "gemma|occ_gender",
+     "p_hat": 0.044651186694255655,
+     "p_true": 0.006598773469242956,
+     "log2_err": 2.7584287212346217,
+     "retention_at_p_hat": 0.9983750289878544,
+     "meets_rho": true
+    },
+    {
+     "cell": "llama|occ_gender",
+     "p_hat": 0.009435679175460647,
+     "p_true": 0.03003273960233765,
+     "log2_err": -1.6703378131577495,
+     "retention_at_p_hat": 0.8116437099287873,
+     "meets_rho": false
+    },
+    {
+     "cell": "llama8b|bbq_Age",
+     "p_hat": 0.007588788356079102,
+     "p_true": 0.19334563129965113,
+     "log2_err": -4.671168796532264,
+     "retention_at_p_hat": 0.195089066264576,
+     "meets_rho": false
+    },
+    {
+     "cell": "llama8b|occ_gender",
+     "p_hat": 0.006409408773139571,
+     "p_true": 0.0010000000000000009,
+     "log2_err": 2.680191283614932,
+     "retention_at_p_hat": 1.4854054467574502,
+     "meets_rho": true
+    },
+    {
+     "cell": "phi|bbq_Age",
+     "p_hat": 0.009743301616368908,
+     "p_true": 0.008411764605665704,
+     "log2_err": 0.21200224863269362,
+     "retention_at_p_hat": 0.9529585077747029,
+     "meets_rho": true
+    },
+    {
+     "cell": "phi|occ_gender",
+     "p_hat": 0.014800640944606862,
+     "p_true": 0.23794946701694317,
+     "log2_err": -4.006923664502828,
+     "retention_at_p_hat": 0.46423552318127514,
+     "meets_rho": false
+    },
+    {
+     "cell": "qwen|bbq_Age",
+     "p_hat": 0.005588658511001544,
+     "p_true": 0.0033712628690318676,
+     "log2_err": 0.7292128997243884,
+     "retention_at_p_hat": 0.9680397571779437,
+     "meets_rho": true
+    },
+    {
+     "cell": "qwen|occ_gender",
+     "p_hat": 0.020998989732622264,
+     "p_true": 0.008951839814005881,
+     "log2_err": 1.2300637953043967,
+     "retention_at_p_hat": 1.488885312425333,
+     "meets_rho": true
+    },
+    {
+     "cell": "qwen7b|bbq_Age",
+     "p_hat": 0.010082877862266578,
+     "p_true": 0.029283299572962735,
+     "log2_err": -1.5381706495754035,
+     "retention_at_p_hat": 0.8659045381682867,
+     "meets_rho": false
+    },
+    {
+     "cell": "qwen7b|occ_gender",
+     "p_hat": 0.015901432409758942,
+     "p_true": 0.0019829057963880593,
+     "log2_err": 3.003468685171771,
+     "retention_at_p_hat": 1.0084323730319076,
+     "meets_rho": true
+    }
+   ]
+  },
+  "fixed": {
+   "n": 11,
+   "median_abs_log2_err": 1.5865360843000096,
+   "frac_meets_rho": 0.6363636363636364,
+   "median_p_hat": 0.01,
+   "per_cell": [
+    {
+     "cell": "gemma|bbq_Age",
+     "p_hat": 0.01,
+     "p_true": 0.003303649789865663,
+     "log2_err": 1.5978673358548738,
+     "retention_at_p_hat": 1.1189317180264255,
+     "meets_rho": true
+    },
+    {
+     "cell": "gemma|occ_gender",
+     "p_hat": 0.01,
+     "p_true": 0.006598773469242956,
+     "log2_err": 0.599730202883262,
+     "retention_at_p_hat": 1.0278569797843475,
+     "meets_rho": true
+    },
+    {
+     "cell": "llama|occ_gender",
+     "p_hat": 0.01,
+     "p_true": 0.03003273960233765,
+     "log2_err": -1.5865360843000096,
+     "retention_at_p_hat": 0.8220683607180675,
+     "meets_rho": false
+    },
+    {
+     "cell": "llama8b|bbq_Age",
+     "p_hat": 0.01,
+     "p_true": 0.19334563129965113,
+     "log2_err": -4.273110261565472,
+     "retention_at_p_hat": 0.26754814992129405,
+     "meets_rho": false
+    },
+    {
+     "cell": "llama8b|occ_gender",
+     "p_hat": 0.01,
+     "p_true": 0.0010000000000000009,
+     "log2_err": 3.321928094887361,
+     "retention_at_p_hat": 1.4321178148303852,
+     "meets_rho": true
+    },
+    {
+     "cell": "phi|bbq_Age",
+     "p_hat": 0.01,
+     "p_true": 0.008411764605665704,
+     "log2_err": 0.24951961654738994,
+     "retention_at_p_hat": 0.9623304075220457,
+     "meets_rho": true
+    },
+    {
+     "cell": "phi|occ_gender",
+     "p_hat": 0.01,
+     "p_true": 0.23794946701694317,
+     "log2_err": -4.572583317896488,
+     "retention_at_p_hat": 0.3677307532059711,
+     "meets_rho": false
+    },
+    {
+     "cell": "qwen|bbq_Age",
+     "p_hat": 0.01,
+     "p_true": 0.0033712628690318676,
+     "log2_err": 1.568638971254657,
+     "retention_at_p_hat": 0.9138407649167033,
+     "meets_rho": true
+    },
+    {
+     "cell": "qwen|occ_gender",
+     "p_hat": 0.01,
+     "p_true": 0.008951839814005881,
+     "log2_err": 0.15974387421279995,
+     "retention_at_p_hat": 1.0339306705499347,
+     "meets_rho": true
+    },
+    {
+     "cell": "qwen7b|bbq_Age",
+     "p_hat": 0.01,
+     "p_true": 0.029283299572962735,
+     "log2_err": -1.5500781222473619,
+     "retention_at_p_hat": 0.8656405942553594,
+     "meets_rho": false
+    },
+    {
+     "cell": "qwen7b|occ_gender",
+     "p_hat": 0.01,
+     "p_true": 0.0019829057963880593,
+     "log2_err": 2.334311955047307,
+     "retention_at_p_hat": 1.020761316619526,
+     "meets_rho": true
+    }
+   ]
+  }
+ },
+ "inputs": {
+  "geometry.jsonl": "d3c553da1b3aa767f956a481333e7042076e54fbaca3f2544edf3b3813a7b103",
+  "removal.jsonl": "d427088bd91dfeb213c1e4e8cc4a8717021ee4ddc934e57e16d3dca4709aa6b6",
+  "published_v8spc_small": "5aa72e9e03a6d792db08784e379f3f7110c466741ba282da07d83723b67f9f5c",
+  "published_v8spc_big": "d7c5b4899aec3760ab5483fff285287436e825c0c76abffb4dfd7c02c45d89ee"
+ }
+}

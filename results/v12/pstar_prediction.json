@@ -1,0 +1,121 @@
+{
+ "created": "2026-09-24T07:49:31+00:00",
+ "fit": {
+  "targets": [
+   "gemma",
+   "llama",
+   "llama8b",
+   "phi",
+   "qwen",
+   "qwen7b"
+  ],
+  "cells": [
+   "gemma|bbq_Age",
+   "gemma|occ_gender",
+   "llama|occ_gender",
+   "llama8b|bbq_Age",
+   "llama8b|occ_gender",
+   "phi|bbq_Age",
+   "phi|occ_gender",
+   "qwen|bbq_Age",
+   "qwen|occ_gender",
+   "qwen7b|bbq_Age",
+   "qwen7b|occ_gender"
+  ],
+  "params": {
+   "mass": {
+    "tau": 0.059262132296326535
+   },
+   "pr": {
+    "a": -4.000466398324806
+   },
+   "ent": {
+    "a": -4.329165991254561
+   },
+   "gini": {
+    "a": -34.276764015530084,
+    "b": 59.462495275512836
+   },
+   "fixed": {
+    "p": 0.01
+   }
+  },
+  "rho": 0.9,
+  "floor": 0.05,
+  "margin": 1.0,
+  "primary": "mass",
+  "fit_file_sha": "6040b8a13eb01b9e50031570ff407e2e6f1cd85a9d47772f8852202e151929fe"
+ },
+ "heldout_panel": "v12big",
+ "cells": {
+  "gemma27b|bbq_Age": {
+   "p_star": 0.008444774475956525,
+   "rule": "mass",
+   "per_rule": {
+    "mass": 0.008444774475956525,
+    "pr": 0.008214766614056738,
+    "ent": 0.008187841617418657,
+    "gini": 0.03523984923392129,
+    "fixed": 0.01
+   },
+   "geom_shas_by_seed": {
+    "0": "bd183cf706bda958",
+    "1": "5fa3b13173a7aef1",
+    "2": "b8fbb494fe88d7da"
+   },
+   "mass_at_1pct": 0.06742960178094638
+  },
+  "gemma27b|occ_gender": {
+   "p_star": 0.007177830772533093,
+   "rule": "mass",
+   "per_rule": {
+    "mass": 0.007177830772533093,
+    "pr": 0.007553637172150566,
+    "ent": 0.007865326684349706,
+    "gini": 0.09853647416611191,
+    "fixed": 0.01
+   },
+   "geom_shas_by_seed": {
+    "0": "1276c99b940433ed",
+    "1": "c179895de40c6392",
+    "2": "ed7db1c6d8afd20e"
+   },
+   "mass_at_1pct": 0.0759350471390307
+  },
+  "qwen32b|bbq_Age": {
+   "p_star": 0.009040963487801956,
+   "rule": "mass",
+   "per_rule": {
+    "mass": 0.009040963487801956,
+    "pr": 0.008626457474956746,
+    "ent": 0.008483404078123317,
+    "gini": 0.011967917797433723,
+    "fixed": 0.01
+   },
+   "geom_shas_by_seed": {
+    "0": "bf9f0a7c860e1813",
+    "1": "21f7f4c4574e8e41",
+    "2": "3b8e983c900744dc"
+   },
+   "mass_at_1pct": 0.06394690568301203
+  },
+  "qwen32b|occ_gender": {
+   "p_star": 0.008488109208209828,
+   "rule": "mass",
+   "per_rule": {
+    "mass": 0.008488109208209828,
+    "pr": 0.00832726532291113,
+    "ent": 0.008334766400840405,
+    "gini": 0.019820595690990532,
+    "fixed": 0.01
+   },
+   "geom_shas_by_seed": {
+    "0": "cd8e42a98aa868a4",
+    "1": "0b7553eb0d428b1d",
+    "2": "98cad6b72a900162"
+   },
+   "mass_at_1pct": 0.06716335203571552
+  }
+ },
+ "heldout_geometry_sha": "129443ea2562d2853787bf7cfe5b936b0825d8bad8bae86b96174d9b85af6651"
+}

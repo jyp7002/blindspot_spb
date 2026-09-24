@@ -1341,3 +1341,33 @@ pstar, C-a@0.01 only. MMLU-1000 at the selected points of s0.99 and pstar.
 v12dec1k, v12frontier. MMLU-1000 at each unit's SELECTED configuration only
 (does the 200-item choice survive a 20-item budget?), not at every α/config;
 the 1000-item argmax is therefore not recomputed. IFEval unchanged.
+
+## v12.C — Calibration result, recorded BEFORE the held-out prediction (2026-09-24)
+
+Written after `v12_pstar.py fit` on the complete v12cal panel (33/33 units,
+replay exact) and after v12big phase A (12/12 geometry rows, no curve row), and
+before `v12_pstar.py predict`. No v12big removal has been measured.
+
+FIT. 11/11 calibration cells eligible (llama8b|bbq_Age has dense +0.086, above
+the 0.05 floor, contrary to the config note that expected it below). tau (mass)
+= 0.0593. p_true spans 0.0010 (censored) to 0.2379; M(1%) spans only
+0.059-0.076 across the same cells.
+
+LEAVE-ONE-TARGET-OUT (calibration only):
+  mass   median |log2 err| 1.81, meets rho in 45% of cells
+  pr     1.75, 45%        ent 1.78, 45%        gini 1.67, 55%
+  fixed  1.59, 64%        <- the published constant is best on every metric
+
+DECISION. The registered primary rule (mass) is kept; no switch is made (D3
+permits one on LOO evidence, and the LOO evidence favours no geometry rule).
+The registered rule predicts p* = 0.72-0.90% for all four held-out cells, i.e.
+indistinguishable from the constant it was meant to replace.
+
+HOW THE HELD-OUT VERDICT WILL BE READ, fixed now. The D4 verdict is computed
+and reported as registered. Because calibration already shows no advantage over
+fixed 1%, a held-out PASS is reported as "consistent with 1%", NOT as evidence
+that |dW| geometry predicts the needed sparsity. Per v12.A's FAIL branch
+wording, the paper keeps 1% as a constant and makes no geometry-predicts-
+sparsity claim, whatever the held-out outcome. Phase B's other measurements
+(27/32B sparsity and binarization curves, adaptive alpha, Delta_selection under
+alpha*, MMLU-1000) are unaffected.
