@@ -1371,3 +1371,36 @@ wording, the paper keeps 1% as a constant and makes no geometry-predicts-
 sparsity claim, whatever the held-out outcome. Phase B's other measurements
 (27/32B sparsity and binarization curves, adaptive alpha, Delta_selection under
 alpha*, MMLU-1000) are unaffected.
+
+## v12.D — Held-out result, read as fixed in v12.C (2026-09-25)
+
+v12big phase B complete (12/12 units, 120 removal rows; every row stamped with
+prediction sha256 8b656aba...4651, the committed pstar_prediction.json). The
+shipped panel is a strict superset of the 12 rows present at 2026-09-24
+(all 12 removal and 94 trace rows verbatim). make v12-check: v12_analyze
+replay PASS (80 rows, max |delta| 0).
+
+D4 VERDICT: FAIL. R(p*) >= rho - 0.05 = 0.85 in 2 of 4 eligible cells.
+  gemma27b|bbq_Age     p* 0.84%  R(p*) 0.518   p_true 15.3%
+  gemma27b|occ_gender  p* 0.72%  R(p*) 0.844   p_true 0.88%  (misses by 0.006)
+  qwen32b|bbq_Age      p* 0.90%  R(p*) 1.174
+  qwen32b|occ_gender   p* 0.85%  R(p*) 1.034
+Per v12.A's FAIL branch and v12.C: 1% stays a constant, the mass rule is
+reported as a negative result, no geometry-predicts-sparsity claim.
+Descriptive only, never a verdict: fixed 1% on the same cells gives R =
+0.557 / 0.945 / 1.217 / 1.045 (3/4 >= 0.85). The fixed constant was not the
+registered hypothesis and this is not reported as its validation.
+
+Reported as measured, not selected on (v12_analyze, 27-32B, n=4 cells):
+Delta_selection frozen grid +0.200 [+0.060, +0.340]; under adaptive alpha*
+-0.037 [-0.071, +0.003] (covers 0). alpha* eval-item pass rate 0.67 (pstar),
+0.83 (s0.99), 0.92 (C-a). MMLU-1000: 7/48 selected held-out points fail.
+D5 applies: as-deployed removal at alpha* is the headline, pass rate beside it.
+
+REPLAY NOTE, v12_frontier (not v12big). 5 SentenceDebias selections differ from
+results_v9/v6trace/sentdebias by 1.2e-3 to 3.2e-3, above the 1e-3 label
+threshold added in a329f15. In all 5 the selected (layer, k) is the published
+one. Mechanism: legacy/run_sentdebias_baseline.py:101 PCA(n_components=k), no
+random_state; sklearn 1.8 'auto' resolves to randomized SVD for every SD fit
+here (X is 2*n_pairs x hidden, k <= 2). The 1e-3 threshold has no stated
+basis. The check is NOT loosened; a determinism re-run is recorded below it.

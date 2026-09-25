@@ -1,0 +1,89 @@
+{
+ "prediction_sha": "8b656aba83280f58913fe4399be510dc77b2e227b6433ad8f34606294e654651",
+ "rho": 0.9,
+ "cells": {
+  "gemma27b|bbq_Age": {
+   "p_star": 0.008444774475956525,
+   "dense": 0.16600980223089026,
+   "removal_at_pstar": 0.08595807206803474,
+   "retention_at_pstar": 0.5177891360203072,
+   "retention_at_1pct": 0.556909748442799,
+   "p_true": 0.1532229846233109,
+   "p_true_status": "ok",
+   "log2_err": -4.181430023309798,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "meets_rho": false,
+   "eligible": true,
+   "meets_criterion": false,
+   "secondary_within_2x": false
+  },
+  "gemma27b|occ_gender": {
+   "p_star": 0.007177830772533093,
+   "dense": 0.7771440454873305,
+   "removal_at_pstar": 0.6555736197404151,
+   "retention_at_pstar": 0.8435677060734844,
+   "retention_at_1pct": 0.9451964482296734,
+   "p_true": 0.008796275946163572,
+   "p_true_status": "ok",
+   "log2_err": -0.29334495340417344,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "meets_rho": false,
+   "eligible": true,
+   "meets_criterion": false,
+   "secondary_within_2x": true
+  },
+  "qwen32b|bbq_Age": {
+   "p_star": 0.009040963487801956,
+   "dense": 0.22741630906644075,
+   "removal_at_pstar": 0.26702297079390375,
+   "retention_at_pstar": 1.1741592847498536,
+   "retention_at_1pct": 1.216586911353927,
+   "p_true": 0.0008034368411731864,
+   "p_true_status": "ok",
+   "log2_err": 3.4922200055848185,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "meets_rho": true,
+   "eligible": true,
+   "meets_criterion": true,
+   "secondary_within_2x": false
+  },
+  "qwen32b|occ_gender": {
+   "p_star": 0.008488109208209828,
+   "dense": 0.493776257501499,
+   "removal_at_pstar": 0.5105650280341679,
+   "retention_at_pstar": 1.0340007650785394,
+   "retention_at_1pct": 1.0447633960808562,
+   "p_true": 0.0036998920728119554,
+   "p_true_status": "ok",
+   "log2_err": 1.1979600306999447,
+   "seeds": [
+    0,
+    1,
+    2
+   ],
+   "meets_rho": true,
+   "eligible": true,
+   "meets_criterion": true,
+   "secondary_within_2x": false
+  }
+ },
+ "criterion": {
+  "rule": "R(p*) >= rho - 0.05 in >= 3 eligible held-out cells",
+  "n_eligible": 4,
+  "n_meeting": 2,
+  "complete": true,
+  "verdict": "FAIL"
+ }
+}
