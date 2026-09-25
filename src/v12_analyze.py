@@ -8,6 +8,7 @@ REPLAY GATE (run first, report nothing until it passes):
     v12cal   s<sp>      vs results_v9/v8spc/{small,big}   (same key, same variant)
     v12dec1k s0.99      vs results_v9/v8dec  C-ref
     v12dec1k C-a@0.01   vs results_v9/v8dec  C-a
+    v12astar (same two) vs results_v9/v8dec  (frozen grid only)
     v12big   s0.99, s0  vs results/v11big    C-ref  (occ_gender only)
 Compared against the RE-SCORED trees (integer gate), never the as-run ones.
 
@@ -112,6 +113,7 @@ def check_replay(tol=0.0):
     cmp("v12cal", os.path.join(v9, "v8spc"), "big", {},
         rename={"qwen": "qwen7b", "llama": "llama8b"})
     cmp("v12dec1k", v9, "v8dec", {"s0.99": "C-ref", "C-a@0.01": "C-a"})
+    cmp("v12astar", v9, "v8dec", {"s0.99": "C-ref", "C-a@0.01": "C-a"})
     cmp("v12big", RESULTS, "v11big", {"s0.99": "C-ref"},
         only=lambda t, a: a == "occ_gender")
     if not pairs:

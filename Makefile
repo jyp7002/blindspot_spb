@@ -22,7 +22,7 @@ REGEN_STAMPS  = $(addprefix $(V10)/,dec_analysis_v9.json spc_v9.json frontier_v9
                                     lopo_v9.json sup1_matrix.json env_v9.json patch_sizes.json claims_audit.json artifact_sizes.json reclaimed.json missing_recomputed.json starred_sources.json alpha_extension.json lineage_h2.json padding_recompute.json)
 
 .PHONY: all regen manifest figures audit report verify freeze clean-figures clean-v10 help \
-        v12-check v12-report \
+        v12-check v12-report v12-astar \
         v11-check v11-preflight v11-plan v11-dec v11-ext v11-ins v11-findings v11-report
 
 all: regen manifest figures audit
@@ -66,6 +66,7 @@ verify:
 	$(PY) $(SRC)/v12_geometry.py
 	$(PY) $(SRC)/v12_opsel.py
 	$(PY) $(SRC)/v12_pstar.py selftest
+	$(PY) $(SRC)/v12_astar.py selftest
 	@$(PY) -c "import torch" 2>/dev/null && $(PY) $(SRC)/v12_selftest.py \
 	  || echo "v12 pipeline selftest: SKIPPED (needs torch)"
 	$(PY) -c "import sys; sys.path.insert(0,'$(SRC)'); import v10_common, v10_style; print('substrate OK')"
@@ -129,6 +130,10 @@ clean-v10:
 v12-check:
 	$(PY) $(SRC)/v12_analyze.py --check-replay
 	$(PY) $(SRC)/v12_frontier.py --check-replay
+
+## v12-astar — §v12.E verdict: Delta_selection under alpha* at <=9B (refuses until complete)
+v12-astar:
+	$(PY) $(SRC)/v12_astar.py
 
 ## v12-report — opsel readings, frontier/Table 3, v12 figure panels
 v12-report:

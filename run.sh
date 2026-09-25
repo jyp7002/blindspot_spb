@@ -16,6 +16,7 @@
 #   bash run.sh opsel-big-geom  27B/32B PHASE A: geometry only, no probe (>=80 GB)
 #   bash run.sh frontier        Table A methods re-measured with traces + IFEval (24 units)
 #   bash run.sh opsel-big       27B/32B PHASE B: refuses without a frozen p*
+#   bash run.sh astar           alpha* on the 10 registered <=9B DEC cells (§v12.E, 30 units)
 #                               (python3 src/v12_pstar.py fit && ... predict)
 #
 # Everything is resumable. If a run dies, re-run the same command: finished
@@ -38,6 +39,7 @@ declare -A CFG=(
   [opsel-big-geom]=configs/v12/opsel_big.yaml
   [opsel-big]=configs/v12/opsel_big.yaml
   [frontier]=configs/v12/frontier.yaml
+  [astar]=configs/v12/astar_dec.yaml
 )
 # opsel panels run in phases; the plan file carries the phase in its name
 declare -A PHASE=(
@@ -45,6 +47,7 @@ declare -A PHASE=(
   [dec1k]=full
   [opsel-big-geom]=geometry
   [opsel-big]=full
+  [astar]=full
 )
 # Order matters: dec produces the panel the alpha extension extends.
 ORDER=(dec alphaext ifeval)
@@ -53,7 +56,7 @@ status() {
   echo "==================================================================="
   echo " blindspot_spb — v11 scale-up status"
   echo "==================================================================="
-  for k in "${ORDER[@]}" big opsel-cal dec1k frontier opsel-big-geom opsel-big; do
+  for k in "${ORDER[@]}" big opsel-cal dec1k frontier opsel-big-geom opsel-big astar; do
     printf '\n--- %s (%s)\n' "$k" "${CFG[$k]}"
     local ph=""
     [ -n "${PHASE[$k]:-}" ] && ph="--phase ${PHASE[$k]}"
@@ -128,7 +131,7 @@ case "${1:-status}" in
     python3 scripts/preflight.py --config configs/v11/ifeval_v11.yaml || exit 1
     python3 scripts/plan.py configs/v11/ifeval_v11.yaml --only published || exit 1
     WORKERS="$WORKERS" bash scripts/submit_local.sh work/v11ins.published.units.json ;;
-  dec|alphaext|ifeval|big|opsel-cal|dec1k|frontier|opsel-big-geom|opsel-big) run_one "$1" ;;
+  dec|alphaext|ifeval|big|opsel-cal|dec1k|frontier|opsel-big-geom|opsel-big|astar) run_one "$1" ;;
   all)
     rc=0
     for k in "${ORDER[@]}"; do run_one "$k" || rc=1; done
@@ -138,6 +141,6 @@ case "${1:-status}" in
     exit $rc ;;
   *)
     echo "unknown target: $1"
-    echo "usage: bash run.sh [status|dec|alphaext|ifeval-check|ifeval|all|big|opsel-cal|dec1k|frontier|opsel-big-geom|opsel-big]"
+    echo "usage: bash run.sh [status|dec|alphaext|ifeval-check|ifeval|all|big|opsel-cal|dec1k|frontier|opsel-big-geom|opsel-big|astar]"
     exit 2 ;;
 esac

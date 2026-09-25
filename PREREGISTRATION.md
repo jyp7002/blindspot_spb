@@ -1426,3 +1426,68 @@ produces at a fixed model and corpus. The 1e-3 label threshold of a329f15 sits
 BELOW that noise floor. The check is left unchanged by this entry; any new
 tolerance is an author decision, to be recorded here with this measurement as
 its basis.
+
+## v12.E — Delta_selection under alpha* at <=9B: scale or rule? (2026-09-25, before any v12astar unit)
+
+Registered before the first unit of panel v12astar. No v12astar row exists.
+Config configs/v12/astar_dec.yaml; criterion coded in src/v12_astar.py
+(selftest passes); both in the commit that adds this entry.
+
+WHY. v12.D: at 27-32B Delta_selection is +0.200 [+0.060, +0.340] under the
+frozen grid and -0.037 [-0.071, +0.003] under alpha*. At <=9B alpha* was never
+run on C-ref/C-a. The only <=9B large-alpha reading is the extended-grid
+ARGMAX on the evaluation split, which saturates at +0.104 [+0.036, +0.184]
+(v11ext, excludes 0). The two tiers therefore differ in scale AND in rule, and
+the existing data cannot separate them. This panel holds the rule fixed.
+
+PANEL. v12astar: the 10 registered DEC cells (as configs/v12/dec1k.yaml) x
+seeds {0,1,2}, variants s0.99 (= C-ref) and C-a@0.01 (= C-a, ref_tensor scale),
+both under the frozen {2,4,8,16} grid AND alpha* (v12.A rule unchanged: ladder
+{1..512} first-failure + 3 log-bisections, v9 gate on MMLU validation 200 +
+WikiText validation 20, no bias probe read). No MMLU-1000. One L40S, pinned
+stack (transformers 4.57.1, peft 0.20.0, torch 2.11.0) freshly installed.
+
+PRIMARY ESTIMAND. E = Delta_selection under alpha* = s0.99 - C-a@0.01, each
+arm at its own alpha*, removal as deployed (D5), cell = seed mean, alpha*
+status 'none' -> 0, paired cell bootstrap (10k, seed 0, v10_common). F = the
+same contrast under the frozen argmax, same panel. The comparison is within
+panel, so a stack drift moves both arms.
+
+BRANCHES, exactly one, and what the paper does under each, written now:
+  PERSISTS (E.lo > 0). alpha* alone does not close the gap at <=9B.
+    If ALSO S.lo > 0, where S = E(<=9B, 10 cells) - E(27-32B, v12big, 4 cells),
+    unpaired cell bootstrap: SCALE FINDING. The paper reports that under a
+    budget-maximal operating point the random-coordinate sign field catches up
+    with the magnitude-selected one as models grow; concentration is kept as a
+    <=9B result and qualified at 27-32B.
+    If S covers 0: the gap persists at <=9B, is not detected at 27-32B (n=4),
+    and the tier difference is unresolved. No scale claim.
+  CLOSES (CI covers 0 and E.point <= 0.25 * F.point), or CLOSES_REVERSED
+    (E.hi < 0): concentration is an operating-point (grid) property at every
+    measured scale, 2.6-32B. The paper moves wholly to the efficiency frame:
+    magnitude selection reaches the effect within the deployment grid; at a
+    budget-maximal alpha random-coordinate signs recover it. No "information is
+    concentrated" claim survives as a structural statement.
+  INCONCLUSIVE (CI covers 0 and E.point > 0.25 * F.point): n = 10 cells cannot
+    separate the branches. Neither reframe; E and F are reported with the
+    current grid-conditional qualifier, and no scale claim is made.
+The 0.25 fraction is set here so that a wide interval that merely touches 0
+cannot be read as "closed".
+
+SENSITIVITIES, reported, never the verdict; any branch change labels the
+verdict FRAGILE in the paper: (i) removal zeroed where alpha* fails the
+evaluation gate (D5's alternative); (ii) the 7 occ_gender/bbq_Age cells, the
+axes v12big has.
+
+REPLAY. Frozen-grid s0.99/C-a must reproduce results_v9/v8dec C-ref/C-a
+(v12_analyze --check-replay; v12_astar reports it). A miss is reported and
+does not void the within-panel contrast.
+
+KNOWN BEFORE THIS RUN, disclosed: the v11ext alpha traces at <=9B (evaluation
+split, grid points to 512) and the +0.104 extended-argmax result. They bear on
+the outcome, since alpha* is roughly the largest alpha that passes a gate on
+different items. No proxy for E was computed from them before this entry.
+
+NO READING BEFORE COMPLETION. src/v12_astar.py prints no removal until all 30
+units exist; `progress` reports counts only. No amendment to this entry after
+the first unit starts, except for cost or failure, recorded as such.

@@ -1,0 +1,52 @@
+# v12 ASTAR-DEC — Delta_selection under alpha* on the 10 registered <=9B cells.
+#
+# WHY. At 27-32B, Delta_selection under alpha* is -0.037 [-0.071, +0.003]
+# (covers 0) against +0.200 under the frozen grid (PREREGISTRATION §v12.D).
+# At <=9B alpha* was never run on C-ref/C-a: the only <=9B large-alpha reading
+# is the extended-grid ARGMAX on the evaluation split (+0.104, excludes 0,
+# V11_FINDINGS §3.2) -- a different operating-point rule. So "the gap closes at
+# 27-32B" cannot be attributed to scale or to the rule. This panel holds the
+# rule fixed (alpha*, v12.A) and varies only the tier.
+#
+# Registered as §v12.E BEFORE the first unit; verdict coded in src/v12_astar.py.
+#
+# REPRODUCTION GUARD. s0.99 is C-ref and C-a@0.01 is DEC's C-a (ref_tensor
+# scale), exactly as configs/v12/dec1k.yaml: the frozen-grid removals must
+# replay results_v9/v8dec. The primary contrast is within-panel either way.
+#
+# COST. Per unit: 2 variants x 4 frozen alpha + 2 x ~13 calibration probes
+# + 2 alpha* evaluations. No MMLU-1000. 30 units, <=7B, one L40S.
+
+panel: v12astar
+kind: opsel
+out_panel: v12astar
+base_on: v8dec
+
+phase: full
+density: 0.01
+scale_mode: ref_tensor
+alphas: [2, 4, 8, 16]
+seeds: [0, 1, 2]
+mmlu_n: 200
+
+sparsities: [0.99]
+extra_variants: ["C-a@0.01"]
+adaptive_variants: [s0.99, "C-a@0.01"]
+alpha_ladder: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+refine_steps: 3
+calib_n: 200
+mmlu1k_variants: []
+mmlu1k_all_alphas: false
+
+# The 10 registered DEC cells, verbatim from configs/v12/dec1k.yaml.
+cells:
+  - {target: gemma,  hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: occ_gender}
+  - {target: llama,  hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: occ_gender}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: occ_gender}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: occ_gender}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: bbq_Age}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: bbq_Age}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: bbq_Race_ethnicity}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: ss_intra}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: ss_intra}
+  - {target: qwen7b, hf: Qwen/Qwen2.5-7B-Instruct,         designer: qwen,     axis: occ_gender}
