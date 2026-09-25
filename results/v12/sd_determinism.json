@@ -1,0 +1,172 @@
+[
+ {
+  "axis": "occ_gender",
+  "seed": 0,
+  "layer": 26,
+  "k": 1,
+  "X_shape": [
+   100,
+   2048
+  ],
+  "auto_solver": "randomized",
+  "embedding_max_absdiff": 0.0,
+  "published": 0.4626797160959264,
+  "v12frontier": 0.4614788871004354,
+  "full_svd": 0.46362508261957003,
+  "seeded_fits": [
+   {
+    "global_seed": 0,
+    "cos_to_full": [
+     1.0000001192092896
+    ],
+    "removal": 0.46362508261957003
+   },
+   {
+    "global_seed": 1,
+    "cos_to_full": [
+     1.000000238418579
+    ],
+    "removal": 0.46362508261957003
+   },
+   {
+    "global_seed": 2,
+    "cos_to_full": [
+     1.0000001192092896
+    ],
+    "removal": 0.46362508261957003
+   },
+   {
+    "global_seed": 3,
+    "cos_to_full": [
+     1.000000238418579
+    ],
+    "removal": 0.46362508261957003
+   },
+   {
+    "global_seed": 4,
+    "cos_to_full": [
+     1.0
+    ],
+    "removal": 0.46362508261957003
+   },
+   {
+    "global_seed": 5,
+    "cos_to_full": [
+     1.000000238418579
+    ],
+    "removal": 0.46362508261957003
+   },
+   {
+    "global_seed": 6,
+    "cos_to_full": [
+     1.0000001192092896
+    ],
+    "removal": 0.46177208780801315
+   },
+   {
+    "global_seed": 7,
+    "cos_to_full": [
+     1.000000238418579
+    ],
+    "removal": 0.46362508261957003
+   }
+  ],
+  "repeat_seed0": 0.46362508261957003,
+  "spread": [
+   0.46177208780801315,
+   0.46362508261957003
+  ],
+  "range": 0.001852994811556874,
+  "pub_in_spread": true,
+  "new_in_spread": false
+ },
+ {
+  "axis": "crows_socioeconomic",
+  "seed": 0,
+  "layer": 18,
+  "k": 2,
+  "X_shape": [
+   44,
+   2048
+  ],
+  "auto_solver": "randomized",
+  "embedding_max_absdiff": 0.0,
+  "published": 0.06746983805368115,
+  "v12frontier": 0.06422241621239241,
+  "full_svd": 0.06406602194142896,
+  "seeded_fits": [
+   {
+    "global_seed": 0,
+    "cos_to_full": [
+     1.0000004768371582,
+     0.9999998211860657
+    ],
+    "removal": 0.06388238973395771
+   },
+   {
+    "global_seed": 1,
+    "cos_to_full": [
+     1.000000238418579,
+     1.0
+    ],
+    "removal": 0.06506477677544883
+   },
+   {
+    "global_seed": 2,
+    "cos_to_full": [
+     1.0000001192092896,
+     1.0000001192092896
+    ],
+    "removal": 0.06388238973395771
+   },
+   {
+    "global_seed": 3,
+    "cos_to_full": [
+     1.0000005960464478,
+     1.0000005960464478
+    ],
+    "removal": 0.06678243016087732
+   },
+   {
+    "global_seed": 4,
+    "cos_to_full": [
+     1.0000005960464478,
+     1.000000238418579
+    ],
+    "removal": 0.06614636543185212
+   },
+   {
+    "global_seed": 5,
+    "cos_to_full": [
+     1.0000005960464478,
+     1.000000238418579
+    ],
+    "removal": 0.0655023913050807
+   },
+   {
+    "global_seed": 6,
+    "cos_to_full": [
+     1.0000003576278687,
+     1.0
+    ],
+    "removal": 0.06388238973395771
+   },
+   {
+    "global_seed": 7,
+    "cos_to_full": [
+     0.9999997615814209,
+     0.9999997019767761
+    ],
+    "removal": 0.06476390916247701
+   }
+  ],
+  "repeat_seed0": 0.06388238973395771,
+  "spread": [
+   0.06388238973395771,
+   0.06678243016087732
+  ],
+  "range": 0.0029000404269196034,
+  "pub_in_spread": false,
+  "new_in_spread": true
+ }
+]

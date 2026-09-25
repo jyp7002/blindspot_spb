@@ -1404,3 +1404,25 @@ one. Mechanism: legacy/run_sentdebias_baseline.py:101 PCA(n_components=k), no
 random_state; sklearn 1.8 'auto' resolves to randomized SVD for every SD fit
 here (X is 2*n_pairs x hidden, k <= 2). The 1e-3 threshold has no stated
 basis. The check is NOT loosened; a determinism re-run is recorded below it.
+
+v12.D addendum — SentenceDebias determinism, measured (2026-09-25, L40S, pinned
+run stack). scripts/sd_determinism.py -> results/v12/sd_determinism.json.
+Model, corpus and pooled embeddings held fixed (embeddings bit-identical on
+repeat); only the PCA refit, under 8 global numpy seeds + svd_solver='full'.
+Unseeded PCA draws from numpy's GLOBAL RNG: the published SD runner never seeds
+it, and in v12frontier train_task_vector (colab_t2t4.py:196) seeds it before
+later seeds' SD fits, so neither process's state is recoverable.
+  qwen|occ_gender|0  L26 k1  X 100x2048 randomized; removal range 1.9e-3
+      [+0.46177, +0.46363]; published +0.46268 inside, v12frontier +0.46148
+      3e-4 below the 8-draw range.
+  qwen|crows_socioeconomic|0  L18 k2  X 44x2048 randomized; range 2.9e-3
+      [+0.06388, +0.06678]; v12frontier +0.06422 inside, published +0.06747
+      7e-4 above.
+Every seeded fit matches the exact SVD to |cos| = 1.0000000 (float32); the
+removal moves anyway because Project casts the subspace to the model dtype
+(bf16) before projecting. Repeating one seed reproduces its removal exactly.
+Reading: the 5 flagged diffs (1.2e-3 to 3.2e-3) are of the size this mechanism
+produces at a fixed model and corpus. The 1e-3 label threshold of a329f15 sits
+BELOW that noise floor. The check is left unchanged by this entry; any new
+tolerance is an author decision, to be recorded here with this measurement as
+its basis.
