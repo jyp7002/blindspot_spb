@@ -202,6 +202,35 @@ The held-out order is enforced by the code, not left to discipline: see
 
 ---
 
+## Seed patch and density floor (v13)
+
+`experiments_v13.md` is the design, registered as `PREREGISTRATION.md` §v13
+before any unit. SEED: is a seed-regenerable random-support patch (payload only,
+no index) non-inferior to the magnitude-selected one? FLOOR: does the 99.9%
+sparsity cliff move when each density gets its own α\*?
+
+```bash
+# <=9B, on a >=48 GB card: replay gate -> determinism diagnostic -> FLOOR -> SEED
+bash scripts/v13_local.sh
+
+# 27-32B, on ONE >=80 GB card (bf16, v11.G/H). Needs HF_TOKEN for gemma.
+python3 scripts/preflight.py --config configs/v13/seed_big_8.yaml
+bash run.sh v13-seed-big      # 24 units; cell count read from §v13.F (8)
+bash run.sh v13-floor-big     # 12 units
+bash scripts/pack_artifacts.sh v13seedbig
+bash scripts/pack_artifacts.sh v13floorbig
+#   ship both archives back, untar into results/, then:
+python3 src/v13_analyze.py verdicts
+```
+
+Every unit encodes its patches (`src/v13_patch.py`), decodes them, and stops
+unless the rebuilt edit is bit-identical to the in-memory one. Missing corpora
+for the new 27–32B axes (crows_socioeconomic, ss_intra) are elicited on the
+node automatically, from the target itself. `v13_analyze.py verdicts` reports
+a tier as pending until every unit of it is on disk, and reads nothing before.
+
+---
+
 ## Layout
 
 ```

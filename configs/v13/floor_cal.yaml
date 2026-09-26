@@ -1,0 +1,38 @@
+# v13 FLOOR (<=9B) -- does the sparsity cliff move when each level gets its own alpha*?
+# PREREGISTRATION §v13.D. The 11 v12cal cells x 3 seeds. C-ref at s in
+# {0.99, 0.995, 0.999, 0.9995} (colab_t2t4.binarize: global top-k, natural
+# per-tensor scale -- the sparsity panel's construction), each at its own alpha*,
+# ladder to 4096 (censored if the ladder never fails). The frozen grid is measured
+# at every point as well. Measured index-patch bytes at every sparsity.
+
+panel: v13floor
+kind: opsel
+out_panel: v13floor
+base_on: v12cal
+phase: full
+density: 0.01
+scale_mode: ref_tensor
+alphas: [2, 4, 8, 16]
+seeds: [0, 1, 2]
+mmlu_n: 200
+sparsities: [0.99, 0.995, 0.999, 0.9995]
+extra_variants: []
+adaptive_variants: &id001 [s0.99, s0.995, s0.999, s0.9995]
+alpha_ladder: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096]
+refine_steps: 3
+calib_n: 200
+mmlu1k_variants: []
+mmlu1k_all_alphas: false
+patch_variants: *id001
+cells:
+- {target: qwen, hf: Qwen/Qwen2.5-3B-Instruct, designer: qwen_3b, axis: occ_gender}
+- {target: phi, hf: microsoft/Phi-3.5-mini-instruct, designer: phi_3b, axis: occ_gender}
+- {target: gemma, hf: google/gemma-2-2b-it, designer: gemma_3b, axis: occ_gender}
+- {target: llama, hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: occ_gender}
+- {target: qwen7b, hf: Qwen/Qwen2.5-7B-Instruct, designer: qwen, axis: occ_gender}
+- {target: llama8b, hf: meta-llama/Llama-3.1-8B-Instruct, designer: llama, axis: occ_gender}
+- {target: qwen, hf: Qwen/Qwen2.5-3B-Instruct, designer: qwen_3b, axis: bbq_Age}
+- {target: phi, hf: microsoft/Phi-3.5-mini-instruct, designer: phi_3b, axis: bbq_Age}
+- {target: gemma, hf: google/gemma-2-2b-it, designer: gemma_3b, axis: bbq_Age}
+- {target: qwen7b, hf: Qwen/Qwen2.5-7B-Instruct, designer: qwen, axis: bbq_Age}
+- {target: llama8b, hf: meta-llama/Llama-3.1-8B-Instruct, designer: llama, axis: bbq_Age}

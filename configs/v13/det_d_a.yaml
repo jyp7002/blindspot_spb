@@ -1,0 +1,31 @@
+# v13 E0.5 DETERMINISM DIAGNOSTIC -- used for no verdict (PREREGISTRATION §v13.B).
+# The same 6 units run in two fresh processes (a, b) with default kernels (nd) and
+# with deterministic kernels forced (d). Frozen grid only: the question is whether
+# MMLU at identical weights agrees across processes, and whether forcing
+# deterministic kernels makes it agree. This file: mode=d, process=a.
+
+panel: v13det_d_a
+kind: opsel
+out_panel: v13det_d_a
+base_on: v12dec1k
+phase: full
+deterministic: true
+density: 0.01
+scale_mode: ref_tensor
+alphas: [2, 4, 8, 16]
+seeds: [0]
+mmlu_n: 200
+sparsities: [0.99]
+extra_variants: [C-a@0.01]
+adaptive_variants: []
+refine_steps: 3
+calib_n: 200
+mmlu1k_variants: []
+mmlu1k_all_alphas: false
+cells:
+- {target: gemma, hf: google/gemma-2-2b-it, designer: gemma_3b, axis: occ_gender}
+- {target: llama, hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: occ_gender}
+- {target: qwen, hf: Qwen/Qwen2.5-3B-Instruct, designer: qwen_3b, axis: occ_gender}
+- {target: phi, hf: microsoft/Phi-3.5-mini-instruct, designer: phi_3b, axis: occ_gender}
+- {target: qwen, hf: Qwen/Qwen2.5-3B-Instruct, designer: qwen_3b, axis: bbq_Age}
+- {target: qwen7b, hf: Qwen/Qwen2.5-7B-Instruct, designer: qwen, axis: occ_gender}

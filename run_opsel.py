@@ -16,6 +16,19 @@ VARIANTS (names are the SPC panel's, so the replay is row-comparable):
                 cells only; refused without a frozen prediction, see v12_opsel)
     C-a@0.01    DEC's random-support arm at 1%, ref_tensor scale -- so
                 Delta_selection can be re-read under the adaptive-α rule
+    C-seed@0.01 v13: a random 1% support regenerated from a seed (a keyed
+                integer permutation, src/v13_seed.py), true signs, ref_tensor
+                scale. Ships as a payload-only patch.
+
+v13 ADDITIONS (all off unless the config names them).
+    patch_variants   encode each listed variant as a patch file at its selected
+                     α (α* where it exists), decode it, rebuild, and require
+                     bit-identity with the in-memory edit; record measured bytes
+                     (src/v13_patch.py). C-seed -> seed patch, else index patch.
+    ifeval_variants  IFEval at α* on the listed variants, for seeds in
+                     ifeval_seeds, with the unedited baseline measured once per
+                     unit BEFORE training (as every other baseline here).
+    deterministic    set by scripts/run_unit.py before CUDA initialises.
 
 TWO SELECTIONS PER VARIANT, BOTH PERSISTED.
     frozen      the published rule: max removal over in-budget α in {2,4,8,16},
@@ -71,6 +84,11 @@ ALPHAS = (2, 4, 8, 16)          # frozen grid -- the published estimand
 LADDER = list(S.ALPHA_LADDER)
 REFINE = S.REFINE_STEPS
 PSTAR_FILE = None
+PATCH_VARIANTS = []             # v13: measured patch files
+IFEVAL_VARIANTS = []            # v13: IFEval at alpha*
+IFEVAL_SEEDS = [0]
+IFEVAL_LIMIT = 200
+DETERMINISTIC = False           # recorded on every row; set by run_unit
 MMLU_N = 200
 CALIB_N = 200
 BATCH = 6                       # run_dec / run_spc fast_eval batch
@@ -147,6 +165,15 @@ def build(v, name, seed, p_star=None):
         sp = 1.0 - float(p_star)
         E, meta = C.binarize(v, "per_tensor", sp, seed)
         meta.update(kind="pstar", sparsity=sp)
+        return E, meta
+    if name.startswith("C-seed@"):
+        # C-seed@<density>: v13_seed support at that density, true signs,
+        # ref_tensor scale of C-ref AT THE SAME DENSITY (as C-a@0.01 at 1%)
+        import v13_seed
+        d = float(name.split("@", 1)[1])
+        rs = V8.ref_scale_table(v, d, seed)
+        E, meta = v13_seed.build_cseed(v, d, seed, rs)
+        meta.update(kind="C-seed", sparsity=1.0 - d)
         return E, meta
     if name == "C-a@0.01":
         rs = V8.ref_scale_table(v, 0.01, seed)
@@ -281,6 +308,9 @@ def main():
                             pre_cal = collateral_eval(model, tok, mmlu_cal, wt_cal)
                         if MMLU1K and pre_1k is None:
                             pre_1k = mmlu1k_eval(model, tok, mmlu1k)
+                        if IFEVAL_VARIANTS and s in IFEVAL_SEEDS \
+                                and ("ifeval_base", s) not in pre_cache:
+                            pre_cache[("ifeval_base", s)] = _ifeval(model, tok)
                     v, losses = train_contrast(model, tok, dn, ax, s)
                     g = geometry_of(v)
                     prior = [r for r in geo_rows if r["target"] == fam
@@ -318,7 +348,9 @@ def main():
                             continue
                         run_variant(model, tok, v, vn, fam, ax, s, dn, g, p_star,
                                     pred_sha, pre, pre_cal, pre_1k, mmlu, wt,
-                                    mmlu_cal, wt_cal, mmlu1k)
+                                    mmlu_cal, wt_cal, mmlu1k,
+                                    ifeval_base=pre_cache.get(("ifeval_base", s)),
+                                    hf=hf)
                         done.add((fam, ax, s, dn, vn))
                     del v
                 except S.HeldOutViolation:
@@ -331,8 +363,40 @@ def main():
     print("[opsel] ALL DONE", flush=True)
 
 
+def _ifeval(model, tok):
+    """run_ins.ifeval, the function behind the published IFEval arm."""
+    if "run_ins" not in sys.modules:
+        argv, sys.argv = sys.argv, ["run_ins.py", "A"]   # ARM is read at import
+        try:
+            import run_ins  # noqa: F401
+        finally:
+            sys.argv = argv
+    return sys.modules["run_ins"].ifeval(model, tok, IFEVAL_LIMIT)
+
+
+def _patch(model, E, vn, seed, alpha, hf, density):
+    """Measured patch file for one variant (v13_patch). Never raises silently:
+    a patch that does not rebuild the in-memory edit bit-for-bit stops the unit."""
+    import v13_patch as P
+    import v13_seed
+    rev = str(getattr(model.config, "_commit_hash", None) or "unknown")
+    if vn.startswith("C-seed@"):
+        density = float(vn.split("@", 1)[1])     # exactly what build() used
+        sup = v13_seed.support({k: t.numel() for k, t in E.items()}, density, seed)
+        _raw, st = P.measure(E, P.SEED, model_id=hf, revision=rev, seed=seed,
+                             density=density, alpha=alpha, positions_by_name=sup)
+    else:
+        _raw, st = P.measure(E, P.INDEX, model_id=hf, revision=rev, seed=seed,
+                             density=density, alpha=alpha)
+    if not st["identical"]:
+        raise RuntimeError(f"patch for {vn} does not rebuild the edit bit-for-bit")
+    st["alpha"] = alpha
+    return st
+
+
 def run_variant(model, tok, v, vn, fam, ax, s, dn, g, p_star, pred_sha,
-                pre, pre_cal, pre_1k, mmlu, wt, mmlu_cal, wt_cal, mmlu1k):
+                pre, pre_cal, pre_1k, mmlu, wt, mmlu_cal, wt_cal, mmlu1k,
+                ifeval_base=None, hf=None):
     E, meta = build(v, vn, s, p_star)
     key = dict(panel=PANEL, target=fam, axis=ax, seed=s, designer=dn, variant=vn)
 
@@ -410,6 +474,9 @@ def run_variant(model, tok, v, vn, fam, ax, s, dn, g, p_star, pred_sha,
                 post_ppl=post["ppl"], ppl_ratio=post["ppl"] / pre["ppl"],
                 pre_skew=pre["skew"], post_skew=post["skew"],
                 collateral_ok=bool(ok), bias_reduction=float(r)))
+            if vn in IFEVAL_VARIANTS and s in IFEVAL_SEEDS:
+                adaptive["ifeval"] = at(a_star, lambda: _ifeval(model, tok))
+                adaptive["ifeval_base"] = ifeval_base
 
     # ---- MMLU-1000 reading of the frozen operating point ----
     frozen_1k = None
@@ -426,8 +493,16 @@ def run_variant(model, tok, v, vn, fam, ax, s, dn, g, p_star, pred_sha,
             [(a, frozen_1k_all[a]["ok"], r) for a, _ok, r in frozen])
         frozen_1k = dict(frozen_1k or {}, argmax_1k_removal=b1k, argmax_1k_alpha=a1k)
 
+    patch = None
+    if vn in PATCH_VARIANTS:
+        a_sel = (adaptive or {}).get("alpha_star") or best_a
+        sp_ = meta.get("sparsity")
+        patch = _patch(model, E, vn, s, float(a_sel) if a_sel else 0.0, hf,
+                       1.0 - sp_ if sp_ is not None else 1.0)
+
     sp = meta.get("sparsity")
-    row = dict(key, role="self", sparsity=sp,
+    row = dict(key, role="self", sparsity=sp, patch=patch,
+               deterministic=bool(DETERMINISTIC),
                p_retained=(None if sp is None else 1.0 - sp),
                removal=best, alpha_frozen=best_a, pre_skew=pre["skew"],
                n_items=pre.get("n_items", MMLU_N),

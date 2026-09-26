@@ -1535,3 +1535,142 @@ entry. scripts/mmlu_determinism.py -> results/v12/mmlu_determinism.json:
   down (the code path has no RNG). It moves the gate only at the item
   boundary. It also bounds how reproducible alpha*, which is a gate decision,
   can be. Substituting the published row gives F = +0.2835 and the same branch.
+
+## v13.A — Scope (registered 2026-09-26, before any v13 unit)
+
+Two experiments from V12_FINDINGS §6. Design: experiments_v13.md (§7 lists
+the changes from the circulated draft, all made before this entry). Code and
+configs (src/v13_*.py, configs/v13/, run_opsel.py) are in the commit that adds
+this entry; their selftests pass and one GPU smoke unit ran end to end in a
+throwaway panel that is not part of v13.
+SEED asks whether a seed-regenerable random-support patch is non-inferior
+to the magnitude-selected patch as a deployable artifact. FLOOR asks
+whether the sparsity cliff moves when each sparsity level gets its own
+budget-limited edit scale.
+
+§v12.E is NOT re-adjudicated. v13 does not recompute its E/F criterion and
+does not re-run v12astar except two replay units (v13.B). The §v12.E
+verdict (INCONCLUSIVE, no scale claim) is reported as registered whatever
+v13 finds.
+
+## v13.B — Common definitions
+
+C-seed. k = N - floor(0.99 N). Allocation over tensors by deterministic
+largest-remainder, proportional to tensor size, ties by tensor name (no RNG;
+sum k_t = k). Positions within a tensor: the first k_t outputs of a keyed
+pseudorandom permutation of [0, N_t) (4-round unbalanced Feistel on the next
+power of two, splitmix64 round function, cycle-walking; round keys = the four
+u64 words of SHA-256(seed_u64_le || tensor name)). Sign = +1 where dW >= 0,
+else -1. Per-tensor scale = C-ref's (ref_tensor) at the same density.
+Decoding is bit-exact across processes (src/v13_seed.py selftest).
+
+Patches. Seed patch = header + sign bits; index patch = header + Elias-Fano
+positions + sign bits; per-tensor scale f32. Every unit decodes its patches,
+rebuilds the edit and stops unless it is bit-identical to the in-memory edit.
+
+alpha*. As in v12.A. Doubling ladder from 1, first failure on the
+validation gate (integer gate on 200 MMLU validation items + perplexity
+ratio on 20 WikiText validation chunks), three log-bisection steps, alpha*
+= largest passing value. No bias probe is read. Ladder maximum 512 (SEED),
+4096 (FLOOR). A run with no failure up to the maximum is flagged censored.
+
+Deployable scoring (PRIMARY for both experiments). A selected configuration
+counts its removal only if it also passes the integer-item gate on the 200
+MMLU evaluation items and the evaluation perplexity corpus; otherwise it
+scores 0, recorded, never imputed; alpha* status 'none' scores 0. As-deployed
+removal (v12 D5) is reported alongside.
+
+Estimands are ratios of cell-mean deployable removals with 95% paired
+cell-level percentile bootstrap intervals (10k resamples, RNG seed 0). The bar
+0.85 is v12.A's rho - 0.05 (rho = 0.9), unchanged. Coded in src/v13_analyze.py,
+which reads no removal from a panel until every unit of it exists.
+
+Determinism. One process per unit: dW trained once, every arm derived from
+it, each arm's alpha* search and final evaluation in that process, every
+MMLU read persisted. Before new cells, two v12astar units (gemma|occ_gender s0,
+qwen|occ_gender s0) are replayed: at every frozen evaluation point pre/post
+skew and perplexity must be bit-identical and MMLU within 3 items of 200, else
+stop. Diagnostic, no verdict: 6 units x {default, deterministic kernels} x 2
+fresh processes, frozen grid only.
+
+## v13.C — SEED
+
+Cells. <=9B: the 18 v11dec cells, 3 seeds. 27-32B: gemma-2-27b-it and
+Qwen2.5-32B-Instruct x {occ_gender, bbq_Age, crows_socioeconomic, ss_intra},
+3 seeds (8 cells, per v13.F). New cells pass the v11.F C-ref-only screen
+(frozen s0.99 of this panel); cells that fail it are reported, not dropped.
+
+Arms. C-ref@alpha* (s0.99) and C-seed@alpha* (C-seed@0.01) (primary). Both
+arms at the frozen grid {2,4,8,16}, and C-a@alpha* on the ten registered
+cells (descriptive).
+
+PRIMARY. rho_seed = mean_cells(C-seed@alpha*) / mean_cells(C-ref@alpha*),
+deployable scoring, per tier, over ALL cells of the tier (in-envelope-only
+ratio reported beside it).
+  NON-INFERIOR  iff lower bound >= 0.85
+  INFERIOR      iff upper bound <  0.85
+  INCONCLUSIVE  otherwise
+The <=9B verdict is primary; with 8 cells the 27-32B tier also gets a verdict.
+A scale claim is made only if both tiers have verdicts and rho(27-32B) -
+rho(<=9B) (tiers resampled independently) has an interval excluding 0.
+
+Readings (no verdict): C-ref - C-seed at alpha* (never reported as
+Delta_selection); alpha* medians and ranges; evaluation-gate pass rates;
+MMLU-1000 at every selected configuration; IFEval (seed 0, both arms, all
+7-9B and 27-32B cells, baseline measured before training); measured patch
+bytes for both patch formats with global and per-tensor entropy floors.
+
+BOTH OUTCOMES, WRITTEN NOW.
+NON-INFERIOR -> the paper adds a seed-patch operating mode for that tier
+(payload-only measured size, ~4x edit scale, pass rate and IFEval beside
+it). INFERIOR -> reported as a negative result: the index is worth its
+bytes, supporting the efficiency reading. INCONCLUSIVE -> both arms
+reported, no storage claim.
+
+## v13.D — FLOOR
+
+Cells. <=9B: the 11 v12cal cells. 27-32B: the 4 v12big cells. 3 seeds.
+
+Arm. C-ref (binarize: global top-k, true signs, natural per-tensor scale) at
+s in {0.99, 0.995, 0.999, 0.9995}, each at its own alpha* (ladder to 4096).
+The frozen grid is measured at every point in the same unit.
+
+PRIMARY. R = mean_cells(removal at s=0.999) / mean_cells(removal at
+s=0.99), both under alpha*, deployable scoring, <=9B cells.
+  FLOOR MOVES   iff lower bound >= 0.85
+  FLOOR HOLDS   iff upper bound <  0.85
+  INCONCLUSIVE  otherwise
+27-32B descriptive (n = 4).
+
+Readings (no verdict): the same ratio under the frozen grid and as-deployed,
+and the shift (alpha* - frozen) from the same resamples; the 0.995 and 0.9995
+points; per-cell density keeping 90% of the 1% removal under each rule (v12.A
+last-success, relative to s = 0.99); censoring rate at alpha = 4096; measured
+index-patch bytes.
+
+BOTH OUTCOMES, WRITTEN NOW.
+FLOOR MOVES -> the density floor is reported as a property of the edit
+scale, with the measured (about sevenfold) smaller index patch at 0.1%.
+FLOOR HOLDS -> the cliff is reported as intrinsic at free scale,
+strengthening the ~1% claim. INCONCLUSIVE -> reported beside the frozen
+curve, no floor claim.
+
+## v13.E — Conditional exploratory arm
+
+Iff SEED (<=9B) is NON-INFERIOR and FLOOR is FLOOR MOVES: C-seed at
+s = 0.999 under alpha* on the <=9B cells (configs/v13/floor_seed.yaml),
+reported descriptively. No verdict, no claim. run.sh refuses it otherwise.
+
+## v13.F — Author decision, recorded before the first v13 unit
+
+SEED 27-32B cell count: 8 cells (verdict issued). Recorded on 2026-09-26.
+Not revisable after the first unit. Machine-readable, read by run.sh and
+src/v13_analyze.py:
+V13F_SEED_BIG_CELLS = 8
+
+## v13.G — Forbidden moves
+
+No change to cells, arms, sparsity points, ladders, bars, scoring or
+verdict rules after the first unit. No re-run replaces a completed unit;
+repeats are reported alongside. No v13 number is read back into §v12.E or
+into Delta_selection. No combined claim across SEED and FLOOR.

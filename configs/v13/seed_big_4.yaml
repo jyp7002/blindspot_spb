@@ -1,0 +1,36 @@
+# v13 SEED (27-32B), 4-cell variant. PREREGISTRATION §v13.C and §v13.F: exactly
+# ONE of seed_big_4.yaml / seed_big_8.yaml is the registered panel -- the one
+# §v13.F names. RUNS ON A >=80 GB CARD, bf16, one device (v11.G/H), self designers.
+# Same arms, ladder, MMLU-1000, IFEval (seed 0, both primary arms, every cell) and
+# patch measurement as seed_dec.yaml; no C-a arm (it is descriptive and <=9B only).
+# Cells new to the big tier (crows_socioeconomic, ss_intra) pass through the v11.F
+# C-ref-only screen, read from this panel's frozen-grid s0.99; failures are
+# reported, not dropped.
+
+panel: v13seedbig
+kind: opsel
+out_panel: v13seedbig
+base_on: v12big
+phase: full
+density: 0.01
+scale_mode: ref_tensor
+alphas: [2, 4, 8, 16]
+seeds: [0, 1, 2]
+mmlu_n: 200
+sparsities: [0.99]
+extra_variants: [C-seed@0.01]
+adaptive_variants: [s0.99, C-seed@0.01]
+alpha_ladder: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+refine_steps: 3
+calib_n: 200
+mmlu1k_variants: [s0.99, C-seed@0.01]
+mmlu1k_all_alphas: false
+patch_variants: [s0.99, C-seed@0.01]
+ifeval_variants: [s0.99, C-seed@0.01]
+ifeval_seeds: [0]
+ifeval_limit: 200
+cells:
+- {target: gemma27b, hf: google/gemma-2-27b-it, designer: gemma27b, axis: occ_gender, designer_hf: google/gemma-2-27b-it}
+- {target: gemma27b, hf: google/gemma-2-27b-it, designer: gemma27b, axis: bbq_Age, designer_hf: google/gemma-2-27b-it}
+- {target: qwen32b, hf: Qwen/Qwen2.5-32B-Instruct, designer: qwen32b, axis: occ_gender, designer_hf: Qwen/Qwen2.5-32B-Instruct}
+- {target: qwen32b, hf: Qwen/Qwen2.5-32B-Instruct, designer: qwen32b, axis: bbq_Age, designer_hf: Qwen/Qwen2.5-32B-Instruct}

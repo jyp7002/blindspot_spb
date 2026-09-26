@@ -17,6 +17,12 @@
 #   bash run.sh frontier        Table A methods re-measured with traces + IFEval (24 units)
 #   bash run.sh opsel-big       27B/32B PHASE B: refuses without a frozen p*
 #   bash run.sh astar           alpha* on the 10 registered <=9B DEC cells (§v12.E, 30 units)
+#
+# v13 (experiments_v13.md, PREREGISTRATION §v13) -- SEED and FLOOR:
+#   bash scripts/v13_local.sh   everything <=9B, in the registered order (L40S)
+#   bash run.sh v13-seed-big    SEED 27-32B  (>=80 GB; cell count from §v13.F)
+#   bash run.sh v13-floor-big   FLOOR 27-32B (>=80 GB)
+#   bash run.sh v13-floor-seed  v13.E conditional arm; refuses unless licensed
 #                               (python3 src/v12_pstar.py fit && ... predict)
 #
 # Everything is resumable. If a run dies, re-run the same command: finished
@@ -40,6 +46,15 @@ declare -A CFG=(
   [opsel-big]=configs/v12/opsel_big.yaml
   [frontier]=configs/v12/frontier.yaml
   [astar]=configs/v12/astar_dec.yaml
+  [v13-replay]=configs/v13/replay.yaml
+  [v13-det-nd-a]=configs/v13/det_nd_a.yaml
+  [v13-det-nd-b]=configs/v13/det_nd_b.yaml
+  [v13-det-d-a]=configs/v13/det_d_a.yaml
+  [v13-det-d-b]=configs/v13/det_d_b.yaml
+  [v13-seed]=configs/v13/seed_dec.yaml
+  [v13-floor]=configs/v13/floor_cal.yaml
+  [v13-floor-big]=configs/v13/floor_big.yaml
+  [v13-floor-seed]=configs/v13/floor_seed.yaml
 )
 # opsel panels run in phases; the plan file carries the phase in its name
 declare -A PHASE=(
@@ -48,6 +63,16 @@ declare -A PHASE=(
   [opsel-big-geom]=geometry
   [opsel-big]=full
   [astar]=full
+  [v13-replay]=full
+  [v13-det-nd-a]=full
+  [v13-det-nd-b]=full
+  [v13-det-d-a]=full
+  [v13-det-d-b]=full
+  [v13-seed]=full
+  [v13-seed-big]=full
+  [v13-floor]=full
+  [v13-floor-big]=full
+  [v13-floor-seed]=full
 )
 # Order matters: dec produces the panel the alpha extension extends.
 ORDER=(dec alphaext ifeval)
@@ -56,7 +81,7 @@ status() {
   echo "==================================================================="
   echo " blindspot_spb — v11 scale-up status"
   echo "==================================================================="
-  for k in "${ORDER[@]}" big opsel-cal dec1k frontier opsel-big-geom opsel-big astar; do
+  for k in "${ORDER[@]}" big opsel-cal dec1k frontier opsel-big-geom opsel-big astar v13-replay v13-floor v13-seed v13-floor-big; do
     printf '\n--- %s (%s)\n' "$k" "${CFG[$k]}"
     local ph=""
     [ -n "${PHASE[$k]:-}" ] && ph="--phase ${PHASE[$k]}"
@@ -78,7 +103,17 @@ TXT
 }
 
 run_one() {
-  local key="$1" cfg="${CFG[$1]}"
+  local key="$1" cfg="${CFG[$1]:-}"
+  if [ "$key" = "v13-seed-big" ]; then
+    # §v13.F fixes 4 or 8 cells before the first v13 unit; read it, never guess
+    local n
+    n=$(grep -E '^V13F_SEED_BIG_CELLS = [48]$' PREREGISTRATION.md | awk '{print $3}')
+    if [ -z "$n" ]; then
+      echo "REFUSED: §v13.F (SEED 27-32B cell count) is not recorded in PREREGISTRATION.md."
+      return 1
+    fi
+    cfg=configs/v13/seed_big_${n}.yaml
+  fi
   echo
   echo "==================================================================="
   echo " RUN: $key   ($cfg)"
@@ -98,6 +133,13 @@ run_one() {
   if [ "$key" = "opsel-big" ] && [ ! -f results/v12/pstar_prediction.json ]; then
     echo "REFUSED: no frozen p* prediction (results/v12/pstar_prediction.json)."
     echo "Order: opsel-cal -> opsel-big-geom -> v12_pstar.py fit/predict -> opsel-big"
+    return 1
+  fi
+
+  if [ "$key" = "v13-floor-seed" ] && ! $PY -c "
+import json,sys; sys.exit(0 if json.load(open('results/v13/verdicts.json')).get('floor_seed_2b_licensed') else 1)" 2>/dev/null; then
+    echo "REFUSED: v13.E runs only if SEED (<=9B) is NON-INFERIOR and FLOOR MOVES."
+    echo "Run python3 src/v13_analyze.py verdicts after both <=9B panels complete."
     return 1
   fi
 
@@ -131,7 +173,7 @@ case "${1:-status}" in
     python3 scripts/preflight.py --config configs/v11/ifeval_v11.yaml || exit 1
     python3 scripts/plan.py configs/v11/ifeval_v11.yaml --only published || exit 1
     WORKERS="$WORKERS" bash scripts/submit_local.sh work/v11ins.published.units.json ;;
-  dec|alphaext|ifeval|big|opsel-cal|dec1k|frontier|opsel-big-geom|opsel-big|astar) run_one "$1" ;;
+  dec|alphaext|ifeval|big|opsel-cal|dec1k|frontier|opsel-big-geom|opsel-big|astar|v13-*) run_one "$1" ;;
   all)
     rc=0
     for k in "${ORDER[@]}"; do run_one "$k" || rc=1; done

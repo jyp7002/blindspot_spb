@@ -1,0 +1,104 @@
+# v13 SEED (<=9B) -- is a seed-regenerable random-support patch non-inferior?
+# PREREGISTRATION §v13.C. The 18 v11dec cells x 3 seeds.
+# Arms: s0.99 (= C-ref) and C-seed@0.01, both at alpha* (primary) and on the frozen
+# grid (descriptive); C-a@0.01 at alpha* on the 10 registered cells only
+# (descriptive; per-cell extra_variants). Ladder to 512.
+# MMLU-1000 at every selected configuration of both primary arms. IFEval (seed 0)
+# at alpha* on both primary arms for the 7-9B cells (per-cell ifeval_variants).
+# Measured patch files for both arms (C-ref: index patch, C-seed: seed patch);
+# every patch must rebuild its edit bit-for-bit or the unit stops.
+
+panel: v13seed
+kind: opsel
+out_panel: v13seed
+base_on: v11dec
+phase: full
+density: 0.01
+scale_mode: ref_tensor
+alphas: [2, 4, 8, 16]
+seeds: [0, 1, 2]
+mmlu_n: 200
+sparsities: [0.99]
+extra_variants: [C-seed@0.01]
+adaptive_variants: [s0.99, C-seed@0.01, C-a@0.01]
+alpha_ladder: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+refine_steps: 3
+calib_n: 200
+mmlu1k_variants: [s0.99, C-seed@0.01]
+mmlu1k_all_alphas: false
+patch_variants: [s0.99, C-seed@0.01]
+ifeval_variants: []
+ifeval_seeds: [0]
+ifeval_limit: 200
+cells:
+- target: gemma
+  hf: google/gemma-2-2b-it
+  designer: gemma_3b
+  axis: occ_gender
+  extra_variants: [C-seed@0.01, C-a@0.01]
+- target: llama
+  hf: meta-llama/Llama-3.2-3B-Instruct
+  designer: llama_3b
+  axis: occ_gender
+  extra_variants: [C-seed@0.01, C-a@0.01]
+- target: qwen
+  hf: Qwen/Qwen2.5-3B-Instruct
+  designer: qwen_3b
+  axis: occ_gender
+  extra_variants: [C-seed@0.01, C-a@0.01]
+- target: phi
+  hf: microsoft/Phi-3.5-mini-instruct
+  designer: phi_3b
+  axis: occ_gender
+  extra_variants: [C-seed@0.01, C-a@0.01]
+- target: phi
+  hf: microsoft/Phi-3.5-mini-instruct
+  designer: phi_3b
+  axis: bbq_Age
+  extra_variants: [C-seed@0.01, C-a@0.01]
+- target: qwen
+  hf: Qwen/Qwen2.5-3B-Instruct
+  designer: qwen_3b
+  axis: bbq_Age
+  extra_variants: [C-seed@0.01, C-a@0.01]
+- target: qwen
+  hf: Qwen/Qwen2.5-3B-Instruct
+  designer: qwen_3b
+  axis: bbq_Race_ethnicity
+  extra_variants: [C-seed@0.01, C-a@0.01]
+- target: qwen
+  hf: Qwen/Qwen2.5-3B-Instruct
+  designer: qwen_3b
+  axis: ss_intra
+  extra_variants: [C-seed@0.01, C-a@0.01]
+- target: phi
+  hf: microsoft/Phi-3.5-mini-instruct
+  designer: phi_3b
+  axis: ss_intra
+  extra_variants: [C-seed@0.01, C-a@0.01]
+- target: qwen7b
+  hf: Qwen/Qwen2.5-7B-Instruct
+  designer: qwen
+  axis: occ_gender
+  extra_variants: [C-seed@0.01, C-a@0.01]
+  ifeval_variants: [s0.99, C-seed@0.01]
+- {target: gemma, hf: google/gemma-2-2b-it, designer: gemma_3b, axis: crows_socioeconomic}
+- {target: phi, hf: microsoft/Phi-3.5-mini-instruct, designer: phi_3b, axis: crows_socioeconomic}
+- {target: llama, hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: crows_socioeconomic}
+- target: llama8b
+  hf: meta-llama/Llama-3.1-8B-Instruct
+  designer: llama
+  axis: occ_gender
+  ifeval_variants: [s0.99, C-seed@0.01]
+- target: qwen7b
+  hf: Qwen/Qwen2.5-7B-Instruct
+  designer: qwen
+  axis: bbq_Age
+  ifeval_variants: [s0.99, C-seed@0.01]
+- target: llama8b
+  hf: meta-llama/Llama-3.1-8B-Instruct
+  designer: llama
+  axis: bbq_Age
+  ifeval_variants: [s0.99, C-seed@0.01]
+- {target: gemma, hf: google/gemma-2-2b-it, designer: gemma_3b, axis: bbq_Age}
+- {target: llama, hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: ss_intra}

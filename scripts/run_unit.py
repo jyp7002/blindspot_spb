@@ -176,7 +176,12 @@ def _run_opsel(u):
                       ("refine_steps", "REFINE"),
                       ("pstar_file", "PSTAR_FILE"),
                       ("calib_n", "CALIB_N"),
-                      ("mmlu1k_all_alphas", "MMLU1K_ALL_ALPHAS")):
+                      ("mmlu1k_all_alphas", "MMLU1K_ALL_ALPHAS"),
+                      ("patch_variants", "PATCH_VARIANTS"),
+                      ("ifeval_variants", "IFEVAL_VARIANTS"),
+                      ("ifeval_seeds", "IFEVAL_SEEDS"),
+                      ("ifeval_limit", "IFEVAL_LIMIT"),
+                      ("deterministic", "DETERMINISTIC")):
         if key in u:
             setattr(R, attr, u[key])
     if R.PSTAR_FILE and not os.path.isabs(R.PSTAR_FILE):
@@ -226,6 +231,17 @@ def main():
     if a.skip_done and v11_panel.done(u):
         print("[unit] already complete on disk — skipping", flush=True)
         return 0
+
+    if u.get("deterministic"):
+        # v13 E0.5 diagnostic. Must precede CUDA initialisation (cuBLAS reads
+        # the workspace setting once). warn_only: an op without a deterministic
+        # kernel is logged, not fatal, and the log is part of the diagnostic.
+        os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
+        import torch
+        torch.use_deterministic_algorithms(True, warn_only=True)
+        torch.backends.cudnn.benchmark = False
+        torch.backends.cudnn.deterministic = True
+        print("[unit] deterministic kernels forced", flush=True)
 
     t0 = time.time()
     try:

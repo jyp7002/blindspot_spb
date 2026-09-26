@@ -1,0 +1,27 @@
+# v13 FLOOR (27-32B, descriptive, n = 4). As floor_cal.yaml on the v12big cells.
+# RUNS ON A >=80 GB CARD, bf16, one device, self designers.
+
+panel: v13floorbig
+kind: opsel
+out_panel: v13floorbig
+base_on: v12big
+phase: full
+density: 0.01
+scale_mode: ref_tensor
+alphas: [2, 4, 8, 16]
+seeds: [0, 1, 2]
+mmlu_n: 200
+sparsities: [0.99, 0.995, 0.999, 0.9995]
+extra_variants: []
+adaptive_variants: &id001 [s0.99, s0.995, s0.999, s0.9995]
+alpha_ladder: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096]
+refine_steps: 3
+calib_n: 200
+mmlu1k_variants: []
+mmlu1k_all_alphas: false
+patch_variants: *id001
+cells:
+- {target: gemma27b, hf: google/gemma-2-27b-it, designer: gemma27b, axis: occ_gender, designer_hf: google/gemma-2-27b-it}
+- {target: gemma27b, hf: google/gemma-2-27b-it, designer: gemma27b, axis: bbq_Age, designer_hf: google/gemma-2-27b-it}
+- {target: qwen32b, hf: Qwen/Qwen2.5-32B-Instruct, designer: qwen32b, axis: occ_gender, designer_hf: Qwen/Qwen2.5-32B-Instruct}
+- {target: qwen32b, hf: Qwen/Qwen2.5-32B-Instruct, designer: qwen32b, axis: bbq_Age, designer_hf: Qwen/Qwen2.5-32B-Instruct}

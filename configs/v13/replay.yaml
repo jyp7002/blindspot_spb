@@ -1,0 +1,26 @@
+# v13 E0.5 REPLAY -- two v12astar units, configured exactly as configs/v12/astar_dec.yaml.
+# Gate before any new v13 cell (PREREGISTRATION §v13.B): at every frozen evaluation
+# point, skew and perplexity bit-identical to results/v12astar; MMLU within the
+# registered tolerance. Checked by `python3 src/v13_analyze.py replay`.
+
+panel: v13replay
+kind: opsel
+out_panel: v13replay
+base_on: v12astar
+phase: full
+density: 0.01
+scale_mode: ref_tensor
+alphas: [2, 4, 8, 16]
+seeds: [0]
+mmlu_n: 200
+sparsities: [0.99]
+extra_variants: [C-a@0.01]
+adaptive_variants: [s0.99, C-a@0.01]
+alpha_ladder: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+refine_steps: 3
+calib_n: 200
+mmlu1k_variants: []
+mmlu1k_all_alphas: false
+cells:
+- {target: gemma, hf: google/gemma-2-2b-it, designer: gemma_3b, axis: occ_gender}
+- {target: qwen, hf: Qwen/Qwen2.5-3B-Instruct, designer: qwen_3b, axis: occ_gender}

@@ -55,7 +55,9 @@ INS_CONDITIONS = ["fp", "sign_only", "sparse99", "random_sign"]
 KINDS = ("dec", "alphaext", "ifeval", "opsel", "frontier")
 OPSEL_KEYS = ("phase", "sparsities", "extra_variants", "adaptive_variants",
               "mmlu1k_variants", "alpha_ladder", "refine_steps", "pstar_file",
-              "calib_n", "mmlu1k_all_alphas")
+              "calib_n", "mmlu1k_all_alphas",
+              # v13
+              "patch_variants", "ifeval_variants", "ifeval_seeds", "deterministic")
 # v12: "frontier" = Table A methods re-measured with traces (run_frontier.py)
 FRONTIER_KEYS = ("methods", "mmlu1k", "mmlu1k_all_configs", "ifeval_seeds",
                  "ifeval_limit", "eval_batch")
