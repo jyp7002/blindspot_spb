@@ -1,0 +1,84 @@
+{
+ "criterion": "PREREGISTRATION \u00a7v12.E",
+ "close_frac": 0.25,
+ "frozen": {
+  "point": 0.2850767591875146,
+  "lo": 0.1696985659095657,
+  "hi": 0.41115225176035997,
+  "n": 10
+ },
+ "adaptive": {
+  "point": 0.07268639487903526,
+  "lo": -0.03571862502807129,
+  "hi": 0.21325525570502335,
+  "n": 10
+ },
+ "branch": "INCONCLUSIVE",
+ "scale_contrast": {
+  "point": 0.10949896622906294,
+  "lo": -0.007998988872304918,
+  "hi": 0.2599732860553913,
+  "n": [
+   10,
+   4
+  ]
+ },
+ "scale_claim": false,
+ "sensitivities": {
+  "eval_fail_zeroed": {
+   "adaptive": {
+    "point": 0.07232605242107323,
+    "lo": -0.07186186789611577,
+    "hi": 0.24043509691330672,
+    "n": 10
+   },
+   "branch": "INCONCLUSIVE"
+  },
+  "matched_axes": {
+   "cells": 7,
+   "frozen": {
+    "point": 0.3588548378255822,
+    "lo": 0.21880143026951163,
+    "hi": 0.49701327000587103,
+    "n": 7
+   },
+   "adaptive": {
+    "point": 0.10418770979794223,
+    "lo": -0.0425031629961467,
+    "hi": 0.3014012749368865,
+    "n": 7
+   },
+   "branch": "INCONCLUSIVE"
+  }
+ },
+ "fragile": false,
+ "alpha_star": {
+  "s0.99": {
+   "status": {
+    "ok": 30
+   },
+   "alpha_star_median": 20.749432874416154,
+   "alpha_star_range": [
+    10.374716437208077,
+    45.254833995939045
+   ],
+   "eval_pass_rate": 0.5666666666666667
+  },
+  "C-a@0.01": {
+   "status": {
+    "ok": 30
+   },
+   "alpha_star_median": 90.50966799187809,
+   "alpha_star_range": [
+    29.34412938254948,
+    152.2185107203483
+   ],
+   "eval_pass_rate": 0.6
+  }
+ },
+ "replay_v8dec": {
+  "n": 60,
+  "n_diff": 1,
+  "max_abs": 0.045806915992044894
+ }
+}

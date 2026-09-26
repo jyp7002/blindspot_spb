@@ -1491,3 +1491,47 @@ different items. No proxy for E was computed from them before this entry.
 NO READING BEFORE COMPLETION. src/v12_astar.py prints no removal until all 30
 units exist; `progress` reports counts only. No amendment to this entry after
 the first unit starts, except for cost or failure, recorded as such.
+
+## v12.F — v12.E result, read as registered (2026-09-26)
+
+v12astar complete: 30/30 units, 60/60 rows, all units rc 0 (2026-09-25,
+17:43-21:14 UTC, one L40S). Verdict by `make v12-astar` ->
+results/v12/astar_verdict.json.
+
+VERDICT: INCONCLUSIVE.
+  F (frozen)  +0.285 [+0.170, +0.411]  n=10, excludes 0
+  E (alpha*)  +0.073 [-0.036, +0.213]  n=10, covers 0
+  E/F = 0.255 against the registered 0.25: E exceeds 0.25*F by 0.0014.
+  Scale contrast S (<=9B - 27-32B) +0.109 [-0.008, +0.260]: no scale claim.
+  Sensitivities: eval-fail zeroed +0.072 [-0.072, +0.240]; matched axes
+  (7 cells) +0.104 [-0.043, +0.301]; both INCONCLUSIVE, so not FRAGILE by the
+  coded definition.
+  alpha*: C-ref median 20.7 (10.4-45.3), C-a median 90.5 (29.3-152.2), all 30
+  status 'ok' per arm; evaluation-gate pass rate 0.57 (C-ref), 0.60 (C-a).
+Per v12.E: neither reframe; E and F reported with the grid-conditional
+qualifier; no scale claim.
+
+STATED PLAINLY, because the verdict sits on its threshold: the 0.0014 margin
+is smaller than the MMLU process-level variation measured below, so a re-run
+could land on CLOSES. The registered reading is INCONCLUSIVE and is not
+re-cut. Descriptive only: the per-cell differences are heavy-tailed. One cell,
+qwen|occ_gender, contributes +0.629 (C-a at its alpha* is -0.029); 5 of 10
+cells have |d| < 0.07 and 3 are negative.
+
+REPLAY. 59/60 frozen rows bit-identical to results_v9/v8dec. The miss,
+llama|occ_gender|s0|C-a (+0.0026 vs +0.0484), was explained before this
+entry. scripts/mmlu_determinism.py -> results/v12/mmlu_determinism.json:
+  - v12astar and v12dec1k agree bit-for-bit on post-edit skew and perplexity
+    at every alpha, so the edited weights are identical. Only MMLU differs:
+    alpha 8 0.670 vs 0.655, alpha 16 0.660 vs 0.645 (a 5-item drop, over the
+    4-item gate, so the frozen argmax falls from alpha 16 to 8).
+  - Rebuilt in a fresh process (geometry sha matches v12astar), MMLU at a
+    fixed edit is deterministic within the process: 6/6 identical reads,
+    interleaved with calibration evaluation, an MMLU-1000 read and fast_eval.
+  - Across processes it is not: this process reads the unedited model at
+    0.660 (both panels: 0.670) and alpha 8 at 0.665 (0.670 / 0.655).
+  So the MMLU reading of identical weights depends on the process by 1-3
+  items, with no counterpart in skew or perplexity. The cause is not pinned
+  down (the code path has no RNG). It moves the gate only at the item
+  boundary. It also bounds how reproducible alpha*, which is a gate decision,
+  can be. Substituting the published row gives F = +0.2835 and the same branch.
