@@ -1674,3 +1674,41 @@ No change to cells, arms, sparsity points, ladders, bars, scoring or
 verdict rules after the first unit. No re-run replaces a completed unit;
 repeats are reported alongside. No v13 number is read back into §v12.E or
 into Delta_selection. No combined claim across SEED and FLOOR.
+
+## v13.H — <=9B results, read as registered (2026-09-27)
+
+scripts/v13_local.sh completed 2026-09-27 05:34 UTC: replay 4/4 rows, the
+determinism diagnostic 4 x 12/12, FLOOR 132/132, SEED 138/138; every unit rc 0;
+every patch rebuilt its edit bit-for-bit. 27-32B panels (v13seedbig 8 cells,
+v13floorbig) pending on the big card. results/v13/verdicts.json.
+
+E0.5 REPLAY: PASS. 16/16 frozen points bit-identical in skew and perplexity and
+0 items apart in MMLU; alpha* identical in all four arms.
+E0.5 DIAGNOSTIC: two fresh processes agree at 48/48 points, MMLU included, with
+default AND with deterministic kernels. The cross-process drift of v12 is not
+kernel nondeterminism between identical processes; it follows from what else a
+process has run (v12dec1k read MMLU-1000 before training; v12astar did not).
+
+SEED <=9B: INCONCLUSIVE. rho_seed (deployable) 0.854 [0.457, 1.709], 18 cells,
+all in-envelope. No storage claim (v13.C).
+FLOOR <=9B: INCONCLUSIVE. R (deployable, alpha*) 0.953 [0.642, 2.074], 11 cells.
+No floor claim (v13.D).
+
+Readings (no verdict), stated because they explain the width:
+- alpha* passes the evaluation gate in 48% (C-ref), 50% (C-seed), 45-52%
+  (FLOOR points) of units, so deployable scoring zeroes about half the units
+  and the cell means rest on which seeds happened to pass. As-deployed:
+  rho_seed 0.877 [0.691, 1.066]; FLOOR R 0.845 [0.716, 1.026].
+- MMLU-1000 at alpha*: 30/54 C-ref and 29/54 C-seed selected points fail the
+  20-item budget (frozen argmax: 3/54, 1/54). alpha* sits on the 200-item gate
+  boundary by construction.
+- FLOOR under the frozen grid: 0.474 [0.278, 0.640] (the published cliff). The
+  shift alpha* - frozen at 0.1% is +0.479 [+0.267, +1.488] (excludes 0). The
+  cliff moves with scale; whether it moves by enough is what the registered
+  deployable criterion cannot resolve.
+- C-seed vs C-a at alpha* (10 registered cells) +0.008 [-0.047, +0.066]: the
+  keyed permutation behaves like the v8 random support.
+- Measured patches: C-seed 0.41-1.61 MiB (median 0.85); C-ref index 3.35-14.57
+  MiB (median 7.57) at 8.88 bits/coordinate against a per-tensor floor of 7.36
+  (+1 sign). FLOOR index medians: 8.51 MiB at 1%, 1.14 MiB at 0.1% (x7.5).
+- IFEval (4 7-9B units, seed 0): mean delta -0.005 for both arms.

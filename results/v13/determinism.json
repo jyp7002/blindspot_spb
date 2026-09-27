@@ -1,0 +1,24 @@
+{
+ "nd": {
+  "points": 48,
+  "post_mmlu_item_diffs": {
+   "0": 48
+  },
+  "pre_mmlu_item_diffs": {
+   "0": 48
+  },
+  "skew_ppl_identical": 48,
+  "gate_decisions_differing": 0
+ },
+ "d": {
+  "points": 48,
+  "post_mmlu_item_diffs": {
+   "0": 48
+  },
+  "pre_mmlu_item_diffs": {
+   "0": 48
+  },
+  "skew_ppl_identical": 48,
+  "gate_decisions_differing": 0
+ }
+}
