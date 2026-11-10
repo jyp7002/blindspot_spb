@@ -149,6 +149,16 @@ to m = 0.5). The E7a reconstruction for the same unit reads −0.081, +0.097, +0
 +0.477 at m = 0.25 … 1 with ratios 1.030 … 1.367: the same picture from a separately
 trained adapter.
 
+**2026-11-10 ~09:20Z, during pass A — queue order.** The chain was stopped between
+measurements and restarted as: pass A (E4 `C-rand`, resumes where it stopped) →
+E7b arm `pub` (24 units, about 1.6 h) → pass B (E5 + replays + E8) → pass C (rest of
+E4) → E7b registered arms. Reason: the DPO correction withdraws a claim of the
+submitted paper, and a withdrawal should rest on a measurement rather than on a
+reconstruction; the cost is a 1.6 h delay of pass B. The unit that was running when the
+chain stopped is re-run from the start (its partial `alpha_trace.jsonl` rows are
+superseded; analyses read the `rungs` stored in complete `removal.jsonl` rows).
+`scripts/r1_queue.sh` gained an optional runner field for this. No reading rule changes.
+
 ---
 
 ## 4. Readings and findings log
