@@ -1,0 +1,44 @@
+# R1 E7b -- DPO re-measured with a correct harness (R1_REBUTTAL_EXPERIMENTS.md §3 E7;
+# R1_NOTES.md §4 E7a for why the harness had to change).
+#
+# FRONT8 x 3 seeds, self designer; pairs built exactly as run_dpo_baseline.py
+# built them (differing pairs only, chosen = debiased, rejected = biased, empty
+# prompt). Baseline on the clean model before training; adapter unloaded and the
+# baseline re-checked before any measurement; the delta is ADDED at merge scale m.
+#
+# arms
+#   pub      the as-published recipe. Merge scales: the published {0.25,0.5,0.75,1}
+#            plus {0.0625, 0.125, 0.375} below them, so the budget boundary is
+#            bracketed. Trained wherever >= 8 pairs differ; the published skip
+#            threshold (20) is applied in the analysis, and the cells below it
+#            are reported separately.
+#   lr1e-5,  the registered E7b design: {lr 1e-5, 5e-5} x merge {1, 2} is the
+#   lr5e-5   4-configuration selection space, skip threshold 8 differing pairs.
+#            "epoch 고정" in the plan names no number; 3 is used (TRL's default,
+#            and close to the 3.5 passes the published 250 steps x batch 2 make
+#            over a full 144-pair occupation corpus). Logged in R1_NOTES.md §3.
+#
+# Do not edit after the first unit: that is an amendment and goes in R1_NOTES.md.
+
+panel: r1/E7b
+seeds: [0, 1, 2]
+lora: {r: 16, lora_alpha: 32}
+
+arms:
+  pub:    {lr: 1.0e-4, steps: 250, batch: 2, beta: 0.1, max_length: 128, min_pairs: 8,
+           merge: [0.0625, 0.125, 0.25, 0.375, 0.5, 0.75, 1.0]}
+  lr1e-5: {lr: 1.0e-5, epochs: 3, batch: 2, beta: 0.1, max_length: 128, min_pairs: 8,
+           merge: [1.0, 2.0]}
+  lr5e-5: {lr: 5.0e-5, epochs: 3, batch: 2, beta: 0.1, max_length: 128, min_pairs: 8,
+           merge: [1.0, 2.0]}
+
+# FRONT8, verbatim from configs/v12/frontier.yaml.
+cells:
+  - {target: gemma, hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: occ_gender}
+  - {target: gemma, hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: crows_socioeconomic}
+  - {target: llama, hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: occ_gender}
+  - {target: llama, hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: crows_socioeconomic}
+  - {target: qwen,  hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: occ_gender}
+  - {target: qwen,  hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: crows_socioeconomic}
+  - {target: phi,   hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: occ_gender}
+  - {target: phi,   hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: crows_socioeconomic}

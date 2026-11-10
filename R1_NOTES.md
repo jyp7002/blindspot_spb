@@ -125,6 +125,30 @@ trace, and removal at every such point is measured on the evaluation split like 
 other rung. E8's registered reading (deployment rule α\*/√2, target ≥ 90% evaluation
 pass; Δ_selection invariant to backoff if collateral is homogeneous) is unchanged.
 
+**2026-11-10, before the first E7b unit — E7b harness and the parameters the plan leaves
+open.** `run_r1_dpo.py` + `configs/r1/e7b.yaml`. (a) The harness is the corrected one
+(section 4, E7a): baseline on the clean model before training; the adapter is unloaded
+and the baseline re-measured and required to match bit for bit; the update is added at
+merge scale m. (b) Pairs are built exactly as the published script built them, which
+already dropped identical pairs; so "differing pairs only" is not a change. (c) The
+registered 4-configuration space {lr 1e-5, 5e-5} × merge {1, 2}, β = 0.1, skip threshold
+8 differing pairs, is run as two arms. "epoch 고정" names no number: **3 epochs** is
+used (TRL's default; the published 250 steps × batch 2 make 3.5 passes over a full
+144-pair occupation corpus). With 8–50 differing pairs that is 12–75 optimizer steps,
+so these arms may under-train; that is a property of the registered design and will be
+reported as such next to the `pub` arm. (d) Added arm `pub`: the as-published recipe
+(lr 1e-4, 250 steps, batch 2) at merge scales {0.0625, 0.125, 0.25, 0.375, 0.5, 0.75, 1},
+trained wherever ≥ 8 pairs differ, with the published threshold of 20 applied in the
+analysis. It checks the E7a reconstruction by measurement and is not part of the
+registered reading E7-1 / E7-2. (e) TRL 1.9.2 (the version named in
+`run_dpo_baseline.py`) was installed with `--no-deps`; the pinned stack is unchanged.
+(f) Smoke unit (qwen | occ_gender | s0, arm `pub`, throwaway panel `r1/_smoke_e7b`):
+baseline restored exactly after unloading; removal by merge scale −0.021, −0.055,
+−0.083, −0.045, +0.084, +0.301, +0.547 at perplexity ratios 1.003 … 1.416 (in budget up
+to m = 0.5). The E7a reconstruction for the same unit reads −0.081, +0.097, +0.286,
++0.477 at m = 0.25 … 1 with ratios 1.030 … 1.367: the same picture from a separately
+trained adapter.
+
 ---
 
 ## 4. Readings and findings log
