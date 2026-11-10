@@ -175,6 +175,23 @@ model in throwaway panels (fixed-scale arms; elicitation of a missing corpus). T
 elicitation check showed why (b) is needed: re-eliciting gemma-2-2.6B | occupation in a
 different item order changed 3 of 144 pairs.
 
+**2026-11-10 17:10Z, pass B at 51 of 150 unit-arms — E5 and E8 readings coded; two
+sentences of E8 pinned down.** `src/r1_e5.py` and `src/r1_e8.py` were written, self-tested
+on synthetic rows (12/12, 8/8) and committed while the panel was incomplete; both refuse
+to print a removal until every unit-arm they read is on disk. Before the commit, only the
+field layout of the finished rows (key names, counts, α\* status) was looked at, no removal
+and no skew. E5 is read exactly as registered (reference arms per §2.5; the other source
+is printed next to the verdict and a reading that changes with it is labelled FRAGILE).
+The plan states E8's reading in two sentences that leave room; they are fixed here,
+before any E8 number exists:
+- *"evaluation pass ≥ 90%" at α\*/√2*: the rate is taken over the units in which the edit
+  is deployed (α\* exists), **per arm**, and the target is met only if **both** `C-ref`
+  and `C-a` reach 0.90. The pooled rate is printed next to it.
+- *"Δ_selection is invariant to backoff"*: the paired cell bootstrap interval of
+  `Δ_selection(α*·f) − Δ_selection(α*)` includes 0, read at f = 1/√2 (the deployment
+  rule); f = 1/2 is reported. Removal is the registered `|pre| − |post|`; an undeployed
+  edit scores 0 at every backoff.
+
 ---
 
 ## 4. Readings and findings log
