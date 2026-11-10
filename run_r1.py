@@ -78,6 +78,11 @@ def load_cfg(path):
     cfg.setdefault("curve_extra_rungs", 1)
     cfg.setdefault("ref_panel", "v12astar")
     cfg.setdefault("arm_ladder", {})
+    # E8 (alpha* backoff and budget sensitivity); all empty = the E4 behaviour
+    cfg.setdefault("backoff_arms", [])
+    cfg.setdefault("backoff_factors", [])
+    cfg.setdefault("mmlu1k_arms", [])
+    cfg.setdefault("budget_items_extra", [])
     for a in cfg["arms"]:
         if a not in DEC_ARMS + OP_ARMS:
             raise SystemExit(f"unknown arm {a!r}")
@@ -312,6 +317,13 @@ def run_unit(cfg, u, arms, panel):
         raise RuntimeError("calibration and evaluation MMLU items overlap")
     if set(wt_cal) & set(wt):
         raise RuntimeError("calibration and evaluation WikiText chunks overlap")
+    mmlu1k = None
+    if any(a in cfg["mmlu1k_arms"] for a in todo):
+        # run_opsel's MMLU-1000 reading: a superset of the evaluation items,
+        # read at already-selected points, never a selection criterion.
+        mmlu1k = C.load_mmlu(n=1000, seed=0)
+        if [r["question"] for r in mmlu1k[:200]] != [r["question"] for r in mmlu]:
+            raise RuntimeError("load_mmlu(1000)[:200] != load_mmlu(200)")
 
     t0 = time.time()
     model, tok = C.load_model(hf, dispatch=False)
@@ -320,6 +332,7 @@ def run_unit(cfg, u, arms, panel):
         pre, pre_ll = eval_split(C, model, tok, ax, mmlu, wt, BATCH)
         pre_cal = RO.collateral_eval(model, tok, mmlu_cal, wt_cal)
         pre_cal_c = RS.collateral_only(pre_cal)
+        pre_1k = RO.mmlu1k_eval(model, tok, mmlu1k) if mmlu1k is not None else None
 
         v, losses = RO.train_contrast(model, tok, dn, ax, s)
         g = RO.geometry_of(v)
@@ -455,6 +468,53 @@ def run_unit(cfg, u, arms, panel):
                                 n_changed=rungs[a_star]["n_changed"],
                                 realized_l2=rungs[a_star]["realized_l2"])
 
+            # ---- E8: alpha* backoff and budget sensitivity (listed arms only) ----
+            def add_1k(alpha):
+                rec = rungs[float(alpha)]
+                if "mmlu1k" in rec:
+                    return
+                undo = C.apply_edit(model, E, alpha=float(alpha), sign=-1.0)
+                try:
+                    p1k = RO.mmlu1k_eval(model, tok, mmlu1k)
+                finally:
+                    undo()
+                rec["mmlu1k"] = RO._k1(pre_1k, p1k,
+                                       v9_gate.ppl_ok(pre["ppl"], rec["eval"]["ppl"]))
+                _append(os.path.join(out_dir, "alpha_trace.jsonl"), dict(
+                    key, arm=arm, split="mmlu1k", rule="adaptive", role=rec["role"],
+                    alpha=float(alpha), pre_mmlu=pre_1k, post_mmlu=p1k, n_items=1000,
+                    ppl_ratio=rec["eval"]["ppl_ratio"],
+                    collateral_ok=rec["mmlu1k"]["ok"]))
+
+            backoff, budgets = None, None
+            if arm in cfg["backoff_arms"]:
+                if a_star is not None:
+                    backoff = []
+                    for f in [1.0] + [float(x) for x in cfg["backoff_factors"]]:
+                        a = float(a_star * f)
+                        if a not in rungs:
+                            measure(a, "backoff")
+                        if mmlu1k is not None and arm in cfg["mmlu1k_arms"]:
+                            add_1k(a)
+                        backoff.append(dict(factor=f, alpha=a))
+                budgets = {}
+                for b in cfg["budget_items_extra"]:
+                    def probe_b(alpha, _b=b):
+                        rec = rungs.get(float(alpha)) or measure(alpha, f"rung_b{_b}")
+                        return {k: rec["calib"][k] for k in ("mmlu_acc", "ppl", "n_items")}
+                    sb = RS.select(pre_cal_c, probe_b, ladder, cfg["refine_steps"],
+                                   mmlu_budget_items=int(b))
+                    d = {k: sb[k] for k in ("alpha_star", "status", "n_probes",
+                                            "last_pass", "first_fail")}
+                    if sb["alpha_star"] is not None:
+                        evb = rungs[sb["alpha_star"]]["eval"]
+                        d.update(removal=evb["removal"], post_skew=evb["post_skew"],
+                                 dmmlu_items=evb["dmmlu_items"], ppl_ratio=evb["ppl_ratio"],
+                                 eval_ok_same_budget=bool(
+                                     evb["dmmlu_items"] <= int(b)
+                                     and v9_gate.ppl_ok(pre["ppl"], evb["ppl"])))
+                    budgets[str(b)] = d
+
             ll_fp = os.path.join(out_dir, "probe_ll",
                                  f"{fam}__{ax}__s{s}__{dn}__{arm}.npz")
             order = sorted(range(len(lls)), key=lambda i: lls[i][0])
@@ -468,7 +528,8 @@ def run_unit(cfg, u, arms, panel):
                 meta={k: meta.get(k) for k in (
                     "kind", "n_flips", "n_params", "effective_sparsity", "frobenius",
                     "scale_mode", "support", "values", "rescale", "sigma", "scale")},
-                frozen=frozen, adaptive=adaptive,
+                frozen=frozen, adaptive=adaptive, backoff=backoff, budgets=budgets,
+                pre_mmlu1k=pre_1k,
                 rungs=[rungs[a] for a in sorted(rungs)],
                 seconds=round(time.time() - ta, 1)))
             # Operational line only: alpha*, probe count, gate status. Removals

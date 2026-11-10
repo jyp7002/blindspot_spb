@@ -50,12 +50,15 @@ def collateral_only(d):
     return {k: d[k] for k in ("mmlu_acc", "ppl", "n_items") if k in d}
 
 
-def gate(pre, post):
+def gate(pre, post, mmlu_budget_items=None):
     """Budget decision from calibration collateral alone.
 
     Same semantics as colab_t2t4.collateral_ok(pre, post): the item count comes
     from the measurement, a pre/post count mismatch is refused, and the decision
     is v9_gate.collateral_ok at the registered budget (4 of 200 items, 1.10).
+
+    mmlu_budget_items (E8 only) replaces the 4-item MMLU allowance by another
+    integer; the perplexity bound stays 1.10. None is the registered gate.
     """
     _check("pre", pre)
     _check("post", post)
@@ -64,20 +67,30 @@ def gate(pre, post):
         raise ValueError(f"pre/post scored on different MMLU item counts "
                          f"({n_pre} vs {n_post})")
     n = n_pre or n_post or v9_gate.N_ITEMS_DEFAULT
-    return bool(v9_gate.collateral_ok(pre["mmlu_acc"], post["mmlu_acc"],
-                                      pre["ppl"], post["ppl"], n_items=n))
+    if mmlu_budget_items is None:
+        return bool(v9_gate.collateral_ok(pre["mmlu_acc"], post["mmlu_acc"],
+                                          pre["ppl"], post["ppl"], n_items=n))
+    b = int(mmlu_budget_items)
+    if b != mmlu_budget_items or b < 0:
+        raise ValueError(f"mmlu_budget_items must be a non-negative integer, got "
+                         f"{mmlu_budget_items!r}")
+    drop = (v9_gate.items_from_acc(pre["mmlu_acc"], n)
+            - v9_gate.items_from_acc(post["mmlu_acc"], n))
+    return bool(drop <= b and v9_gate.ppl_ok(pre["ppl"], post["ppl"]))
 
 
 def select(pre, collateral_probe, ladder=S.ALPHA_LADDER,
-           refine_steps=S.REFINE_STEPS):
+           refine_steps=S.REFINE_STEPS, mmlu_budget_items=None):
     """alpha* by the registered first-failure rule, from collateral alone.
 
     pre               calibration-split collateral of the unedited model
     collateral_probe  alpha -> calibration-split collateral with the edit active
+    mmlu_budget_items E8's budget-sensitivity variants; None = registered gate
     """
     _check("pre", pre)
-    return S.select_alpha(lambda a: gate(pre, collateral_probe(a)),
-                          ladder, refine_steps)
+    return S.select_alpha(
+        lambda a: gate(pre, collateral_probe(a), mmlu_budget_items),
+        ladder, refine_steps)
 
 
 # ------------------------------------------------------------------ tests ----
@@ -114,8 +127,10 @@ def selftest(verbose=True):
 
     # 2. the selector's interface has no slot through which bias could arrive
     params = list(inspect.signature(select).parameters)
-    checks.append(("select(pre, collateral_probe, ladder, refine_steps) -- no bias slot",
-                   params == ["pre", "collateral_probe", "ladder", "refine_steps"]))
+    checks.append(("select(pre, collateral_probe, ladder, refine_steps, "
+                   "mmlu_budget_items) -- no bias slot",
+                   params == ["pre", "collateral_probe", "ladder", "refine_steps",
+                              "mmlu_budget_items"]))
     seen = []
     r = select(pre, lambda a: (seen.append(a), post_at(a))[1])
     checks.append(("the probe is called with alpha and nothing else",
@@ -149,6 +164,21 @@ def selftest(verbose=True):
         checks.append(("pre/post item-count mismatch refused", False))
     except ValueError:
         checks.append(("pre/post item-count mismatch refused", True))
+
+    # 4b. E8 budget variants: integer items, and b=4 is the registered gate
+    g = lambda p, q, b=None: gate(dict(mmlu_acc=p, ppl=10.0, n_items=200),
+                                  dict(mmlu_acc=q, ppl=10.0, n_items=200), b)
+    same = all(g(i / 200, j / 200, 4) == g(i / 200, j / 200)
+               for i in range(0, 201, 7) for j in range(0, 201, 3))
+    checks.append(("mmlu_budget_items=4 reproduces the registered gate on the grid", same))
+    checks.append(("budget 2: 2 items pass, 3 fail; budget 8: 8 pass, 9 fail",
+                   g(.5, .49, 2) and not g(.5, .485, 2)
+                   and g(.5, .46, 8) and not g(.5, .455, 8)))
+    checks.append(("a budget variant still enforces the 1.10 perplexity bound",
+                   gate(dict(mmlu_acc=.5, ppl=10.0), dict(mmlu_acc=.5, ppl=11.1), 8) is False))
+    rb = select(pre, lambda a: post_at(a), mmlu_budget_items=8)
+    checks.append(("select passes the budget variant through (8 items: never fails here)",
+                   rb["status"] == "exhausted"))
 
     # 5. collateral_only strips everything else
     full = dict(skew=0.4, mmlu_acc=0.6, ppl=20.0, n_items=200)

@@ -34,6 +34,17 @@ arm_ladder: {O-trim: wide, O-dare: wide, O-compeft: wide}
 
 arms: [O-compeft, O-trim, O-dare, C-ref, C-a]
 
+# E8 (alpha* backoff, budget sensitivity) rides on the two replay arms, so it
+# costs no extra training pass (R1_NOTES.md §3, entry of 2026-11-10; added
+# before the first E5 unit). After alpha* is fixed by the registered rule:
+#   - evaluation split + MMLU-1000 at alpha*, alpha*/sqrt(2), alpha*/2
+#   - alpha* re-selected with a 2-item and an 8-item MMLU allowance (same
+#     first-failure rule, same calibration items, perplexity bound unchanged)
+backoff_arms: [C-ref, C-a]
+backoff_factors: [0.7071067811865476, 0.5]
+mmlu1k_arms: [C-ref, C-a]
+budget_items_extra: [2, 8]
+
 # The 10 registered DEC cells, verbatim from configs/v12/astar_dec.yaml.
 cells:
   - {target: gemma,  hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: occ_gender}

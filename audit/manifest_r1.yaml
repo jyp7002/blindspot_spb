@@ -38,6 +38,15 @@ smoke:
   baselines_reproduced: true
   frozen_grid_replay_equal_to_v8dec: true
 
+smoke_e5:
+  panel: r1/_smoke_e5
+  unit: "gemma | occ_gender | s0 | gemma_3b, arms O-dare and C-ref (with the E8 backoff/budget code)"
+  utc: "2026-11-10T08:44Z-08:57Z"
+  read: "mechanics only; not a registered run, never cited. Ran concurrently with pass A units 1-2."
+  geom_sha_reproduced: true
+  c_ref_replay_equal_to_v12astar: "alpha*, n_probes, removal at alpha*, perplexity ratio and frozen-grid removal all identical"
+  pass_a_units_run_concurrently_reproduced_geom_sha: true
+
 not_runnable_on_this_box:
   - "E4b (C-rand at 27-32B): needs >= 80 GB"
   - "E1b (27-32B grid extension): needs >= 80 GB"

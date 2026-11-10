@@ -109,3 +109,18 @@ runner design depends on.
 ## 3. Amendment log (append-only)
 
 *(empty at registration)*
+
+**2026-11-10, during pass A (E4 `C-rand`), before the first E5 unit — E8 folded into the
+E5 pass.** E8 measures `C-ref` and `C-a` at α ∈ {α\*, α\*/√2, α\*/2} (evaluation gate,
+MMLU-1000, removal) and re-selects α\* with a 2-item and an 8-item MMLU allowance. Both
+arms are already replayed in the E5 panel, so the E8 measurements are taken there, in
+the same process, right after each arm's registered α\* search: `configs/r1/e5.yaml`
+gains `backoff_arms`, `backoff_factors`, `mmlu1k_arms`, `budget_items_extra`;
+`run_r1.py` and `src/r1_select.py` gain the corresponding code, inert when those keys
+are empty (as in `configs/r1/e4.yaml`, so pass A is unaffected). Differences from the
+plan's wording, both in the direction of measuring more: α\*(b) is found by re-running
+the registered first-failure search under budget *b* (re-using every rung already
+measured and adding only the new bisection points) rather than read off the b = 4
+trace, and removal at every such point is measured on the evaluation split like any
+other rung. E8's registered reading (deployment rule α\*/√2, target ≥ 90% evaluation
+pass; Δ_selection invariant to backoff if collateral is homogeneous) is unchanged.
