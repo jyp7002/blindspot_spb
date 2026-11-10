@@ -159,6 +159,22 @@ chain stopped is re-run from the start (its partial `alpha_trace.jsonl` rows are
 superseded; analyses read the `rungs` stored in complete `removal.jsonl` rows).
 `scripts/r1_queue.sh` gained an optional runner field for this. No reading rule changes.
 
+**2026-11-10 ~09:30Z — the 27–32B panel (E4b + E1b), to be run by the authors on a
+≥ 80 GB card.** `configs/r1/big.yaml`, `scripts/r1_big.sh`, `scripts/r1_pack.sh`; panel
+`r1/BIG`, reference panel `v12big`, the four cells and three seeds of
+`configs/v12/opsel_big.yaml`. Per unit: `C-rand` under the registered α\* rule with
+dual-split rungs (E4b); `C-ref` and `C-a` at the fixed scales 32, 64, 128 (E1b), their
+α\* points being the registered v12big values. Two things the plan does not spell out:
+(a) a corpus that is not on the box is elicited by the model itself, the route
+`scripts/run_unit.py` takes for every big-tier cell; (b) if the retrained ΔW does not
+reproduce v12big's fingerprint (or v12big is not on the box), the unit also runs the
+α\* search for `C-ref` and `C-a`, because the registered reference values then belong
+to a different ΔW. `run_r1.py` gained `elicit_missing`, `grid_only_arms` and
+`grid_only_fallback_full` for this; all are off in the E4/E5 configs. Checked on a small
+model in throwaway panels (fixed-scale arms; elicitation of a missing corpus). The
+elicitation check showed why (b) is needed: re-eliciting gemma-2-2.6B | occupation in a
+different item order changed 3 of 144 pairs.
+
 ---
 
 ## 4. Readings and findings log
@@ -283,3 +299,30 @@ support, beyond DPO (E7a) and the removal definition (E3a):
     after edit results existed on those cells; the steering strength grid was
     recalibrated once after a first run, on one of the eight cells.
 11. No supplementary archive, and no record of an upload, exists in the repository.
+
+
+---
+
+## 5. Running the 27–32B panel (E4b + E1b)
+
+One ≥ 80 GB card (bf16, one device). About 12 units; resumable — re-run the same command.
+
+```bash
+git fetch origin && git checkout r1-rebuttal
+bash setup.sh                         # once per box: the pinned stack (torch 2.11.0, transformers 4.57.1, peft 0.20.0)
+export HF_TOKEN=hf_...                # gemma-2-27b-it is gated
+mkdir -p results && cp -r /path/to/v12big results/v12big   # recommended: the replay guards read it
+bash scripts/r1_big.sh                # preflight, then the queue (logs: logs/r1/big/, logs/r1/queue.log)
+python3 run_r1.py --config configs/r1/big.yaml --progress
+bash scripts/r1_pack.sh r1/BIG        # -> r1_BIG_<utc>.tar.gz (+ logs); send both back
+```
+
+On the analysis box: `tar -xzf r1_BIG_<utc>.tar.gz -C results`.
+
+- If `results/t2x/corpora/gemma27b|*.json` and `qwen32b|*.json` from the v12big run are
+  still on that box, leave them in place: the units then train on the same corpora and
+  the ΔW fingerprint should reproduce. Otherwise they are re-elicited, and a unit whose
+  fingerprint differs runs the full α\* search for all three arms by itself.
+- Each unit prints `geom_sha=… match=True/False/None` right after training. `None`
+  means the reference panel was not found.
+- Nothing is printed about removal; the readings are made after the archive is back.

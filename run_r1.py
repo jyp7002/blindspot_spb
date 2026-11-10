@@ -83,6 +83,12 @@ def load_cfg(path):
     cfg.setdefault("backoff_factors", [])
     cfg.setdefault("mmlu1k_arms", [])
     cfg.setdefault("budget_items_extra", [])
+    # 27-32B panel (configs/r1/big.yaml)
+    cfg.setdefault("elicit_missing", False)      # elicit a missing self-designer corpus
+    cfg.setdefault("grid_only_arms", {})         # arm -> [alpha, ...]: no alpha* search
+    # ... unless the retrained dW is not the reference panel's: then the reference
+    # alpha* values do not apply to this unit and the search is run here as well
+    cfg.setdefault("grid_only_fallback_full", True)
     for a in cfg["arms"]:
         if a not in DEC_ARMS + OP_ARMS:
             raise SystemExit(f"unknown arm {a!r}")
@@ -307,7 +313,16 @@ def run_unit(cfg, u, arms, panel):
 
     corpus_fp = C._t2x_corpus_fp(dn, ax, s)
     if not os.path.exists(corpus_fp):
-        raise RuntimeError(f"corpus missing: {corpus_fp} (R1 elicits nothing new)")
+        if not cfg["elicit_missing"]:
+            raise RuntimeError(f"corpus missing: {corpus_fp} (this panel elicits nothing new)")
+        # The published route for a cell whose corpus is not on this box: the
+        # self-designer elicits it (scripts/run_unit._ensure_corpus), inference only,
+        # in a separate load before the target is loaded for the unit.
+        sys.path.insert(0, os.path.join(HERE, "scripts"))
+        import run_unit as RU
+        RU._ensure_corpus(dict(u))
+        if not os.path.exists(corpus_fp):
+            raise RuntimeError(f"elicitation did not produce {corpus_fp}")
 
     mmlu = C.load_mmlu(n=200, seed=0)
     wt = C.load_wikitext(n_chunks=20, seed=0)
@@ -339,10 +354,20 @@ def run_unit(cfg, u, arms, panel):
 
         # ---- replay guards against the registered alpha* panel ----
         ref_panel = cfg["ref_panel"]
-        ref_geo = [r for r in _rows(os.path.join(C.RESULTS, ref_panel, "geometry.jsonl"))
+        # results/<panel> first; a panel shipped back from another box is often
+        # dropped at the repository root (v12big/), so look there too.
+        ref_dir = next((d for d in (os.path.join(C.RESULTS, ref_panel),
+                                    os.path.join(HERE, ref_panel))
+                        if os.path.exists(os.path.join(d, "geometry.jsonl"))), None)
+        if ref_dir is None:
+            print(f"[r1] NOTE: reference panel {ref_panel!r} is not on this box "
+                  f"(looked in {C.RESULTS}/{ref_panel} and ./{ref_panel}); the replay "
+                  "guards are recorded as None for this unit", flush=True)
+            ref_dir = os.path.join(C.RESULTS, ref_panel)
+        ref_geo = [r for r in _rows(os.path.join(ref_dir, "geometry.jsonl"))
                    if _key(r) == _key(u)]
         ref_sha = ref_geo[-1]["geometry"]["geom_sha"] if ref_geo else None
-        ref_tr = [r for r in _rows(os.path.join(C.RESULTS, ref_panel, "alpha_trace.jsonl"))
+        ref_tr = [r for r in _rows(os.path.join(ref_dir, "alpha_trace.jsonl"))
                   if _key(r) == _key(u)]
         ref_ev = next((r for r in reversed(ref_tr) if r.get("split") == "eval"), None)
         ref_ca = next((r for r in reversed(ref_tr) if r.get("split") == "calib"), None)
@@ -437,7 +462,25 @@ def run_unit(cfg, u, arms, panel):
                 rec = measure(alpha, "rung")
                 return {k: rec["calib"][k] for k in ("mmlu_acc", "ppl", "n_items")}
 
-            sel = RS.select(pre_cal_c, collateral_probe, ladder, cfg["refine_steps"])
+            grid_arm = arm in cfg["grid_only_arms"]
+            grid_only = grid_arm and (base["geom_match"] is True
+                                      or not cfg["grid_only_fallback_full"])
+            if grid_only:
+                # Fixed scales only (E1b): this arm's alpha* is the reference panel's.
+                for a in cfg["grid_only_arms"][arm]:
+                    measure(a, "grid")
+                sel = dict(alpha_star=None, status="grid_only", n_probes=0,
+                           last_pass=None, first_fail=None)
+            else:
+                if grid_arm:
+                    print(f"[r1] {fam} {ax} s{s} {arm}: dW is not the reference panel's "
+                          f"(geom_match={base['geom_match']}); running the alpha* search "
+                          "here so the unit is self-contained", flush=True)
+                sel = RS.select(pre_cal_c, collateral_probe, ladder, cfg["refine_steps"])
+                if grid_arm:
+                    for a in cfg["grid_only_arms"][arm]:
+                        if float(a) not in rungs:
+                            measure(a, "grid")
             a_star = sel["alpha_star"]
 
             # ---- curve-only measurements, after and outside the selection ----
@@ -447,7 +490,7 @@ def run_unit(cfg, u, arms, panel):
                     if a not in rungs:
                         measure(a, "curve_extra")
             frozen = None
-            if arm in DEC_ARMS:
+            if arm in DEC_ARMS and not grid_only:
                 for a in cfg["frozen_grid"]:
                     if float(a) not in rungs:
                         measure(a, "frozen_fill")

@@ -1,0 +1,63 @@
+# R1 BIG -- E4b and E1b on the 27-32B cells (R1_REBUTTAL_EXPERIMENTS.md §3 E4b, §2 E1b).
+#
+# RUNS ON ONE >= 80 GB CARD, NOT ON THE L40S. bf16 only, one device,
+# dispatch=False -- the same constraints as configs/v12/opsel_big.yaml, whose four
+# cells and three seeds these are (reference panel: v12big).
+#
+#   bash scripts/r1_big.sh          # preflight, then the queue; resumable
+#   bash scripts/r1_pack.sh r1/BIG  # the artifacts to send back (small)
+#
+# WHAT IS MEASURED, per (cell, seed), from one contrast vector:
+#   C-rand   random 1% support (C-a's), random signs, C-ref's per-tensor scales,
+#            scaled to its own budget by the registered bias-blind rule alpha*;
+#            every rung measured on both splits.                       -> E4b
+#   C-ref,   at the fixed scales 32, 64, 128 only (both splits), extending the
+#   C-a      frozen grid {2,4,8,16} that v12big already holds.          -> E1b
+#            Their alpha* points are the registered v12big values; no alpha*
+#            search is repeated for them here.
+#
+# REPLAY GUARDS. If results/v12big (or ./v12big) is on the box, every unit
+# checks that its retrained dW reproduces v12big's fingerprint and that the
+# unedited baselines are identical, and records the outcome. Copy the panel
+# over first if you can (three small jsonl files).
+#   - fingerprint reproduced: C-ref and C-a are measured at 32/64/128 only.
+#   - not reproduced, or v12big absent: the v12big alpha* values do not apply
+#     to this unit, so the unit also runs the alpha* search for C-ref and C-a
+#     (self-contained, roughly twice the cost of the unit).
+#
+# CORPORA. A corpus that is not on the box is elicited by the model itself, as
+# scripts/run_unit.py does for every big-tier cell (inference only, cached).
+# Elicitation is an argmax between two fixed sentences, and near-ties can flip
+# with hardware or batch composition: a re-elicited corpus may differ from the
+# one v12big trained on in a few items, which is exactly what the fingerprint
+# guard detects. If the box that ran v12big still has
+# results/t2x/corpora/gemma27b|*.json and qwen32b|*.json, keep them.
+#
+# COST, rough: per unit one training pass, ~13 dual-split rungs for C-rand and
+# 6 fixed-scale measurements; 12 units. Run order is gemma27b first (headroom).
+#
+# Do not edit after the first unit: that is an amendment and goes in R1_NOTES.md.
+
+panel: r1/BIG
+ref_panel: v12big
+elicit_missing: true
+density: 0.01
+seeds: [0, 1, 2]
+frozen_grid: [2, 4, 8, 16]
+refine_steps: 3
+curve_extra_rungs: 1
+
+ladders:
+  default: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+
+arms: [C-rand, C-ref, C-a]
+grid_only_arms:
+  C-ref: [32, 64, 128]
+  C-a: [32, 64, 128]
+
+# The four cells of configs/v12/opsel_big.yaml, verbatim.
+cells:
+  - {target: gemma27b, hf: google/gemma-2-27b-it,      designer: gemma27b, designer_hf: google/gemma-2-27b-it,      axis: occ_gender}
+  - {target: gemma27b, hf: google/gemma-2-27b-it,      designer: gemma27b, designer_hf: google/gemma-2-27b-it,      axis: bbq_Age}
+  - {target: qwen32b,  hf: Qwen/Qwen2.5-32B-Instruct,  designer: qwen32b,  designer_hf: Qwen/Qwen2.5-32B-Instruct,  axis: occ_gender}
+  - {target: qwen32b,  hf: Qwen/Qwen2.5-32B-Instruct,  designer: qwen32b,  designer_hf: Qwen/Qwen2.5-32B-Instruct,  axis: bbq_Age}
