@@ -124,3 +124,74 @@ measured and adding only the new bisection points) rather than read off the b = 
 trace, and removal at every such point is measured on the evaluation split like any
 other rung. E8's registered reading (deployment rule α\*/√2, target ≥ 90% evaluation
 pass; Δ_selection invariant to backoff if collateral is homogeneous) is unchanged.
+
+---
+
+## 4. Readings and findings log
+
+Each entry names the script that produces it. Registered readings are applied as
+written in the plan; anything else is labelled.
+
+### E1 — matched-collateral curves (2026-11-10, zero GPU, `src/r1_e1.py`)
+
+- **Sanity gate reproduced**: frozen-grid Δ_selection +0.2835 [+0.1692, +0.4072];
+  extension to α ≤ 512 under the joint gate +0.1041 [+0.0361, +0.1827]; zero difference
+  from `results/v10/alpha_extension.json`. 540 rows, no duplicates.
+- **Δ_matched(c)** (R at the scale where the perplexity ratio equals c; n = 10 cells,
+  30/30 runs solved per arm, none unreached): c = 1.02 +0.068 [−0.010, +0.161];
+  1.04 +0.054 [−0.019, +0.142]; 1.05 +0.054 [−0.016, +0.134]; 1.06 +0.053
+  [−0.015, +0.130]; 1.08 +0.043 [−0.017, +0.109]; **1.10 +0.034 [−0.021, +0.094]**.
+- **Registered reading: E1-B** (the interval includes 0 at both c = 1.10 and c = 1.05).
+  It does not move under the implementation choices the text leaves open (isotonic on
+  or off, log-α or α interpolation, first or last crossing: largest shift 0.004).
+- Registered secondary axis (largest R with MMLU drop ≤ b items, MMLU only): b = 2
+  +0.073 [+0.016, +0.137]; b = 4 +0.088 [+0.036, +0.144]; b = 6 +0.077 [+0.028,
+  +0.135]; b = 8 +0.064 [+0.022, +0.112]. All exclude 0.
+- **Post-hoc, a different estimand from the registered one**: reading the perplexity
+  axis in budget form (largest R with ratio ≤ c, as the published estimands do) gives
+  +0.057 [+0.019, +0.107] at 1.10 and +0.078 [+0.025, +0.148] at 1.05, which would
+  read E1-C. Two cells account for the difference (qwen|bbq_Age, qwen|bbq_Race):
+  C-ref's removal peaks at α = 8 and falls before its perplexity limit. The registered
+  reading stays E1-B.
+- Step 6: the literal pooled fit has unequal exponents (5.3 vs 3.3, dominated by
+  runaway points) and its h ratio is not interpretable. From the curves, the scale at
+  which the two arms reach ratio 1.10 differs by a median factor of 4.61 (squared 21.2);
+  the α\* ratio squared is 19.0–20.8.
+- Step 7: nominal ‖αE‖_F of C-a over C-ref at matched c = 1.10 is 4.81 [4.11, 5.57].
+- Literal resolutions of ambiguous wording are listed in `results/r1/E1/e1.json`.
+
+### E7a — the published DPO column is an evaluation error (2026-11-10, zero GPU, `src/r1_e7a.py`)
+
+Found while reading `run_dpo_baseline.py` for E0. Not anticipated by the plan.
+
+- **What the script measures.** TRL's `DPOTrainer` attaches the LoRA layers to the model
+  object in place. The script then takes its "pre" measurement on that object, i.e. with
+  the trained adapter active, and applies `apply_edit(model, dw, alpha=a, sign=-1.0)`,
+  which subtracts a·ΔW from the base weights under the adapter. The "post" model is
+  base + (1 − a)·ΔW. The recorded "removal at α = a" is therefore
+  |S(base + ΔW)| − |S(base + (1 − a)ΔW)|: the bias regained when the DPO update is undone.
+- **Three confirmations in `results/v6trace/dpo`**, no rerun needed: the recorded
+  pre-skew differs from the unedited skew of the same model and axis in every run
+  (median gap 0.476; llama|occ 0.0000 against 0.7605); pre-skew minus removal(α = 1)
+  recovers the unedited skew to within 0.011; the recorded perplexity ratio is below 1
+  and non-increasing in α in 15/15 runs.
+- **Sanity gate**: the same loader reproduces the published DPO +0.006 [−0.064, +0.095]
+  and edit − DPO +0.276 [+0.027, +0.513].
+- **Reconstructed intended contrast** (merge scales {0.25, 0.5, 0.75, 1}, best in budget,
+  skipped cells 0): DPO +0.109 [−0.005, +0.302] on the 8 cells; edit − DPO +0.173
+  [+0.044, +0.342]. On the 5 cells with ≥ 20 differing pairs: DPO +0.175 [−0.005,
+  +0.471], edit +0.288, edit − DPO +0.113 [+0.005, +0.221].
+- **Why DPO is still behind in budget**: at its trained scale the adapter removes most
+  occupation bias (llama +0.761, phi +0.539, qwen +0.504) but its perplexity is a median
+  2.0× the unedited model's; the full adapter is in budget in 0 of 15 runs, and 14 of 60
+  configurations are in budget. On qwen|crows it increases bias (−0.277 at full scale).
+- **Status**: a reconstruction from persisted rows, exact up to bf16 rounding of the
+  in-run "unedited" model; collateral is known only relative to that model. E7b
+  re-measures. **The sentence "DPO removes no detectable bias" is withdrawn** wherever
+  it appears (abstract, contribution 3, §2, §5.7, Fig. 4, Table 2, conclusion), and so
+  is its explanation as a signal–method mismatch: the published script already trained
+  on differing pairs only.
+- **Addition to E7b** (not a change to its registered reading): one extra arm that
+  repeats the as-published configuration (lr 1e-4, 250 steps, merge scales
+  {0.25, 0.5, 0.75, 1}) under a correct harness — baseline before training, delta
+  added to a clean model — so the reconstruction above is checked by measurement.
