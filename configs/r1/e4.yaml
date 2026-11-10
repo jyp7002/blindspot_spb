@@ -1,0 +1,40 @@
+# R1 E4 -- budget-matched null and necessity under alpha* (R1_REBUTTAL_EXPERIMENTS.md §3 E4).
+#
+# REG10 x 3 seeds, the alpha* rule of PREREGISTRATION §v12.A unchanged
+# (ladder {1..512}, first failure, 3 log-bisections, calibration split only),
+# with every rung additionally measured on the evaluation split (§0).
+#
+# Arm order is the registered queue order: C-rand first (the validity gate G1),
+# then the necessity conditions. C-tensorshuf is not applicable to phi's fused
+# qkv_proj (3 cells), exactly as in the DEC panel.
+#
+# Reference arms C-ref(alpha*) and C-a(alpha*) are the registered v12astar
+# values; their same-process replays run in configs/r1/e5.yaml.
+#
+# Do not edit after the first unit: that is an amendment and goes in R1_NOTES.md.
+
+panel: r1/E4
+ref_panel: v12astar
+density: 0.01
+seeds: [0, 1, 2]
+frozen_grid: [2, 4, 8, 16]
+refine_steps: 3
+curve_extra_rungs: 1
+
+ladders:
+  default: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+
+arms: [C-rand, C-b, C-layershuf, C-tensorshuf, C-bottom]
+
+# The 10 registered DEC cells, verbatim from configs/v12/astar_dec.yaml.
+cells:
+  - {target: gemma,  hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: occ_gender}
+  - {target: llama,  hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: occ_gender}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: occ_gender}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: occ_gender}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: bbq_Age}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: bbq_Age}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: bbq_Race_ethnicity}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: ss_intra}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: ss_intra}
+  - {target: qwen7b, hf: Qwen/Qwen2.5-7B-Instruct,         designer: qwen,     axis: occ_gender}

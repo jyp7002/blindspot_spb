@@ -1,0 +1,48 @@
+# R1 E5 -- operator 2x2 + ComPEFT under alpha* (R1_REBUTTAL_EXPERIMENTS.md §3 E5).
+#
+# Same contrast vector, same 1% density, same merge W <- W - alpha*E, same
+# bias-blind alpha* rule; the arms differ only in support, values and scale:
+#
+#   arm        support              values              scale
+#   O-trim     top-1% (magnitude)   fp dW               alpha
+#   O-dare     random 1% (= C-a's)  fp dW x 100         alpha      (1/(1-p), p=0.99)
+#   O-compeft  top-1% (magnitude)   sign                sigma(dW) x alpha, one scalar
+#   C-ref      top-1% (magnitude)   sign                s_t x alpha   (replay)
+#   C-a        random 1%            sign                s_t x alpha   (replay)
+#
+# The three new arms use the wide ladder registered in E5 ({2^-6 .. 2^9}); the
+# two replays use the published ladder so they are comparable to v12astar row
+# for row. The replays are a reproducibility check on the registered values and
+# give every new arm a same-process partner; the registered reference numbers
+# remain the v12astar ones (R1_NOTES.md §2).
+#
+# Do not edit after the first unit: that is an amendment and goes in R1_NOTES.md.
+
+panel: r1/E5
+ref_panel: v12astar
+density: 0.01
+seeds: [0, 1, 2]
+frozen_grid: [2, 4, 8, 16]
+refine_steps: 3
+curve_extra_rungs: 1
+
+ladders:
+  default: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+  wide: [0.015625, 0.03125, 0.0625, 0.125, 0.25, 0.5, 1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+
+arm_ladder: {O-trim: wide, O-dare: wide, O-compeft: wide}
+
+arms: [O-compeft, O-trim, O-dare, C-ref, C-a]
+
+# The 10 registered DEC cells, verbatim from configs/v12/astar_dec.yaml.
+cells:
+  - {target: gemma,  hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: occ_gender}
+  - {target: llama,  hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: occ_gender}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: occ_gender}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: occ_gender}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: bbq_Age}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: bbq_Age}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: bbq_Race_ethnicity}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: ss_intra}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: ss_intra}
+  - {target: qwen7b, hf: Qwen/Qwen2.5-7B-Instruct,         designer: qwen,     axis: occ_gender}

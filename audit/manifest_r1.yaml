@@ -1,0 +1,43 @@
+# R1 (ICLR 2027 rebuttal) -- registration manifest.
+#
+# The plan was committed unmodified BEFORE any R1 analysis or GPU unit; this
+# file pins it. Anything measured after `registered_utc` is read by the rules in
+# the plan; anything added to the analysis afterwards is labelled post-hoc.
+
+plan:
+  file: R1_REBUTTAL_EXPERIMENTS.md
+  sha256: 19bd0cd8932dd5bf55b865aaeb4896e6d1eff32ed0e16a0d54638455a01e7a1e
+  bytes: 27879
+  git_blob: b992d7544d849aabb0a7fd14b05f7e88fc8573ef
+  commit: 0fe904346cf228dc34eda70132f7359c8d60a79f
+  branch: r1-rebuttal
+  registered_utc: "2026-11-10T08:20:19Z"
+  status_in_file: "pre-registration draft (written 2026-11-07), committed as received"
+
+implementation_notes:
+  file: R1_NOTES.md
+  role: >
+    Choices the plan leaves open, fixed before the first registered unit, plus an
+    append-only amendment log. Its own commit hash is the one that introduces
+    this manifest.
+
+runner:
+  files: [run_r1.py, src/r1_select.py, scripts/r1_queue.sh, configs/r1/e4.yaml, configs/r1/e5.yaml]
+  selftest: "python3 src/r1_select.py  (17 checks: the alpha* selector refuses any bias field)"
+
+reference_panel:
+  panel: v12astar
+  role: registered C-ref(alpha*) and C-a(alpha*) values; geom_sha and baseline replay targets
+
+smoke:
+  panel: r1/_smoke
+  unit: "gemma | occ_gender | s0 | gemma_3b, arm C-rand"
+  utc: "2026-11-10T08:29Z-08:34Z"
+  read: "mechanics only (schema, replay guards, timing); not a registered run, never cited"
+  geom_sha_reproduced: true
+  baselines_reproduced: true
+  frozen_grid_replay_equal_to_v8dec: true
+
+not_runnable_on_this_box:
+  - "E4b (C-rand at 27-32B): needs >= 80 GB"
+  - "E1b (27-32B grid extension): needs >= 80 GB"
