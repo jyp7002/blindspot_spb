@@ -195,3 +195,57 @@ Found while reading `run_dpo_baseline.py` for E0. Not anticipated by the plan.
   repeats the as-published configuration (lr 1e-4, 250 steps, merge scales
   {0.25, 0.5, 0.75, 1}) under a correct harness — baseline before training, delta
   added to a clean model — so the reconstruction above is checked by measurement.
+
+### E3a — removal definitions, α\* panel (2026-11-10, zero GPU, `src/r1_e3a.py`)
+
+Registered as a robustness report with no fork; "if the interval status of a headline
+changes, disclose it". It changes.
+
+- At α\* the skew **changes sign** in 10/30 C-ref runs and 7/30 C-a runs, almost all on
+  the BBQ cells (qwen|bbq_Age 3/3 and 3/3, qwen|bbq_Race 3/3 and 2/3, phi|bbq_Age 2/3 and
+  2/3). The code's removal `|pre| − |post|` charges the part beyond zero.
+- Δ_selection on the ten registered cells, frozen grid / α\*:
+  - (ii) `|pre| − |post|` (published): +0.285 [+0.170, +0.411] / **+0.073 [−0.036, +0.213]**
+    (sanity gate: identical to `results/v12/astar_verdict.json`).
+  - (i) signed `sign(pre)·(pre − post)`: +0.321 [+0.213, +0.435] / **+0.127 [+0.032, +0.257]**,
+    excludes 0.
+  - (iii) relative: +0.543 [+0.431, +0.638] / +0.096 [−0.133, +0.341], includes 0.
+  - (iv) capped at zero, `|pre| − max(0, sign(pre)·post)` — **post-hoc**, not in the plan:
+    +0.292 [+0.179, +0.414] / +0.100 [+0.007, +0.231], excludes 0.
+- The two cells that pull the published α\* gap down (qwen|bbq_Age −0.132, qwen|bbq_Race
+  −0.118) are the two where C-ref crosses zero in every run; under (i) they are +0.132
+  and +0.160, under (iv) +0.000 and +0.021. On BBQ a negative skew is a preference for
+  the "unknown" answer in an ambiguous context.
+- Scope: only v12astar stored signed skew for both arms. The grid extension and E1 can
+  be re-read under (i)/(iv) once the E5 replays (per-rung signed skew) are complete.
+- What this does and does not license: the statement "under α\* the gap is
+  indistinguishable from zero" holds under the published definition and under (iii),
+  not under (i) or (iv). It is a statement about how overshoot is scored as much as
+  about the two supports.
+
+### E0 — SPEC (2026-11-10, `results/r1/E0/SPEC.md`)
+
+Full text there. Statements of the submitted paper that the code or artifacts do not
+support, beyond DPO (E7a) and the removal definition (E3a):
+
+1. Table A's "edit" is the **dense** sign-only edit (`run_frontier.py:118`, sparsity 0),
+   while the abstract and Table B describe the 1% patch.
+2. "Diagnosis framing": the prompts are generation instructions and two fixed candidate
+   sentences are scored as the reply; there is no diagnosis question.
+3. `contrast_gap` is a net share (can be negative), not "the fraction of items on which
+   the model can express any contrast".
+4. "Permutation maps are logged per run": they are regenerable from the seed, not logged.
+5. MMLU run-to-run variation "one or two items": stored replays of llama-3.2-3B differ
+   by up to 4 items post-edit at bit-identical skew and perplexity.
+6. The α = 256/512 medians quoted in App. B are C-a's only.
+7. Prompting numbers on the occupation axis are on half the scale of every other
+   method's skew (`legacy/run_prompt_baseline.py`).
+8. The audit manifest covers the v10 draft, not the v11–v13 numbers; `figures/make_figs.py`
+   is not in the repo; "every edit" is regenerable, not stored.
+9. The three seeds are three orderings of essentially one corpus plus three adapter
+   initialisations, not three elicitations.
+10. FRONT8 = {gemma-2-2.6B, llama-3.2-3B, qwen2.5-3B, phi-3.5} × {occupation, CrowS
+    socioeconomic}: named in a design file minutes before the first steering run and
+    after edit results existed on those cells; the steering strength grid was
+    recalibrated once after a first run, on one of the eight cells.
+11. No supplementary archive, and no record of an upload, exists in the repository.
