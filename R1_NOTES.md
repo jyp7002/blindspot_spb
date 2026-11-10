@@ -326,3 +326,65 @@ On the analysis box: `tar -xzf r1_BIG_<utc>.tar.gz -C results`.
 - Each unit prints `geom_sha=… match=True/False/None` right after training. `None`
   means the reference panel was not found.
 - Nothing is printed about removal; the readings are made after the archive is back.
+
+---
+
+## 4 (continued). Readings from the GPU panels
+
+### E4 pass A — `C-rand` under α\*: G1 (2026-11-10 12:10Z complete, `src/r1_e4.py`)
+
+- 30/30 units; ΔW fingerprint reproduced in 30/30; `C-rand` frozen-grid removal
+  identical to the published DEC panel in 30/30. Unedited baselines identical in 27/30:
+  the three llama units read MMLU one item lower than v12astar did on both splits
+  (0.665 vs 0.670; 0.510 vs 0.515) with skew and perplexity bit-identical — the known
+  llama MMLU variation (E0 §8.2).
+- `C-rand(α*)` = +0.012 [+0.001, +0.023]; `C-a(α*)` = +0.305; `C-ref(α*)` = +0.377.
+  q = 0.038. `C-a − C-rand` = +0.293 [+0.160, +0.440]; `C-ref − C-rand` = +0.366
+  [+0.211, +0.530].
+- **Registered verdict: G1-valid.** At budget-limited scales a random sign field on
+  C-a's support, at the same per-tensor scales, removes nothing; what C-a removes there
+  is carried by the learned signs. The verdict is the same under the signed and the
+  capped removal (q = 0.034, 0.036).
+- `C-rand`'s α\* (median 107.6) is not C-a's (median 90.5): equal in 3/30 units. Same
+  support and scales, different signs, different budget boundary. Its α\* passes the
+  evaluation budget in 43% of runs.
+
+### E2 — ρ_k and the first-order account (`src/r1_e2.py`, statistics from the pass-A units)
+
+- ρ_k at 1%: median 6.64 over the ten cells (6.20–7.61; a Gaussian gives 3.62);
+  kurtosis 8.0–14.6; the top 1% of coordinates hold 6.2–7.6% of the L1 mass.
+- With the scales as built, ρ_eff = A_ref / A_a: median 6.94 (6.50–8.13).
+  r_α = α\*(C-a)/α\*(C-ref): median 4.56 (1.54–6.73). Squares: 48.2 vs 20.8.
+- median(ρ_eff / r_α) = 1.64 (0.99–5.09; 3 of 10 cells inside [0.75, 1.33]).
+  **Registered reading: E2-N**, first-order failure. The first-order account predicts
+  that at α\* the deployed edit should still remove about 1.6 times as much as the
+  random-coordinate one; the observed ratio R_ref/R_a at α\* has median 1.02. Removal
+  saturates (it cannot exceed the bias that is there), which a linear account does not
+  contain. App. H's "does not claim" paragraph has to say this.
+
+### E7b arm `pub` — DPO measured with the corrected harness (2026-11-10 13:14Z, `src/r1_e7b.py`)
+
+- 24/24 units; the baseline was restored bit for bit after unloading in every run.
+- Published selection space (merge 0.25–1; cells with < 20 differing pairs scored 0):
+  DPO **+0.095 [−0.008, +0.284]**, edit − DPO **+0.187 [+0.049, +0.357]**. The E7a
+  reconstruction gave +0.109 and +0.173: confirmed by measurement.
+- At the trained scale (merge 1) no run is in budget; perplexity is 1.5–3.2 times the
+  unedited model's; 12 of 60 published merge configurations are in budget.
+- Not the published selection, reported for completeness: training DPO in every cell
+  with ≥ 8 differing pairs gives +0.188 [+0.012, +0.400] (edit − DPO +0.095 [+0.013,
+  +0.195]); adding the finer merge ladder {0.0625, 0.125, 0.375} gives +0.210 [+0.026,
+  +0.447] (edit − DPO +0.073 [−0.012, +0.178], includes 0).
+- **Degeneracy.** From the stored per-item likelihoods: on llama-3.2-3B the mean P("she")
+  after DPO is 1.00 on female- and 1.00 on male-stereotyped probe occupations in all
+  three seeds from merge 0.25 up; on gemma-2-2.6B it is 1.00 / 0.95–0.97 at the trained
+  scale. The occupation skew reads zero for a model that always prefers one pronoun, so
+  DPO's two largest "removals" (llama +0.74, gemma +0.62–0.70) are pronoun collapse, not
+  the removal of an occupation effect. qwen and phi move to 0.96–0.99 / 0.69–0.99.
+- **The same check on the edit** (first units available; all occupation cells once pass
+  B is complete): gemma | occupation, `C-ref`, mean P("she") on female- / male-
+  stereotyped occupations 0.90 / 0.04 before; 0.82 / 0.73 at α\* = 20.7; 0.77 / 0.76 at
+  α = 32. `C-a` at α\* = 98.7: 0.71 / 0.44. `C-rand` (qwen-7B) leaves both where they
+  were up to α = 128. The edit closes the gap without collapsing, but it does so mostly
+  by raising P("she") on male-stereotyped occupations (mean 0.47 → 0.77): the skew
+  measures the dependence on the occupation, not the overall pronoun rate. This needs
+  to be reported in the paper.
