@@ -1,0 +1,46 @@
+# R1 E13 -- balanced-contrast control on the occupation axis (R1_NOTES.md §3,
+# entry of 2026-11-11; not in the plan of 0fe9043: added after the pronoun
+# check of §4, reading rules fixed before the first unit).
+#
+# The deployed edit (C-ref: top 1%, signs, per-matrix scales) is rebuilt from a
+# contrast vector trained on corpora in which "he" -> "she" and "she" -> "he"
+# replacements are equally frequent, and measured exactly as in the E5 panel
+# (same baselines, same alpha* rule, fixed grid filled in, per-item
+# likelihoods stored at every rung, alpha*/sqrt2 and alpha*/2 measured).
+#
+#   <designer>_bal   elicited corpus + mirrored swaps   (primary; 15 units, first)
+#   exo              colab_t2t4.exogenous_corpora       (secondary; 15 units)
+#
+# Corpora: scripts/r1_make_balanced.py (CPU; audit/r1_e13_corpora.json). The
+# elicited counterpart of every unit is the C-ref row of results/r1/E5.
+# The designer name is only the corpus file's name; no designer model is loaded.
+#
+# Do not edit after the first unit: that is an amendment and goes in R1_NOTES.md.
+
+panel: r1/E13
+ref_panel: v12astar          # no row matches these designer names: guards are recorded as None
+density: 0.01
+seeds: [0, 1, 2]
+frozen_grid: [2, 4, 8, 16]
+refine_steps: 3
+curve_extra_rungs: 1
+
+ladders:
+  default: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+
+arms: [C-ref]
+
+backoff_arms: [C-ref]
+backoff_factors: [0.7071067811865476, 0.5]
+
+cells:
+  - {target: gemma,  hf: google/gemma-2-2b-it,             designer: gemma_3b_bal, axis: occ_gender}
+  - {target: llama,  hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b_bal, axis: occ_gender}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b_bal,  axis: occ_gender}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b_bal,   axis: occ_gender}
+  - {target: qwen7b, hf: Qwen/Qwen2.5-7B-Instruct,         designer: qwen_bal,     axis: occ_gender}
+  - {target: gemma,  hf: google/gemma-2-2b-it,             designer: exo,          axis: occ_gender}
+  - {target: llama,  hf: meta-llama/Llama-3.2-3B-Instruct, designer: exo,          axis: occ_gender}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: exo,          axis: occ_gender}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: exo,          axis: occ_gender}
+  - {target: qwen7b, hf: Qwen/Qwen2.5-7B-Instruct,         designer: exo,          axis: occ_gender}

@@ -192,6 +192,55 @@ before any E8 number exists:
   rule); f = 1/2 is reported. Removal is the registered `|pre| − |post|`; an undeployed
   edit scores 0 at every backoff.
 
+**2026-11-11, before the first E13 unit — a new experiment, E13: balanced-contrast
+control on the occupation axis (author decision of the same day).** E13 is not in the
+plan committed as `0fe9043`. It was added after the pronoun check (§4, "What removal on
+the occupation probe consists of") showed that the deployed edit closes the occupation
+skew by raising P("she") on male-stereotyped occupations, and after we attributed this to
+the elicited contrast being one-sided. That attribution is so far an observation about
+the corpora, not a tested claim. E13 tests it. Its motivation is post hoc; its design and
+its reading are fixed here, before any E13 unit runs.
+
+- *Corpora* (`scripts/r1_make_balanced.py`, CPU only, record in
+  `audit/r1_e13_corpora.json`). **`<designer>_bal`, the primary control**: the elicited
+  corpus with mirrored swaps. The biased corpus is unchanged. In the debiased corpus,
+  with D_mf the items that replace "he" by "she", D_fm the reverse, and the candidates
+  the items on a female-stereotyped occupation in which both corpora hold the
+  stereotype-congruent "she" sentence: k = min(|D_mf|, |D_fm| + |candidates|); a seeded
+  random k of D_mf are kept and the rest reverted to the biased string; a seeded random
+  k − |D_fm| candidates become "she" → "he" swaps. Item order and corpus size are those
+  of the elicited file. Resulting k: 9–10 (gemma), 31 (llama), 38–39 (qwen-3B), 16–17
+  (phi), 56–57 (qwen-7B; 9–11 of its 66–67 elicited swaps are reverted because only
+  49–51 candidates exist). **`exo`, secondary**: `colab_t2t4.exogenous_corpora`, the
+  published designer-free builder — every item swapped, 72 in each direction.
+- *Runs* (`configs/r1/e13.yaml`, panel `r1/E13`, 30 units, `run_r1.py` unchanged; the
+  designer field only names the corpus file). Arm `C-ref` only, measured as in the E5
+  panel: baselines before training, α\* by the bias-blind rule, the fixed grid filled
+  in, per-item likelihoods at every rung, α\*/√2 and α\*/2. The elicited counterpart of
+  every unit is its `C-ref` row in `results/r1/E5` (which reproduces v12astar exactly).
+  Queued behind the running chain with `scripts/r1_after.sh` (waits for the queue lock;
+  the running queue is not touched): pass C → E7b registered arms → E13.
+- *Quantity.* f, m = mean P("she") on the 12 female- / 12 male-stereotyped probe
+  occupations; base = (f + m)/2; shift = base(after) − base(before) **at the scale the
+  fixed grid {2,4,8,16} selects**, the operating point of the paper's main tables (a run
+  with no in-budget grid scale is not edited: shift 0, removal 0). Cell = seed mean;
+  five occupation cells; paired bootstrap over cells.
+- *Reading* (`src/r1_e13.py`, committed with this entry). ratio = |mean shift(balanced)|
+  / mean shift(elicited); D = shift(elicited) − shift(balanced).
+  - **E13-confirmed**: ratio ≤ 0.25 and D's interval excludes 0 → the base-rate shift
+    comes from the one-sided contrast; the sentence in the paper stands.
+  - **E13-partial**: 0.25 < ratio < 0.75 and D's interval excludes 0 → it explains part.
+  - **E13-refuted**: ratio ≥ 0.75, or D's interval includes 0 → the attribution is
+    withdrawn from the paper and the shift is reported as unexplained.
+  - Qualifier: if the balanced edit's removal under the grid rule has an interval that
+    includes 0, a confirmed or partial verdict is labelled **vacuous** (an edit that does
+    nothing cannot shift anything) and is not used as support.
+  - Reported, never the verdict: the same at α\* and α\*/2; f-side and m-side movements;
+    removal under both rules; runs with both probabilities above 0.95 or below 0.05; the
+    `exo` arm read by the same rule.
+- With five cells the interval of D excludes 0 only if the cells agree in sign almost
+  without exception; that is intended.
+
 ---
 
 ## 4. Readings and findings log
