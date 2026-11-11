@@ -405,3 +405,119 @@ On the analysis box: `tar -xzf r1_BIG_<utc>.tar.gz -C results`.
   by raising P("she") on male-stereotyped occupations (mean 0.47 → 0.77): the skew
   measures the dependence on the occupation, not the overall pronoun rate. This needs
   to be reported in the paper.
+
+### E5 — operator 2×2 + ComPEFT under α\* (2026-11-11 04:14Z complete, `src/r1_e5.py`)
+
+Pass B: 150/150 unit-arms, 0 failed. ΔW fingerprint reproduced 30/30; baselines 27/30
+(the three llama units, one MMLU item, as in pass A). **The two replays reproduce
+v12astar exactly**: α\* equal 30/30 and removal equal 30/30 for both `C-ref` and `C-a`
+(max |diff| 0), so the registered reference values and the same-process replays are the
+same numbers and no reading depends on the source.
+
+Removal at each arm's own α\* (ten cells, registered definition):
+
+| arm | support | values | removal at α\* | α\* median | eval pass | realized L2 (median) |
+|---|---|---|---|---|---|---|
+| `C-ref` | top 1% | sign, s_t | +0.377 [+0.219, +0.547] | 20.7 | 57% | 14.7 |
+| `O-compeft` | top 1% | sign, global σ | +0.382 [+0.218, +0.557] | 90.5 (in σ units) | 57% | 15.2 |
+| `O-trim` | top 1% | full precision | +0.364 [+0.209, +0.528] | 19.0 | 60% | 14.1 |
+| `C-a` | random 1% | sign, s_t | +0.305 [+0.167, +0.456] | 90.5 | 60% | 70.2 |
+| `O-dare` | random 1% | full precision × 100 | +0.308 [+0.179, +0.455] | 3.08 | 57% | 49.2 |
+
+Registered readings:
+- **E5-1, `C-ref − O-trim` = +0.014 [+0.004, +0.026]: the interval excludes 0, so E5-1
+  as registered ("includes 0 → one bit is free at matched collateral") does not hold —
+  on the favourable side.** The sign edit removes slightly more than the full-precision
+  values on the same coordinates (8 of 10 cells; 4% of the removal). Binarization costs
+  nothing at matched collateral; the plan had no branch for "better", and the text
+  should say "no cost, a small gain" rather than "free".
+- **E5-2, `O-trim − O-dare` = +0.056 [−0.021, +0.157]: includes 0 → holds.** In full
+  precision too, the choice of support is not detectable at matched collateral under
+  the registered definition. Like `C-ref − C-a` it is definition-sensitive: signed
+  +0.088 [+0.017, +0.182], capped +0.072 [+0.002, +0.165] (both exclude 0).
+- **E5-3, `C-ref − O-compeft` = −0.004 [−0.015, +0.006]: includes 0 → holds.** The
+  per-tensor scale is not a point of difference from ComPEFT. At 1% and matched
+  collateral the deployed edit and ComPEFT's operator are indistinguishable (same
+  realized norm at the boundary, 14.7 vs 15.2; same sign-flip count, 10/30).
+- Reported with them: `C-a − O-dare` = −0.003 [−0.047, +0.034] (sign vs full precision
+  on the random support: no difference; this answers 5PJm's "C-a is not DARE" — original
+  DARE behaves like C-a here); `C-ref − C-a` = +0.073 [−0.036, +0.213] (the published
+  number).
+
+What this says. The five operators fall into two groups by **support**, not by value
+precision or scale convention: top-magnitude arms 0.364–0.382, random-support arms
+0.305–0.308. Within a group nothing is distinguishable except the +0.014 of sign over
+full precision. Positioning as the plan fixed it regardless of outcome: the operator is
+in the STC/ComPEFT family; the contribution is the decomposition and the protocol.
+
+### E8 — α\* backoff and budget sensitivity (same panel, `src/r1_e8.py`)
+
+| scale | eval pass `C-ref` / `C-a` | MMLU-1000 drop (items) | MMLU-1000 gate pass | removal `C-ref` / `C-a` | Δ_selection |
+|---|---|---|---|---|---|
+| α\* | 17/30, 18/30 (57%, 60%) | 14.4 / 12.6 | 50% / 50% | +0.377 / +0.305 | +0.073 [−0.036, +0.213] |
+| α\*/√2 | 25/30, 23/30 (83%, 77%) | 5.3 / 3.3 | 93% / 97% | +0.342 / +0.266 | +0.076 [−0.021, +0.205] |
+| α\*/2 | 28/30, 28/30 (93%, 93%) | 1.5 / 1.1 | 100% / 100% | +0.302 / +0.216 | +0.086 [+0.012, +0.187] |
+
+- **Registered reading: the deployment rule α\*/√2 does NOT meet the 90% target**
+  (83% and 77%; pooled 80%). α\*/2 does (93% for both arms, every run passes the
+  1,000-item gate, mean loss 1.5 and 1.1 of 1,000 items) and keeps 80% (`C-ref`) and 71%
+  (`C-a`) of the removal at α\*. Calling α\*/2 the deployment rule is post hoc.
+- **Registered prediction holds**: Δ_selection does not change under backoff
+  (α\*/√2 minus α\*: +0.003 [−0.014, +0.021]; α\*/2: +0.013 [−0.033, +0.059]).
+- The 200-item evaluation gate is a noisy instrument at the boundary: at α\* half the
+  runs lose more than the 1,000-item allowance (mean 13–14 of 1,000 items, about 1.3%),
+  so α\* is the boundary of the budget, not a point safely inside it — what E8 was meant
+  to show.
+- Budget sensitivity (α\* re-selected with a 2- / 8-item allowance): α\* medians
+  19.0 / 20.7 / 23.7 (`C-ref`) and 83.0 / 90.5 / 117.4 (`C-a`) for 2 / 4 / 8 items;
+  Δ_selection +0.086 [+0.004, +0.186] / +0.073 [−0.036, +0.213] / +0.047 [−0.032, +0.145].
+  Under the signed definition all three exclude 0 (+0.118, +0.127, +0.088).
+- Not a registered reading, stated so it is not over-read: at α\*/2 and at the 2-item
+  budget the registered-definition interval of Δ_selection excludes 0; at α\* and at 8
+  items it does not. The point estimate is stable (+0.05 to +0.09); what moves is how
+  much overshoot the default definition charges `C-ref` for.
+
+### What removal on the occupation probe consists of (post hoc, `src/r1_pronoun.py`)
+
+Per-item likelihoods of the E5 panel, five occupation cells × three seeds. Mean P("she")
+on the 12 female- / 12 male-stereotyped probe occupations; gap = what the skew measures;
+base = their mean.
+
+| arm, scale | P(she) f / m | gap | base rate | runs with both > 0.95 |
+|---|---|---|---|---|
+| unedited | 0.82 / 0.07 | 0.75 | 0.45 | — |
+| `C-ref`, fixed grid (the paper's tables) | 0.91 / 0.65 | 0.25 | 0.78 | 0/15 |
+| `C-ref`, α\*/2 | 0.92 / 0.60 | 0.32 | 0.76 | — |
+| `C-ref`, α\* | 0.86 / 0.71 | 0.15 | 0.79 | 2/15 (qwen-3B) |
+| `O-trim`, α\* | 0.87 / 0.70 | 0.17 | 0.79 | 2/15 |
+| `O-compeft`, α\* | 0.86 / 0.72 | 0.14 | 0.79 | 2/15 |
+| `C-a`, fixed grid | 0.86 / 0.18 | 0.68 | 0.52 | 0/15 |
+| `C-a`, α\* | 0.85 / 0.53 | 0.32 | 0.69 | 1/15 (llama) |
+| `O-dare`, α\* | 0.86 / 0.57 | 0.30 | 0.72 | 1/15 |
+
+- **The edit closes the occupation gap almost entirely by raising P("she") on
+  male-stereotyped occupations (0.07 → 0.65–0.71); the probability on female-stereotyped
+  occupations does not come down (0.82 → 0.86–0.91).** The pronoun base rate moves from
+  0.45 to 0.78. This holds at the fixed-grid scale of the paper's main tables, not only
+  at α\*. Per cell at α\*: gemma 0.74 / 0.62, llama 0.95 / 0.89, qwen-3B 0.99 / 0.95
+  (two of three runs above 0.95 on both), phi 0.86 / 0.39, qwen-7B 0.75 / 0.71.
+- **This corrects the entry above** ("the edit closes the gap without collapsing"),
+  which rested on gemma alone. On llama (0.95 / 0.89) and qwen-3B (0.99 / 0.95) the edit
+  at α\* is itself near saturation. DPO goes further on llama (1.00 / 0.98 at a quarter
+  of its trained scale, 1.00 / 1.00 above) and less far than the edit on qwen-3B within
+  the budget (0.91–0.99 / 0.17–0.55). The difference between the edit and DPO on this
+  probe is one of degree, not of kind, and the asterisks in the DPO table apply to the
+  edit column as well.
+- **It is a property of the contrast, not of the operator**: full precision (`O-trim`)
+  and ComPEFT show the same numbers. The cause is in the corpora. Of the pairs in which
+  the biased and the debiased item differ, the swap is "he" → "she" in 9–10 of 11–12
+  (gemma), 31 of 31 (llama), 38–39 of 49–50 (qwen-3B), 16–17 of 21–22 (phi), 66–67 of
+  72–74 (qwen-7B): under the debiased instruction the designer model replaces "he" by
+  "she" on male-stereotyped occupations and almost never the reverse. The contrast
+  vector, and DPO trained on the same pairs, both learn "more she".
+- Consequence for the paper: the occupation skew measures the dependence of the pronoun
+  on the occupation, and it is what the paper reports; the paper must also say that on
+  this axis the dependence is removed by a base-rate shift, give the table, and not
+  describe the result as neutralization. The decomposition claims (which part of ΔW
+  carries the effect) are about the edit's effect whatever its direction and are not
+  touched; the framing of occupation removal as debiasing is.
