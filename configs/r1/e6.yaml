@@ -1,0 +1,50 @@
+# R1 E6 -- collateral-aware support selection, hypothesis H-act
+# (R1_REBUTTAL_EXPERIMENTS.md E6; details the plan leaves open are fixed in
+# R1_NOTES.md section 3, entry of 2026-11-12, before the first unit).
+#
+# E6a (diagnosis) and E6b (alpha* runs) are one pass: every unit first measures,
+# on the unedited model, the input second moments n_j^2 of each edited
+# projection and the empirical Fisher diagonal of the edited weights on a
+# calibration set (WikiText-103 TRAIN, 256 sequences x 512 tokens; disjoint by
+# split from everything the gate reads), writes the E6a diagnostics (e6a.jsonl),
+# proves the model unchanged (baseline re-measured, must be identical), and
+# then runs the three arms under the alpha* rule of the other R1 panels.
+#
+#   S-act1    (primary)    score |dW_ij| / n_j
+#   S-fisher  (secondary)  score |dW_ij| / (sqrt(F_ij) + 0.01 * mean sqrt(F) of the tensor)
+#   S-wanda   (control)    score |dW_ij| * n_j
+#
+# For every arm: C-ref's per-tensor count k_t and scale s_t are kept and only
+# the choice of entries inside each tensor changes; signs are the true signs.
+# Reference arms at alpha* (C-ref, C-a: v12astar / results/r1/E5; C-rand:
+# results/r1/E4) are not run again. Reading: src/r1_e6.py.
+#
+# Do not edit after the first unit: that is an amendment and goes in R1_NOTES.md.
+
+panel: r1/E6
+ref_panel: v12astar
+density: 0.01
+seeds: [0, 1, 2]
+frozen_grid: [2, 4, 8, 16]
+refine_steps: 3
+curve_extra_rungs: 1
+act_seqs: 256
+act_tokens: 512
+
+ladders:
+  default: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+
+arms: [S-act1, S-wanda, S-fisher]
+
+# The 10 registered DEC cells, verbatim from configs/v12/astar_dec.yaml.
+cells:
+  - {target: gemma,  hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: occ_gender}
+  - {target: llama,  hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: occ_gender}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: occ_gender}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: occ_gender}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: bbq_Age}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: bbq_Age}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: bbq_Race_ethnicity}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: ss_intra}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: ss_intra}
+  - {target: qwen7b, hf: Qwen/Qwen2.5-7B-Instruct,         designer: qwen,     axis: occ_gender}

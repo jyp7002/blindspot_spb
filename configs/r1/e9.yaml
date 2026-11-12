@@ -1,0 +1,41 @@
+# R1 E9 -- held-out capability battery at alpha* (R1_REBUTTAL_EXPERIMENTS.md E9;
+# details the plan leaves open are fixed in R1_NOTES.md section 3, entry of
+# 2026-11-12, before the first unit). Runner: run_r1_e9.py. Reading: src/r1_e9.py.
+#
+# Four model states per unit: unedited, and C-ref, C-a, C-rand each at the
+# alpha* that the stored panels selected for the same (cell, seed). Nothing is
+# selected in this panel.
+#
+# Do not edit after the first unit: that is an amendment and goes in R1_NOTES.md.
+
+panel: r1/E9
+ref_panel: v12astar
+density: 0.01
+seeds: [0, 1, 2]
+
+arms: [C-ref, C-a, C-rand]
+alpha_sources:                 # arm -> panel whose removal.jsonl holds its alpha*
+  C-ref: r1/E5
+  C-a: r1/E5
+  C-rand: r1/E4
+
+battery_batch: 16
+hellaswag_n: 2000
+
+# generation tasks (--arms gen), descriptive
+gen_seeds: [0]
+gsm8k_n: 250
+ifeval_n: null                 # all 541 prompts
+
+# The 10 registered DEC cells, verbatim from configs/v12/astar_dec.yaml.
+cells:
+  - {target: gemma,  hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: occ_gender}
+  - {target: llama,  hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: occ_gender}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: occ_gender}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: occ_gender}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: bbq_Age}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: bbq_Age}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: bbq_Race_ethnicity}
+  - {target: qwen,   hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: ss_intra}
+  - {target: phi,    hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: ss_intra}
+  - {target: qwen7b, hf: Qwen/Qwen2.5-7B-Instruct,         designer: qwen,     axis: occ_gender}

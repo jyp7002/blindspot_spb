@@ -65,6 +65,8 @@ sys.path.insert(0, os.path.join(HERE, "src"))
 
 DEC_ARMS = ["C-ref", "C-a", "C-bottom", "C-b", "C-rand", "C-layershuf", "C-tensorshuf"]
 OP_ARMS = ["O-trim", "O-dare", "O-compeft"]
+# E6b (R1_NOTES.md section 3, 2026-11-12): support re-selected inside each tensor
+ACT_ARMS = ["S-act1", "S-fisher", "S-wanda"]
 
 
 # ---------------------------------------------------------------- config ----
@@ -89,8 +91,11 @@ def load_cfg(path):
     # ... unless the retrained dW is not the reference panel's: then the reference
     # alpha* values do not apply to this unit and the search is run here as well
     cfg.setdefault("grid_only_fallback_full", True)
+    # E6 calibration set: WikiText-103 train, act_seqs sequences of act_tokens tokens
+    cfg.setdefault("act_seqs", 256)
+    cfg.setdefault("act_tokens", 512)
     for a in cfg["arms"]:
-        if a not in DEC_ARMS + OP_ARMS:
+        if a not in DEC_ARMS + OP_ARMS + ACT_ARMS:
             raise SystemExit(f"unknown arm {a!r}")
     return cfg
 
@@ -246,10 +251,12 @@ def applicable(v, arm):
     return True
 
 
-def build_arm(v, arm, seed, density, ref_scales):
+def build_arm(v, arm, seed, density, ref_scales, stats=None):
     """-> (E, meta). Never mutates v."""
     import torch
     import v8_edits as V8
+    if arm in ACT_ARMS:
+        return build_act_arm(v, arm, seed, density, ref_scales, stats)
     if arm in DEC_ARMS:
         E, meta = V8.build_edit(v, arm, density, seed, scale_mode="ref_tensor",
                                 ref_scales=ref_scales)
@@ -286,6 +293,201 @@ def build_arm(v, arm, seed, density, ref_scales):
                 **extra)
     del masks
     return E, meta
+
+
+# ------------------------------------------------- E6: activation-aware ----
+def calib_sequences(C, tok, n_seq, n_tok, seed=0):
+    """n_seq token sequences of exactly n_tok tokens from WikiText-103 TRAIN.
+
+    Disjoint by split from every chunk the gate reads (validation, test).
+    Chunks are taken in a seeded order and joined until a sequence is long
+    enough, then truncated; deterministic given the tokenizer.
+    """
+    chunks = C.load_wikitext(n_chunks=None, seed=0, split="train")
+    order = np.random.default_rng(seed).permutation(len(chunks))
+    seqs, buf = [], []
+    for i in order:
+        buf.append(chunks[int(i)])
+        ids = tok("\n\n".join(buf), truncation=True, max_length=n_tok)["input_ids"]
+        if len(ids) >= n_tok:
+            seqs.append(ids)
+            buf = []
+            if len(seqs) == n_seq:
+                break
+    if len(seqs) < n_seq:
+        raise RuntimeError(f"only {len(seqs)} calibration sequences of {n_tok} tokens")
+    return seqs
+
+
+def act_stats(C, model, tok, keys, n_seq, n_tok, want_fisher):
+    """Input second moments and (optionally) the empirical Fisher diagonal.
+
+    n2[key][j]  = mean over calibration tokens of x_j^2, x = the input of the
+                  edited projection `key` (so n_j = sqrt(n2[j]) is the RMS).
+    fisher[key] = mean over calibration sequences of (d NLL / d W)^2, NLL = the
+                  mean next-token loss of one sequence.
+    The model is left exactly as it was: no optimizer step, hooks removed,
+    requires_grad restored, gradients cleared.
+    """
+    import torch
+    seqs = calib_sequences(C, tok, n_seq, n_tok)
+    mods = {k: C._resolve(model, k) for k in keys}
+    dev = next(model.parameters()).device
+    n2 = {k: torch.zeros(mods[k].weight.shape[1], dtype=torch.float64, device=dev) for k in keys}
+    fisher = ({k: torch.zeros(mods[k].weight.shape, dtype=torch.float32, device=dev)
+               for k in keys} if want_fisher else None)
+
+    def mk(k):
+        def hook(_mod, inp):
+            x = inp[0].detach().float()
+            n2[k].add_((x * x).sum(dim=tuple(range(x.dim() - 1))).double())
+        return hook
+
+    hooks = [mods[k].register_forward_pre_hook(mk(k)) for k in keys]
+    was = [q.requires_grad for q in model.parameters()]
+    n_tokens = 0
+    try:
+        if want_fisher:
+            for q in model.parameters():
+                q.requires_grad_(False)
+            for k in keys:
+                mods[k].weight.requires_grad_(True)
+        for ids in seqs:
+            x = torch.tensor([ids], device=dev)
+            if want_fisher:
+                loss = model(input_ids=x, labels=x).loss
+                loss.float().backward()
+                for k in keys:
+                    g = mods[k].weight.grad
+                    fisher[k].add_(g.float() ** 2)
+                    mods[k].weight.grad = None
+            else:
+                with torch.no_grad():
+                    model(input_ids=x)
+            n_tokens += x.numel()
+    finally:
+        for h in hooks:
+            h.remove()
+        for q, w in zip(model.parameters(), was):
+            q.requires_grad_(w)
+        model.zero_grad(set_to_none=True)
+    out = dict(n2={k: (n2[k] / n_tokens).cpu() for k in keys},
+               fisher=({k: (fisher[k] / len(seqs)).cpu() for k in keys} if want_fisher else None),
+               n_seq=len(seqs), n_tok=n_tok, n_tokens=n_tokens)
+    del n2, fisher
+    torch.cuda.empty_cache()
+    return out
+
+
+FISHER_DAMP = 0.01          # sqrt(F) + FISHER_DAMP * mean(sqrt(F)) of the tensor
+
+
+def act_scores(v_t, arm, n2_t, fisher_t):
+    """Selection score of one tensor (same shape as v_t). Exact zeros of v never win."""
+    import torch
+    a = v_t.abs().float()
+    if arm == "S-fisher":
+        d = fisher_t.float().sqrt()
+        score = a / (d + FISHER_DAMP * float(d.mean()))
+    else:
+        n = n2_t.float().sqrt().clamp_min(1e-12)[None, :]
+        score = a / n if arm == "S-act1" else a * n
+    return score.masked_fill(v_t == 0, float("-inf"))
+
+
+def build_act_arm(v, arm, seed, density, ref_scales, stats):
+    """E6b arms. C-ref's per-tensor count k_t and scale s_t are kept; only WHICH
+    k_t entries of each tensor are used changes (top-k_t by the arm's score);
+    signs are the true signs. -> (E, meta)."""
+    import torch
+    import v8_edits as V8
+    if stats is None or (arm == "S-fisher" and stats.get("fisher") is None):
+        raise RuntimeError(f"{arm} needs activation statistics that were not computed")
+    ref = V8._masks(v, "C-ref", density, seed)
+    E, kept, tot = {}, 0, 0
+    for k in v:
+        kt = int(ref[k].sum().item())
+        score = act_scores(v[k], arm, stats["n2"][k],
+                           stats["fisher"][k] if stats.get("fisher") is not None else None)
+        flat = score.reshape(-1)
+        m = torch.zeros(flat.numel(), dtype=torch.bool)
+        if kt > 0:
+            m[torch.topk(flat, kt, sorted=False).indices] = True
+        m = m.view(v[k].shape)
+        E[k] = torch.sign(v[k]) * m.float() * ref_scales[k]
+        kept += int((m & ref[k]).sum().item())
+        tot += kt
+        del score, flat
+    n_flips = int(sum(int((e != 0).sum().item()) for e in E.values()))
+    n_total = int(sum(e.numel() for e in E.values()))
+    fro = float(torch.sqrt(sum((e.double() ** 2).sum() for e in E.values())))
+    meta = dict(condition=arm, density=density, n_flips=n_flips, n_params=n_total,
+                effective_sparsity=1.0 - n_flips / max(n_total, 1), frobenius=fro,
+                kind="act", support="top-k_t of each tensor by the arm's score",
+                values="sign", scale="C-ref per-tensor scales",
+                overlap_with_C_ref=(kept / tot if tot else None),
+                fisher_damp=(FISHER_DAMP if arm == "S-fisher" else None))
+    del ref
+    return E, meta
+
+
+def e6a_diag(v, stats, density, seed, ref_scales):
+    """E6a: is C-ref's support on high-activation input channels? (a function of
+    v and the activation statistics alone; no edit is applied)."""
+    import collections
+    import v8_edits as V8
+    from v8_support import parse_module
+    m_ref = V8._masks(v, "C-ref", density, seed)
+    m_a = V8._masks(v, "C-a", density, seed)
+    S = dict(all_n2=0.0, all_cnt=0.0, ref_n2=0.0, ref_k=0, a_n2=0.0, a_k=0,
+             ref_within=0.0, a_within=0.0, h_ref=0.0, h_a=0.0)
+    proj = collections.defaultdict(lambda: dict(all_n2=0.0, all_cnt=0.0, ref_n2=0.0, ref_k=0,
+                                                a_n2=0.0, a_k=0))
+    for k in v:
+        n2 = stats["n2"][k].double()
+        rows = v[k].shape[0]
+        c_ref, c_a = m_ref[k].sum(0).double(), m_a[k].sum(0).double()
+        sr, sa = float((c_ref * n2).sum()), float((c_a * n2).sum())
+        kr, ka = int(c_ref.sum().item()), int(c_a.sum().item())
+        mean_all = float(n2.mean())
+        st = float(ref_scales[k])
+        S["all_n2"] += float(n2.sum()) * rows
+        S["all_cnt"] += n2.numel() * rows
+        S["ref_n2"] += sr
+        S["ref_k"] += kr
+        S["a_n2"] += sa
+        S["a_k"] += ka
+        if mean_all > 0:
+            S["ref_within"] += sr / mean_all          # = k_t * e_t
+            S["a_within"] += sa / mean_all
+        S["h_ref"] += st * st * sr
+        S["h_a"] += st * st * sa
+        q = proj[parse_module(k)[1]]
+        q["all_n2"] += float(n2.sum()) * rows
+        q["all_cnt"] += n2.numel() * rows
+        q["ref_n2"] += sr
+        q["ref_k"] += kr
+        q["a_n2"] += sa
+        q["a_k"] += ka
+    mean_all = S["all_n2"] / S["all_cnt"]
+    by_proj = {}
+    for name, q in proj.items():
+        ma = q["all_n2"] / q["all_cnt"]
+        by_proj[name] = dict(
+            mean_n2=ma, mean_n2_over_global=ma / mean_all,
+            share_of_entries=q["all_cnt"] / S["all_cnt"],
+            share_of_C_ref_support=q["ref_k"] / max(S["ref_k"], 1),
+            enrich_C_ref_within=((q["ref_n2"] / q["ref_k"]) / ma if q["ref_k"] and ma > 0 else None),
+            enrich_C_a_within=((q["a_n2"] / q["a_k"]) / ma if q["a_k"] and ma > 0 else None))
+    del m_ref, m_a
+    return dict(
+        enrich_C_ref=(S["ref_n2"] / S["ref_k"]) / mean_all,
+        enrich_C_a=(S["a_n2"] / S["a_k"]) / mean_all,
+        enrich_C_ref_within_tensor=S["ref_within"] / S["ref_k"],
+        enrich_C_a_within_tensor=S["a_within"] / S["a_k"],
+        h_proxy_C_ref=S["h_ref"], h_proxy_C_a=S["h_a"],
+        h_proxy_ratio=(S["h_ref"] / S["h_a"] if S["h_a"] > 0 else None),
+        k_C_ref=S["ref_k"], k_C_a=S["a_k"], mean_n2=mean_all, by_projection=by_proj)
 
 
 # ------------------------------------------------------------------ unit ----
@@ -403,6 +605,26 @@ def run_unit(cfg, u, arms, panel):
               f"pre_calib_match={base['pre_calib_match']} "
               f"(setup {time.time() - t0:.0f}s)", flush=True)
 
+        stats = None
+        if any(a in ACT_ARMS for a in todo):
+            # E6: activation statistics on the unedited model, then proof that the
+            # model is unchanged (same skew, MMLU and perplexity as before training)
+            tq = time.time()
+            stats = act_stats(C, model, tok, sorted(v), cfg["act_seqs"], cfg["act_tokens"],
+                              want_fisher="S-fisher" in todo)
+            again, _ = eval_split(C, model, tok, ax, mmlu, wt, BATCH)
+            same = all(again[k] == pre[k] for k in ("skew", "mmlu_acc", "ppl"))
+            if not same:
+                raise RuntimeError(f"baseline changed after the statistics pass: {again} vs {pre}")
+            if not any(_key(r) == _key(u) for r in _rows(os.path.join(out_dir, "e6a.jsonl"))):
+                _append(os.path.join(out_dir, "e6a.jsonl"), dict(
+                    key, **e6a_diag(v, stats, density, s, ref_scales),
+                    n_seq=stats["n_seq"], n_tok=stats["n_tok"], fisher=stats["fisher"] is not None,
+                    baseline_unchanged_after_stats=bool(same)))
+            print(f"[r1] {fam} {ax} s{s} activation statistics: {stats['n_seq']} x "
+                  f"{stats['n_tok']} tokens, baseline unchanged={same} "
+                  f"({time.time() - tq:.0f}s)", flush=True)
+
         for arm in todo:
             ta = time.time()
             if not applicable(v, arm):
@@ -411,7 +633,7 @@ def run_unit(cfg, u, arms, panel):
                     "projections; the shuffle would return C-ref unchanged"))
                 print(f"[r1] {fam} {ax} s{s} {arm}: N/A (structural)", flush=True)
                 continue
-            E, meta = build_arm(v, arm, s, density, ref_scales)
+            E, meta = build_arm(v, arm, s, density, ref_scales, stats=stats)
             ladder, ladder_name = ladder_for(cfg, arm)
             rungs, lls = {}, []
 
@@ -490,7 +712,7 @@ def run_unit(cfg, u, arms, panel):
                     if a not in rungs:
                         measure(a, "curve_extra")
             frozen = None
-            if arm in DEC_ARMS and not grid_only:
+            if arm in DEC_ARMS + ACT_ARMS and not grid_only:
                 for a in cfg["frozen_grid"]:
                     if float(a) not in rungs:
                         measure(a, "frozen_fill")

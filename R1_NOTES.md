@@ -373,6 +373,82 @@ size of the replay difference is visible next to the optimism it is used to esti
 Runs outside the tolerance still stop the reading. Steering and the dense edit keep
 1e-6. No split-half value had been computed when this was written.
 
+**2026-11-12 ~15:20Z, before the first unit of either — E9 (held-out capability battery)
+and E6 (collateral-aware support selection): the details the plan leaves open.** Both are
+plan items (author decision of 2026-11-12 to run them; E9 first). Code committed with
+this entry: `run_r1_e9.py`, `configs/r1/e9.yaml`, `src/r1_e9.py` (selftest 6/6); an
+additive change to `run_r1.py`, `configs/r1/e6.yaml`, `src/r1_e6.py` (selftest 6/6).
+When this was written the only thing seen of either experiment was the log of one
+throwaway E6 unit up to the line "activation statistics … baseline unchanged=True";
+no removal of a new arm and no battery accuracy had been looked at.
+
+*E9.*
+- *States.* Per unit (ten main cells × seeds 0–2): the unedited model, and `C-ref`,
+  `C-a`, `C-rand` each applied at the α\* the stored panels selected for that same run
+  (`C-ref`, `C-a`: `results/r1/E5`, exact replays of v12astar; `C-rand`:
+  `results/r1/E4`). Edits are rebuilt with the builders of `run_r1.py`. Nothing is
+  selected in E9. Guards recorded per row and enforced by the reading to 1e-6: the
+  retrained contrast vector has the registered fingerprint; the unedited skew equals
+  the stored one; the skew of each edited state, measured before the battery, equals
+  the skew the stored panel recorded at that α\*.
+- *Likelihood tasks, all three seeds.* ARC-Challenge test (1,172 items); HellaSwag
+  validation, the 2,000 items given by the first 2,000 indices of a seed-0 permutation;
+  TruthfulQA MC1 (817; the options of each item are shuffled by a fixed per-item seed
+  because the dataset lists the correct answer first); Winogrande-xl validation
+  (1,267); and the items of `load_mmlu(1000)` that are neither among the 200 evaluation
+  items nor among the 200 calibration items of the budget. Scoring is by the letter
+  the model prefers, through the chat template, as the paper scores MMLU: for the MMLU
+  slice the gate's own scorer (two rotations, batch 6); for the other four one fixed
+  system prompt, no rotation, batch 16, items in a fixed order.
+- *Primary metric and reading* (the plan's): per run and edited state, the mean over
+  the five tasks of the accuracy difference to the unedited model (not deployed → 0);
+  cell = seed mean; D = macro(`C-ref`) − macro(`C-a`), paired cell bootstrap.
+  **E9-H1**: D > 0 with an interval excluding 0. **E9-H0**: the interval includes 0. An
+  interval entirely below 0 is neither and is reported as "E9-H1 fails, the deployed
+  edit loses more". Per-task differences, each state's own loss, and the contrasts with
+  `C-rand` are descriptive.
+- *Generation tasks, seed 0, descriptive*: GSM8K (first 250 test items) and IFEval (541),
+  through `lm_eval` on the live model as the published IFEval arm does; a separate pass
+  after the others.
+
+*E6.*
+- *One pass.* Every unit of `configs/r1/e6.yaml` (ten main cells × three seeds) first
+  measures, on the unedited model after the contrast vector is trained, the statistics
+  below; proves the model unchanged (the evaluation baseline is measured again and must
+  equal the one taken before training, else the unit fails); writes the E6a diagnostics;
+  then runs the three arms under the α\* rule of the other panels (default ladder; the
+  fixed grid is filled in as for the other sign arms).
+- *Calibration set.* WikiText-103 train (disjoint by split from every chunk the gate
+  reads): chunks of `load_wikitext(split="train")` in a seed-0 order, joined until 512
+  tokens; 256 sequences; one sequence per forward pass. n_j² = mean over calibration
+  tokens of x_j², x the input of the edited projection (phi: the fused projection).
+  Fisher: mean over sequences of the squared gradient of that sequence's mean next-token
+  loss with respect to the edited weights.
+- *Arms.* For each tensor, the k_t entries with the largest score, k_t = the number of
+  entries `C-ref` keeps in that tensor; values sign(ΔW)·s_t with `C-ref`'s s_t. Scores:
+  `S-act1` |ΔW_ij| / n_j (primary); `S-wanda` |ΔW_ij| · n_j (control); `S-fisher`
+  |ΔW_ij| / (√F_ij + 0.01 · mean √F of the tensor) (secondary; the damping is ours, the
+  plan gives none). Entries with ΔW = 0 are never selected. With constant statistics
+  each arm reproduces `C-ref` exactly (CPU check).
+- *E6a quantities.* Enrichment of a support = mean of n_j² over its entries divided by
+  the mean over all edited entries (pooled over tensors; the within-tensor version is
+  reported beside it). h_proxy(S) = Σ_t s_t² Σ_{(i,j)∈S_t} n_j² with `C-ref`'s s_t for
+  both supports. r_α = α\*(`C-a`) / α\*(`C-ref`) of the same run, from `results/r1/E5`.
+  The plan also names "E1's h_ref / h_a" as a comparison; E1 stored no such quantity and
+  it is not used.
+- *Readings* (the plan's, with the aggregation fixed here). **E6-M** holds iff (a) the
+  enrichment of `C-ref`'s support, cell = seed mean, has a ten-cell mean ≥ 1.5 with an
+  interval above 1, and (b) the median over cells of h_proxy(`C-ref`)/h_proxy(`C-a`)
+  (cell = median over seeds) lies within [0.25, 4] times the median over cells of r_α².
+  **E6-W** holds iff the intervals of `S-act1` − `C-ref`, `S-act1` − `C-a` and
+  `S-act1` − `C-rand` (removal at α\*, references from `results/r1/E5` and
+  `results/r1/E4`) all lie above 0. **Control**: `S-wanda`(α\*) ≤ `C-ref`(α\*) on the
+  ten-cell means; if violated the mechanism reading is withheld. `S-fisher` passing where
+  `S-act1` fails is reported as "secondary, needs confirmation" and decides nothing.
+- *The change to `run_r1.py`* is additive: three new arm names, the statistics pass and
+  the diagnostics run only when a configuration lists a new arm; no existing arm's code
+  path changes.
+
 ---
 
 ## 4. Readings and findings log
