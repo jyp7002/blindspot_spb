@@ -301,6 +301,33 @@ sign-only edit, while the abstract, the deployment table and the conclusion spea
   the stored cell values; and the unedited skew of the 12 runs equals that recorded by
   the stored comparison panel exactly (max |diff| 0).
 
+**2026-11-12 ~11:10Z, before E3c is run on any data — E3c (select/report split): the
+details the plan leaves open.** The plan fixes the rule (`sha256(item_id) mod 2`, choose
+on one half, report on the other, both directions, average) and no verdict: it asks for
+the absolute change and for whether the intervals of the main contrasts change status.
+Fixed here, with `src/r1_e3c.py` (selftest 7/7), before the script reads a likelihood:
+
+- *item_id.* Occupation axis: the occupation string of `PROBE_OCC`, so the eight
+  templates of an occupation stay in one half (24 items; the rule gives 7 f + 5 m and
+  5 f + 7 m — computed from the names alone, before any result). Pair axes: the key of
+  the probe pair as built by `colab_t2t4` (unique per pair). The halves are written to
+  `audit/r1_e3c_split.json` before the analysis.
+- *Skew per half* from the stored per-item log-likelihoods with the probe's own
+  formulas. *Budget*: not split; a scale is admissible if the run's recorded evaluation
+  check passed, as in the published rule. *Selection*: largest removal among admissible
+  grid scales on the selecting half, first maximum; none admissible → 0.
+- *Reported*: per variant, the removal with the scale chosen on all items (published),
+  on the other half (split-half), and on the same half; same-half minus split-half is
+  the optimism of selecting on the reported items; for C-ref − C-a, C-a − C-rand and
+  C-ref minus each perturbed variant, the interval under both and whether its status
+  changes.
+- *Scope*: the seven variants on the ten main cells (C-ref, C-a from `results/r1/E5`;
+  the other five from `results/r1/E4`). The eight-cell comparison is **not** covered:
+  per-item likelihoods of steering and SentenceDebias were not stored, and the plan's
+  fallback (re-evaluating the probes on GPU) has not been run.
+- Sanity gates: the skew recomputed from all items equals the recorded one for every
+  run and scale, and the full-set selection equals the run's `frozen` row.
+
 ---
 
 ## 4. Readings and findings log
