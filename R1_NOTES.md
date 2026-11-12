@@ -856,3 +856,48 @@ the stored `frozen` row), so the first column below is the published table.
   the 1% edit and for DPO there, not for steering, SentenceDebias or the dense edit.
   The plan's fallback (re-evaluate the probes on GPU, about 4 GPU-hours) has not been
   run.
+
+### FRONT8 — the 1% edit on the eight cells of the comparison: FRONT8-below (2026-11-12 11:53Z, `src/r1_front8.py`)
+
+12/12 new units (CrowS socioeconomic), 0 failed; with the 12 occupation runs of the E5
+panel, 24 runs. The unedited skew of all 24 equals that recorded by the stored
+comparison panel exactly (max |diff| 0). The three CrowS cells for which the submitted
+scale-up table has fixed-grid values reproduce them (gemma +0.084 / +0.084, phi +0.029 /
++0.029, llama +0.014 against +0.011).
+
+| | removal, grid rule (8 cells) | 1% edit minus it |
+|---|---|---|
+| 1% edit (`C-ref`) | **+0.242 [+0.073, +0.437]** | — |
+| dense sign-only edit | +0.282 [+0.096, +0.487] | −0.040 [−0.097, +0.009] |
+| steering | +0.320 [+0.096, +0.542] | **−0.077 [−0.195, +0.016]** |
+| SentenceDebias | +0.326 [+0.113, +0.550] | **−0.084 [−0.194, −0.003]** |
+| DPO, lower learning rates (post hoc) | +0.273 [+0.080, +0.495] | −0.031 [−0.080, +0.008] |
+| DPO, as-published recipe (the script's comparator) | +0.095 [−0.008, +0.284] | +0.147 [+0.005, +0.334] |
+
+1% edit: 80/96 grid configurations in budget (83.3%); selected configurations lose a
+median of 2 MMLU items, median perplexity ratio 1.023; selected scales 2 / 4 / 8 / 16 in
+2 / 4 / 7 / 11 runs; no run unedited.
+
+- **Registered reading: FRONT8-below.** The interval of 1% − SentenceDebias lies below
+  zero (that of 1% − steering includes it). Consequence as registered: the tie with
+  steering and projection is stated for the dense sign-only edit only; the paper says
+  that the 1% patch removes less (about three quarters as much) and the conclusion,
+  abstract and contribution list are rewritten accordingly.
+- The outcome is the one the registration said to expect (mean near +0.24, some 0.08
+  below, carried by phi | occupation).
+- Post hoc, reported so that the verdict is not over-read in either direction
+  (`/tmp/front8_posthoc.py` logic; numbers from `front8.json` and `e7b.json`):
+  - The excluding interval is narrow and depends on single cells: leaving out any one
+    of gemma | occ, llama | occ, qwen | occ, qwen | crows or phi | occ makes it include
+    zero. Without phi | occupation (1% +0.116, dense +0.316, steering +0.539,
+    SentenceDebias +0.550) the differences are −0.028 [−0.107, +0.028] and −0.034
+    [−0.076, +0.014].
+  - The 1% edit is grid-limited on the occupation cells (the largest scale is selected
+    in 11 of 24 runs). At α\* it removes +0.311 [+0.113, +0.527]; 1% at α\* − steering
+    −0.008 [−0.094, +0.060], − SentenceDebias −0.015 [−0.109, +0.067]. This is not a
+    like-for-like comparison (α\* is not one of four configurations, and it passes the
+    evaluation budget in only 13 of 24 runs) and does not change the reading.
+- The registered script compares with the as-published DPO arm because it was written
+  before the lower-learning-rate arms were read; the paper's table uses the
+  lower-learning-rate design, so the DPO difference quoted in the paper is the post hoc
+  −0.031 [−0.080, +0.008].
