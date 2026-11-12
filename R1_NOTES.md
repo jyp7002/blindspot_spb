@@ -768,3 +768,64 @@ Mean P("she") on female- / male-stereotyped probe occupations, five occupation c
   elicitation prompt can be made to return a balanced contrast is not tested. The
   decomposition and operator panels use the elicited contrast. Other axes have no
   comparable base-rate reading.
+
+### E13, `exo` arm and removal differences (2026-11-12 10:55Z, `src/r1_e13.py`; differences post hoc)
+
+- **`exo` arm (secondary), 15/15 units: E13-confirmed by the same rule** (ratio 0.03;
+  elicited − exo shift +0.320 [+0.155, +0.482]). At the grid scales the fully swapped,
+  designer-free contrast gives P("she") 0.47 / 0.45, base-rate shift +0.009
+  [−0.045, +0.067] and removal +0.718 [+0.673, +0.768] of an initial skew of 0.75, with
+  α = 2 selected in the median run. At α\*/2 and α\* it overshoots: 0.38 / 0.56 and
+  0.31 / 0.51 (removal +0.575 and +0.549).
+- Post hoc, from the cell values in `e13_verdict.json` (paired cell bootstrap): removal
+  balanced − elicited +0.079 [−0.083, +0.214] at the grid scales, +0.144
+  [+0.093, +0.211] at α\*/2, +0.074 [−0.008, +0.210] at α\*; exo − elicited +0.223
+  [+0.081, +0.427] at the grid scales. Balancing does not cost removal.
+- Per model the balanced edit changes the base rate by −0.08 to +0.12 (gemma 0.00,
+  llama −0.05, qwen-3B +0.12, phi +0.01, qwen-7B −0.08); "unchanged" is a statement
+  about the mean.
+
+### E3c — select on one half of the probe items, report on the other (2026-11-12, zero GPU, `src/r1_e3c.py`)
+
+Seven variants, ten main cells, three seeds, fixed grid; halves by `sha256(item_id) mod 2`
+(occupation 12 / 12 occupations; BBQ-Age 232 / 228; BBQ-Race 414 / 407; StereoSet
+526 / 527). Both sanity gates pass for all 201 runs (skew recomputed from the stored
+likelihoods equals the recorded one at every grid scale; the full-set selection equals
+the stored `frozen` row), so the first column below is the published table.
+
+| variant | scale chosen on all items (published) | on the other half | on the same half | optimism (same − other) | halves choose different scales |
+|---|---|---|---|---|---|
+| `C-ref` | +0.353 [+0.224, +0.494] | +0.342 [+0.220, +0.476] | +0.346 | +0.004 [+0.000, +0.010] | 2/30 runs |
+| `C-a` | +0.070 [+0.031, +0.113] | +0.069 [+0.031, +0.113] | +0.070 | +0.000 [+0.000, +0.001] | 1/30 |
+| `C-tensorshuf` (7 cells) | +0.045 [−0.002, +0.137] | +0.044 [−0.003, +0.136] | +0.046 | +0.001 | 8/21 |
+| `C-layershuf` | +0.004 [+0.002, +0.008] | +0.003 [+0.001, +0.007] | +0.005 | +0.002 | 12/30 |
+| `C-b` | +0.004 [+0.002, +0.006] | +0.002 [+0.000, +0.004] | +0.004 | +0.002 | 18/30 |
+| `C-rand` | +0.001 [+0.001, +0.002] | +0.001 [−0.000, +0.001] | +0.002 | +0.001 | 17/30 |
+| `C-bottom` | +0.001 [+0.001, +0.002] | −0.000 [−0.001, +0.001] | +0.002 | +0.002 | 17/30 |
+
+| contrast | published | split-half | interval status |
+|---|---|---|---|
+| `C-ref − C-a` (selection effect) | +0.284 [+0.169, +0.407] | +0.273 [+0.166, +0.388] | unchanged |
+| `C-a − C-rand` | +0.068 [+0.030, +0.112] | +0.069 [+0.030, +0.112] | unchanged |
+| `C-ref − C-rand` | +0.352 [+0.223, +0.492] | +0.342 [+0.220, +0.475] | unchanged |
+| `C-ref − C-b` | +0.350 [+0.222, +0.489] | +0.340 [+0.219, +0.473] | unchanged |
+| `C-ref − C-layershuf` | +0.349 [+0.222, +0.487] | +0.339 [+0.219, +0.470] | unchanged |
+| `C-ref − C-bottom` | +0.352 [+0.223, +0.493] | +0.343 [+0.220, +0.477] | unchanged |
+
+- Choosing the scale on the items that are reported inflates the deployed edit's
+  fixed-grid removal by **+0.004** (about 1%), and nothing for `C-a`; no main contrast
+  changes status. The two halves pick the same scale in 28 of 30 `C-ref` runs: the
+  choice among four scales is driven by the budget, not by noise in the probe.
+- The published column and the same-half column differ slightly (+0.353 against
+  +0.346) for a reason unrelated to selection: removal is a difference of absolute
+  skews, and the mean of two half-level absolute values is not the absolute value of
+  the mean.
+- For the variants near zero the two halves choose different scales in more than half
+  of the runs: there the "best of four" picks noise, and the split-half values
+  (−0.000 to +0.003) are the honest ones. The published +0.001 to +0.004 for `C-rand`,
+  `C-b`, `C-layershuf` and `C-bottom` should be read as "zero within the optimism of
+  the selection".
+- **Not covered**: the eight-cell comparison (pe22 Q3). Per-item likelihoods exist for
+  the 1% edit and for DPO there, not for steering, SentenceDebias or the dense edit.
+  The plan's fallback (re-evaluate the probes on GPU, about 4 GPU-hours) has not been
+  run.
