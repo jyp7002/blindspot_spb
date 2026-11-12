@@ -792,7 +792,8 @@ def run_unit(cfg, u, arms, panel):
                 pre_skew=pre["skew"], n_items=pre.get("n_items", 200),
                 meta={k: meta.get(k) for k in (
                     "kind", "n_flips", "n_params", "effective_sparsity", "frobenius",
-                    "scale_mode", "support", "values", "rescale", "sigma", "scale")},
+                    "scale_mode", "support", "values", "rescale", "sigma", "scale")
+                    + (("overlap_with_C_ref", "fisher_damp") if arm in ACT_ARMS else ())},
                 frozen=frozen, adaptive=adaptive, backoff=backoff, budgets=budgets,
                 pre_mmlu1k=pre_1k,
                 rungs=[rungs[a] for a in sorted(rungs)],
