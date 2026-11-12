@@ -1,0 +1,38 @@
+# R1 FRONT8 -- the 1% edit on the eight cells of the comparison table
+# (R1_NOTES.md §3, entry of 2026-11-12; not in the plan of 0fe9043).
+#
+# The comparison table of the paper (edit / steering / SentenceDebias / DPO, eight
+# cells: gemma, llama, qwen-3B, phi on occupation and on CrowS-Pairs
+# socioeconomic) was run with the DENSE sign-only edit, while the abstract and
+# the deployment table describe the 1% patch (E0 audit). This panel measures the
+# deployed edit (C-ref: top 1%, signs, per-matrix scales) on the cells of that
+# table that no R1 panel covers:
+#
+#   occupation x 4 models      already on disk: the C-ref rows of results/r1/E5
+#                              (which reproduce v12astar exactly)
+#   CrowS socioeconomic x 4    THIS PANEL, 12 units
+#
+# Same runner, same baselines-before-training, same alpha* rule and fixed grid as
+# every other R1 panel; self designers and seeds as in configs/v12/frontier.yaml.
+# The corpora are the stored ones (nothing is elicited). Reading: src/r1_front8.py.
+#
+# Do not edit after the first unit: that is an amendment and goes in R1_NOTES.md.
+
+panel: r1/FRONT8
+ref_panel: v12astar          # no row matches these cells: replay guards are recorded as None
+density: 0.01
+seeds: [0, 1, 2]
+frozen_grid: [2, 4, 8, 16]
+refine_steps: 3
+curve_extra_rungs: 1
+
+ladders:
+  default: [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+
+arms: [C-ref]
+
+cells:
+  - {target: gemma, hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: crows_socioeconomic}
+  - {target: llama, hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: crows_socioeconomic}
+  - {target: qwen,  hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: crows_socioeconomic}
+  - {target: phi,   hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: crows_socioeconomic}

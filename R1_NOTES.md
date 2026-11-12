@@ -241,6 +241,66 @@ its reading are fixed here, before any E13 unit runs.
 - With five cells the interval of D excludes 0 only if the cells agree in sign almost
   without exception; that is intended.
 
+**2026-11-12 03:08Z — the VM stopped during pass C; the queue was restarted (no reading
+rule changes).** The cloud VM stopped at about 2026-11-11 08:16Z (last write 08:15:49Z)
+with pass C at 101 of 150 unit-arms, and came back at 2026-11-12 02:12Z with the same
+disk, container and software stack (torch 2.11.0, transformers 4.57.1, peft 0.20.0).
+No result file has a torn line. One arm was in flight (qwen | bbq_Age | seed 2,
+`C-bottom`): its ten rows in `E4/alpha_trace.jsonl` have no row in `removal.jsonl`. They
+are left in place (the trace is append-only and its readers deduplicate; `src/r1_e4.py`
+reads `removal.jsonl`), and the arm is measured again from the start. The follower that
+was to start E13 died with the VM, so E13 is now part of the main chain, restarted with
+`scripts/r1_queue.sh` at 03:08:33Z: pass C (remaining units) → E7b registered arms →
+E13. The first resumed unit reproduced its ΔW fingerprint and both baselines
+(`geom_sha` match, `pre_eval_match`, `pre_calib_match`). A copy of `results/r1` as of the
+restart is kept off the server.
+
+**2026-11-12, before the first FRONT8 unit — a new panel, FRONT8: the 1% edit on the
+eight cells of the comparison table.** Not in the plan of `0fe9043`. E0 found that the
+"edit" of the comparison table (edit / steering / SentenceDebias / DPO) is the dense
+sign-only edit, while the abstract, the deployment table and the conclusion speak of the
+1% patch; the revision and the response draft promise the 1% edit on the same cells.
+
+- *Runs* (`configs/r1/front8.yaml`, panel `r1/FRONT8`, 12 units, `run_r1.py` unchanged).
+  `C-ref` on gemma, llama, qwen-3B and phi × CrowS-Pairs socioeconomic, self designers
+  and seeds 0–2 as in `configs/v12/frontier.yaml`, stored corpora. The four occupation
+  cells of the table are not run again: they are the `C-ref` rows of `results/r1/E5`.
+  Queued behind the running chain with `scripts/r1_after.sh`.
+- *Quantity.* Per run, the removal at the best in-budget of the four fixed scales
+  {2, 4, 8, 16} (none in budget → not edited → 0): the selection space of every method
+  in that table, and the `frozen` field of the run's row. Cell = seed mean; eight cells;
+  bootstrap over cells, paired for differences. The comparators are the stored cell
+  values and are not run again: dense edit, steering and SentenceDebias from
+  `results/v12/frontier_v12.json`; DPO from the corrected measurement,
+  `results/r1/E7b/e7b.json`, published selection space.
+- *Reading* (`src/r1_front8.py`, committed with this entry; selftest 8/8). With
+  d_steer = 1% edit − steering and d_sent = 1% edit − SentenceDebias:
+  - **FRONT8-tie**: both intervals include 0 → the paper may say of the 1% patch itself
+    that it removes as much as steering and projection within the uncertainty.
+  - **FRONT8-below**: at least one interval lies entirely below 0 and none above → the
+    tie is stated for the dense sign-only edit only; the paper says that the 1% patch
+    removes less, with the numbers, and the conclusion's "small, mergeable patch that
+    matches activation steering and projection" is rewritten.
+  - **FRONT8-above** / **FRONT8-mixed**: stated as found; no summary claim if mixed.
+  - Reported, never the verdict: 1% − dense (what sparsity costs on these cells),
+    1% − DPO, the same at α\*, the medians of the chosen configurations and the share of
+    the 96 grid configurations in budget. IFEval is not measured for the 1% edit; that
+    column stays with the dense edit.
+- *What was known when this was written.* This is not a blind registration. The 12
+  occupation runs are on disk and have been read for other purposes; their fixed-grid
+  cell means are those of the submitted scale-up table (+0.693, +0.615, +0.391, +0.116),
+  and the same table has earlier fixed-grid values, from another runner, for three of
+  the four CrowS cells (+0.084, +0.011, +0.029). From these one expects a mean near
+  +0.24, some 0.08 below steering and SentenceDebias, the difference carried by
+  phi | occupation (+0.116 for the 1% edit against +0.316 for the dense one). The rule
+  is fixed now so that the consequence for the text is fixed before the numbers are
+  final, not because the outcome is unknown.
+- *Checks made before the panel ran, without computing any FRONT8 difference.* The
+  script accepts the 12 E5 rows (in each, `frozen` is the in-budget argmax of the four
+  grid scales); it reproduces the published pooled differences of the dense edit from
+  the stored cell values; and the unedited skew of the 12 runs equals that recorded by
+  the stored comparison panel exactly (max |diff| 0).
+
 ---
 
 ## 4. Readings and findings log
