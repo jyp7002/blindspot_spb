@@ -26,6 +26,15 @@ its configurations equal the stored values to 1e-6; otherwise this script stops
 and lists the runs (deciding what to do then is an amendment). For every method
 the full-set selection recomputed here must equal the stored selection.
 
+AMENDMENT (R1_NOTES.md section 3, 2026-11-12 ~12:05Z; after the first replay unit,
+before any split-half value was computed). SentenceDebias fits its subspace with
+an unseeded randomized PCA (scripts/sd_determinism.py), so a configuration can
+differ between processes: in the first unit one of four did, by 0.002 in skew.
+For SentenceDebias the tolerance is therefore 0.01 in skew per configuration and
+0.01 in the full-set removal; within it the replayed likelihoods are used as they
+are, and the removal recomputed from the replay is printed beside the stored one.
+Steering and the dense edit keep 1e-6.
+
 REPORTED (no verdict is registered): per method, removal with the configuration
 chosen on all items (published), on the other half, on the same half, and the
 optimism; for the paired differences of the dense edit and of the 1% edit with
@@ -57,7 +66,8 @@ METHODS = ("edit", "edit_1pct", "steering", "sentdebias", "dpo")
 NAME = dict(edit="dense edit", edit_1pct="1% edit", steering="steering",
             sentdebias="SentenceDebias", dpo="DPO (lower lr)")
 DPO_ARMS = ("lr1e-5", "lr5e-5")
-TOL = 1e-6
+TOL = dict(steering=1e-6, edit=1e-6, sentdebias=1e-2)      # skew, per configuration
+TOL_FULL = dict(steering=1e-5, edit=1e-5, sentdebias=1e-2)  # full-set removal
 
 
 class Partial(Exception):
@@ -83,7 +93,7 @@ def select_report(pre, post, ok):
                 same=0.5 * (rem(0, i0) + rem(1, i1)), i_full=i_f, i_h=(i0, i1))
 
 
-ZERO = dict(full=0.0, split=0.0, same=0.0, i_full=None, i_h=(None, None))
+ZERO = dict(full=0.0, split=0.0, same=0.0, i_full=None, i_h=(None, None), stored=0.0)
 
 
 def load_all():
@@ -115,7 +125,8 @@ def load_all():
                         bad.append((k, "skipped here but run in the stored panel"))
                     runs[k] = dict(ZERO)
                     continue
-                if not r["all_configs_stored"] or r["max_abs_diff"] > TOL or r["pre_abs_diff"] > TOL:
+                if (not r["all_configs_stored"] or r["max_abs_diff"] > TOL[m]
+                        or r["pre_abs_diff"] > 1e-6):
                     bad.append((k, f"max diff {r['max_abs_diff']}, pre diff {r['pre_abs_diff']}"))
                     continue
                 zf = np.load(os.path.join(OUT, "probe_ll", f"{t}__{a}__s{s}__{m}.npz"))
@@ -123,8 +134,10 @@ def load_all():
                 post = [three(fns[a], zf["ll"][i]) for i in range(len(r["configs"]))]
                 ok = [bool(c["collateral_ok"]) for c in r["configs"]]
                 v = select_report(pre, post, ok)
-                if abs(v["full"] - A.z(st.get("removal"))) > 1e-5:
+                if abs(v["full"] - A.z(st.get("removal"))) > TOL_FULL[m]:
                     bad.append((k, f"full-set selection {v['full']:+.6f} != stored {st.get('removal')}"))
+                v["stored"] = A.z(st.get("removal"))
+                v["replay_max_abs_diff"] = float(r["max_abs_diff"])
                 runs[k] = v
 
     # ---- DPO, lower learning rates
@@ -156,6 +169,7 @@ def load_all():
                     post.append(q)
                     ok.append(bool(p["ok"]))
             runs[k] = select_report(pre, post, ok) if post else dict(ZERO)
+            runs[k]["stored"] = runs[k]["full"]
 
     # ---- 1% edit
     one = F8.load_runs()
@@ -181,6 +195,7 @@ def load_all():
             v = select_report(pre, post, ok)
             if abs(v["full"] - A.z((r.get("frozen") or {}).get("removal"))) > 1e-5:
                 bad.append((k, "full-set selection != frozen row"))
+            v["stored"] = v["full"]
             runs[k] = v
     return runs, missing, bad
 
@@ -195,7 +210,12 @@ def analyse(runs):
     for m in METHODS:
         full, split, same = (cell_vals(runs, m, k) for k in ("full", "split", "same"))
         ks = [k for k in runs if k[3] == m and runs[k]["i_full"] is not None]
+        stored = cell_vals(runs, m, "stored")
         out["methods"][m] = dict(
+            stored=V.boot_mean(stored),
+            max_abs_cell_diff_replay_vs_stored=float(max(abs(a - b) for a, b in zip(full, stored))),
+            runs_not_bit_exact=sum(runs[k].get("replay_max_abs_diff", 0.0) > 1e-6
+                                   for k in runs if k[3] == m),
             full=V.boot_mean(full), split=V.boot_mean(split), same=V.boot_mean(same),
             optimism=V.boot_paired(list(zip(same, split))),
             halves_disagree=f"{sum(runs[k]['i_h'][0] != runs[k]['i_h'][1] for k in ks)}/{len(ks)}")
@@ -241,6 +261,10 @@ def main():
         r = out["methods"][m]
         print(f"  {NAME[m]:16s} {fmt(r['full']):26s} {fmt(r['split']):26s} {fmt(r['same']):26s} "
               f"{fmt(r['optimism'])}   halves disagree in {r['halves_disagree']} runs")
+        if r["runs_not_bit_exact"]:
+            print(f"      replay not bit-exact in {r['runs_not_bit_exact']} runs; stored value "
+                  f"{fmt(r['stored'])}; largest cell difference replay vs stored "
+                  f"{r['max_abs_cell_diff_replay_vs_stored']:.4f}")
     for name, r in out["contrasts"].items():
         print(f"  {name:32s} published {fmt(r['full'])}   split-half {fmt(r['split'])}   "
               f"interval status {'CHANGES' if r['status_changes'] else 'unchanged'}")
@@ -277,7 +301,8 @@ def selftest():
         for s in SEEDS:
             for m in METHODS:
                 x = 0.3 if m.startswith("edit") else 0.2
-                runs[(t, a, s, m)] = dict(full=x, split=x - 0.01, same=x, i_full=0, i_h=(0, 0))
+                runs[(t, a, s, m)] = dict(full=x, split=x - 0.01, same=x, i_full=0, i_h=(0, 0),
+                                          stored=x)
     o = analyse(runs)
     check("analyse: optimism 0.01 for every method, differences unchanged in status",
           all(abs(o["methods"][m]["optimism"]["point"] - 0.01) < 1e-12 for m in METHODS)

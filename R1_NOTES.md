@@ -355,6 +355,24 @@ dense sign-only edit).
   steering, SentenceDebias and DPO, the interval under both rules and whether its
   status changes.
 
+**2026-11-12 ~12:05Z, after the first replay unit and before any split-half value of
+the comparison is computed — amendment to the replay gate for SentenceDebias.** The
+first unit (gemma | occupation | seed 0) replays the unedited skew, all four steering
+configurations and all four dense-edit configurations with difference 0, and three of
+the four SentenceDebias configurations with difference 0; the fourth (layer 12, rank 2)
+gives a skew of 0.4248 against the stored 0.4229. The cause is known and was recorded
+before R1: SentenceDebias fits its subspace with an unseeded randomized PCA, which
+draws from the global random state (`scripts/sd_determinism.py`). The 1e-6 gate would
+therefore reject SentenceDebias runs for a reason unrelated to the question E3c asks
+(how much is gained by choosing on the reported items, within one measurement).
+Amendment: for SentenceDebias the tolerance is 0.01 in skew per configuration and 0.01
+in the full-set removal; within it the replayed likelihoods are used as they are, and
+the removal recomputed from the replay with the configuration chosen on all items is
+printed beside the stored one, with the number of runs that are not bit-exact, so the
+size of the replay difference is visible next to the optimism it is used to estimate.
+Runs outside the tolerance still stop the reading. Steering and the dense edit keep
+1e-6. No split-half value had been computed when this was written.
+
 ---
 
 ## 4. Readings and findings log
