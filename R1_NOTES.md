@@ -630,3 +630,114 @@ base = their mean.
   describe the result as neutralization. The decomposition claims (which part of ΔW
   carries the effect) are about the edit's effect whatever its direction and are not
   touched; the framing of occupation removal as debiasing is.
+
+### E4 pass C — necessity under α\*: N-hold (2026-11-12 07:20Z complete, `src/r1_e4.py`)
+
+150/150 unit-arms, 0 failed (the pass was interrupted by the VM stop and resumed; §3).
+ΔW fingerprint reproduced 30/30; baselines 27/30 (llama, one MMLU item, as before).
+Every arm's fixed-grid values replay the published decomposition panel exactly (C-rand,
+C-b, C-layershuf, C-bottom 30/30, C-tensorshuf 21/21, max |diff| 0).
+
+Removal at each arm's own α\* (ten cells, registered definition; C-ref +0.377, C-a +0.305):
+
+| arm | what it changes | removal at α\* | share of C-ref | α\* median | eval pass |
+|---|---|---|---|---|---|
+| `C-b` | signs permuted within each matrix | +0.035 [+0.002, +0.080] | 9.2% | 69.8 | 53% |
+| `C-layershuf` | pattern moved to another layer | +0.060 [+0.013, +0.139] | 16.0% | 64.0 | 67% |
+| `C-bottom` | smallest 1% instead of largest | +0.004 [−0.004, +0.012] | 0.9% | 128.0 | 53% |
+| `C-tensorshuf` (7 cells) | pattern moved to another projection | +0.091 [−0.009, +0.262] | 20.7% | 49.4 | 57% |
+| `C-rand` (pass A) | random support, random signs | +0.012 [+0.001, +0.023] | 3.0% | 107.6 | 43% |
+
+- **Registered reading: N-hold = True.** Each of `C-b`, `C-layershuf`, `C-bottom` is at
+  most a quarter of `C-ref` on the ten-cell means (9%, 16%, 1%), also under the signed
+  and the capped definitions (7–8%, 13–14%, 1%). With G1-valid from pass A, the E4
+  verdict is **G1-valid, N-hold**: the necessity results of the fixed grid are not an
+  artefact of comparing at scales where the perturbed edits are too small to act. Given
+  three to six times the scale of the deployed edit, up to their own budget, they still
+  remove little.
+- **Not zero, and the text must not say zero.** At the fixed grid these arms were at
+  +0.004 or below; at α\* the intervals of `C-b` and `C-layershuf` exclude 0. The means
+  are carried by occupation cells (per-cell values, `results/r1/E4/e4_cells.json`):
+  `C-b` +0.204 on gemma (28% of that cell's `C-ref`), +0.092 on phi, +0.049 on llama;
+  `C-layershuf` **+0.386 on qwen-7B (55% of that cell's `C-ref` +0.703)**, +0.07 on
+  llama and on phi. On the five BBQ and StereoSet cells both are within ±0.02 of zero.
+  `C-bottom` is within ±0.03 everywhere.
+- `C-tensorshuf` (outside N-hold as registered): gemma | occupation keeps +0.584 of
+  +0.738 (79%) when the pattern is moved between projections of the same layer; qwen-7B
+  +0.074; the other five cells are within ±0.04. At the fixed grid gemma kept about
+  half (+0.317); under its own budget it keeps most. The statement "the pattern must
+  stay in its projection" does not hold for gemma, as the submitted appendix already
+  said for the fixed grid.
+- For the paper: the necessity claim is stated for signs-on-coordinates and for the
+  smallest coordinates without qualification, and for the layer with the qwen-7B
+  exception named.
+
+### E7b registered arms — DPO at lower learning rates: E7-1 (2026-11-12 07:59Z, `src/r1_e7b.py`)
+
+48/48 unit-arms. Design as registered: {lr 1e-5, 5e-5} × merge {1, 2}, three epochs
+(15–75 optimizer steps), every cell with at least 8 differing pairs trained (all eight).
+
+- DPO **+0.273 [+0.080, +0.495]**; edit − DPO **+0.009 [−0.049, +0.069]**, includes 0.
+  **Registered reading: E7-1** — "DPO removes none" is withdrawn in full and replaced
+  by "DPO is comparable". (The edit here is the dense sign-only edit of the comparison
+  table, +0.282.)
+- Per cell, DPO / edit: gemma | occ +0.694 / +0.674; gemma | crows +0.053 / +0.123;
+  llama | occ +0.760 / +0.748; llama | crows +0.010 / +0.023; qwen | occ +0.520 /
+  +0.378; qwen | crows +0.002 / −0.047; phi | occ +0.140 / +0.316; phi | crows +0.008 /
+  +0.044.
+- Post hoc, reports only (`src/r1_e7b_detail.py`, written after the reading was known).
+  All 96 configurations are in budget (median ΔMMLU 1 item, median perplexity ratio
+  1.015), and 19 of 24 runs select the largest configuration (lr 5e-5 × merge 2): in
+  this design DPO is limited by its grid, not by the budget, so +0.273 is a lower bound
+  on what DPO can do within the budget. With the as-published recipe (lr 1e-4, 250
+  steps; arm `pub`) the same method was outside the budget at its trained scale and
+  gave +0.095 when scaled down: the earlier number was a badly tuned baseline on top of
+  the evaluation error.
+- **Pronoun check for the registered design** (four occupation cells, selected
+  configuration): mean P("she") on female- / male-stereotyped occupations 0.83 / 0.08 →
+  **0.98 / 0.76**, base-rate shift +0.417 [+0.271, +0.519]; llama is at 1.00 / 1.00 in
+  all three runs (collapsed 3/12), qwen-3B 1.00 / 0.87, gemma 0.98 / 0.82, phi 0.95 /
+  0.36. The 1% edit at the fixed grid on the same four cells: 0.83 / 0.08 → 0.91 / 0.61,
+  shift +0.302 [+0.171, +0.433], collapsed 0/12. Both methods close the gap by raising
+  "she"; DPO goes further on every model.
+- For the paper: the comparison table's DPO row becomes the registered design; the
+  text says that the edit, steering, SentenceDebias and DPO are indistinguishable in
+  removal on these cells, that DPO is in budget everywhere and limited by its grid, and
+  that the as-published DPO recipe is reported in the appendix as what it was.
+
+### E13 — balanced-contrast control on the occupation axis: E13-confirmed (balanced arm complete 2026-11-12 ~09:40Z, `src/r1_e13.py`)
+
+Balanced arm 15/15 units (the `exo` arm is read when its 15 units are complete).
+Mean P("she") on female- / male-stereotyped probe occupations, five occupation cells,
+`C-ref`:
+
+| contrast | scale | P(she) f / m | base-rate shift | removal | runs collapsed |
+|---|---|---|---|---|---|
+| (unedited) | — | 0.82 / 0.07 | — | — | — |
+| elicited | fixed grid | 0.91 / 0.65 | +0.329 [+0.201, +0.436] | +0.496 [+0.281, +0.665] | 0/15 |
+| elicited | α\*/2 | 0.92 / 0.60 | +0.309 [+0.181, +0.427] | +0.427 | 1/15 |
+| elicited | α\* | 0.86 / 0.71 | +0.336 [+0.221, +0.459] | +0.602 | 2/15 |
+| **balanced** | fixed grid | **0.54 / 0.37** | **+0.002 [−0.047, +0.061]** | **+0.575 [+0.462, +0.688]** | 0/15 |
+| balanced | α\*/2 | 0.55 / 0.37 | +0.013 [−0.040, +0.074] | +0.571 [+0.472, +0.660] | 0/15 |
+| balanced | α\* | 0.48 / 0.43 | +0.009 [−0.043, +0.066] | +0.676 [+0.607, +0.742] | 0/15 |
+
+- **Registered reading (balanced, fixed grid): E13-confirmed.** ratio = |shift
+  (balanced)| / shift(elicited) = 0.01; elicited − balanced = +0.327 [+0.193, +0.461],
+  excludes 0. Not vacuous: the balanced edit removes +0.575 [+0.462, +0.688]. The same
+  at α\*/2 (ratio 0.04) and at α\* (ratio 0.03), reported.
+- What the balanced edit does: it lowers P("she") on female-stereotyped occupations by
+  0.29 and raises it on male-stereotyped ones by 0.29 (fixed grid), so the gap closes
+  from both sides and the base rate stays at 0.45. Per cell at the fixed grid: gemma
+  0.90 / 0.04 → 0.65 / 0.29, llama 0.84 / 0.08 → 0.43 / 0.40, qwen-3B 0.76 / 0.11 →
+  0.61 / 0.49, phi 0.83 / 0.10 → 0.63 / 0.31, qwen-7B 0.80 / 0.05 → 0.35 / 0.35.
+- The base-rate shift reported in the pronoun check is therefore a property of the
+  one-sided elicited contrast, as attributed, and not of the operator or of the probe:
+  the same operator on a contrast with mirrored replacements removes at least as much
+  skew without moving the base rate. The sentence in the paper stands, and the remedy
+  is no longer "untested".
+- Limits, so that this is not over-read: the balanced corpus is a constructed control
+  (replacements added by rule to the elicited corpus; for qwen-7B, 9–11 elicited
+  replacements were reverted), not what a model returns when asked; whether an
+  elicitation prompt can be made to return a balanced contrast is not tested. The
+  decomposition and operator panels use the elicited contrast. Other axes have no
+  comparable base-rate reading.
