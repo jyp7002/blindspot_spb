@@ -919,3 +919,75 @@ median of 2 MMLU items, median perplexity ratio 1.023; selected scales 2 / 4 / 8
   before the lower-learning-rate arms were read; the paper's table uses the
   lower-learning-rate design, so the DPO difference quoted in the paper is the post hoc
   −0.031 [−0.080, +0.008].
+
+### E3c on the eight-cell comparison — replay and split-half (2026-11-12 12:51Z replay complete; `src/r1_e3c_front.py`)
+
+Replay (`run_r1_front_ll.py`): 72/72 unit-methods, 0 failed. Unedited skew: difference 0
+in all 24 units. Steering and the dense edit: every configuration reproduces the stored
+skew with difference 0 (48 unit-methods). SentenceDebias: no unit is bit-exact; largest
+skew difference per unit 0.0003 to 0.0054 (unseeded PCA; within the 0.01 tolerance of the
+amendment); recomputed mean removal +0.327 against the stored +0.326, largest cell
+difference 0.0009.
+
+Registered output (split of the amendment log: occupations by hash, 7 f + 5 m / 5 f + 7 m):
+
+| method | configuration chosen on all items | on the other half | on the same half | optimism | halves disagree |
+|---|---|---|---|---|---|
+| dense edit | +0.282 [+0.096, +0.487] | +0.242 [+0.079, +0.423] | +0.261 | +0.020 [+0.003, +0.045] | 4/24 |
+| 1% edit | +0.242 [+0.073, +0.437] | +0.228 [+0.064, +0.418] | +0.236 | +0.008 [+0.002, +0.017] | 5/24 |
+| steering | +0.320 [+0.096, +0.542] | +0.276 [+0.077, +0.465] | +0.318 | +0.042 [+0.002, +0.102] | 11/24 |
+| SentenceDebias (replayed) | +0.327 [+0.113, +0.550] | +0.323 [+0.110, +0.543] | +0.324 | +0.001 [+0.000, +0.002] | 2/21 |
+| DPO, lower lr | +0.273 [+0.080, +0.495] | +0.248 [+0.077, +0.445] | +0.248 | +0.000 [+0.000, +0.001] | 6/24 |
+
+| contrast | all items | other half | status |
+|---|---|---|---|
+| dense edit − steering | −0.037 [−0.129, +0.046] | −0.034 [−0.100, +0.023] | unchanged |
+| dense edit − SentenceDebias | −0.045 [−0.119, +0.026] | **−0.081 [−0.148, −0.015]** | **changes** |
+| dense edit − DPO | +0.009 [−0.049, +0.069] | −0.006 [−0.073, +0.060] | unchanged |
+| 1% edit − steering | −0.077 [−0.195, +0.016] | −0.048 [−0.150, +0.023] | unchanged |
+| 1% edit − SentenceDebias | −0.084 [−0.194, −0.004] | −0.095 [−0.203, −0.014] | unchanged |
+| 1% edit − DPO | −0.031 [−0.080, +0.008] | −0.020 [−0.049, +0.002] | unchanged |
+
+- **As registered, one contrast changes status: dense edit − SentenceDebias excludes zero
+  when the configuration is chosen on the other half.** This is reported in the paper.
+- **The registered split is flawed for the occupation axis, and that flaw, not selection,
+  produces the change** (found after the output above; everything from here is post hoc,
+  `src/r1_e3c_posthoc.py`, `results/r1/E3/e3c_balanced_posthoc.json`). Hashing whole
+  occupations gave halves of 7 f + 5 m and 5 f + 7 m occupations. The occupation skew is
+  2·mean(congruent) − 1; on a half with n_f ≠ n_m a uniform shift δ of P("she") moves it
+  by 2δ(n_f − n_m)/n = ±δ/3, so the half-level skew measures the pronoun base rate as
+  well as the f/m gap, which the full probe (12 + 12) does not. The registration noted
+  the 7/5 imbalance and missed its consequence. Evidence that this is what happens:
+  the "all items − same half" difference, which involves no cross-half selection, is
+  +0.021 for the dense edit and +0.025 for DPO (the two methods that shift the pronoun
+  most) and +0.002 / +0.003 for steering and SentenceDebias; it sits entirely on the
+  occupation cells (dense edit +0.529 → +0.494; CrowS +0.035 → +0.029).
+- **With gender-balanced halves** (within each gender, occupations ordered by the same
+  sha256 and dealt alternately: 6 f + 6 m per half; pair axes unchanged):
+
+  | method | other half | optimism | halves disagree |
+  |---|---|---|---|
+  | dense edit | +0.275 [+0.089, +0.482] | +0.003 [+0.000, +0.010] | 1/24 |
+  | 1% edit | +0.237 [+0.065, +0.434] | +0.004 [+0.000, +0.010] | 4/24 |
+  | steering | +0.314 [+0.092, +0.535] | +0.008 [+0.001, +0.021] | 10/24 |
+  | SentenceDebias | +0.326 [+0.112, +0.549] | +0.001 [+0.000, +0.003] | 3/21 |
+  | DPO, lower lr | +0.273 [+0.080, +0.495] | +0.000 [+0.000, +0.001] | 3/24 |
+
+  Contrasts on the other half: dense − steering −0.039 [−0.129, +0.042]; dense −
+  SentenceDebias −0.051 [−0.121, +0.013]; dense − DPO +0.002 [−0.053, +0.062]; 1% −
+  steering −0.077 [−0.193, +0.015]; 1% − SentenceDebias −0.089 [−0.197, −0.011]; 1% − DPO
+  −0.036 [−0.082, +0.001]. **No contrast changes status.**
+- The same balanced split on the ten main cells (seven variants): `C-ref` other half
+  +0.353 [+0.224, +0.494], optimism +0.001 [+0.000, +0.002] (registered split: +0.004),
+  halves disagree 1/30; `C-ref − C-a` +0.283 [+0.169, +0.407]; variants near zero as
+  before (other half −0.000 to +0.004, halves disagree in 19–22 of 30 runs for `C-rand`,
+  `C-b`, `C-bottom`). The earlier explanation of "all items ≠ same half" in the E3c entry
+  above (absolute values) was incomplete; the unbalanced occupation halves are the main
+  reason.
+- Reading for the paper. Both splits are reported, with the flaw named. Selecting the
+  configuration on the reported items is worth at most 0.008 for any method under the
+  balanced split; under the registered split the number for steering (+0.042) and the
+  dense edit (+0.020) is inflated by the composition effect and should not be quoted as
+  selection optimism. The tie statements of the comparison are kept, with the one
+  status change stated in App. B.9. The balanced split was chosen after seeing the
+  registered output; that is said wherever it is used.
