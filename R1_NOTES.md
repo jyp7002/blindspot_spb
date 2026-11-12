@@ -328,6 +328,33 @@ Fixed here, with `src/r1_e3c.py` (selftest 7/7), before the script reads a likel
 - Sanity gates: the skew recomputed from all items equals the recorded one for every
   run and scale, and the full-set selection equals the run's `frozen` row.
 
+**2026-11-12 ~11:30Z, before any unit of it — E3c fallback: the select/report split on
+the eight-cell comparison (pe22 Q3).** The plan's fallback for E3c is to regenerate the
+interventions and evaluate the probes again where per-item scores were not stored. That
+is the case for the comparison panel (`results/v12frontier`: steering, SentenceDebias,
+dense sign-only edit).
+
+- *Runs* (`run_r1_front_ll.py --config configs/v12/frontier.yaml`, 24 units, panel
+  `r1/E3c`). Each configuration is rebuilt with the published constructions
+  (`run_frontier.configs`, imported), in the published order and at the published
+  evaluation batch, and only the bias probe is evaluated, with its per-item
+  log-likelihoods kept. Capability is not measured again: the budget decision of each
+  configuration is the stored one.
+- *Replay gate.* A run enters the analysis only if its unedited skew and the skew of
+  each of its configurations equal the stored values to 1e-6. If some do not, the
+  reading script stops and lists them; what to do then is an amendment.
+- *Analysis* (`src/r1_e3c_front.py`, selftest 5/5, committed with this entry). The rule
+  of the entry above (same hash split, with CrowS socioeconomic added to
+  `audit/r1_e3c_split.json` by the same rule; budget not split; first maximum), applied
+  to five methods on the eight cells: the dense edit, steering and SentenceDebias from
+  the replay; DPO at lower learning rates from the stored likelihoods of `results/r1/E7b`
+  (four configurations: two learning rates × merge 1, 2); the 1% edit from
+  `results/r1/E5` and `results/r1/FRONT8`. Reported, no verdict: per method the removal
+  with the configuration chosen on all items, on the other half, on the same half, and
+  the optimism; for the differences of the dense edit and of the 1% edit with each of
+  steering, SentenceDebias and DPO, the interval under both rules and whether its
+  status changes.
+
 ---
 
 ## 4. Readings and findings log

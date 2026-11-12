@@ -69,7 +69,9 @@ def build_split():
     sys.path.insert(0, REPO)
     import colab_t2t4 as C
     out = {}
-    for axis in sorted({a for _, a in A.CELLS}):
+    # the axes of the ten main cells, and CrowS socioeconomic for the eight-cell
+    # comparison (src/r1_e3c_front.py); the rule is the same for every axis
+    for axis in sorted({a for _, a in A.CELLS} | {"crows_socioeconomic"}):
         if axis == "occ_gender":
             ids = list(C.PROBE_OCC.keys())
         else:
