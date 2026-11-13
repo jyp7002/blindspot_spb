@@ -1219,3 +1219,43 @@ E6b (removal at each arm's own α\*; references `C-ref` +0.377, `C-a` +0.305, `C
   what makes large-|ΔW| coordinates costly (direction right, (a) holds), but they do not
   account for the size of the effect ((b) fails), and using them to choose coordinates
   buys nothing at the budget. Reported in an appendix; no claim of a mechanism.
+
+### E3b — the fixed-grid results under other budgets (2026-11-13, zero GPU, `src/r1_e3b.py`)
+
+Fifteen budgets: MMLU allowance 2 / 4 / 6 / 8 items × perplexity bound 1.05 / 1.10 / 1.20,
+and each perplexity bound alone. At the registered budget (4 items, 1.10) every run's
+recomputed selection equals its stored one. `results/r1/E3/e3b_budgets.json`.
+
+- **Seven-variant experiment (ten cells): nothing changes status under any budget.**
+  The selection effect `C-ref − C-a` ranges from +0.221 [+0.124, +0.330] (2 items,
+  1.05) to +0.288 [+0.175, +0.411] (6 or 8 items, or no MMLU bound, at 1.10 or 1.20);
+  +0.284 at the registered budget. `C-ref` ranges from +0.285 to +0.357 and `C-a` from
+  +0.064 to +0.070. `C-ref` minus each of `C-rand`, `C-b`, `C-layershuf`, `C-bottom`
+  is between +0.28 and +0.36 everywhere, intervals far from zero. The fixed-grid
+  decomposition does not depend on where the budget is set within this range.
+- **Eight-cell comparison: 15 of 84 contrast × budget combinations differ in status
+  from the registered budget, all with an interval end within about 0.01 of zero.**
+
+  | contrast | registered budget | range of the point estimate over budgets | status differs in |
+  |---|---|---|---|
+  | dense edit − steering | −0.037 [−0.129, +0.046] | −0.045 to +0.023 | 0 of 14 |
+  | dense edit − SentenceDebias | −0.044 [−0.119, +0.026] | −0.088 to +0.016 | 1 (2 items, 1.05: −0.088 [−0.176, −0.009]) |
+  | dense edit − DPO | +0.009 [−0.049, +0.069] | −0.003 to +0.072 | 4 (perplexity bound 1.20 with ≥ 4 items or no MMLU bound: +0.043 to +0.069, excluding 0) |
+  | 1% edit − steering | −0.077 [−0.195, +0.016] | −0.120 to −0.064 | 3 (every 2-item budget: excludes 0) |
+  | 1% edit − SentenceDebias | −0.084 [−0.194, −0.003] | −0.139 to −0.071 | 7 (bound 1.10 with 6 or 8 items or no MMLU bound; bound 1.20 with ≥ 4 items or no MMLU bound: includes 0) |
+  | 1% edit − DPO | −0.031 [−0.080, +0.008] | −0.057 to −0.018 | 0 |
+
+- What this says. The comparison between methods on eight cells is a comparison of
+  quantities that differ by a few hundredths with intervals a tenth wide: whether a
+  given difference "excludes zero" depends on the budget at the margin. Two patterns
+  are stable: the dense edit is never distinguishable from steering, and the 1% edit
+  is below steering and SentenceDebias in point estimate under every budget (−0.06 to
+  −0.14). The FRONT8 verdict ("1% edit − SentenceDebias excludes zero") holds at the
+  registered budget and at tighter ones and not at looser ones; the wording adopted
+  after FRONT8 (the 1% patch removes about three quarters as much; the tie is stated
+  for the dense edit) is consistent with every row. The dense edit pulls ahead of DPO
+  only when the perplexity bound is loosened to 1.20, where the edit can use larger
+  scales and DPO's four configurations are already all in budget.
+- Shares of configurations within the registered budget, comparison cells: dense edit
+  58%, 1% edit 83%, steering 95%, SentenceDebias 78%, DPO 100%.
+- Not covered, as registered: extended grid and α\* (E1, E8), sparsity panels.
