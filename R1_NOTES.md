@@ -449,6 +449,48 @@ no removal of a new arm and no battery accuracy had been looked at.
   the diagnostics run only when a configuration lists a new arm; no existing arm's code
   path changes.
 
+**2026-11-13 ~19:50Z, before the first unit — E11 (the comparison at budget-limited
+scales): the details the plan leaves open.** Plan item, run on the author's decision of
+2026-11-13. Code committed with this entry: `run_r1_e11.py`, `configs/r1/e11.yaml`,
+`src/r1_e11.py` (selftest 5/5). No E11 measurement existed when this was written.
+
+- *Why.* The decomposition is judged with each edit scaled to its own budget; the
+  comparison with steering, SentenceDebias and DPO lets each method choose among four
+  fixed configurations. Steering keeps 95% of those in budget, and the 1% edit selects
+  its largest grid scale in 11 of 24 runs (FRONT8): both sides may be limited by their
+  grids. E11 gives every comparator the rule the edit has under α\*.
+- *Rule, for every method*: its knob is raised along a ladder until the budget first
+  fails on the calibration items (200 MMLU validation items, 20 WikiText validation
+  passages; the selector of `src/r1_select.py`, which cannot read a bias score), refined
+  by three log-bisections where the knob is continuous; the bias is then measured once,
+  on the evaluation split, at the selected value. Nothing passing → the method is not
+  applied in that run and scores 0.
+- *Edit*: `C-ref` at α\*, already on disk for the eight cells (`results/r1/E5`,
+  `results/r1/FRONT8`); not run again.
+- *Steering*: the published construction; knob = strength over {0.005, 0.01, …, 2.56}
+  (the published grid used 0.02 and 0.04). *SentenceDebias*: the published construction
+  with its PCA seeded; knob = rank over {1, 2, 4, 8, 16}, no bisection, ranks above the
+  number of differing pairs dropped (the pair-centred data have no more dimensions).
+  *DPO*: the corrected harness, learning rate 1e-5 (the plan's choice), three epochs,
+  every cell with at least 8 differing pairs; knob = merge scale over {1, 2, …, 512}.
+- *Layer* of steering and SentenceDebias, fixed in advance from the stored
+  four-configuration panel: per model, the relative depth selected more often over that
+  model's six stored runs, ties toward 0.75 (the depth selected more often overall).
+  This gives 0.75 everywhere except steering on llama (0.50). The stored selections were
+  made on removal, so this choice favours the comparators if anything.
+- *Nulls* (the plan's): a random direction at the steering layer and a random subspace
+  of each rank at the SentenceDebias layer, each scaled by the same rule.
+- *Reading* (the plan's). D = steering(s\*) − edit(α\*), cell = seed mean, eight cells,
+  paired bootstrap. **E11-steering**: the interval of D lies above 0 → the comparison
+  claim becomes "at budget-limited scales steering removes more than the edit".
+  **E11-tie**: the interval includes 0 → the tie stands. An interval entirely below 0
+  is not a registered outcome and is reported as "the edit removes more than steering
+  at budget-limited scales". SentenceDebias − edit, DPO − edit, the nulls, the selected
+  values and the evaluation-budget pass rates are descriptive.
+- *Known in advance*: the edit's side (+0.311 [+0.113, +0.527] on these cells at α\*,
+  13 of 24 runs within the evaluation budget) and the fixed-grid values of every
+  comparator. Not known: how far any comparator can be pushed.
+
 ---
 
 ## 4. Readings and findings log

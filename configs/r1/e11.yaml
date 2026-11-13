@@ -1,0 +1,47 @@
+# R1 E11 -- the comparison with other interventions at budget-limited scales
+# (R1_REBUTTAL_EXPERIMENTS.md E11; details the plan leaves open are fixed in
+# R1_NOTES.md section 3, entry of 2026-11-13, before the first unit).
+# Runner: run_r1_e11.py. Reading: src/r1_e11.py.
+#
+# Eight cells of the comparison (configs/v12/frontier.yaml), seeds 0-2. Every
+# comparator's knob is raised along its ladder until the budget first fails on
+# calibration items (same selector, same budget, same calibration items as
+# alpha*), then measured once on the evaluation split. The edit's side, C-ref
+# at alpha*, is on disk (results/r1/E5, results/r1/FRONT8) and is not run here.
+#
+# Do not edit after the first unit: that is an amendment and goes in R1_NOTES.md.
+
+panel: r1/E11
+seeds: [0, 1, 2]
+refine_steps: 3
+
+# Layer, as a relative depth, fixed in advance per model: the depth that the
+# stored four-configuration comparison (results/v12frontier) selected more often
+# over that model's six runs, ties broken toward 0.75, the depth selected more
+# often overall (steering 17 of 24 runs, SentenceDebias 12 of 21).
+#   steering        gemma 6/6 deep, llama 4/6 shallow, qwen 6/6 deep, phi 3/3 tie
+#   SentenceDebias  gemma, llama, qwen 3/3 ties, phi 3/3 deep
+depth:
+  steering:   {gemma: 0.75, llama: 0.50, qwen: 0.75, phi: 0.75}
+  sentdebias: {gemma: 0.75, llama: 0.75, qwen: 0.75, phi: 0.75}
+
+ladders:
+  # strength; the published grid used 0.02 and 0.04
+  steering:   [0.005, 0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 1.28, 2.56]
+  # rank; no bisection; ranks above the number of differing pairs are dropped
+  sentdebias: [1, 2, 4, 8, 16]
+  # merge scale of the DPO update; the registered E7b arms used 1 and 2
+  dpo:        [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+
+# DPO recipe: the lr 1e-5 arm of configs/r1/e7b.yaml (plan: "LR 1e-5 fixed")
+dpo: {lr: 1.0e-5, epochs: 3, batch: 2, beta: 0.1, max_length: 128, min_pairs: 8}
+
+cells:
+  - {target: gemma, hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: occ_gender}
+  - {target: gemma, hf: google/gemma-2-2b-it,             designer: gemma_3b, axis: crows_socioeconomic}
+  - {target: llama, hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: occ_gender}
+  - {target: llama, hf: meta-llama/Llama-3.2-3B-Instruct, designer: llama_3b, axis: crows_socioeconomic}
+  - {target: qwen,  hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: occ_gender}
+  - {target: qwen,  hf: Qwen/Qwen2.5-3B-Instruct,         designer: qwen_3b,  axis: crows_socioeconomic}
+  - {target: phi,   hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: occ_gender}
+  - {target: phi,   hf: microsoft/Phi-3.5-mini-instruct,  designer: phi_3b,   axis: crows_socioeconomic}
