@@ -1067,3 +1067,98 @@ Registered output (split of the amendment log: occupations by hash, 7 f + 5 m / 
   selection optimism. The tie statements of the comparison are kept, with the one
   status change stated in App. B.9. The balanced split was chosen after seeing the
   registered output; that is said wherever it is used.
+
+### E9 — held-out capability battery at α\*: E9-H0 (likelihood pass complete 2026-11-12 19:38Z, `src/r1_e9.py`)
+
+120/120 unit-states, 0 failed. Gates pass for all 90 edited states: contrast-vector
+fingerprint reproduced, unedited skew and skew at α\* equal to the stored values. All
+three arms deployed in 30/30 runs. Unedited accuracy (mean over the 30 runs): ARC-Challenge
+82.8 (1,172 items), HellaSwag 74.8 (2,000), TruthfulQA MC1 52.4 (817), Winogrande 60.4
+(1,267), MMLU held-out 65.8 (798).
+
+Accuracy difference to the unedited model at each arm's own α\*, percentage points, ten
+cells:
+
+| | macro (5 tasks) | ARC | HellaSwag | TruthfulQA | Winogrande | MMLU held-out |
+|---|---|---|---|---|---|---|
+| `C-ref` | −1.11 [−1.94, −0.45] | −1.70 | −2.63 | +1.49 | −1.31 | −1.39 |
+| `C-a` | −1.28 [−1.96, −0.66] | −1.96 | −3.20 | +0.97 | −1.03 | −1.20 |
+| `C-rand` | −2.26 [−3.19, −1.30] | −2.23 | −3.83 | −1.76 | −1.38 | −2.08 |
+| `C-ref − C-a` | **+0.18 [−0.51, +0.86]** | +0.26 | +0.57 | +0.52 | −0.28 | −0.19 |
+
+- **Registered reading: E9-H0.** macro(`C-ref`) − macro(`C-a`) = +0.18 points
+  [−0.51, +0.86]; the interval includes 0. No per-task difference excludes 0 either. At
+  their budgets the deployed edit and the random-coordinate edit, which is 4.8 times
+  larger in norm, lose the same amount of held-out capability: there is no hidden
+  advantage of magnitude selection on tasks the budget does not read, and no hidden cost
+  of the larger edit.
+- Both lose something: about 1.1 to 1.3 points on average (intervals exclude 0), with
+  HellaSwag the most affected (−2.6, −3.2) and TruthfulQA not lowered. A budget of 4 of
+  200 MMLU items and 10% perplexity, taken at its edge, corresponds to roughly one point
+  on tasks outside it.
+- Descriptive: the random-sign edit at its budget loses about twice as much (−2.26);
+  `C-ref − C-rand` +1.15 [+0.15, +2.09], `C-a − C-rand` +0.97 [+0.44, +1.61]. An edit of
+  the same size and support whose signs are random costs more held-out capability than
+  one with the learned signs, at the same MMLU/perplexity budget.
+- Per cell (macro, `C-ref` / `C-a` / `C-rand`): gemma | occ −1.45 / −1.38 / −3.62;
+  llama | occ −0.59 / −2.38 / −3.33; qwen | occ −2.33 / −0.43 / −0.22; phi | occ −1.33 /
+  −2.78 / −3.50; phi | bbq_Age −0.53 / −0.68 / −3.66; qwen | bbq_Age +0.05 / −0.45 /
+  −0.53; qwen | bbq_Race −0.39 / −0.25 / −0.47; qwen | ss −0.05 / +0.17 / −0.43; phi | ss
+  −4.10 / −2.86 / −3.88; qwen-7B | occ −0.35 / −1.80 / −2.93. The sign of the difference
+  varies by cell (5 of 10 favour `C-ref`).
+- Generation pass (GSM8K 250, IFEval 541, seed 0; descriptive): running; the first
+  state took 48 minutes, so the 40 states need about 32 hours.
+
+### E6 — collateral-aware support selection: E6-M fails, E6-W fails (complete 2026-11-13 02:51Z, `src/r1_e6.py`)
+
+90/90 unit-arms and 30/30 diagnostic rows, 0 failed. Fingerprint reproduced 30/30; the
+baseline re-measured after the statistics pass equals the one before training in 30/30.
+
+E6a (diagnosis):
+
+- (a) **holds.** n_j² enrichment of `C-ref`'s support 1.98 [1.69, 2.26] (within tensors
+  1.73 [1.55, 1.91]); `C-a` 1.00. The largest-|ΔW| entries sit on input channels with
+  about twice the mean squared activation. Per cell 1.23 (llama | occ) to 2.63
+  (phi | bbq_Age).
+- (b) **fails.** h_proxy(`C-ref`) / h_proxy(`C-a`): median 2.17 (per cell 1.40 to 3.10).
+  r_α²: median 20.8 (per cell 2.4 to 45.3). Their ratio, 0.10, is outside the registered
+  band [0.25, 4]. The input-activation proxy accounts for a factor of about 2 of the
+  factor of about 21 in curvature that the scale ratio implies.
+- By projection (mean n_j² relative to the mean over all edited entries; share of
+  entries; share of `C-ref`'s support): `q`/`k`/`v` 1.49 each (they share one input),
+  `o_proj` 0.30; `o_proj` has 42% of the entries and 55% of `C-ref`'s support. The
+  projection in which `C-ref` is densest has the *smallest* input activations, so the
+  plan's conjecture that `o_proj` is dense because its input is not normalised is not
+  supported.
+- **Registered reading: E6-M fails** ((a) holds, (b) fails).
+
+E6b (removal at each arm's own α\*; references `C-ref` +0.377, `C-a` +0.305, `C-rand`
++0.012):
+
+| arm | score | removal at α\* | − `C-ref` | − `C-a` | α\* median | eval pass | overlap with `C-ref` | fixed grid |
+|---|---|---|---|---|---|---|---|---|
+| `S-wanda` | \|ΔW\|·n_j | +0.365 [+0.213, +0.528] | −0.013 [−0.034, +0.008] | +0.060 [−0.041, +0.196] | 7.0 | 63% | 0.50 | +0.352 |
+| `C-ref` | \|ΔW\| | +0.377 | — | +0.073 [−0.036, +0.213] | 20.7 | 57% | 1 | +0.353 |
+| `S-act1` | \|ΔW\|/n_j | +0.380 [+0.214, +0.554] | +0.002 [−0.039, +0.053] | +0.075 [−0.045, +0.225] | 53.8 | 60% | 0.69 | +0.231 |
+| `S-fisher` | \|ΔW\|/√F | +0.358 [+0.186, +0.534] | −0.019 [−0.079, +0.043] | +0.054 [−0.084, +0.220] | 83.3 | 60% | 0.46 | +0.167 |
+| `C-a` | random | +0.305 | — | — | 90.5 | 60% | ≈ 0.01 (by construction) | +0.070 |
+
+- **Registered reading: E6-W fails.** `S-act1 − C-ref` = +0.002 [−0.039, +0.053] and
+  `S-act1 − C-a` = +0.075 [−0.045, +0.225] include 0 (only `S-act1 − C-rand` excludes
+  it). `S-fisher` does not pass either. Control holds (`S-wanda` +0.365 ≤ `C-ref`
+  +0.377). No method improvement; no Branch A′.
+- What the arms do show, descriptively. The budget-limited scale moves with the
+  statistic in the direction the hypothesis says: preferring high-activation channels
+  (`S-wanda`) makes the budget bind at a third of `C-ref`'s scale (7.0 against 20.7);
+  avoiding them (`S-act1`) or avoiding high-Fisher entries (`S-fisher`) lets the edit
+  grow 2.6 and 4 times further (53.8, 83.3), almost to the scale of random coordinates
+  (90.5). The removal at the budget does not move: +0.358 to +0.380 for all four
+  magnitude-informed selections across a twelve-fold range of scale. On the fixed grid
+  the same arms are ordered by how early their budget binds (+0.352, +0.353, +0.231,
+  +0.167, and +0.070 for random coordinates).
+- Reading for the paper. This is the paper's third finding again, from a different
+  direction: which coordinates carry the signs decides the scale at which the budget
+  binds, not how much is removed there. Activation and Fisher statistics are part of
+  what makes large-|ΔW| coordinates costly (direction right, (a) holds), but they do not
+  account for the size of the effect ((b) fails), and using them to choose coordinates
+  buys nothing at the budget. Reported in an appendix; no claim of a mechanism.
