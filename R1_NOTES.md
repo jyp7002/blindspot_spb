@@ -491,6 +491,21 @@ scales): the details the plan leaves open.** Plan item, run on the author's deci
   13 of 24 runs within the evaluation budget) and the fixed-grid values of every
   comparator. Not known: how far any comparator can be pushed.
 
+**2026-11-13 ~20:00Z, before it is run — E3b (budget re-gating): scope.** Plan item,
+zero GPU; the plan fixes the budgets (MMLU allowance 2, 4, 6, 8 items × perplexity
+bound 1.05, 1.10, 1.20, and the perplexity bound alone) and no verdict: a table, and
+which estimands change whether their interval excludes zero. Fixed here with
+`src/r1_e3b.py` (selftest 7/7): for each budget every run re-selects its best
+admissible configuration from the stored per-configuration MMLU loss and perplexity
+ratio (none admissible → 0). (A) Ten main cells, grid {2, 4, 8, 16}: `C-ref`, `C-a`,
+their difference, and `C-ref` minus each of `C-rand`, `C-b`, `C-layershuf`, `C-bottom`
+(`results/r1/E5`, `results/r1/E4`). (B) Eight comparison cells: dense edit, steering,
+SentenceDebias (`results/v12frontier`), DPO at lower learning rates (`results/r1/E7b`),
+1% edit (`results/r1/E5`, `results/r1/FRONT8`); the differences of both edits with each
+other method; shares of configurations in budget. Gate: at the registered budget the
+recomputed selections equal the stored ones. Not covered: the extended grid and α\*
+(their budget sensitivity is E1 and E8) and the sparsity panels.
+
 ---
 
 ## 4. Readings and findings log
